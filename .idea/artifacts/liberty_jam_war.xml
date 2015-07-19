@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="liberty-jam:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="liberty-jam.war">
+      <element id="artifact" artifact-name="liberty-jam:war exploded" />
+    </root>
+  </artifact>
+</component>

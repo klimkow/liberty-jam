@@ -1,0 +1,7 @@
+com\liberty\technical\logic\entity\DeliveryInformation.class
+com\liberty\technical\logic\entity\Item.class
+com\liberty\technical\logic\entity\Order.class
+com\liberty\technical\logic\factory\SessionFactoryInitializer.class
+com\liberty\technical\logic\Test.class
+com\liberty\technical\logic\entity\Category.class
+com\liberty\technical\logic\entity\User.class
