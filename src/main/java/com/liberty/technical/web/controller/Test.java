@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import spark.ModelAndView;
+import spark.servlet.SparkFilter;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.io.File;
@@ -23,6 +24,7 @@ import java.util.Map;
 public class Test
 {
 
+
   public static void main(String[] args)
   {
     Configuration config = new Configuration();
@@ -31,9 +33,18 @@ public class Test
     FreeMarkerEngine engine = new FreeMarkerEngine();
     engine.setConfiguration(config);
 
+    SparkFilter.configureStaticResources("/public");
+
     get("/hello/:words", (request, response) -> {
       Map<String, Object> attributes = new HashMap<String, Object>();
       attributes.put("message", request.params(":words"));
+
+      return new ModelAndView(attributes, "index.ftl");
+    }, engine);
+
+    get("/hello/*", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<String, Object>();
+      attributes.put("message", "Alex");
 
       return new ModelAndView(attributes, "index.ftl");
     }, engine);
