@@ -1,0 +1,22 @@
+#IDEA
+*.iml
+.idea
+
+#vim
+*.swp
+.*.swo
+
+#Eclipse
+.classpath
+.project
+.settings
+.externalToolBuilders
+.checkstyle
+
+/target
+
+# Gradle
+.gradle/
+
+
+
