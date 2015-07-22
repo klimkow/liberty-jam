@@ -4,11 +4,13 @@
     <title>Bootstrap 101 Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="public/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/liberty.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="public/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -33,6 +35,8 @@
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
-    <p>Hello ${message}! You have the following messages:
+
+
+
 </body>
 </html>

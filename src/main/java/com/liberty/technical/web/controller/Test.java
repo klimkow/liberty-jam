@@ -8,7 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import spark.ModelAndView;
+import spark.*;
 import spark.servlet.SparkFilter;
 import spark.template.freemarker.FreeMarkerEngine;
 
@@ -33,21 +33,19 @@ public class Test
     FreeMarkerEngine engine = new FreeMarkerEngine();
     engine.setConfiguration(config);
 
-    SparkFilter.configureStaticResources("/public");
 
-    get("/hello/:words", (request, response) -> {
-      Map<String, Object> attributes = new HashMap<String, Object>();
-      attributes.put("message", request.params(":words"));
+    SparkBase.staticFileLocation("/public");
 
-      return new ModelAndView(attributes, "index.ftl");
-    }, engine);
-
-    get("/hello/*", (request, response) -> {
+    get("/index", (request, response) -> {
       Map<String, Object> attributes = new HashMap<String, Object>();
       attributes.put("message", "Alex");
 
       return new ModelAndView(attributes, "index.ftl");
     }, engine);
+
+
+
+
 
 //    SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();
 //    Session session = factory.openSession();
