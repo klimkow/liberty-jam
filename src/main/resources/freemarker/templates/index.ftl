@@ -35,8 +35,53 @@
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
+    <header>
+         <div class="container" style="margin-top: 50px; font-family: Attentica4F; font-weight:  bold">
+             <div class="span12" style="text-align: center">
+                 <div class="row">
+                     <img src="img/main-logo.png" style="height:120px;"/>
+                 </div>
+                 <div class="row" style="font-size: 12pt">
+                     <div class="span2">ВЫБРАТЬ БУКЕТ</div>
+                     <div class="span2">ПОВОД</div>
+                     <div class="span2">КАК ЭТО РАБОТАЕТ</div>
+                     <div class="span2">О НАС</div>
+                     <div class="span2">КОНТАКТЫ</div>
+                 </div>
+             </div>
+         </div>
 
 
+    </header>
+    <div class="container">
+    <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item">
+                <img src="img/slide-1.jpg"/>
+            </div>
+            <div class="item">
+                <img src="img/slide-2.jpg"/>
+            </div>
+            <div class="item">
+                <img src="img/slide-3.jpg"/>
+            </div>
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
 
+    </div>
+
+    <div class="content-section-a">
+
+
+    </div>
 </body>
 </html>

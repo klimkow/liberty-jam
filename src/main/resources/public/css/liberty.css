@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Attentica4F';
+    src: url('fonts/Attentica4F.otf'), url('fonts/Attentica4F.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .navbar {
     background-color: #f3f3f3;
+}
+
+.content-section-a {
+    background-color: #f3f3f3;
+    height: 150px;
+    width: 100%;
 }
