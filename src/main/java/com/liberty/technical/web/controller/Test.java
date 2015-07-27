@@ -11,10 +11,12 @@ import org.hibernate.Transaction;
 import spark.*;
 import spark.servlet.SparkFilter;
 import spark.template.freemarker.FreeMarkerEngine;
+import com.liberty.technical.logic.localization.LocalizationUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -23,7 +25,6 @@ import java.util.Map;
  */
 public class Test
 {
-
 
   public static void main(String[] args)
   {
@@ -38,7 +39,7 @@ public class Test
 
     get("/index", (request, response) -> {
       Map<String, Object> attributes = new HashMap<String, Object>();
-      attributes.put("message", "Alex");
+      attributes.put("locale", LocalizationUtil.getString("choose_bouquet_title", new Locale("RU")));
 
       return new ModelAndView(attributes, "index.ftl");
     }, engine);

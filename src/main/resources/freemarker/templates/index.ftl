@@ -42,7 +42,7 @@
                      <img src="img/main-logo.png" style="height:120px;"/>
                  </div>
                  <div class="row" style="font-size: 12pt">
-                     <div class="span2">ВЫБРАТЬ БУКЕТ</div>
+                     <div class="span2">${locale}</div>
                      <div class="span2">ПОВОД</div>
                      <div class="span2">КАК ЭТО РАБОТАЕТ</div>
                      <div class="span2">О НАС</div>
