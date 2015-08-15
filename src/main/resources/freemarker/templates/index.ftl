@@ -32,8 +32,8 @@
 
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <div class="textleft">
-                <img src="img/cart.png" height="42" width="42">
+            <div class="textleft margintop3">
+                <img src="img/cart.png" height="25" width="25">
                 У ВАС 2 БУКЕТА НА СУММУ 3.150.000 РУБ.
             </div>
             <div class="textright">
@@ -123,9 +123,9 @@
     <!-- FILTER MENU -->
     <div class="row">
     <div class="content-section-a">
-        <div class="container">
-            <p class="textleft vcenter">Выберите тип букета и стоимость </p>
-            <div style="float: right; width: 33%" id="slider" class="slider vcenter"></div>
+        <div class="container attentica-font16 ">
+            <p class="textleft margintop25">Выберите тип букета и стоимость </p>
+            <div id="slider" class="slider"></div>
         </div>
     </div>
     </div>
@@ -163,8 +163,8 @@
 
         <div class="row">
             <div class="content-section-a">
-                <div class="container">
-                    <p class="text-center vcenter">КАК ЭТО РАБОТАЕТ </p>
+                <div class="container attentica-font30">
+                    <p class="text-center margintop10">КАК ЭТО РАБОТАЕТ </p>
                 </div>
             </div>
         </div>
@@ -186,6 +186,20 @@
                 <img src="img/hw-it-work3.png" height="200" width="200">
             </div>
         </div><!-- /.row -->
+    </div>
+
+    <div class="row">
+        <div class="content-section-a">
+            <div class="container text-center">
+            <div class="row menu-item-container">
+                <div class="menu-col">ВЫБРАТЬ БУКЕТ</div>
+                <div class="menu-col">ПОВОД</div>
+                <div class="menu-col">КАК ЭТО РАБОТАЕТ</div>
+                <div class="menu-col">О НАС</div>
+                <div class="menu-col">КОНТАКТЫ</div>
+            </div>
+                </div>
+        </div>
     </div>
 
 

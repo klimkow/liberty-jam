@@ -7,8 +7,17 @@
 
 /*-------------- NAV BAR -------------- */
 .navbar {
+    height: 45px;
     background-color: #f3f3f3;
     border-bottom: 1px solid #D8D8D8;
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.margintop2
+{
+    margin-top: 2px;
 }
 
 .textleft
@@ -27,13 +36,14 @@
     margin-top: 70px;
     margin-bottom: 20px;
     font-family: Attentica4F;
+    font-size: 20pt;
     font-weight:  bold
 }
 
 .menu-item-container
 {
     width:70%;
-    font-size: 12pt
+    font-size: 20pt;
     white-space: nowrap;
     margin-top: 5px;
     margin-left: 15%
@@ -62,6 +72,12 @@
 
 
 /*-------------- FILTER BAR -------------- */
+.slider
+{
+    margin-top: 30px;
+    float: right;
+    width: 33%;
+}
 
 .content-section-a {
     font-family: Attentica4F;
@@ -70,14 +86,36 @@
     width: 100%;
 }
 
-.vcenter {
-    margin-top: 25px;
+.attentica-font16
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.attentica-font30
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 30pt;
 }
 
 .margintop10
 {
     margin-top: 10px;
 }
+
+.margintop15
+{
+    margin-top: 15px;
+}
+
+.margintop25
+{
+    margin-top: 25px;
+}
+
+
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
