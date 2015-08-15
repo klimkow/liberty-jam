@@ -5,12 +5,101 @@
     font-style: normal;
 }
 
+/*-------------- NAV BAR -------------- */
 .navbar {
     background-color: #f3f3f3;
+    border-bottom: 1px solid #D8D8D8;
 }
 
+.textleft
+{
+    float: left;
+}
+
+.textright
+{
+    float: right;
+}
+
+/*-------------- TOP MENU -------------- */
+.top-menu
+{
+    margin-top: 70px;
+    margin-bottom: 20px;
+    font-family: Attentica4F;
+    font-weight:  bold
+}
+
+.menu-item-container
+{
+    width:70%;
+    font-size: 12pt
+    white-space: nowrap;
+    margin-top: 5px;
+    margin-left: 15%
+}
+
+.menu-col
+{
+    float: left;
+    width: 20%;
+}
+
+
+/*-------------- CAROUSEL -------------- */
+.carousel .item {
+    height: 500px;
+    background-color:#555;
+}
+
+.carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 500px;
+}
+
+
+
+/*-------------- FILTER BAR -------------- */
+
 .content-section-a {
+    font-family: Attentica4F;
     background-color: #f3f3f3;
-    height: 150px;
+    height: 80px;
     width: 100%;
+}
+
+.vcenter {
+    margin-top: 25px;
+}
+
+.margintop10
+{
+    margin-top: 10px;
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+    float: left;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.marketing h2 {
+    font-weight: normal;
+}
+.marketing .col-lg-4 p {
+    margin-left: 10px;
+    margin-right: 10px;
 }

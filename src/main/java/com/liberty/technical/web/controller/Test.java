@@ -39,7 +39,7 @@ public class Test
 
     get("/index", (request, response) -> {
       Map<String, Object> attributes = new HashMap<String, Object>();
-      attributes.put("locale", LocalizationUtil.getString("choose_bouquet_title", new Locale("RU")));
+      attributes.put("message", "Alex");
 
       return new ModelAndView(attributes, "index.ftl");
     }, engine);
