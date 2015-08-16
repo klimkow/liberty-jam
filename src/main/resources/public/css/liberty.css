@@ -149,14 +149,14 @@
     margin-right: 10px;
 }
 
-div.col-sm-6 > h2
+div.gallery__item > h2
 {
     font-family: BadScript;
     font-size: 15pt;
     font-weight: bold;
 }
 
-div.col-sm-6 > p
+div.gallery__item > p
 {
     font-family: BadScript;
     font-size: 10pt;
@@ -262,3 +262,16 @@ div.description-text > p
     margin-left: 5px;
     margin-right: 5px;
 }
+
+
+/* MARKETING GALLERY
+-------------------------------------------------- */
+
+.gallery-wrap { margin: 0 auto; overflow: hidden;}
+.gallery { position: relative; left: 0; top: 0; }
+.gallery__item { float: left; word-wrap: break-word;  list-style: none; }
+
+
+
+.gallery__controls-prev { cursor: pointer; float: left; }
+.gallery__controls-next { cursor: pointer; float: right; }

@@ -2,6 +2,7 @@ package com.liberty.technical.web.controller;
 
 import static spark.Spark.*;
 import com.liberty.technical.logic.entity.*;
+import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.factory.SessionFactoryInitializer;
 import freemarker.template.Configuration;
 import org.hibernate.HibernateException;
@@ -15,9 +16,7 @@ import com.liberty.technical.logic.localization.LocalizationUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -44,7 +43,7 @@ public class Test
       return new ModelAndView(attributes, "index.ftl");
     }, engine);
 
-    post("/hello", (request, response) -> {
+    post("/getItem", (request, response) -> {
       Map<String, Object> attributes = new HashMap<String, Object>();
       attributes.put("message", "Alex");
 
@@ -60,27 +59,41 @@ public class Test
 //    Transaction tx = null;
 //    long id = 2;
 //    Category cat2 = null;
-//    try{
+//    try {
 //      tx = session.beginTransaction();
 //
 //      Item item = new Item();
-//      item.setName("item1");
-//      item.setDescription("desc");
+//      item.setName("Ласковый рассвет");
+//      item.setDescription("With its fresh, zingy shades of lime, hot pink and vibrant yellow, this hand-tied bouquet is perfect for a celebration or simply to make someone you care about feel great. Sunflowers always prompt a smile and are definitely a summer favourite too. Featuring blue agapanthus, sunflowers, cerise gerbera, yellow spray chrysanthemums and green alchemilla mollis with pittosporum and salal, trimmed with a lime ribbon.");
+//      item.setAvailableAmount(10);
+//        item.setPrice(1500);
 //
+//        Set<ItemImages> images = new HashSet<>();
+//        ItemImages image = new ItemImages();
+//        image.setImageUrl("img/b1.jpg");
+//        image.setItem(item);
+//        images.add(image);
+//
+//        item.setImages(images);
+
+
 //      Item item2 = new Item();
 //      item.setName("item2");
 //      item.setDescription("desc");
-//      session.save(item);
+//         session.save(item);
+//        session.save(image);
+
+
 //      session.save(item2);
-//
+
 //      Set<Item> items = new HashSet<>();
 //      items.add(item);
 //      items.add(item2);
-//
+
 //      User us = new User();
 //      us.setName("Nigga");
 //      session.save(us);
-//
+
 //      DeliveryInformation dv = new DeliveryInformation();
 //      dv.setName("dv");
 //

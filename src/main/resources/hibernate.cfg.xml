@@ -12,7 +12,7 @@
         </property>
 
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/liberty-jam
+            jdbc:mysql://localhost/liberty-jam?useUnicode=true&amp;characterEncoding=utf8
         </property>
         <property name="hibernate.connection.username">
             root
