@@ -37,11 +37,18 @@ public class Test
 
     SparkBase.staticFileLocation("/public");
 
-    get("/index", (request, response) -> {
+    get("/", (request, response) -> {
       Map<String, Object> attributes = new HashMap<String, Object>();
       attributes.put("message", "Alex");
 
       return new ModelAndView(attributes, "index.ftl");
+    }, engine);
+
+    post("/hello", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<String, Object>();
+      attributes.put("message", "Alex");
+
+      return new ModelAndView(attributes, "common/item-description.ftl");
     }, engine);
 
 
