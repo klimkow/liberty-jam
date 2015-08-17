@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,5 +37,15 @@ public class LibertyBaseUtils {
           session.close();
         }
         return resultList;
+    }
+
+    public static Item getItemIndexById(List<Item> items, Long id)
+    {
+      for (Item item : items) {
+        if (item.getId() == id) {
+          return item;
+        }
+      }
+      return null;
     }
 }

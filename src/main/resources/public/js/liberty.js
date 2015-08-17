@@ -39,6 +39,30 @@ function appear(elm, i, step, speed){
 
 }
 
+function getItem(id)
+{
+
+        var form = $(this);
+        var post_url = 'getItem';
+        var post_data = {'itemId' : id};
+        $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+        //$('#top-layer').height($('#active-zone')[0].offsetHeight);
+        //var topOffset = $('#active-zone')[0].offsetTop;
+        //$('#top-layer').offset({top: topOffset});
+        $.ajax({
+            type: 'POST',
+            url: post_url,
+            data: post_data,
+            success: function(msg) {
+                $('#active-zone').fadeOut(800, function(){
+                    $('#active-zone').html(msg).fadeIn().delay(2000);
+
+                });
+            }
+        });
+
+}
+
 
     $(document).ready(function(){
 
@@ -47,7 +71,10 @@ function appear(elm, i, step, speed){
                 var form = $(this);
                 var post_url = 'getItem';
                 var post_data = form.serialize();
-                //$('#active-zone').append('<img style=" background-color:transparent; z-index: 100;  position: relative; top: 50%;transform: translateY(-180%);" src="img/loading.gif"  height="43" width="43"  /> ');
+                $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+                //$('#top-layer').height($('#active-zone')[0].offsetHeight);
+                //var topOffset = $('#active-zone')[0].offsetTop;
+                //$('#top-layer').offset({top: topOffset});
                 $.ajax({
                     type: 'POST',
                     url: post_url,
