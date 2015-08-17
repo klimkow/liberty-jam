@@ -33,11 +33,16 @@ public class Liberty
 
 
     SparkBase.staticFileLocation("/public");
-    List<Item> items = LibertyBaseUtils.getAllItems();
+//    final List<Item> items = LibertyBaseUtils.getAllItems();
 
     get("/", (request, response) -> {
 
-      Map<String, Object> attributes = new HashMap<String, Object>();
+      List<Item> items = LibertyBaseUtils.getItemsBySession(request.session());
+      if (items == null) {
+        // TODO: throw exception view
+      }
+
+      Map<String, Object> attributes = new HashMap<>();
       attributes.put("items", items);
 
       return new ModelAndView(attributes, "index.ftl");
@@ -45,6 +50,11 @@ public class Liberty
 
 
     post("/getItem", (request, response) -> {
+      List<Item> items = LibertyBaseUtils.getItemsBySession(request.session());
+      if (items == null) {
+        // TODO: throw exception view
+      }
+
       Map<String, Item> attributes = new HashMap<>();
       Long id = new Long( request.queryParams("itemId"));
       Item item = LibertyBaseUtils.getItemIndexById(items, id);

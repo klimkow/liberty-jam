@@ -48,4 +48,16 @@ public class LibertyBaseUtils {
       }
       return null;
     }
+
+    public static List<Item> getItemsBySession(spark.Session session)
+    {
+      List<Item> items;
+      if(session.isNew()) {
+        items = LibertyBaseUtils.getAllItems();
+        session.attribute("sessionItemList", items);
+      } else {
+        items = session.attribute("sessionItemList");
+      }
+      return items;
+    }
 }
