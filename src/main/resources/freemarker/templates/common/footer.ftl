@@ -1,17 +1,25 @@
 <!-- How does it work section
    ================================================== -->
 
-<div class="container marketing margintop10">
+<div class="row">
+    <div class="content-section-a">
+        <div class="container attentica-font30">
+            <p class="text-center margintop10">КАК ЭТО РАБОТАЕТ </p>
+        </div>
+    </div>
+</div>
+
+<div class="container marketing margintop10 text-center">
 
     <!-- Three columns of text below the carousel -->
     <div class="row">
-        <div class="col-sm-6 col-md-4 text-center">
+        <div class="width33">
             <img src="img/hw-it-work1.png" height="200" width="200">
         </div>
-        <div class="col-sm-6 col-md-4 text-center">
+        <div class="width33">
             <img src="img/hw-it-work2.png" height="200" width="200">
         </div>
-        <div class="col-sm-6 col-md-4 text-center">
+        <div class="width33">
             <img src="img/hw-it-work3.png" height="200" width="200">
         </div>
     </div><!-- /.row -->

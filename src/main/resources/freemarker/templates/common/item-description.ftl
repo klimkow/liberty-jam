@@ -1,9 +1,9 @@
 <div class="container ">
     <div class="item-description-container">
-    <div class="item-photo vertical-center">
+    <div class="item-photo">
         <img src="${selectedItem.getLogo()}" height="400" width="400">
     </div>
-    <div class="item-description vertical-center">
+    <div class="item-description">
         <div class="description-text">
             <h2>${selectedItem.getName()}</h2>
             <p>${selectedItem.getDescription()}</p>

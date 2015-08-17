@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap 101 Template</title>
+    <title>Комплимент - Цветочный бутик</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -17,9 +17,12 @@
     <#include "/common/navbar.ftl">
     <div id="active-zone" class="row text-center">
         <#include "/common/carousel.ftl">
-
     </div>
-    <#include "/common/marketing.ftl">
+    <#include "/common/filter.ftl">
+    <div id="marketing-active-zone">
+        <#--<#include "/common/marketing.ftl">-->
+        <#include "/common/download-stub.ftl">
+    </div>
     <#include "/common/footer.ftl">
 
 </body>
