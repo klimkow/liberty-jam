@@ -37,7 +37,7 @@ public class Item
       inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID")})
   private Set<Category> categories;
 
-  @OneToMany(cascade=CascadeType.PERSIST)
+  @OneToMany(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
   @JoinColumn(name="ITEM_ID", referencedColumnName="ID")
   private Set<ItemImages> images;
 
@@ -102,7 +102,7 @@ public class Item
   }
 
 
-  public Set<ItemImages> getImages()
+    public Set<ItemImages> getImages()
   {
     return images;
   }
@@ -123,5 +123,10 @@ public class Item
   public void setPrice(Integer price)
   {
     this.price = price;
+  }
+
+  public String getLogo()
+  {
+    return ((ItemImages)getImages().toArray()[0]).getImageUrl();
   }
 }

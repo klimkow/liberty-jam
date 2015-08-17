@@ -28,70 +28,17 @@
         <div class="gallery-wrap">
                 <div class="gallery clearfix">
 
-                    <div class="gallery__item  text-center">
+                    <#list items as item>
+                        <div class="gallery__item  text-center">
 
-                        <img class="img-circle" src="img/b1.jpg" height="200" width="200">
-                        <h2>Mobile-first</h2>
-                        <p>Tablets, phones, laptops. The new 3 promises to be mobile friendly from the start.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
+                            <img class="img-circle" src="${item.getLogo()}" height="200" width="200">
+                            <h2>${item.getName()}</h2>
+                            <p>${item.getDescription()?substring(0, 110)}...</p>
+                            <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
 
-                    </div>
-                    <div class="gallery__item  text-center">
+                        </div>
+                    </#list>
 
-                        <img class="img-circle" src="img/b2.jpg" height="200" width="200">
-                        <h2>One Fluid Grid</h2>
-                        <p>There is now just one percentage-based grid for Bootstrap 3. Customize for fixed widths.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
-
-                    </div>
-                    <div class="gallery__item text-center">
-
-                        <img class="img-circle" src="img/b3.jpg" height="200" width="200">
-                        <h2>LESS is More</h2>
-                        <p>Improved support for mixins make the new Bootstrap 3 easier to customize.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
-
-                    </div>
-                    <div class="gallery__item text-center">
-
-                        <img class="img-circle" src="img/b3.jpg" height="200" width="200">
-                        <h2>LESS is More</h2>
-                        <p>Improved support for mixins make the new Bootstrap 3 easier to customize.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
-
-                    </div>
-                    <div class="gallery__item text-center">
-
-                        <img class="img-circle" src="img/b3.jpg" height="200" width="200">
-                        <h2>LESS is More</h2>
-                        <p>Improved support for mixins make the new Bootstrap 3 easier to customize.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
-
-                    </div>
-                    <div class="gallery__item text-center">
-
-                        <img class="img-circle" src="img/b3.jpg" height="200" width="200">
-                        <h2>LESS is More</h2>
-                        <p>Improved support for mixins make the new Bootstrap 3 easier to customize.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
-
-                    </div>
-                    <div class="gallery__item text-center">
-
-                        <img class="img-circle" src="img/b3.jpg" height="200" width="200">
-                        <h2>LESS is More</h2>
-                        <p>Improved support for mixins make the new Bootstrap 3 easier to customize.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
-
-                    </div>
-                    <div class="gallery__item text-center">
-
-                        <img class="img-circle" src="img/b3.jpg" height="200" width="200">
-                        <h2>LESS is More</h2>
-                        <p>Improved support for mixins make the new Bootstrap 3 easier to customize.</p>
-                        <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
-
-                    </div>
             </div>
             <div class="gallery__controls clearfix">
                 <div href="#" class="gallery__controls-prev">

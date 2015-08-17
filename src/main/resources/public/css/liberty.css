@@ -12,6 +12,7 @@
     font-style: normal;
 }
 
+
 /*-------------- NAV BAR -------------- */
 .navbar {
     height: 45px;
@@ -275,3 +276,4 @@ div.description-text > p
 
 .gallery__controls-prev { cursor: pointer; float: left; }
 .gallery__controls-next { cursor: pointer; float: right; }
+
