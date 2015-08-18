@@ -1,13 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="textleft margintop3">
+        <div style="margin-top: 9px" class="textleft margintop3">
             <img src="img/cart.png" height="25" width="25">
             У ВАС 2 БУКЕТА НА СУММУ 3.150.000 РУБ.
         </div>
         <div class="textright">
-            <img style="border-right: 1px solid #B8B8B8; border-left: 1px solid #B8B8B8" src="img/fb.png" alt="Facebook" height="42" width="42">
-            <img style="border-right: 1px solid #B8B8B8;" src="img/twt.png" alt="Twitter" height="42" width="42">
-            <img style="border-right: 1px solid #B8B8B8;" src="img/vk.png" alt="Vkontakte" height="42" width="42">
+            <img style="border-right: 1px solid #E2E2E2; border-left: 1px solid #E2E2E2" src="img/fb-tr.png" alt="Facebook" height="48" width="48">
+            <img style="border-right: 1px solid #E2E2E2;" src="img/twt-tr.gif" alt="Twitter" height="48" width="48">
+            <img style="border-right: 1px solid #E2E2E2;" src="img/vk-tr.png" alt="Vkontakte" height="48" width="48">
+            <img style="border-right: 1px solid #E2E2E2;" src="img/lang.gif" alt="Language" height="48" width="48">
         </div>
     </div>
 </nav>
