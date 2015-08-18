@@ -2,15 +2,10 @@ package com.liberty.technical.web.controller;
 
 import static spark.Spark.*;
 
-import com.liberty.technical.logic.entity.Category;
 import com.liberty.technical.logic.entity.Item;
-import com.liberty.technical.logic.entity.images.ItemImages;
-import com.liberty.technical.logic.factory.SessionFactoryInitializer;
-import com.liberty.technical.logic.util.LibertyBaseUtils;
+import com.liberty.technical.logic.entity.Order;
+import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 
@@ -43,14 +38,14 @@ public class Liberty
 
 
     post("/getItem", (request, response) -> {
-      List<Item> items = LibertyBaseUtils.getItemsBySession(request.session());
+      List<Item> items = UserSessionUtils.getItemsBySession(request.session());
       if (items == null) {
         // TODO: throw exception view
       }
 
       Map<String, Item> attributes = new HashMap<>();
       Long id = new Long( request.queryParams("itemId"));
-      Item item = LibertyBaseUtils.getItemIndexById(items, id);
+      Item item = UserSessionUtils.getItemIndexById(items, id);
       attributes.put("selectedItem", item);
 
       return new ModelAndView(attributes, "common/item-description.ftl");
@@ -58,7 +53,7 @@ public class Liberty
 
 
     post("/getAllItems", (request, response) -> {
-        List<Item> items = LibertyBaseUtils.getItemsBySession(request.session());
+        List<Item> items = UserSessionUtils.getItemsBySession(request.session());
         if (items == null) {
             // TODO: throw exception view
         }
@@ -73,6 +68,18 @@ public class Liberty
         attributes.put("x", 0);
 
       return new ModelAndView(attributes, "common/marketing.ftl");
+    }, engine);
+
+    post("/addToCart", (request, response) -> {
+      Map<String, Order> attributes = new HashMap<>();
+      List<Item> items = UserSessionUtils.getItemsBySession(request.session());
+      if (items == null) {
+          // TODO: throw exception view
+      }
+      Long id = new Long( request.queryParams("itemId"));
+      Order order = UserSessionUtils.addToCart(request.session(), id);
+      attributes.put("order", order);
+      return new ModelAndView(attributes, "navbar-order-line.ftl");
     }, engine);
 
 

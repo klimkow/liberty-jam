@@ -63,6 +63,28 @@ function getItem(id)
 
 }
 
+function addToCart(id)
+{
+    var form = $(this);
+    var post_url = 'getItem';
+    var post_data = {'itemId' : id};
+    $('#add-to-cart').html('<img src="../img/button-loading.gif">');
+    //$('#top-layer').height($('#active-zone')[0].offsetHeight);
+    //var topOffset = $('#active-zone')[0].offsetTop;
+    //$('#top-layer').offset({top: topOffset});
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        data: post_data,
+        success: function(msg) {
+            $('#active-zone').fadeOut(800, function(){
+                $('#active-zone').html(msg).fadeIn().delay(2000);
+
+            });
+        }
+    });
+}
+
 function getAllItems()
 {
 
