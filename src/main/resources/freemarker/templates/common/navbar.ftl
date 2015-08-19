@@ -1,8 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div style="margin-top: 9px" class="textleft margintop3">
-            <img src="img/cart.png" height="25" width="25">
-            У ВАС 2 БУКЕТА НА СУММУ 3.150.000 РУБ.
+            <img style="margin-right: 15px" src="img/cart.png" class="textleft" height="25" width="25">
+            <div id="cart-notif" class="textleft">КОРЗИНА ПУСТА</div>
         </div>
         <div class="textright">
             <img style="border-right: 1px solid #E2E2E2; border-left: 1px solid #E2E2E2" src="img/fb-tr.png" alt="Facebook" height="48" width="48">

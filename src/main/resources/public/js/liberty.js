@@ -44,7 +44,7 @@ function getItem(id)
 
         var form = $(this);
         var post_url = 'getItem';
-        var post_data = {'itemId' : id};
+        var post_data = id;
         $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
         //$('#top-layer').height($('#active-zone')[0].offsetHeight);
         //var topOffset = $('#active-zone')[0].offsetTop;
@@ -63,26 +63,28 @@ function getItem(id)
 
 }
 
-function addToCart(id)
+function addToCart(id, element)
 {
     var form = $(this);
-    var post_url = 'getItem';
-    var post_data = {'itemId' : id};
-    $('#add-to-cart').html('<img src="../img/button-loading.gif">');
-    //$('#top-layer').height($('#active-zone')[0].offsetHeight);
-    //var topOffset = $('#active-zone')[0].offsetTop;
-    //$('#top-layer').offset({top: topOffset});
+    var post_url = 'addToCart';
+    var post_data = id;
     $.ajax({
         type: 'POST',
         url: post_url,
         data: post_data,
         success: function(msg) {
-            $('#active-zone').fadeOut(800, function(){
-                $('#active-zone').html(msg).fadeIn().delay(2000);
-
+            var resp = JSON.parse(msg);
+            $('#cart-notif').fadeOut(300, function(){
+                $('#cart-notif').html('У ВАС N БУКЕТОВ НА СУММУ ' + resp.amount + ' РУБ.').fadeIn().delay(800);
             });
+            element.html('Товар в корзине').fadeIn().delay(800);
         }
     });
+}
+
+function testfunc(f)
+{
+   var t = f;
 }
 
 function getAllItems()

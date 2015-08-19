@@ -1,3 +1,22 @@
+<script>
+    $(document).ready(function(){
+
+      $("#gallery-container").delegate('#add-to-cart','click', function(e) {
+          $(this).html('<img src="../img/button-loading.gif"/>');
+          var form = $(this).closest('form');
+          var formData = form.serialize();
+          addToCart(formData, $(this));
+      });
+
+      $("#gallery-container").delegate('#item-desc-container','click', function(e) {
+          var form = $(this).closest('form');
+          var formData = form.serialize();
+          getItem(formData);
+      });
+
+    });
+</script>
+
 <!-- Marketing messaging and featurettes
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -11,16 +30,20 @@
 
     <!-- Three columns of text below the carousel -->
     <div class="row">
-        <div class="gallery-wrap">
+        <div id="gallery-container" class="gallery-wrap">
                 <div style="width: ${galleryWidth}px" class="gallery clearfix">
 
                     <#list items as item>
-                        <div style="cursor: pointer; width: ${itemWidth}px" class="gallery__item <#if x == 0>gallery__item--active</#if> text-center" onclick="getItem(${item.getId()})">
+                        <div style="cursor: pointer; width: ${itemWidth}px" class="gallery__item <#if x == 0>gallery__item--active</#if> text-center" >
+                            <form name="myform">
+                            <div id="item-desc-container">
                             <input id="item-id" type="hidden" name="itemId" value="${item.getId()}">
                             <img class="img-circle" src="${item.getLogo()}" height="200" width="200">
                             <h2>${item.getName()}</h2>
                             <p>${item.getDescription()?substring(0, 110)}...</p>
-                            <p><a class="btn btn-default" href="#">Добавить в корзину</a></p>
+                            </div>
+                            <p><div id="add-to-cart" class="btn btn-default" >Добавить в корзину</div></p>
+                            </form>
                         </div>
                         <#assign x=1>
                     </#list>

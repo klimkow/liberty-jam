@@ -64,12 +64,13 @@ public class UserSessionUtils {
 
     public static Order addToCart(spark.Session session, Long itemId)
     {
-        Set<Item> items = new HashSet<>();
+        Set<Item> items = null;
         Order order = session.attribute(ATTRIBUTE_ORDER);
         if (order != null) {
             items = order.getItems();
         } else {
             order = new Order();
+            items = new HashSet<>(getAllItems());
         }
         Item item = getItemById(items, itemId);
         items.add(item);

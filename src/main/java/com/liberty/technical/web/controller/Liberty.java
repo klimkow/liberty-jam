@@ -2,8 +2,10 @@ package com.liberty.technical.web.controller;
 
 import static spark.Spark.*;
 
+import com.google.gson.Gson;
 import com.liberty.technical.logic.entity.Item;
 import com.liberty.technical.logic.entity.Order;
+import com.liberty.technical.logic.entity.OrderVO;
 import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
 import spark.*;
@@ -70,6 +72,7 @@ public class Liberty
       return new ModelAndView(attributes, "common/marketing.ftl");
     }, engine);
 
+    Gson gson = new Gson();
     post("/addToCart", (request, response) -> {
       Map<String, Order> attributes = new HashMap<>();
       List<Item> items = UserSessionUtils.getItemsBySession(request.session());
@@ -79,10 +82,8 @@ public class Liberty
       Long id = new Long( request.queryParams("itemId"));
       Order order = UserSessionUtils.addToCart(request.session(), id);
       attributes.put("order", order);
-      return new ModelAndView(attributes, "navbar-order-line.ftl");
-    }, engine);
-
-
+      return new OrderVO(order.getAmount());
+    }, gson::toJson);
 
 
 

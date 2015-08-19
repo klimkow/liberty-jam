@@ -9,6 +9,7 @@
     <link href="css/nouislider.min.css" rel="stylesheet">
 </head>
 <body onload="createSlider()">
+    <#--TODO: download jquery to libs folder (current downloaded is too slow)-->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/nouislider.min.js"></script>
