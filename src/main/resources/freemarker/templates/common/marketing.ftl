@@ -36,7 +36,7 @@
                     <#list items as item>
                         <div style="cursor: pointer; width: ${itemWidth}px" class="gallery__item <#if x == 0>gallery__item--active</#if> text-center" >
                             <form name="myform">
-                            <div id="item-desc-container">
+                            <div id="item-desc-container" class="marketing-item-container">
                             <input id="item-id" type="hidden" name="itemId" value="${item.getId()}">
                             <img class="img-circle" src="${item.getLogo()}" height="200" width="200">
                             <h2>${item.getName()}</h2>

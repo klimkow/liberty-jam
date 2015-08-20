@@ -82,10 +82,6 @@ function addToCart(id, element)
     });
 }
 
-function testfunc(f)
-{
-   var t = f;
-}
 
 function getAllItems()
 {
