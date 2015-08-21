@@ -32,8 +32,14 @@ public class Liberty
     SparkBase.staticFileLocation("/public");
 
     get("/", (request, response) -> {
-
+      Session session = request.session();
       Map<String, Object> attributes = new HashMap<>();
+      if (!session.isNew()) {
+          Order order = session.attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+          if (order != null) {
+              attributes.put("order", order);
+          }
+      }
 
       return new ModelAndView(attributes, "index.ftl");
     }, engine);
@@ -68,6 +74,10 @@ public class Liberty
         attributes.put("itemWidth", itemWidth.toString());
         attributes.put("galleryWidth", totalWidth.toString());
         attributes.put("x", 0);
+        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+        if (order != null) {
+            attributes.put("order", order);
+        }
 
       return new ModelAndView(attributes, "common/marketing.ftl");
     }, engine);
@@ -82,9 +92,8 @@ public class Liberty
       Long id = new Long( request.queryParams("itemId"));
       Order order = UserSessionUtils.addToCart(request.session(), id);
       attributes.put("order", order);
-      return new OrderVO(order.getAmount());
+      return new OrderVO(order.getAmount(), order.getItems().size());
     }, gson::toJson);
-
 
 
 //    SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();

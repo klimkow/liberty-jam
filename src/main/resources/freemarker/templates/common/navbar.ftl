@@ -2,7 +2,9 @@
     <div class="container">
         <div style="margin-top: 9px" class="textleft margintop3">
             <img style="margin-right: 15px" src="img/cart.png" class="textleft" height="25" width="25">
-            <div id="cart-notif" class="textleft">КОРЗИНА ПУСТА</div>
+            <div id="cart-notif" class="textleft"><#if order??>
+            У вас ${order.getItemCount()} букетов на сумму ${order.getAmount()?string?replace(",",".")}.000 РУБ.
+            <#else>КОРЗИНА ПУСТА</#if></div>
         </div>
         <div class="textright">
             <img style="border-right: 1px solid #E2E2E2; border-left: 1px solid #E2E2E2" src="img/fb-tr.png" alt="Facebook" height="48" width="48">

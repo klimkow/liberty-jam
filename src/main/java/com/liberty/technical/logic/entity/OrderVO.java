@@ -6,9 +6,11 @@ package com.liberty.technical.logic.entity;
 public class OrderVO
 {
     public int amount;
+    public int price;
 
-    public OrderVO(int amount)
+    public OrderVO(int price, int amount)
     {
+        this.price = price;
         this.amount = amount;
     }
 
@@ -18,5 +20,13 @@ public class OrderVO
 
     void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

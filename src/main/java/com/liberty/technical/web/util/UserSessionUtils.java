@@ -52,12 +52,13 @@ public class UserSessionUtils {
 
     public static List<Item> getItemsBySession(spark.Session session)
     {
-      List<Item> items;
-      if(session.isNew()) {
-        items = UserSessionUtils.getAllItems();
-        session.attribute(ATTRIBUTE_ALL_ITEMS_LIST, items);
-      } else {
-        items = session.attribute(ATTRIBUTE_ALL_ITEMS_LIST);
+      List<Item> items = null;
+      if (!session.isNew()) {
+          items = session.attribute(ATTRIBUTE_ALL_ITEMS_LIST);
+      }
+      if (items == null) {
+          items = UserSessionUtils.getAllItems();
+          session.attribute(ATTRIBUTE_ALL_ITEMS_LIST, items);
       }
       return items;
     }
@@ -70,9 +71,9 @@ public class UserSessionUtils {
             items = order.getItems();
         } else {
             order = new Order();
-            items = new HashSet<>(getAllItems());
+            items = new HashSet<>();
         }
-        Item item = getItemById(items, itemId);
+        Item item = getItemById(getItemsBySession(session), itemId);
         items.add(item);
         order.setItems(items);
         order.setAmount(calculateOrderAmount(items));
@@ -89,7 +90,7 @@ public class UserSessionUtils {
         return sum;
     }
 
-    private static Item getItemById(Set<Item> items, Long id)
+    private static Item getItemById(List<Item> items, Long id)
     {
         for (Item i : items) {
             if (i.getId() == id.longValue()) {

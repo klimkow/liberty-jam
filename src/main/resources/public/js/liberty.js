@@ -75,9 +75,10 @@ function addToCart(id, element)
         success: function(msg) {
             var resp = JSON.parse(msg);
             $('#cart-notif').fadeOut(300, function(){
-                $('#cart-notif').html('У ВАС N БУКЕТОВ НА СУММУ ' + resp.amount + ' РУБ.').fadeIn().delay(800);
+                $('#cart-notif').html('У ВАС '+ resp.amount +' БУКЕТОВ НА СУММУ ' + resp.price + '.000 РУБ.').fadeIn().delay(800);
             });
-            element.html('Товар в корзине').fadeIn().delay(800);
+            element.css('border-color', '#3FB8AF');
+            element.html('<img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>Букет в корзине').fadeIn().delay(800);
         }
     });
 }

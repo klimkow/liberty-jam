@@ -41,7 +41,6 @@ public class Item
   @JoinColumn(name="ITEM_ID", referencedColumnName="ID")
   private Set<ItemImages> images;
 
-
   public long getId()
   {
     return id;

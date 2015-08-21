@@ -38,7 +38,7 @@
 
 #download-stub-glass {
     width: 100%;
-    height: 382px;
+    height: 403px;
     opacity: 0.2;
     margin: 0;
     padding: 0;
@@ -178,7 +178,7 @@
 
 #add-to-cart
 {
-    width: 117px;
+    margin-top: 3px;
 }
 
 /* Pad the edges of the mobile views a bit */
@@ -210,10 +210,18 @@ div.marketing-item-container > h2
     font-weight: bold;
 }
 
+div.marketing-item-container > div.item-price-small
+{
+    font-weight: bold;
+    font-family: Attentica4F;
+    font-size: 20pt;
+}
+
 div.gallery__item > p, div.marketing-item-container > p
 {
     font-family: BadScript;
     font-size: 10pt;
+    margin-bottom: 0px;
 }
 
 #filter > p
@@ -231,6 +239,11 @@ div.gallery__item > p, div.marketing-item-container > p
     font-family: Attentica4F;
     font-size: 15pt;
     padding: 1px 10px;
+}
+
+.btn-item-in-cart
+{
+    border-color: #3FB8AF;
 }
 
 

@@ -170,4 +170,17 @@ public class Order
   {
     this.paymentStatus = paymentStatus;
   }
+
+  // TODO: replace to ContentManager
+
+  public int getItemCount()
+  {
+      return getItems() == null ? 0 : getItems().size();
+  }
+
+  public boolean isSelected(Item item)
+  {
+      return getItems() != null && getItems().contains(item);
+  }
+
 }
