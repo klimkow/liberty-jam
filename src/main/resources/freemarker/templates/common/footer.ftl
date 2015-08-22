@@ -4,7 +4,7 @@
 <div class="row">
     <div class="content-section-a">
         <div class="container attentica-font30">
-            <p class="text-center margintop10">КАК ЭТО РАБОТАЕТ </p>
+            <p class="text-center margintop10">${translator.getString("how_does_it_work_title")}</p>
         </div>
     </div>
 </div>
@@ -13,14 +13,20 @@
 
     <!-- Three columns of text below the carousel -->
     <div class="row">
-        <div class="width33">
-            <img src="img/hw-it-work1.png" height="200" width="200">
+        <div class="width33 text-center">
+            <img src="img/hw-it-work1.png" width="200">
+            </br>
+            <p class="hdw-font">${translator.getString("hw_step1")}</p>
         </div>
         <div class="width33">
-            <img src="img/hw-it-work2.png" height="200" width="200">
+            <img src="img/hw-it-work2.png" width="200">
+            </br>
+            <p class="hdw-font">${translator.getString("hw_step2")}</p>
         </div>
         <div class="width33">
-            <img src="img/hw-it-work3.png" height="200" width="200">
+            <img src="img/hw-it-work3.png" width="200">
+            </br>
+            <p class="hdw-font">${translator.getString("hw_step3")}</p>
         </div>
     </div><!-- /.row -->
 </div>
@@ -29,11 +35,11 @@
     <div class="content-section-a">
         <div class="container text-center">
             <div class="row menu-item-container">
-                <div class="menu-col">ВЫБРАТЬ БУКЕТ</div>
-                <div class="menu-col">ПОВОД</div>
-                <div class="menu-col">КАК ЭТО РАБОТАЕТ</div>
-                <div class="menu-col">О НАС</div>
-                <div class="menu-col">КОНТАКТЫ</div>
+                <div class="menu-col">${translator.getString("choose_bouquet_title")}</div>
+                <div class="menu-col">${translator.getString("reason_title")}</div>
+                <div class="menu-col">${translator.getString("how_does_it_work_title")}</div>
+                <div class="menu-col">${translator.getString("about_title")}</div>
+                <div class="menu-col">${translator.getString("contacts_title")}</div>
             </div>
         </div>
     </div>

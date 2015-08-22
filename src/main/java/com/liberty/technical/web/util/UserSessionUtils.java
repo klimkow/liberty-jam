@@ -19,6 +19,7 @@ import java.util.Set;
 public class UserSessionUtils {
     public final static String ATTRIBUTE_ORDER = "getOrder";
     public final static String ATTRIBUTE_ALL_ITEMS_LIST = "sessionItemList";
+    public final static String ATTRIBUTE_LOCALE = "locale";
 
     public static List<Item> getAllItems()
     {

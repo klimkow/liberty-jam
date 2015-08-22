@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.liberty.technical.logic.entity.Item;
 import com.liberty.technical.logic.entity.Order;
 import com.liberty.technical.logic.entity.OrderVO;
+import com.liberty.technical.logic.localization.LocalizationUtil;
 import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
 import spark.*;
@@ -38,8 +39,11 @@ public class Liberty
           Order order = session.attribute(UserSessionUtils.ATTRIBUTE_ORDER);
           if (order != null) {
               attributes.put("order", order);
+              attributes.put("itemCount", order.getItemCount());
           }
       }
+      Locale locale = session.attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
 
       return new ModelAndView(attributes, "index.ftl");
     }, engine);
@@ -78,6 +82,8 @@ public class Liberty
         if (order != null) {
             attributes.put("order", order);
         }
+        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+        attributes.put("translator", LocalizationUtil.getInstance(locale));
 
       return new ModelAndView(attributes, "common/marketing.ftl");
     }, engine);
@@ -91,8 +97,24 @@ public class Liberty
       }
       Long id = new Long( request.queryParams("itemId"));
       Order order = UserSessionUtils.addToCart(request.session(), id);
+      String bouquets;
+      int count = order.getItems().size();
+      if (count == 1) {
+          bouquets = LocalizationUtil.getString("bouquet1");
+      } else if (count >1 && count <5) {
+          bouquets = LocalizationUtil.getString("bouquet24");
+      } else {
+          bouquets = LocalizationUtil.getString("bouquet5");
+      }
+
       attributes.put("order", order);
-      return new OrderVO(order.getAmount(), order.getItems().size());
+      return new OrderVO(order.getAmount(),
+              count,
+              LocalizationUtil.getString("you_have"),
+              bouquets,
+              LocalizationUtil.getString("total_amount"),
+              LocalizationUtil.getString("currency"),
+              LocalizationUtil.getString("item_int_the_cart"));
     }, gson::toJson);
 
 

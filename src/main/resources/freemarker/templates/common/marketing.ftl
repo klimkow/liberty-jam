@@ -45,8 +45,8 @@
                             <div class="item-price-small">${item.getPrice()?string?replace(",",".")}.000</div>
                             </div>
                             <div id="add-to-cart" class="btn btn-default <#if order??><#if order.isSelected(item)>btn-item-in-cart</#if></#if>" >
-                                <#if order??&&order.isSelected(item)><img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>Букет в корзине
-                                <#else>Добавить в корзину
+                                <#if order??&&order.isSelected(item)><img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>${translator.getString("item_int_the_cart")}
+                                <#else>${translator.getString("add_to_cart")}
                                 </#if></div>
                             </form>
                         </div>

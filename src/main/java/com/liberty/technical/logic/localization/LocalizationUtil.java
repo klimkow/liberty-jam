@@ -12,6 +12,8 @@ import com.google.common.collect.Table;
  * @author M-AKI.
  */
 public class LocalizationUtil {
+    private static LocalizationUtil instanse;
+    private static Locale locale;
     private static Table<String, String, String> valueTable = HashBasedTable.create();
     private static ResourceBundle resourceBundle = null;
 
@@ -19,26 +21,41 @@ public class LocalizationUtil {
     private final static String ENCODING = "UTF-8";
     private final static String EXTENSION = ".properties";
 
+    private LocalizationUtil()
+    {}
+
+
+    public static LocalizationUtil getInstance(Locale newLocale)
+    {
+        locale = newLocale;
+        if (instanse == null) {
+            instanse = new LocalizationUtil();
+        }
+        return instanse;
+    }
+
 
     private static void initializeBundle(Locale locale)
     {
-        if (locale != null) {
-            StringBuilder bundleName = new StringBuilder();
-            bundleName.append(TRANSLATION_LOC.replace(".", "/")).
-                    append("_").
-                    append(locale.getLanguage().toUpperCase()).append(EXTENSION);
-            try {
-                InputStream is = LocalizationUtil.class.getClassLoader().getResourceAsStream(bundleName.toString());
-                if (is != null) {
-                    resourceBundle = new PropertyResourceBundle(new InputStreamReader(is, ENCODING));
-                } else {
-                    resourceBundle = ResourceBundle.getBundle(TRANSLATION_LOC);
-                }
-            } catch (IOException ex) {
+        StringBuilder bundleName = new StringBuilder();
+        bundleName.append(TRANSLATION_LOC.replace(".", "/"));
+        if (!locale.getLanguage().toUpperCase().equals("RU")) {
+            bundleName.append("_").
+                    append(locale.getLanguage().toUpperCase());
+        }
+        bundleName.append(EXTENSION);
+        try {
+            InputStream is = LocalizationUtil.class.getClassLoader().getResourceAsStream(bundleName.toString());
+            if (is != null) {
+                resourceBundle = new PropertyResourceBundle(new InputStreamReader(is, ENCODING));
+            } else {
                 resourceBundle = ResourceBundle.getBundle(TRANSLATION_LOC);
             }
-            putToValueTable(locale.getLanguage());
+        } catch (IOException ex) {
+            resourceBundle = ResourceBundle.getBundle(TRANSLATION_LOC);
         }
+        putToValueTable(locale.getLanguage());
+
     }
 
 
@@ -53,10 +70,13 @@ public class LocalizationUtil {
     }
 
 
-    public static String getString(String key, Locale locale)
+    public static String getString(String key)
     {
         String result = "";
-        if (key != null && locale != null) {
+        if (key != null) {
+            if (locale == null) {
+                locale = new Locale("RU");
+            }
             if (!valueTable.containsRow(locale.getLanguage())) {
                 initializeBundle(locale);
             }
