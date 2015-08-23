@@ -241,6 +241,17 @@ div.gallery__item > p, div.marketing-item-container > p
     padding: 1px 10px;
 }
 
+.btn-large
+{
+    border-color: #333;
+    border-width: 2px;
+    border-radius: 0;
+    font-weight: bold;
+    font-family: Attentica4F;
+    font-size: 20pt;
+    padding: 1px 10px;
+}
+
 .btn-item-in-cart
 {
     border-color: #3FB8AF;
@@ -369,4 +380,92 @@ div.description-text > p
     font-weight: bold;
     width: 200px;
     margin-left: 80px;
+}
+
+
+/*CART -----------------------------------------*/
+
+#go-to-cart
+{
+    margin-left: 15px;
+}
+
+.item-name-cart
+{
+    float: left;
+    font-family: BadScript;
+    font-size: 15pt;
+    padding-left: 90px;
+    padding-top: 30px;
+}
+
+.td-right
+{
+    padding-top: 30px;
+}
+
+td
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+th
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+/*WIZARD -----------------------------------------------------*/
+
+.wizard-container
+{
+    width:60%;
+    margin-left: 20%;
+    white-space: nowrap;
+    border-bottom: 2px solid #F3F3F3;
+    margin-top: 10px;
+}
+
+.wizard-item-active
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 30pt;
+    background-color: #f3f3f3;
+    border-bottom: 2px solid #DADADA
+
+}
+
+div.wizard-item-active > h2
+{
+  color: black;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.wizard-item
+{
+    float: left;
+    width: 33.3%;
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 22pt;
+    color:  #DADADA;
+    padding-top: 5px;
+}
+
+.carousel-caption > h1
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 30pt;
+}
+
+.carousel-caption > p
+{
+    font-family: BadScript;
+    font-size: 20pt;
 }

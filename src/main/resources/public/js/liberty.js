@@ -77,10 +77,28 @@ function addToCart(id, element)
             $('#cart-notif').fadeOut(300, function(){
                 $('#cart-notif').html(resp.st1 + ' ' + resp.amount
                     + ' ' + resp.st2 + ' ' + resp.st3 + ' '
-                    + resp.price + resp.st4).fadeIn().delay(800);
+                    + resp.price + resp.st4 +
+                    '<div id="go-to-cart" class="btn btn-default" onclick="goToCart()">Оплатить</div>').fadeIn().delay(800);
             });
             element.css('border-color', '#3FB8AF');
-            element.html('<img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>' + resp.st5).fadeIn().delay(800);
+            element.html('<img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>' + resp.st5
+            ).fadeIn().delay(800);
+        }
+    });
+}
+
+function goToCart()
+{
+    var post_url = 'cart';
+    $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        success: function(msg) {
+            $('#active-zone').fadeOut(800, function(){
+                $('#active-zone').html(msg).fadeIn().delay(2000);
+
+            });
         }
     });
 }
@@ -88,7 +106,6 @@ function addToCart(id, element)
 
 function getAllItems()
 {
-
     var form = $(this);
     var post_url = 'getAllItems';
     var post_data = {'itemWidth' : $(".container")[0].offsetWidth/3};

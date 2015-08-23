@@ -1,3 +1,12 @@
+<script>
+    $(document).ready(function(){
+
+        $("#go-to-cart").click(function(e) {
+           goToCart();
+        });
+
+    });
+</script>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div style="margin-top: 9px" class="textleft margintop3">
@@ -16,6 +25,7 @@
                     </#if>
             </#if>
                 ${translator.getString("total_amount")} ${order.getAmount()?string?replace(",",".")}${translator.getString("currency")}
+                <div id="go-to-cart" class="btn btn-default" onclick="goToCart()">${translator.getString("go_to_cart")}</div>
             <#else>${translator.getString("cart_is_empty")}
             </#if>
             </div>

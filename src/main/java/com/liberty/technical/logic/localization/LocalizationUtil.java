@@ -17,7 +17,7 @@ public class LocalizationUtil {
     private static Table<String, String, String> valueTable = HashBasedTable.create();
     private static ResourceBundle resourceBundle = null;
 
-    private final static String TRANSLATION_LOC = "com.liberty.technical.logic.localization.locution";
+    private final static String TRANSLATION_LOC = "locution";
     private final static String ENCODING = "UTF-8";
     private final static String EXTENSION = ".properties";
 
