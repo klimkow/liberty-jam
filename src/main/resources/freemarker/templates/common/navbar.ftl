@@ -46,7 +46,7 @@
     <div class="container top-menu">
         <div class="text-center">
             <div class="row">
-                <img src="img/main-logo.png" style="height:120px;"/>
+                <a href=""><img src="img/main-logo.png" style="height:120px;"/></a>
             </div>
             <div class="row menu-item-container">
                 <div class="menu-col"><button class="btn-main-menu">${translator.getString("choose_bouquet_title")}</button></div>

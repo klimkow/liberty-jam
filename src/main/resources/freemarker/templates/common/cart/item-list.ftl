@@ -1,11 +1,11 @@
 <div style="height: 500px;" class="container ">
     <div class="row wizard-container text-center">
-        <div class="wizard-item wizard-item-active"><h2>Букеты</h2></div>
-        <div class="wizard-item">Подробности доставки</div>
-        <div class="wizard-item">Оплата</div>
+        <div class="wizard-item-active-first"><h2>1.Выбрать букет</h2></div>
+        <div class="wizard-item">2.Подробности доставки</div>
+        <div class="wizard-item">3.Оплата</div>
     </div>
-    <div class="row" style="height: 350px; width: 60%; margin-top: 20px; margin-left: 20%; overflow: auto">
-    <table class="table table-hover">
+    <div class="row" style="height: 350px; width: 100%; margin-top: 20px; overflow: auto">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th></th>

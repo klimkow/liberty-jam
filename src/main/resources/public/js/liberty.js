@@ -45,6 +45,11 @@ function getItem(id)
         var form = $(this);
         var post_url = 'getItem';
         var post_data = id;
+        // scroll slowly to active zone
+        // 50 - the height of navbar
+        $('html, body').animate({
+            scrollTop: $("#active-zone").offset().top-50
+        }, 'slow');
         $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
         //$('#top-layer').height($('#active-zone')[0].offsetHeight);
         //var topOffset = $('#active-zone')[0].offsetTop;

@@ -426,35 +426,45 @@ th
     margin-left: 20%;
     white-space: nowrap;
     border-bottom: 2px solid #F3F3F3;
-    margin-top: 10px;
+
 }
 
-.wizard-item-active
+.wizard-item-active-first
 {
+    float: left;
+    width: 10%;
+    background: url(../img/bi1.jpg) no-repeat;
+    background-position: right;
+    background-size: 50px 50px;
+    border-bottom: 2px solid #3FB8AF;
+    background-position-x: 32px;
+    background-position-y: 20px;
+    height: 70px;
+
+}
+
+div.wizard-item-active-first > h2
+{
+    position: absolute;
     font-family: Attentica4F;
     font-weight: bold;
-    font-size: 30pt;
-    background-color: #f3f3f3;
-    border-bottom: 2px solid #DADADA
-
-}
-
-div.wizard-item-active > h2
-{
-  color: black;
-  margin-top: 10px;
-  font-weight: bold;
+    font-size: 20pt;
+    color: black;
+    margin-top: 75px;
+    margin-left: 20px;
+    font-weight: bold;
 }
 
 .wizard-item
 {
     float: left;
-    width: 33.3%;
+    width: 45%;
     font-family: Attentica4F;
     font-weight: bold;
-    font-size: 22pt;
+    font-size: 20pt;
     color:  #DADADA;
-    padding-top: 5px;
+    padding-top: 25px;
+    padding-left: 160px;
 }
 
 .carousel-caption > h1

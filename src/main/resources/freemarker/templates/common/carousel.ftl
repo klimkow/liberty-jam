@@ -14,7 +14,7 @@
                 <div class="carousel-caption">
                     <h1>Удивлять близких каждый день теперь просто</h1>
                     <p>Используйте раздел повод чтобы сделать лучший комплимент</p>
-                    <p><a class="btn btn-lg btn-primary" href="http://getbootstrap.com">Узнать больше</a>
+                    <p><a class="btn btn-lg btn-primary" href="">Узнать больше</a>
                     </p>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div class="carousel-caption">
                     <h1>Доверьтесь профессионалам</h1>
                     <p>Используйте раздел повод чтобы сделать лучший комплимент</p>
-                    <p><a class="btn btn-lg btn-primary" href="http://getbootstrap.com">Подробности</a>
+                    <p><a class="btn btn-lg btn-primary" href="">Подробности</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <div class="carousel-caption">
                     <h1>Дарите любимым людям улыбки</h1>
                     <p>Доставка букетов в самые неожиданные места</p>
-                    <p><a class="btn btn-lg btn-primary" href="http://getbootstrap.com">Узнать больше</a>
+                    <p><a class="btn btn-lg btn-primary" href="">Узнать больше</a>
                 </div>
             </div>
         </div>
