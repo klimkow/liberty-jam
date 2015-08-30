@@ -34,19 +34,21 @@ public class Order
   @Column(name = "PAYMENT_STATUS")
   private Integer paymentStatus;
 
-  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+  @ManyToMany(targetEntity=com.liberty.technical.logic.entity.Item.class,
+          cascade = {CascadeType.PERSIST, CascadeType.MERGE}
       , fetch = FetchType.EAGER)
   @JoinTable(name = "ORDER_HAS_ITEM",
       joinColumns = {@JoinColumn(name = "ORDER_ID")},
       inverseJoinColumns = {@JoinColumn(name = "ITEM_ID")})
-  private Set<Item> items;
+  private Set items;
 
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name="DELIVERY_INFORMATION_ID")
   private DeliveryInformation deliveryInformation;
 
 
-  @ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+  @ManyToOne(targetEntity=User.class,
+          cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
   @JoinColumn(name="USER_ID", referencedColumnName="ID")
   private User user;
 

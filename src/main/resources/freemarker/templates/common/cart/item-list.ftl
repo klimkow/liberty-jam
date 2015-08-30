@@ -1,16 +1,16 @@
 <div style="height: 500px;" class="container ">
     <div class="row wizard-container text-center">
-        <div class="wizard-item-active-first"><h2>1.Выбрать букет</h2></div>
-        <div class="wizard-item">2.Подробности доставки</div>
-        <div class="wizard-item">3.Оплата</div>
+        <div class="wizard-item-active-first"><h2>1.${translator.getString("step1")}</h2></div>
+        <div class="wizard-item">2.${translator.getString("step2")}</div>
+        <div class="wizard-item">3.${translator.getString("step3")}</div>
     </div>
     <div class="row" style="height: 350px; width: 100%; margin-top: 20px; overflow: auto">
     <table class="table table-striped">
         <thead>
         <tr>
             <th></th>
-            <th>Количество</th>
-            <th>Стоимость</th>
+            <th>${translator.getString("amount")}</th>
+            <th>${translator.getString("price")}</th>
             <th></th>
         </tr>
         </thead>
@@ -26,5 +26,5 @@
         </tbody>
     </table>
     </div>
-    <div style="margin-top: 10px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">Далее<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15"/></div>
+    <div style="margin-top: 10px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15"/></div>
 </div>

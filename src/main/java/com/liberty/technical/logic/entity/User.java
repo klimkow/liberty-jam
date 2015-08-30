@@ -30,9 +30,10 @@ public class User
   @Column(name = "CITY")
   private String city;
 
-  @OneToMany(cascade=CascadeType.PERSIST)
+  @OneToMany(targetEntity=Order.class,
+          cascade=CascadeType.PERSIST)
   @JoinColumn(name="USER_ID", referencedColumnName="ID")
-  private Set<Order> orders;
+  private Set orders;
 
 
   public long getId()
@@ -59,13 +60,13 @@ public class User
   }
 
 
-  public Set<Order> getOrders()
+  public Set getOrders()
   {
     return orders;
   }
 
 
-  public void setOrders(Set<Order> orders)
+  public void setOrders(Set orders)
   {
     this.orders = orders;
   }

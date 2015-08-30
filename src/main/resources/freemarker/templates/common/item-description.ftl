@@ -13,7 +13,7 @@
                 <p class="textleft">${selectedItem.getPrice()?string?replace(",",".")}.000</p>
             </div>
             <div style="margin-top:20px; padding-right: 10px" class="textleft">
-                <p class="textleft"><a class="btn btn-default" href="#">Добавить в корзину</a></p>
+                <p class="textleft"><a class="btn btn-default" href="#">${translator.getString("add_to_cart")}</a></p>
             </div>
         </div>
     </div>

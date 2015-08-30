@@ -9,33 +9,33 @@
     </ol>
     <div class="carousel-inner">
         <div class="item active">
-            <img src="/img/car1.jpg" style="width:100%" class="img-responsive">
+            <img src="img/car1.jpg" style="width:100%" class="img-responsive">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Удивлять близких каждый день теперь просто</h1>
-                    <p>Используйте раздел повод чтобы сделать лучший комплимент</p>
-                    <p><a class="btn btn-lg btn-primary" href="">Узнать больше</a>
+                    <h1>${translator.getString("car_item1_header")}</h1>
+                    <p>${translator.getString("car_item1_text")}</p>
+                    <p><a class="btn btn-lg btn-primary" href="">${translator.getString("car_button_more")}</a>
                     </p>
                 </div>
             </div>
         </div>
         <div class="item">
-            <img src="/img/car2.jpg" style="width:100%" class="img-responsive">
+            <img src="img/car2.jpg" style="width:100%" class="img-responsive">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Доверьтесь профессионалам</h1>
-                    <p>Используйте раздел повод чтобы сделать лучший комплимент</p>
-                    <p><a class="btn btn-lg btn-primary" href="">Подробности</a>
+                    <h1>${translator.getString("car_item2_header")}</h1>
+                    <p>${translator.getString("car_item2_text")}</p>
+                    <p><a class="btn btn-lg btn-primary" href="">${translator.getString("car_button_more")}</a>
                 </div>
             </div>
         </div>
         <div class="item">
-            <img src="/img/car3.jpg" style="width:100%" class="img-responsive">
+            <img src="img/car3.jpg" style="width:100%" class="img-responsive">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Дарите любимым людям улыбки</h1>
-                    <p>Доставка букетов в самые неожиданные места</p>
-                    <p><a class="btn btn-lg btn-primary" href="">Узнать больше</a>
+                    <h1>${translator.getString("car_item3_header")}</h1>
+                    <p>${translator.getString("car_item3_text")}</p>
+                    <p><a class="btn btn-lg btn-primary" href="">${translator.getString("car_button_more")}</a>
                 </div>
             </div>
         </div>

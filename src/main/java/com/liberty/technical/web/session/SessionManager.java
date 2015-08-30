@@ -12,7 +12,7 @@ import java.util.Map;
 public class SessionManager
 {
   private static SessionManager instance;
-  private static Map<String, Session> sessionMap = new HashMap<>();
+  private static Map sessionMap = new HashMap();
 
   private SessionManager()
   {

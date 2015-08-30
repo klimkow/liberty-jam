@@ -8,10 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  *  @author M-AKI
@@ -21,9 +18,9 @@ public class UserSessionUtils {
     public final static String ATTRIBUTE_ALL_ITEMS_LIST = "sessionItemList";
     public final static String ATTRIBUTE_LOCALE = "locale";
 
-    public static List<Item> getAllItems()
+    public static List getAllItems()
     {
-        List<Item> resultList = null;
+        List resultList = null;
         SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -41,9 +38,10 @@ public class UserSessionUtils {
         return resultList;
     }
 
-    public static Item getItemIndexById(List<Item> items, Long id)
+    public static Item getItemIndexById(List items, Long id)
     {
-      for (Item item : items) {
+      for (int i = 0; i < items.size(); i++) {
+        Item item = (Item)items.get(i);
         if (item.getId() == id) {
           return item;
         }
@@ -51,9 +49,9 @@ public class UserSessionUtils {
       return null;
     }
 
-    public static List<Item> getItemsBySession(spark.Session session)
+    public static List getItemsBySession(spark.Session session)
     {
-      List<Item> items = null;
+      List items = null;
       if (!session.isNew()) {
           items = session.attribute(ATTRIBUTE_ALL_ITEMS_LIST);
       }
@@ -66,13 +64,13 @@ public class UserSessionUtils {
 
     public static Order addToCart(spark.Session session, Long itemId)
     {
-        Set<Item> items = null;
+        Set items = null;
         Order order = session.attribute(ATTRIBUTE_ORDER);
         if (order != null) {
             items = order.getItems();
         } else {
             order = new Order();
-            items = new HashSet<>();
+            items = new HashSet();
         }
         Item item = getItemById(getItemsBySession(session), itemId);
         items.add(item);
@@ -82,20 +80,23 @@ public class UserSessionUtils {
         return order;
     }
 
-    private static int calculateOrderAmount (Set<Item> items)
+    private static int calculateOrderAmount (Set items)
     {
         int sum = 0;
-        for (Item item : items) {
+        Iterator it = items.iterator();
+        while (it.hasNext()) {
+            Item item = (Item)it.next();
             sum += item.getPrice();
         }
         return sum;
     }
 
-    private static Item getItemById(List<Item> items, Long id)
+    private static Item getItemById(List items, Long id)
     {
-        for (Item i : items) {
-            if (i.getId() == id.longValue()) {
-                return i;
+        for (int i = 0; i < items.size(); i++) {
+            Item item = (Item)items.get(i);
+            if (item.getId() == id.longValue()) {
+                return item;
             }
         }
         return null;

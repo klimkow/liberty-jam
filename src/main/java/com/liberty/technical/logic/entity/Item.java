@@ -30,16 +30,19 @@ public class Item
   @Column(name = "PRICE")
   private Integer price;
 
-  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+  @ManyToMany(
+          targetEntity=com.liberty.technical.logic.entity.Category.class,
+          cascade = {CascadeType.PERSIST, CascadeType.MERGE}
       , fetch = FetchType.EAGER)
   @JoinTable(name = "CATEGORY_HAS_ITEM",
       joinColumns = {@JoinColumn(name = "ITEM_ID")},
       inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID")})
-  private Set<Category> categories;
+  private Set categories;
 
-  @OneToMany(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
+  @OneToMany(targetEntity = com.liberty.technical.logic.entity.images.ItemImages.class,
+          cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
   @JoinColumn(name="ITEM_ID", referencedColumnName="ID")
-  private Set<ItemImages> images;
+  private Set images;
 
   public long getId()
   {
@@ -53,13 +56,13 @@ public class Item
   }
 
 
-  public Set<Category> getCategories()
+  public Set getCategories()
   {
     return categories;
   }
 
 
-  public void setCategories(Set<Category> categories)
+  public void setCategories(Set categories)
   {
     this.categories = categories;
   }
@@ -101,13 +104,13 @@ public class Item
   }
 
 
-    public Set<ItemImages> getImages()
+    public Set getImages()
   {
     return images;
   }
 
 
-  public void setImages(Set<ItemImages> images)
+  public void setImages(Set images)
   {
     this.images = images;
   }

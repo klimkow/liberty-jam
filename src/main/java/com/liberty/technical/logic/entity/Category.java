@@ -23,9 +23,10 @@ public class Category
   @Column(name = "DESCRIPTION")
   private String description;
 
-  @OneToMany(cascade=CascadeType.PERSIST)
+  @OneToMany(targetEntity=com.liberty.technical.logic.entity.images.CategoryImages.class,
+          cascade=CascadeType.PERSIST)
   @JoinColumn(name="CATEGORY_ID", referencedColumnName="ID")
-  private Set<CategoryImages> images;
+  private Set images;
 
 
   public long getId()
@@ -52,13 +53,13 @@ public class Category
   }
 
 
-  public Set<CategoryImages> getImages()
+  public Set getImages()
   {
     return images;
   }
 
 
-  public void setImages(Set<CategoryImages> images)
+  public void setImages(Set images)
   {
     this.images = images;
   }
