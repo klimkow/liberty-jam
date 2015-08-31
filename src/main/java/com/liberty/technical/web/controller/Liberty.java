@@ -57,7 +57,7 @@ public class Liberty implements SparkApplication
 
         get("/", new Route() {
             @Override
-            public Object handle(Request request, Response response) throws Exception {
+            public Object handle(Request request, Response response)  {
                 halt();
                 return null;
             }
