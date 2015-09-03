@@ -11,11 +11,8 @@ import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
 import spark.*;
 import spark.servlet.SparkApplication;
-import spark.servlet.SparkFilter;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
 import java.util.*;
 
 
@@ -36,23 +33,20 @@ public class Liberty implements SparkApplication
 
         SparkBase.staticFileLocation("/public");
 
-        get("/a29tcGxpbWVudA==", new TemplateViewRoute() {
-            @Override
-            public ModelAndView handle(Request request, Response response) {
-                Session session = request.session();
-                Map attributes = new HashMap();
-                if (!session.isNew()) {
-                    Order order = session.attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-                    if (order != null) {
-                        attributes.put("order", order);
-                        attributes.put("itemCount", order.getItemCount());
-                    }
+        get("/a29tcGxpbWVudA==", (request, response) -> {
+            Session session = request.session();
+            Map<String, Object> attributes = new HashMap<>();
+            if (!session.isNew()) {
+                Order order = session.attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+                if (order != null) {
+                    attributes.put("order", order);
+                    attributes.put("itemCount", order.getItemCount());
                 }
-                Locale locale = session.attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-                attributes.put("translator", LocalizationUtil.getInstance(locale));
-
-                return new ModelAndView(attributes, "index.ftl");
             }
+            Locale locale = session.attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+            attributes.put("translator", LocalizationUtil.getInstance(locale));
+
+            return new ModelAndView(attributes, "index.ftl");
         }, engine);
 
         get("/", new Route() {
@@ -67,118 +61,93 @@ public class Liberty implements SparkApplication
 
 
 
-        post("/getItem", new TemplateViewRoute() {
-            @Override
-            public ModelAndView handle(Request request, Response response) {
-                List items = UserSessionUtils.getItemsBySession(request.session());
-                if (items == null) {
-                    // TODO: throw exception view
-                }
 
-                Map attributes = new HashMap();
-                Long id = new Long( request.queryParams("itemId"));
-                Item item = UserSessionUtils.getItemIndexById(items, id);
-                attributes.put("selectedItem", item);
-                Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-                attributes.put("translator", LocalizationUtil.getInstance(locale));
-
-                return new ModelAndView(attributes, "common/item-description.ftl");
+        post("/getItem", (request, response) -> {
+            List<Item> items = UserSessionUtils.getItemsBySession(request.session());
+            if (items == null) {
+                // TODO: throw exception view
             }
+
+            Map<String, Object> attributes = new HashMap<>();
+            Long id = new Long( request.queryParams("itemId"));
+            Item item = UserSessionUtils.getItemIndexById(items, id);
+            attributes.put("selectedItem", item);
+            Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+            attributes.put("translator", LocalizationUtil.getInstance(locale));
+
+            return new ModelAndView(attributes, "common/item-description.ftl");
         }, engine);
 
-        post("/cart", new TemplateViewRoute() {
-            @Override
-            public ModelAndView handle(Request request, Response response) {
-                Map attributes = new HashMap();
-                Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-                if (order != null) {
-                    attributes.put("order", order);
-                    attributes.put("itemCount", order.getItemCount());
-                    attributes.put("cartItems", order.getItems());
-                }
-                Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-                attributes.put("translator", LocalizationUtil.getInstance(locale));
-                return new ModelAndView(attributes, "common/cart/item-list.ftl");
+        post("/cart", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+            if (order != null) {
+                attributes.put("order", order);
+                attributes.put("itemCount", order.getItemCount());
+                attributes.put("cartItems", order.getItems());
             }
+            Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+            attributes.put("translator", LocalizationUtil.getInstance(locale));
+            return new ModelAndView(attributes, "common/cart/item-list.ftl");
         }, engine);
 
 
-        post("/getAllItems", new TemplateViewRoute() {
-            @Override
-            public ModelAndView handle(Request request, Response response) {
-                List<Item> items = UserSessionUtils.getItemsBySession(request.session());
-                if (items == null) {
-                    // TODO: throw exception view
-                }
-
-                Double itemWidth = new Double(request.queryParams("itemWidth"));
-                Double totalWidth = itemWidth * items.size();
-
-                Map attributes = new HashMap();
-                attributes.put("items", items);
-                attributes.put("itemWidth", itemWidth.toString());
-                attributes.put("galleryWidth", totalWidth.toString());
-                attributes.put("x", 0);
-                Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-                if (order != null) {
-                    attributes.put("order", order);
-                }
-                Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-                attributes.put("translator", LocalizationUtil.getInstance(locale));
-
-                return new ModelAndView(attributes, "common/marketing.ftl");
+        post("/getAllItems", (request, response) -> {
+            List<Item> items = UserSessionUtils.getItemsBySession(request.session());
+            if (items == null) {
+                // TODO: throw exception view
             }
+
+            Double itemWidth = new Double(request.queryParams("itemWidth"));
+            Double totalWidth = itemWidth * items.size();
+
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("items", items);
+            attributes.put("itemWidth", itemWidth.toString());
+            attributes.put("galleryWidth", totalWidth.toString());
+            attributes.put("x", 0);
+            Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+            if (order != null) {
+                attributes.put("order", order);
+            }
+            Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+            attributes.put("translator", LocalizationUtil.getInstance(locale));
+
+            return new ModelAndView(attributes, "common/marketing.ftl");
         }, engine);
 
         Gson gson = new Gson();
-        post("/addToCart", new Route() {
-            @Override
-            public Object handle(Request request, Response response) {
-                Map attributes = new HashMap();
-                List<Item> items = UserSessionUtils.getItemsBySession(request.session());
-                if (items == null) {
-                    // TODO: throw exception view
-                }
-                Long id = new Long( request.queryParams("itemId"));
-                Order order = UserSessionUtils.addToCart(request.session(), id);
-                String bouquets;
-                int count = order.getItems().size();
-                if (count == 1) {
-                    bouquets = LocalizationUtil.getString("bouquet1");
-                } else if (count >1 && count <5) {
-                    bouquets = LocalizationUtil.getString("bouquet24");
-                } else {
-                    bouquets = LocalizationUtil.getString("bouquet5");
-                }
-
-                attributes.put("order", order);
-                return new OrderVO(order.getAmount(),
-                        count,
-                        LocalizationUtil.getString("you_have"),
-                        bouquets,
-                        LocalizationUtil.getString("total_amount"),
-                        LocalizationUtil.getString("currency"),
-                        LocalizationUtil.getString("item_int_the_cart"));
+        post("/addToCart", (request, response) -> {
+            Map<String, Order> attributes = new HashMap<>();
+            List<Item> items = UserSessionUtils.getItemsBySession(request.session());
+            if (items == null) {
+                // TODO: throw exception view
             }
-        }, new JsonTransformer());
+            Long id = new Long( request.queryParams("itemId"));
+            Order order = UserSessionUtils.addToCart(request.session(), id);
+            String bouquets;
+            int count = order.getItems().size();
+            if (count == 1) {
+                bouquets = LocalizationUtil.getString("bouquet1");
+            } else if (count >1 && count <5) {
+                bouquets = LocalizationUtil.getString("bouquet24");
+            } else {
+                bouquets = LocalizationUtil.getString("bouquet5");
+            }
 
-
-    }
-
-
-    public class JsonTransformer implements ResponseTransformer {
-
-        private Gson gson = new Gson();
-
-        @Override
-        public String render(Object model) {
-            return gson.toJson(model);
-        }
-
+            attributes.put("order", order);
+            return new OrderVO(order.getAmount(),
+                    count,
+                    LocalizationUtil.getString("you_have"),
+                    bouquets,
+                    LocalizationUtil.getString("total_amount"),
+                    LocalizationUtil.getString("currency"),
+                    LocalizationUtil.getString("item_int_the_cart"));
+        }, gson::toJson);
     }
 
     public static void main(String[] args)
-  {
+    {
 //      Configuration config = new Configuration();
 //      config.setClassForTemplateLoading(Liberty.class, "/freemarker/templates");
 //
