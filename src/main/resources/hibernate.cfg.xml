@@ -39,7 +39,7 @@
     </property>
 
     <property name="hibernate.connection.url">
-        jdbc:mysql://localhost:0/komplimentby?useUnicode=true&amp;characterEncoding=utf8
+        jdbc:mysql://localhost:3306/komplimentby?useUnicode=true&amp;characterEncoding=utf8
     </property>
     <property name="hibernate.connection.username">
         komplimentby

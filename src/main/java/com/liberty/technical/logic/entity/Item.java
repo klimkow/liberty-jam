@@ -11,37 +11,37 @@ import java.util.Set;
  * @author M-AKI.
  */
 @Entity
-@Table(name = "Item")
+@Table(name = "item")
 public class Item
 {
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "NAME")
+  @Column(name = "name")
   private String name;
 
-  @Column(name = "DESCRIPTION")
+  @Column(name = "description")
   private String description;
 
-  @Column(name = "AVAILABLE_AMOUNT")
+  @Column(name = "available_amount")
   private Integer availableAmount;
 
-  @Column(name = "PRICE")
+  @Column(name = "price")
   private Integer price;
 
   @ManyToMany(
           targetEntity=com.liberty.technical.logic.entity.Category.class,
           cascade = {CascadeType.PERSIST, CascadeType.MERGE}
       , fetch = FetchType.EAGER)
-  @JoinTable(name = "CATEGORY_HAS_ITEM",
-      joinColumns = {@JoinColumn(name = "ITEM_ID")},
-      inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID")})
+  @JoinTable(name = "category_has_item",
+      joinColumns = {@JoinColumn(name = "item_id")},
+      inverseJoinColumns = {@JoinColumn(name = "category_id")})
   private Set categories;
 
   @OneToMany(targetEntity = com.liberty.technical.logic.entity.images.ItemImages.class,
           cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
-  @JoinColumn(name="ITEM_ID", referencedColumnName="ID")
+  @JoinColumn(name="item_id", referencedColumnName="id")
   private Set images;
 
   public long getId()

@@ -9,47 +9,47 @@ import java.util.Set;
  * @author M-AKI.
  */
 @Entity
-@Table(name = "ORDER")
+@Table(name = "order")
 public class Order
 {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "AMOUNT")
+  @Column(name = "amount")
   private Integer amount;
 
-  @Column(name = "DATE_CREATED")
+  @Column(name = "date_created")
   private Date dateCreated;
 
-  @Column(name = "CONFIRMATION_NUMBER")
+  @Column(name = "confirmation_number")
   private Integer confirmationNumber;
 
-  @Column(name = "STATUS")
+  @Column(name = "status")
   private Integer status;
 
-  @Column(name = "LAST_UPDATED")
+  @Column(name = "last_updated")
   private Date lastUpdated;
 
-  @Column(name = "PAYMENT_STATUS")
+  @Column(name = "payment_status")
   private Integer paymentStatus;
 
   @ManyToMany(targetEntity=com.liberty.technical.logic.entity.Item.class,
           cascade = {CascadeType.PERSIST, CascadeType.MERGE}
       , fetch = FetchType.EAGER)
-  @JoinTable(name = "ORDER_HAS_ITEM",
-      joinColumns = {@JoinColumn(name = "ORDER_ID")},
-      inverseJoinColumns = {@JoinColumn(name = "ITEM_ID")})
+  @JoinTable(name = "order_has_item",
+      joinColumns = {@JoinColumn(name = "order_id")},
+      inverseJoinColumns = {@JoinColumn(name = "item_id")})
   private Set items;
 
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinColumn(name="DELIVERY_INFORMATION_ID")
+  @JoinColumn(name="delivery_information_id")
   private DeliveryInformation deliveryInformation;
 
 
   @ManyToOne(targetEntity=User.class,
           cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
-  @JoinColumn(name="USER_ID", referencedColumnName="ID")
+  @JoinColumn(name="user_id", referencedColumnName="id")
   private User user;
 
   public long getId()

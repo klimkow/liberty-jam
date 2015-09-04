@@ -10,22 +10,22 @@ import java.util.Set;
  * @author M-AKI.
  */
 @Entity
-@Table(name = "CATEGORY")
+@Table(name = "category")
 public class Category
 {
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "NAME")
+  @Column(name = "name")
   private String name;
 
-  @Column(name = "DESCRIPTION")
+  @Column(name = "description")
   private String description;
 
   @OneToMany(targetEntity=com.liberty.technical.logic.entity.images.CategoryImages.class,
           cascade=CascadeType.PERSIST)
-  @JoinColumn(name="CATEGORY_ID", referencedColumnName="ID")
+  @JoinColumn(name="category_id", referencedColumnName="id")
   private Set images;
 
 

@@ -7,35 +7,35 @@ import java.util.Date;
  * @author M-AKI.
  */
 @Entity
-@Table(name = "DELIVERY_INFORMATION")
+@Table(name = "delivery_information")
 public class DeliveryInformation
 {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "NAME")
+  @Column(name = "name")
   private String name;
 
-  @Column(name = "EMAIL")
+  @Column(name = "email")
   private String email;
 
-  @Column(name = "PHONE")
+  @Column(name = "phone")
   private String phone;
 
-  @Column(name = "CITY")
+  @Column(name = "city")
   private String city;
 
-  @Column(name = "ADDRESS")
+  @Column(name = "address")
   private String address;
 
-  @Column(name = "MESSAGE")
+  @Column(name = "message")
   private String message;
 
-  @Column(name = "DELIVERY_TIME")
+  @Column(name = "delivery_time")
   private Date deliveryDate;
 
-  @Column(name = "DELIVERY_PRICE")
+  @Column(name = "delivery_price")
   private Integer deliveryPrice;
 
 

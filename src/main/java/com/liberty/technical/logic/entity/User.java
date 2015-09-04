@@ -8,31 +8,31 @@ import java.util.Set;
  * @author M-AKI.
  */
 @Entity
-@Table(name= "USER")
+@Table(name= "user")
 public class User
 {
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "NAME")
+  @Column(name = "name")
   private String name;
 
-  @Column(name = "EMAIL")
+  @Column(name = "email")
   private String email;
 
-  @Column(name = "PHONE")
+  @Column(name = "phone")
   private String phone;
 
-  @Column(name = "ADDRESS")
+  @Column(name = "address")
   private String address;
 
-  @Column(name = "CITY")
+  @Column(name = "city")
   private String city;
 
   @OneToMany(targetEntity=Order.class,
           cascade=CascadeType.PERSIST)
-  @JoinColumn(name="USER_ID", referencedColumnName="ID")
+  @JoinColumn(name="user_id", referencedColumnName="id")
   private Set orders;
 
 

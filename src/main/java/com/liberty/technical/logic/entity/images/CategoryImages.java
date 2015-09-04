@@ -9,18 +9,18 @@ import javax.persistence.*;
  * @author M-AKI.
  */
 @Entity
-@Table(name = "CATEGORY_IMAGES")
+@Table(name = "category_images")
 public class CategoryImages
 {
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "IMAGE")
+  @Column(name = "image")
   private String imageUrl;
 
   @ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
-  @JoinColumn(name="Category_ID", referencedColumnName="ID")
+  @JoinColumn(name="category_id", referencedColumnName="id")
   private com.liberty.technical.logic.entity.Category Category;
 
 
