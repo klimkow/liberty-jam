@@ -7,6 +7,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/liberty.css" rel="stylesheet" media="screen">
     <link href="css/nouislider.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body onload="createSlider()">
     <#--TODO: download jquery to libs folder (current downloaded is too slow)-->

@@ -33,7 +33,7 @@ public class Liberty implements SparkApplication
 
         SparkBase.staticFileLocation("/public");
 
-        get("/a29tcGxpbWVudA==", (request, response) -> {
+        get("/*", (request, response) -> {
             Session session = request.session();
             Map<String, Object> attributes = new HashMap<>();
             if (!session.isNew()) {
@@ -49,14 +49,14 @@ public class Liberty implements SparkApplication
             return new ModelAndView(attributes, "index.ftl");
         }, engine);
 
-        get("/", new Route() {
-            @Override
-            public Object handle(Request request, Response response)  {
-                halt();
-                return null;
-            }
-        }
-        , null);
+//        get("/", new Route() {
+//            @Override
+//            public Object handle(Request request, Response response)  {
+//                halt();
+//                return null;
+//            }
+//        }
+//        , null);
 
 
 
