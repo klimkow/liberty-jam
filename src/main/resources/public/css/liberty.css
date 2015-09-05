@@ -479,3 +479,42 @@ div.wizard-item-active-first > h2
     font-family: BadScript;
     font-size: 20pt;
 }
+
+.dlv-block
+{
+    margin-top: 50px;
+    float:left;
+    width: 33%;
+    border-right: 2px #f3f3f3 solid;
+}
+
+.dlv-block > h2
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 20pt;
+
+}
+
+.dlv-block-cn
+{
+    padding-right: 15px;
+    padding-left: 15px;
+    text-align: left;
+}
+
+.dlv-block-cn > label
+{
+    font-family: BadScript;
+    font-size: 13pt;
+}
+
+.form-control
+{
+    border-radius: 0px;
+}
+
+.form-control:focus
+{
+    border-color: #3FB8AF;
+}

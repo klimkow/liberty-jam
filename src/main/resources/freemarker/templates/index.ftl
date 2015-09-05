@@ -7,6 +7,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/liberty.css" rel="stylesheet" media="screen">
     <link href="css/nouislider.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
@@ -14,6 +15,8 @@
     <#--TODO: download jquery to libs folder (current downloaded is too slow)-->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="locales/bootstrap-datepicker.ru.min.js"></script>
     <script src="js/nouislider.min.js"></script>
     <script src="js/liberty.js"></script>
 

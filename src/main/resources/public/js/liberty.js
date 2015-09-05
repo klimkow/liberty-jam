@@ -39,6 +39,23 @@ function appear(elm, i, step, speed){
 
 }
 
+function show_step2()
+{
+    var post_url = 'delivery_info';
+    $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        success: function(msg) {
+            $('#active-zone').fadeOut(800, function(){
+                $('#active-zone').html(msg).fadeIn().delay(2000);
+
+            });
+        }
+    });
+}
+
+
 function getItem(id)
 {
 
