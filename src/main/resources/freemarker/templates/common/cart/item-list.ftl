@@ -1,3 +1,13 @@
+<script>
+    $(document).ready(function(){
+
+        $("#go-step2").click(function(e) {
+            show_step2();
+        });
+
+    });
+</script>
+
 <div style="height: 500px;" class="container ">
     <div class="row wizard-container text-center">
         <div class="wizard-item-active-first"><h2>1.${translator.getString("step1")}</h2></div>
@@ -26,5 +36,5 @@
         </tbody>
     </table>
     </div>
-    <div style="margin-top: 10px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15" onclick="show_step2()"/></div>
+    <div style="margin-top: 10px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15""/></div>
 </div>

@@ -480,20 +480,35 @@ div.wizard-item-active-first > h2
     font-size: 20pt;
 }
 
-.dlv-block
+.dlv-container-block
 {
-    margin-top: 50px;
-    float:left;
-    width: 33%;
-    border-right: 2px #f3f3f3 solid;
+    width: 100%;
+    /*border-bottom: 2px #f3f3f3 solid;*/
 }
 
-.dlv-block > h2
+.dlv-block
+{
+    width: 45%;
+    margin-right:100px;
+    background-color: #f3f3f3;
+    margin-top: 18px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+#dlv-bock-title > h2
 {
     font-family: Attentica4F;
     font-weight: bold;
-    font-size: 20pt;
+    font-size: 25pt;
+    padding-right: 90px;
+    margin-top: 12px;
+    margin-bottom: 0px;
+}
 
+#dlv-bock-title
+{
+    border-bottom: 2px #f3f3f3 solid;
 }
 
 .dlv-block-cn
@@ -512,9 +527,19 @@ div.wizard-item-active-first > h2
 .form-control
 {
     border-radius: 0px;
+    font-family: Attentica4f;
+    font-weight: bolder;
+    font-size: 20pt;
+    padding: 2px 10px;
+    line-height: 1;
+    height: 29px;
 }
 
 .form-control:focus
 {
     border-color: #3FB8AF;
+}
+
+.form-group {
+    margin-bottom: 5px;
 }

@@ -1,11 +1,24 @@
-<div style="height: 500px;" class="container ">
-    <div class="row wizard-container text-center">
+<div style="height: 120px; background-color: #f3f3f3;" class="row">
+    <div class="row container wizard-container text-center">
         <div class="wizard-item-active-first"><h2>1.${translator.getString("step1")}</h2></div>
         <div class="wizard-item">2.${translator.getString("step2")}</div>
         <div class="wizard-item">3.${translator.getString("step3")}</div>
     </div>
-    <div style="" class="dlv-block">
+</div>
+<div style="height: 500px;" class="container ">
+    <div class="row dlv-container-block">
+    <div id="dlv-bock-title" class="row text-center">
         <h2>От кого</h2>
+    </div>
+    <div class="row">
+    <div style="float:left">
+        <img style="margin-left: 220px; margin-top:50px;" src="img/lorry.svg.hi.png" width="120" height="75"/>
+        <div style="margin-left: 220px; width: 200px;font-family: BadScript;
+            font-size: 15pt; font-weight: bold; color: #929090">
+            Выберите доступные дату и время доставки, а так же адрес
+        </div>
+    </div>
+    <div style="" class="dlv-block textright">
         <div class="dlv-block-cn form-group">
             <label for="from-name">Имя</label>
             <input type="text" class="form-control" id="from-name">
@@ -19,8 +32,22 @@
             <input type="number" class="form-control" id="from-email">
         </div>
     </div>
-    <div style="" class="dlv-block">
+    </div>
+    </div>
+    <div class="row dlv-container-block">
+    <div id="dlv-bock-title" class="row text-center">
         <h2>Кому</h2>
+    </div>
+    <div class="row">
+    <div style="float:left">
+        <img style="margin-left: 220px; margin-top:60px;" src="img/ci12.png" width="90" height="120"/>
+        <div style="margin-left: 220px; width: 200px;font-family: BadScript;
+             font-size: 15pt; font-weight: bold; color: #929090">
+            Выберите доступные дату и время доставки, а так же адрес
+        </div>
+    </div>
+    <div style="" class="dlv-block textright">
+
         <div class="dlv-block-cn form-group">
             <label for="to-name">Имя</label>
             <input type="text" class="form-control" id="to-name">
@@ -31,12 +58,28 @@
         </div>
         <div class="dlv-block-cn form-group">
             <label for="comment">Послание</label>
-            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <textarea style="height: 70px" class="form-control" rows="5" id="comment"></textarea>
         </div>
     </div>
-    <div style="border-right: none" class="dlv-block">
+    </div>
+    </div>
 
+    <div class="row dlv-container-block">
+    <div id="dlv-bock-title" class="row text-center">
         <h2>Подробности доставки</h2>
+    </div>
+
+    <div class="row">
+    <div style="float:left">
+    <img style="margin-left: 220px; margin-top:50px;" src="img/lorry.svg.hi.png" width="120" height="75"/>
+    <div style="margin-left: 220px; width: 200px;font-family: BadScript;
+    font-size: 15pt; font-weight: bold; color: #929090">
+      Выберите доступные дату и время доставки, а так же адрес
+    </div>
+    </div>
+
+    <div style="margin-bottom: 20px" class="dlv-block textright">
+
         <div style="overflow:hidden;">
             <div class="dlv-block-cn form-group">
                 <label for="comment">Дата</label>
@@ -76,12 +119,17 @@
                 </select>
             </div>
     </div>
+    </div>
 
-        <div style="float: right; margin-top: 90px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15" onclick="show_step2()"/></div>
-        <div style="float:right; margin-top: 90px; margin-bottom: 10px; margin-right: 5px;" id="go-step2" class="btn btn-default textleft">
-            <img style="margin-right: 10px" src="img/prev_arrow.png" width="15" height="15" onclick="show_step2()"/>
-        ${translator.getString("prev")}
-        </div>
+    </div>
+    </div>
+
+
+        <#--<div style="float: right; margin-top: 250px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15"/></div>-->
+        <#--<div style="float:right; margin-top: 250px; margin-bottom: 10px; margin-right: 5px;" id="go-step2" class="btn btn-default textleft">-->
+            <#--<img style="margin-right: 10px" src="img/prev_arrow.png" width="15" height="15"/>-->
+        <#--${translator.getString("prev")}-->
+        <#--</div>-->
 
 
 
