@@ -7,9 +7,6 @@
 </div>
 <div style="height: 500px;" class="container ">
     <div class="row dlv-container-block">
-    <div id="dlv-bock-title" class="row text-center">
-        <h2>От кого</h2>
-    </div>
     <div class="row">
     <div style="float:left">
         <img style="margin-left: 220px; margin-top:50px;" src="img/lorry.svg.hi.png" width="120" height="75"/>
@@ -19,24 +16,25 @@
         </div>
     </div>
     <div style="" class="dlv-block textright">
+        <h2>От кого</h2>
         <div class="dlv-block-cn form-group">
             <label for="from-name">Имя</label>
-            <input type="text" class="form-control" id="from-name">
+            <input type="text" class="form-control has-success" id="from-name"  placeholder="Ваше имя, к примеру Самуил Яковлевич">
         </div>
         <div class="dlv-block-cn form-group">
             <label for="from-email">Email</label>
-            <input type="email" class="form-control" id="from-email">
+            <input type="email" class="form-control" id="from-email"  placeholder="Чтоб сообщать вам о статусе доставки">
         </div>
         <div class="dlv-block-cn form-group">
             <label for="from-email">Номер телефона</label>
-            <input type="number" class="form-control" id="from-email">
+            <input style="padding: 0px 10px;" type="number" class="form-control" id="from-email"  placeholder="Код страны, код оператора и номер телефона">
         </div>
     </div>
     </div>
     </div>
     <div class="row dlv-container-block">
     <div id="dlv-bock-title" class="row text-center">
-        <h2>Кому</h2>
+
     </div>
     <div class="row">
     <div style="float:left">
@@ -47,18 +45,18 @@
         </div>
     </div>
     <div style="" class="dlv-block textright">
-
+        <h2>Кому</h2>
         <div class="dlv-block-cn form-group">
             <label for="to-name">Имя</label>
-            <input type="text" class="form-control" id="to-name">
+            <input type="text" class="form-control" id="to-name"  placeholder="Имя счастливицы, к примеру Маргарита Павловна">
         </div>
         <div class="dlv-block-cn form-group">
             <label for="to-phone">Номер телефона</label>
-            <input type="number" class="form-control" id="to-phone">
+            <input style="padding: 0px 10px;" type="number" class="form-control" id="to-phone"  placeholder="+375 29 1234567">
         </div>
         <div class="dlv-block-cn form-group">
             <label for="comment">Послание</label>
-            <textarea style="height: 70px" class="form-control" rows="5" id="comment"></textarea>
+            <textarea style="height: 70px" class="form-control" rows="5" id="comment"  placeholder="Оставьте пару приятных слов на память"></textarea>
         </div>
     </div>
     </div>
@@ -66,7 +64,7 @@
 
     <div class="row dlv-container-block">
     <div id="dlv-bock-title" class="row text-center">
-        <h2>Подробности доставки</h2>
+
     </div>
 
     <div class="row">
@@ -79,7 +77,7 @@
     </div>
 
     <div style="margin-bottom: 20px" class="dlv-block textright">
-
+        <h2>Подробности доставки</h2>
         <div style="overflow:hidden;">
             <div class="dlv-block-cn form-group">
                 <label for="comment">Дата</label>
@@ -107,7 +105,7 @@
                     <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                     Доставка в указанное время
                 </label>
-                <select style="padding-left: 15px" class="form-control">
+                <select style="padding: 0px 10px;" class="form-control">
                     <option>9.00 - 10.00</option>
                     <option>10.00 - 11.00</option>
                     <option>11.00 - 12.00</option>

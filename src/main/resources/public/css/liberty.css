@@ -433,7 +433,7 @@ th
 {
     float: left;
     width: 10%;
-    background: url(../img/bi1.jpg) no-repeat;
+    background: url(../img/bi4.png) no-repeat;
     background-position: right;
     background-size: 50px 50px;
     border-bottom: 2px solid #3FB8AF;
@@ -496,19 +496,19 @@ div.wizard-item-active-first > h2
     padding-bottom: 5px;
 }
 
-#dlv-bock-title > h2
+.dlv-block > h2
 {
     font-family: Attentica4F;
     font-weight: bold;
-    font-size: 25pt;
-    padding-right: 90px;
-    margin-top: 12px;
+    font-size: 23pt;
+    margin-top: 0px;
     margin-bottom: 0px;
 }
 
 #dlv-bock-title
 {
     border-bottom: 2px #f3f3f3 solid;
+    height: 20px;
 }
 
 .dlv-block-cn
@@ -529,7 +529,7 @@ div.wizard-item-active-first > h2
     border-radius: 0px;
     font-family: Attentica4f;
     font-weight: bolder;
-    font-size: 20pt;
+    font-size: 18pt;
     padding: 2px 10px;
     line-height: 1;
     height: 29px;
