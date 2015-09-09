@@ -5,14 +5,14 @@
         <div class="wizard-item">3.${translator.getString("step3")}</div>
     </div>
 </div>
-<div style="height: 500px;" class="container ">
+<div  class="container ">
     <div class="row dlv-container-block">
     <div class="row">
     <div style="float:left">
-        <img style="margin-left: 220px; margin-top:50px;" src="img/icon_sender.png" width="120" height="120"/>
+        <img style="margin-left: 220px; margin-top:30px;" src="img/icon_sender.png" width="120" height="120"/>
         <div style="margin-left: 220px; width: 200px;font-family: BadScript;
             font-size: 15pt; font-weight: bold; color: #929090">
-            Выберите доступные дату и время доставки, а так же адрес
+            Заполните ваши контактные данные, чтобы мы могли связаться с вами
         </div>
     </div>
     <div style="" class="dlv-block textright">
@@ -27,7 +27,7 @@
         </div>
         <div class="dlv-block-cn form-group">
             <label for="from-email">Номер телефона</label>
-            <input style="padding: 0px 10px;" type="number" class="form-control" id="from-email"  placeholder="Код страны, код оператора и номер телефона">
+            <input style="padding: 0px 10px;" type="number" class="form-control" id="from-email"  placeholder="+375 29 12345678">
         </div>
     </div>
     </div>
@@ -41,7 +41,7 @@
         <img style="margin-left: 220px; margin-top:60px;" src="img/icon_recipient.png" width="120" height="120"/>
         <div style="margin-left: 220px; width: 200px;font-family: BadScript;
              font-size: 15pt; font-weight: bold; color: #929090">
-            Выберите доступные дату и время доставки, а так же адрес
+            Введите данные получателя букета
         </div>
     </div>
     <div style="" class="dlv-block textright">
@@ -69,7 +69,7 @@
 
     <div class="row">
     <div style="float:left">
-    <img style="margin-left: 220px; margin-top:50px;" src="img/icon_delivery.png" width="120" height="120"/>
+    <img style="margin-left: 220px; margin-top:10px;" src="img/icon_delivery.png" width="120" height="120"/>
     <div style="margin-left: 220px; width: 200px;font-family: BadScript;
     font-size: 15pt; font-weight: bold; color: #929090">
       Выберите доступные дату и время доставки, а так же адрес
