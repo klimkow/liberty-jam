@@ -9,7 +9,7 @@
     <div class="row dlv-container-block">
     <div class="row">
     <div style="float:left">
-        <img style="margin-left: 220px; margin-top:50px;" src="img/lorry.svg.hi.png" width="120" height="75"/>
+        <img style="margin-left: 220px; margin-top:50px;" src="img/icon_sender.png" width="120" height="120"/>
         <div style="margin-left: 220px; width: 200px;font-family: BadScript;
             font-size: 15pt; font-weight: bold; color: #929090">
             Выберите доступные дату и время доставки, а так же адрес
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
     <div style="float:left">
-        <img style="margin-left: 220px; margin-top:60px;" src="img/ci12.png" width="90" height="120"/>
+        <img style="margin-left: 220px; margin-top:60px;" src="img/icon_recipient.png" width="120" height="120"/>
         <div style="margin-left: 220px; width: 200px;font-family: BadScript;
              font-size: 15pt; font-weight: bold; color: #929090">
             Выберите доступные дату и время доставки, а так же адрес
@@ -69,7 +69,7 @@
 
     <div class="row">
     <div style="float:left">
-    <img style="margin-left: 220px; margin-top:50px;" src="img/lorry.svg.hi.png" width="120" height="75"/>
+    <img style="margin-left: 220px; margin-top:50px;" src="img/icon_delivery.png" width="120" height="120"/>
     <div style="margin-left: 220px; width: 200px;font-family: BadScript;
     font-size: 15pt; font-weight: bold; color: #929090">
       Выберите доступные дату и время доставки, а так же адрес
