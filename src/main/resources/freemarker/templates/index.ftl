@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <title>${translator.getString("index_title")}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/liberty.css" rel="stylesheet" media="screen">
     <link href="css/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap-datepicker.min.css" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body onload="createSlider()">
     <#--TODO: download jquery to libs folder (current downloaded is too slow)-->

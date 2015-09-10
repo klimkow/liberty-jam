@@ -584,3 +584,10 @@ div.wizard-item-active-first > h2
 {
     text-align: right;
 }
+
+/*The reason of redundant horizontal scroll :*/
+/*.row*/
+/*{*/
+    /*margin-left: 0px;*/
+    /*margin-right: 0px;*/
+/*}*/
