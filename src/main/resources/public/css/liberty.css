@@ -543,3 +543,44 @@ div.wizard-item-active-first > h2
 .form-group {
     margin-bottom: 5px;
 }
+
+.progress
+{
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #fff;
+    height: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 2px;
+
+}
+
+.progress-bar
+{
+    background-color: #3FB8AF;
+    line-height: 5px;
+}
+
+.progress-step1
+{
+    text-align: left;
+}
+
+.progress-step1 > p, .progress-step2 > p, .progress-step3 > p
+{
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 19pt;
+    margin-bottom: 0px;
+}
+
+.progress-step2
+{
+    text-align: center;
+}
+
+.progress-step3
+{
+    text-align: right;
+}
