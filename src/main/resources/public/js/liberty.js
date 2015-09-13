@@ -56,6 +56,25 @@ function show_step2()
 }
 
 
+function filter(option)
+{
+    maxScrollPosition = 0;
+    var post_url = 'filter';
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        data: option,
+        success: function(msg) {
+            $('#marketing-active-zone').fadeOut(800, function(){
+                $('#marketing-active-zone').html(msg).fadeIn().delay(2000);
+
+            });
+        }
+    });
+
+}
+
+
 function getItem(id)
 {
 

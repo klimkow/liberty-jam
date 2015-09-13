@@ -196,6 +196,10 @@ public class Liberty
             Long id = new Long( request.queryParams("itemId"));
             Item item = UserSessionUtils.getItemIndexById(items, id);
             attributes.put("selectedItem", item);
+            Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+            if (order != null) {
+                attributes.put("order", order);
+            }
             Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
             attributes.put("translator", LocalizationUtil.getInstance(locale));
 
@@ -224,6 +228,7 @@ public class Liberty
 
             Double itemWidth = new Double(request.queryParams("itemWidth"));
             Double totalWidth = itemWidth * items.size();
+            request.session().attribute("itemWidth", itemWidth);
 
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("items", items);
@@ -275,6 +280,31 @@ public class Liberty
             Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
             attributes.put("translator", LocalizationUtil.getInstance(locale));
             return new ModelAndView(attributes, "common/cart/delivery.ftl");
+        }, engine);
+
+
+        post("/filter", (request, response) -> {
+            Integer categoryId = Integer.parseInt(request.queryParams("filterOption"));
+            List<Item> items = UserSessionUtils.filterByCat(categoryId);
+            if (items == null) {
+                // TODO: throw exception view
+            }
+
+            Double itemWidth = request.session().attribute("itemWidth");
+            Double totalWidth = itemWidth * items.size();
+
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("items", items);
+            attributes.put("itemWidth", itemWidth.toString());
+            attributes.put("galleryWidth", totalWidth.toString());
+            attributes.put("x", 0);
+            Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+            if (order != null) {
+                attributes.put("order", order);
+            }
+            Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+            attributes.put("translator", LocalizationUtil.getInstance(locale));
+            return new ModelAndView(attributes, "common/marketing.ftl");
         }, engine);
 
 

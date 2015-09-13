@@ -13,7 +13,11 @@
                 <p class="textleft">${selectedItem.getPrice()?string?replace(",",".")}.000</p>
             </div>
             <div style="margin-top:20px; padding-right: 10px" class="textleft">
-                <p class="textleft"><a class="btn btn-default" href="#">${translator.getString("add_to_cart")}</a></p>
+                <div id="add-to-cart" class="btn btn-default <#if order??><#if order.isSelected(selectedItem)>btn-item-in-cart</#if></#if>" >
+                <#if order??&&order.isSelected(selectedItem)>
+                    <img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>${translator.getString("item_int_the_cart")}
+                <#else>${translator.getString("add_to_cart")}
+                </#if></div>
             </div>
         </div>
     </div>

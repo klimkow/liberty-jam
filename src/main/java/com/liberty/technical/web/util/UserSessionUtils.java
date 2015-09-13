@@ -101,4 +101,26 @@ public class UserSessionUtils {
         }
         return null;
     }
+
+    public static List<Item> filterByCat(int categoryId)
+    {
+        List resultList = null;
+        SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
+                    "where chi.id = " + categoryId).
+                    list();
+            tx.commit();
+
+        } catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return resultList;
+    }
 }

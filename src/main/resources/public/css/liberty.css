@@ -591,3 +591,8 @@ div.wizard-item-active-first > h2
     /*margin-left: 0px;*/
     /*margin-right: 0px;*/
 /*}*/
+
+.button-selected
+{
+    border-color: #3FB8AF;
+}

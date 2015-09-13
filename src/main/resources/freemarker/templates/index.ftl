@@ -16,6 +16,7 @@
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/validator.js"></script>
     <script src="locales/bootstrap-datepicker.ru.min.js"></script>
     <script src="js/nouislider.min.js"></script>
     <script src="js/liberty.js"></script>

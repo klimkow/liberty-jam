@@ -30,6 +30,7 @@
     <#--</div>-->
 </div>
 <div  class="container ">
+    <form data-toggle="validator" role="form">
     <div class="row dlv-container-block">
     <div class="row">
     <div style="float:left">
@@ -41,9 +42,11 @@
     </div>
     <div style="" class="dlv-block textright">
         <h2>${translator.getString("dlv_from")}</h2>
-        <div class="dlv-block-cn form-group">
+        <div class="dlv-block-cn form-group has-feedback">
             <label for="from-name">${translator.getString("dlv_name")}</label>
-            <input type="text" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}">
+            <input type="text" pattern="^[_A-z]" maxlength="25" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}">
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <span class="help-block with-errors">Hey look, this one has feedback icons!</span>
         </div>
         <div class="dlv-block-cn form-group">
             <label for="from-email">Email</label>
@@ -154,5 +157,5 @@
         <#--</div>-->
 
 
-
+    </form>
 </div>

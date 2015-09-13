@@ -4,6 +4,7 @@ package com.liberty.technical.logic.entity;
 import com.liberty.technical.logic.entity.images.ItemImages;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -131,4 +132,17 @@ public class Item
   {
     return ((ItemImages)getImages().toArray()[0]).getImageUrl();
   }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Item) {
+            return id == ((Item) obj).getId();
+        }
+        return false;
+    }
 }
