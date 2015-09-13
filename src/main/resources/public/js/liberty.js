@@ -136,6 +136,10 @@ function goToCart()
         type: 'POST',
         url: post_url,
         success: function(msg) {
+            $('#marketing-filter-zone').fadeOut(800, function(){
+                $('#marketing-filter-zone').html('').fadeIn().delay(2000);
+
+            });
             $('#active-zone').fadeOut(800, function(){
                 $('#active-zone').html(msg).fadeIn().delay(2000);
 

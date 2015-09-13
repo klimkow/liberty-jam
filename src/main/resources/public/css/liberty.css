@@ -596,3 +596,8 @@ div.wizard-item-active-first > h2
 {
     border-color: #3FB8AF;
 }
+
+.form-control-feedback
+{
+    margin-right: 15px;
+}

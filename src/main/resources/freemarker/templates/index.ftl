@@ -25,10 +25,12 @@
     <div id="active-zone" class="row text-center">
         <#include "/common/carousel.ftl">
     </div>
+    <div id="marketing-filter-zone">
     <#include "/common/filter.ftl">
     <div id="marketing-active-zone">
         <#--<#include "/common/marketing.ftl">-->
         <#include "/common/download-stub.ftl">
+    </div>
     </div>
     <#include "/common/footer.ftl">
 

@@ -1,18 +1,25 @@
+<script>
+    $(document).ready(function(){
+        $('#dlv-form').validator();
+
+    });
+</script>
+
 <div style="height: 100px; background-color: #f3f3f3;" class="row">
 
 
     <div class="container">
 
-    <div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="goToCart()">
-        <img style="float: left" src="img/ar-left.png" alt="" width="25" height="40" />
-        <p style="text-decoration: underline; float: left; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_prev_step")}</p>
-    </div>
-    <div style="margin-top: 30px;" href="#" class="gallery__controls-next" onclick="show_step2()">
-        <img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>
-        <p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>
-    </div>
+    <#--<div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="goToCart()">-->
+        <#--<img style="float: left" src="img/ar-left.png" alt="" width="25" height="40" />-->
+        <#--<p style="text-decoration: underline; float: left; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_prev_step")}</p>-->
+    <#--</div>-->
+    <#--<div style="margin-top: 30px;" href="#" class="gallery__controls-next" onclick="show_step2()">-->
+        <#--<img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>-->
+        <#--<p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>-->
+    <#--</div>-->
         <div style="width: 60%; margin-left: 210px;">
-            <img style="margin-top: 5px; margin-bottom: 5px" src="img/bi3.png" width="35" height="35"/>
+            <img style="margin-top: 7px; margin-bottom: 5px" src="img/bi3.png" width="30" height="30"/>
             <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                     <span class="sr-only">50% Complete</span>
@@ -23,14 +30,9 @@
                 <div style="color: #ABABAB;" class="width33 progress-step3"><p>3.${translator.getString("step3")}</p></div>
             </div>
         </div>
-    <#--<div class="row container wizard-container text-center">-->
-        <#--<div class="wizard-item-active-first"><h2>1.${translator.getString("step1")}</h2></div>-->
-        <#--<div class="wizard-item">2.${translator.getString("step2")}</div>-->
-        <#--<div class="wizard-item">3.${translator.getString("step3")}</div>-->
-    <#--</div>-->
 </div>
 <div  class="container ">
-    <form data-toggle="validator" role="form">
+    <form id="dlv-form" data-toggle="validator" role="form">
     <div class="row dlv-container-block">
     <div class="row">
     <div style="float:left">
@@ -44,17 +46,19 @@
         <h2>${translator.getString("dlv_from")}</h2>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="from-name">${translator.getString("dlv_name")}</label>
-            <input type="text" pattern="^[_A-z]" maxlength="25" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}">
+            <input type="text" name="name" pattern="[А-яA-z\s]{1,}$" maxlength="55" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            <span class="help-block with-errors">Hey look, this one has feedback icons!</span>
+            <#--<span class="help-block with-errors"></span>-->
         </div>
-        <div class="dlv-block-cn form-group">
+        <div class="dlv-block-cn form-group has-feedback">
             <label for="from-email">Email</label>
-            <input type="email" class="form-control" id="from-email"  placeholder="${translator.getString("dlv_email_placeholder")}">
+            <input type="email" class="form-control" id="from-email"  placeholder="${translator.getString("dlv_email_placeholder")}" required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
-        <div class="dlv-block-cn form-group">
-            <label for="from-email">${translator.getString("dlv_phone_number")}</label>
-            <input style="padding: 0px 10px;" type="number" class="form-control" id="from-email"  placeholder="${translator.getString("dlv_phone_placeholder1")}">
+        <div class="dlv-block-cn form-group has-feedback">
+            <label for="from-tel">${translator.getString("dlv_phone_number")}</label>
+            <input type="text" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="from-tel"  placeholder="${translator.getString("dlv_phone_placeholder1")}" required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>
     </div>
@@ -73,13 +77,15 @@
     </div>
     <div style="" class="dlv-block textright">
         <h2>${translator.getString("dlv_to")}</h2>
-        <div class="dlv-block-cn form-group">
+        <div class="dlv-block-cn form-group has-feedback">
             <label for="to-name">${translator.getString("dlv_name")}</label>
-            <input type="text" class="form-control" id="to-name"  placeholder="${translator.getString("dlv_name_placeholder2")}">
+            <input type="text" pattern="[А-яA-z\s]{1,}$" maxlength="55" class="form-control" id="to-name"  placeholder="${translator.getString("dlv_name_placeholder2")}" required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
-        <div class="dlv-block-cn form-group">
+        <div class="dlv-block-cn form-group has-feedback">
             <label for="to-phone">${translator.getString("dlv_phone_number")}</label>
-            <input style="padding: 0px 10px;" type="number" class="form-control" id="to-phone"  placeholder="${translator.getString("dlv_phone_placeholder1")}">
+            <input type="text" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone"  placeholder="${translator.getString("dlv_phone_placeholder1")}" required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
         <div class="dlv-block-cn form-group">
             <label for="comment">${translator.getString("dlv_wish_comment")}</label>
@@ -89,7 +95,7 @@
     </div>
     </div>
 
-    <div class="row dlv-container-block">
+    <div style="margin-bottom: 50px" class="row dlv-container-block">
     <div id="dlv-bock-title" class="row text-center">
 
     </div>
@@ -109,7 +115,7 @@
             <div class="dlv-block-cn form-group">
                 <label for="comment">${translator.getString("dlv_deliver_date")}</label>
                 <div class='input-group date' id='datetimepicker10'>
-                <input type='text' class="form-control" />
+                <input type='text' class="form-control" required/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar">
                     </span>
@@ -125,7 +131,7 @@
             </div>
             <div class="dlv-block-cn form-group">
                 <label>
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
                 ${translator.getString("dlv_delivery_free")}
                 </label>
                 <label>
@@ -158,4 +164,14 @@
 
 
     </form>
+    <div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="goToCart()">
+        <img style="float: left" src="img/ar-left.png" alt="" width="25" height="40" />
+        <p style="text-decoration: underline; float: left; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_prev_step")}</p>
+    </div>
+    <div style="margin-top: 30px;" href="#" class="gallery__controls-next" onclick="show_step2()">
+        <img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>
+        <p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>
+    </div>
 </div>
+
+<#include "/common/carousel-small.ftl">

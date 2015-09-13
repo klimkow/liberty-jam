@@ -9,14 +9,13 @@
 </script>
 <div style="height: 100px; background-color: #f3f3f3;" class="row">
     <div class="container">
-        <div style="margin-top: 30px;" href="#" class="gallery__controls-next" onclick="show_step2()">
-            <img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>
-            <p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>
-        </div>
-
+        <#--<div style="margin-top: 30px;" href="#" class="gallery__controls-next" onclick="show_step2()">-->
+            <#--<img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>-->
+            <#--<p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>-->
+        <#--</div>-->
         <div style="width: 60%; margin-left: 210px;">
             <div style="height: 45px" class="row">
-                <img style="float:left; margin-left: 80px; margin-top: 5px; margin-bottom: 5px" src="img/bi3.png" width="35" height="35"/>
+                <img style="float:left; margin-left: 80px; margin-top: 7px; margin-bottom: 5px" src="img/bi3.png" width="30" height="30"/>
             </div>
             <div class=" row progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
@@ -36,7 +35,7 @@
         <#--<div class="wizard-item">2.${translator.getString("step2")}</div>-->
         <#--<div class="wizard-item">3.${translator.getString("step3")}</div>-->
     <#--</div>-->
-    <div class="row" style="height: 350px; width: 100%; margin-top: 20px; overflow: auto">
+    <div class="row" style="height: 250px; width: 100%; margin-top: 20px; overflow: auto">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -58,5 +57,12 @@
         </tbody>
     </table>
     </div>
+
+    <div style="margin-top: 90px;" href="#" class="gallery__controls-next" onclick="show_step2()">
+        <img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>
+        <p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>
+    </div>
     <#--<div style="margin-top: 10px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15""/></div>-->
 </div>
+
+<#include "/common/carousel-small.ftl">
