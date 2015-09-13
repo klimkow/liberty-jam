@@ -42,7 +42,7 @@
 <!-- NAVBAR END-->
 
 <!-- TOP MENU & LOGO -->
-<div class="row row-bottom-border">
+<div id="top-menu" class="row row-bottom-border">
     <div class="container top-menu">
         <div class="text-center">
             <div class="row">

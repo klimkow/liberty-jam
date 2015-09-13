@@ -15,6 +15,11 @@
           getItem(formData);
       });
 
+        $('#bqt-found').fadeOut(200, function(){
+            $('#bqt-found').html('${translator.getString("bqt_found")}: ${itemsSize}').fadeIn().delay(2000);
+
+        });
+
     });
 </script>
 

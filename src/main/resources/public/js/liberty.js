@@ -43,6 +43,9 @@ function show_step2()
 {
     var post_url = 'delivery_info';
     $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+    $('html, body').animate({
+        scrollTop: $("#top-menu").offset().top
+    }, 'slow');
     $.ajax({
         type: 'POST',
         url: post_url,
@@ -131,6 +134,9 @@ function addToCart(id, element)
 function goToCart()
 {
     var post_url = 'cart';
+    $('html, body').animate({
+        scrollTop: $("#top-menu").offset().top
+    }, 'slow');
     $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
     $.ajax({
         type: 'POST',

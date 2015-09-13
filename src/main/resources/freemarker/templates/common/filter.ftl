@@ -32,7 +32,7 @@
                     </div>
                 </form>
             </div>
-
+            <p id="bqt-found" style="position: absolute; padding-top: 55px; font-size: 12pt;"></p>
             <div id="slider" class="slider"></div>
         </div>
     </div>

@@ -46,7 +46,7 @@
         <h2>${translator.getString("dlv_from")}</h2>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="from-name">${translator.getString("dlv_name")}</label>
-            <input type="text" name="name" pattern="[А-яA-z\s]{1,}$" maxlength="55" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}" required>
+            <input type="text" name="name" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             <#--<span class="help-block with-errors"></span>-->
         </div>
@@ -79,7 +79,7 @@
         <h2>${translator.getString("dlv_to")}</h2>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="to-name">${translator.getString("dlv_name")}</label>
-            <input type="text" pattern="[А-яA-z\s]{1,}$" maxlength="55" class="form-control" id="to-name"  placeholder="${translator.getString("dlv_name_placeholder2")}" required>
+            <input type="text" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control" id="to-name"  placeholder="${translator.getString("dlv_name_placeholder2")}" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
