@@ -1,7 +1,9 @@
 package com.liberty.technical.web.util;
 
+import com.liberty.technical.logic.dao.ItemDAO;
 import com.liberty.technical.logic.entity.Item;
 import com.liberty.technical.logic.entity.Order;
+import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.factory.SessionFactoryInitializer;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -15,28 +17,22 @@ import java.util.*;
  */
 public class UserSessionUtils {
     public final static String ATTRIBUTE_ORDER = "getOrder";
+    public final static String ATTRIBUTE_USER = "getUser";
+    public final static String ATTRIBUTE_DELIVERY_INFO = "getDelvInfo";
     public final static String ATTRIBUTE_ALL_ITEMS_LIST = "sessionItemList";
     public final static String ATTRIBUTE_LOCALE = "locale";
 
-    public static List getAllItems()
+    public static List<Item> getAllItems()
     {
-        List resultList = null;
-        SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-          tx = session.beginTransaction();
-          resultList = session.createCriteria(Item.class).list();
-          tx.commit();
-
-        } catch (HibernateException e) {
-          if (tx!=null) tx.rollback();
-          e.printStackTrace();
-        } finally {
-          session.close();
-        }
-        return resultList;
+        ItemDAO itemDAO = DaoFactory.getInstance().createItemDAO();
+        return itemDAO.readAllItems();
     }
+
+    public static synchronized void storeOrder()
+    {
+
+    }
+
 
     public static Item getItemIndexById(List items, Long id)
     {

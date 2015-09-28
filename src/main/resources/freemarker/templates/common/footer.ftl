@@ -14,17 +14,17 @@
     <!-- Three columns of text below the carousel -->
     <div class="row">
         <div class="width33 text-center">
-            <img src="img/hw-it-work1.png" width="200">
+            <img src="img/icon_flowers.png" width="120">
             </br>
             <p class="hdw-font">${translator.getString("hw_step1")}</p>
         </div>
         <div class="width33">
-            <img src="img/hw-it-work2.png" width="200">
+            <img src="img/icon_payment.png" width="120">
             </br>
             <p class="hdw-font">${translator.getString("hw_step2")}</p>
         </div>
         <div class="width33">
-            <img src="img/hw-it-work3.png" width="200">
+            <img src="img/icon_fillin.png" width="120">
             </br>
             <p class="hdw-font">${translator.getString("hw_step3")}</p>
         </div>

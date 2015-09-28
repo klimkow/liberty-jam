@@ -59,6 +59,23 @@ function show_step2()
 }
 
 
+function show_step3(formData)
+{
+    var post_url = 'payment_step';
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        data: formData,
+        success: function(msg) {
+            $('#active-zone').fadeOut(800, function(){
+                $('#active-zone').html(msg).fadeIn().delay(2000);
+
+            });
+        }
+    });
+}
+
+
 function filter(option)
 {
     maxScrollPosition = 0;

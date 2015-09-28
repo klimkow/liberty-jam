@@ -27,10 +27,10 @@
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
 <div href="#" class="gallery__controls-prev" onclick="goPrev()">
-    <img src="img/ar-left.png" alt="" width="50" height="50" />
+    <img src="img/ar-left.png" alt="" width="50" height="110" />
 </div>
 <div href="#" class="gallery__controls-next" onclick="goNext()">
-    <img src="img/ar-right.png" alt="" width="50" height="50"/>
+    <img src="img/ar-right.png" alt="" width="50" height="110"/>
 </div>
 <div class="container marketing margintop10">
 
@@ -46,8 +46,7 @@
                             <input id="item-id" type="hidden" name="itemId" value="${item.getId()}">
                             <img class="img-circle" src="${item.getLogo()}" height="200" width="200">
                             <h2>${item.getName()}</h2>
-                            <p>${item.getDescription()?substring(0, 110)}...</p>
-                            <div class="item-price-small">${item.getPrice()?string?replace(",",".")}.000</div>
+                            <div class="item-price-small">${item.getPrice()?string?replace(",",".")}${translator.getString("currency")}</div>
                             </div>
                             <div id="add-to-cart" class="btn btn-default <#if order??><#if order.isSelected(item)>btn-item-in-cart</#if></#if>" >
                                 <#if order??&&order.isSelected(item)><img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>${translator.getString("item_int_the_cart")}
