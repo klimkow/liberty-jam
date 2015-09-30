@@ -117,44 +117,51 @@
 
     <div style="margin-bottom: 20px" class="dlv-block textright">
         <h2>${translator.getString("dlv_delivery_title")}</h2>
-        <div style="overflow:hidden;">
+        <div style="overflow: hidden;">
             <div class="dlv-block-cn form-group">
-                <label for="comment">${translator.getString("dlv_deliver_date")}</label>
+                <div style="float: left; border-bottom: 1px #B1AEAE solid;width: 40%;font-family: BadScript;font-size: 13pt;">
+                    <label for="comment">${translator.getString("dlv_deliver_date")}</label>
+                </div>
+                <div style="font-family: BadScript; font-size: 13pt;float: right; border-bottom: 1px #B1AEAE solid; width: 50%;">
+                    <label for="comment">Время</label>
+                </div>
                 <div class='input-group date' id='datetimepicker10'>
-                <input type='text' name="date" class="form-control" required/>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar">
-                    </span>
-                </span>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker10').datepicker({
-                            language: "ru"
+                    <div class="attentica-font16"></div>
+                <#--<input type='text' name="date" class="form-control" required/>-->
+                <#--<span class="input-group-addon">-->
+                    <#--<span class="glyphicon glyphicon-calendar">-->
+                    <#--</span>-->
+                <#--</span>-->
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker10 div').datepicker({
+                                datesDisabled: ['09/06/2015', '09/21/2015'],
+                                language: "ru"
+                            });
                         });
-                    });
-                </script>
+                    </script>
                 </div>
             </div>
-            <div class="dlv-block-cn form-group">
-                <label>
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-                ${translator.getString("dlv_delivery_free")}
-                </label>
-                <label>
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                ${translator.getString("dlv_delivery_accurate")}
-                </label>
-                <select name="time" style="padding: 0px 10px;" class="form-control">
-                    <option>9.00 - 10.00</option>
-                    <option>10.00 - 11.00</option>
-                    <option>11.00 - 12.00</option>
-                    <option>12.00 - 13.00</option>
-                    <option>13.00 - 14.00</option>
-                    <option>14.00 - 15.00</option>
-                    <option>15.00 - 16.00</option>
-                    <option>16.00 - 17.00</option>
-                </select>
-            </div>
+            <#--<div class="dlv-block-cn form-group">-->
+                <#--<label>-->
+                    <#--<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>-->
+                <#--${translator.getString("dlv_delivery_free")}-->
+                <#--</label>-->
+                <#--<label>-->
+                    <#--<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">-->
+                <#--${translator.getString("dlv_delivery_accurate")}-->
+                <#--</label>-->
+                <#--<select name="time" style="padding: 0px 10px;" class="form-control">-->
+                    <#--<option>9.00 - 10.00</option>-->
+                    <#--<option>10.00 - 11.00</option>-->
+                    <#--<option>11.00 - 12.00</option>-->
+                    <#--<option>12.00 - 13.00</option>-->
+                    <#--<option>13.00 - 14.00</option>-->
+                    <#--<option>14.00 - 15.00</option>-->
+                    <#--<option>15.00 - 16.00</option>-->
+                    <#--<option>16.00 - 17.00</option>-->
+                <#--</select>-->
+            <#--</div>-->
     </div>
     </div>
 

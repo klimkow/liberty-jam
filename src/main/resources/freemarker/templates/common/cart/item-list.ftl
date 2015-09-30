@@ -47,7 +47,7 @@
         </thead>
         <tbody>
         <#list cartItems as item>
-        <tr>
+        <tr id="item-list-tr">
             <td class="textleft"><img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100"> <p class="item-name-cart">${item.getName()}</p></td>
             <td style="padding-top: 30px" class="td-right">1</td>
             <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>

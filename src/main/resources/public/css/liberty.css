@@ -38,7 +38,7 @@
 
 #download-stub-glass {
     width: 100%;
-    height: 403px;
+    height: 367px;
     opacity: 0.2;
     margin: 0;
     padding: 0;
@@ -404,7 +404,7 @@ div.description-text > p
     padding-top: 30px;
 }
 
-td
+#item-list-tr > td
 {
     font-family: Attentica4F;
     font-weight: bold;
