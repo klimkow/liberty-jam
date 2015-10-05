@@ -31,7 +31,7 @@
                     <span class="sr-only">50% Complete</span>
                 </div>
             </div>
-                <div class="width33 progress-step1"><img style="float:left; margin-right: 6px; margin-top: 10px" src="img/ok_symb2.png" width="18" height="18"/><p>1.${translator.getString("step1")}</p></div>
+                <div class="width33 progress-step1" onclick="goToCart()"><img style="float:left; margin-right: 6px; margin-top: 10px" src="img/ok_symb2.png" width="18" height="18"/><p>1.${translator.getString("step1")}</p></div>
                 <div class="width33 progress-step2"><p style="font-size: 21pt;">2.${translator.getString("step2")}</p></div>
                 <div style="color: #ABABAB;" class="width33 progress-step3"><p>3.${translator.getString("step3")}</p></div>
             </div>
@@ -122,10 +122,19 @@
                 <div style="float: left; border-bottom: 1px #B1AEAE solid;width: 40%;font-family: BadScript;font-size: 13pt;">
                     <label for="comment">${translator.getString("dlv_deliver_date")}</label>
                 </div>
-                <div style="font-family: BadScript; font-size: 13pt;float: right; border-bottom: 1px #B1AEAE solid; width: 50%;">
+                <div style="font-family: BadScript; font-size: 13pt;float: right;  width: 50%;">
+                    <div style="margin-bottom:10px; width:99%;
+                    border-bottom: 1px #B1AEAE solid;" class="row">
                     <label for="comment">Время</label>
+                        </div>
+                    <div class="dlv-time-item">07.00 - 09.00</div>
+                    <div class="dlv-time-item">09.00 - 11.00</div>
+                    <div class="dlv-time-item">11.00 - 13.00</div>
+                    <div class="dlv-time-item">13.00 - 15.00</div>
+                    <div class="dlv-time-item">15.00 - 17.00</div>
+                    <div class="dlv-time-item">17.00 - 19.00</div>
                 </div>
-                <div class='input-group date' id='datetimepicker10'>
+                <div style="float: left;" class='input-group date' id='datetimepicker10'>
                     <div class="attentica-font16"></div>
                 <#--<input type='text' name="date" class="form-control" required/>-->
                 <#--<span class="input-group-addon">-->

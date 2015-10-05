@@ -1,10 +1,13 @@
 package com.liberty.technical.logic.dao;
 
+import com.liberty.technical.logic.entity.Item;
 import com.liberty.technical.logic.factory.SessionFactoryInitializer;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import java.util.List;
 
 /**
  * @author AKI
@@ -33,6 +36,22 @@ public class CommonDAO {
     public <T> Object readObject(Class<T> className)
     {
         return new Object();
+    }
+
+
+    public <T> List<T> readAllObjects(Class<T> className)
+    {
+        List<T> resultList = null;
+        Session session = factory.openSession();
+        try {
+            resultList = session.createCriteria(className).list();
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return resultList;
     }
 
 

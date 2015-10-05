@@ -29,7 +29,7 @@
     <#include "/common/filter.ftl">
     <div id="marketing-active-zone">
         <#--<#include "/common/marketing.ftl">-->
-        <#include "/common/download-stub.ftl">
+        <#include "/common/marketing-categories.ftl">
     </div>
     </div>
     <#include "/common/footer.ftl">

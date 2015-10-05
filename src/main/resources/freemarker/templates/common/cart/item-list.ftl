@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="width33 progress-step1"><p style="font-size: 21pt;">1.${translator.getString("step1")}</p></div>
-            <div style="color: #ABABAB;" class="width33 progress-step2"><p>2.${translator.getString("step2")}</p></div>
+            <div style="color: #ABABAB;" class="width33 progress-step2" onclick="show_step2()"><p>2.${translator.getString("step2")}</p></div>
             <div style="color: #ABABAB;" class="width33 progress-step3"><p>3.${translator.getString("step3")}</p></div>
         </div>
     </div>

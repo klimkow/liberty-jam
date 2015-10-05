@@ -36,6 +36,27 @@
     background-size: 50px 50px;
 }
 
+#marketing-empty
+{
+    width: 100%;
+    height: 367px;
+    opacity: 0.2;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#marketing-empty > p {
+    font-family: BadScript;
+    font-size: 30pt;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 140px;
+}
+
+
 #download-stub-glass {
     width: 100%;
     height: 367px;
@@ -45,6 +66,14 @@
     top: 0;
     left: 0;
     z-index: 10;
+    background: #333333 url(../img/loading.gif) no-repeat;
+    background-position: center;
+    background-size: 50px 50px;
+}
+
+#download-stub-glass-transparent {
+    background-color: black;
+    opacity: 0.2;
     background: #333333 url(../img/loading.gif) no-repeat;
     background-position: center;
     background-size: 50px 50px;
@@ -360,11 +389,26 @@ div.description-text > p
     margin-top: 110px;
 
 }
+
 .gallery__controls-next {
     cursor: pointer;
     float: right;
     margin-top: 110px;
 
+}
+
+.marketing-category
+{
+    cursor:pointer;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.marketing-category > h2
+{
+    font-family: BadScript;
+    font-size: 19pt;
+    font-weight: bold;
 }
 
 .width33
@@ -544,6 +588,27 @@ div.wizard-item-active-first > h2
     margin-bottom: 5px;
 }
 
+.dlv-time-item
+{
+    float:left;
+    width: 50%;
+    font-family: Attentica4F;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: center;
+    border: 2px #f3f3f3 solid;
+    padding-top: 3px;
+}
+
+.dlv-time-item:hover, .dlv-time-item:active
+{
+    border: 2px #3FB8AF solid;
+    background-color: #65D5D8;
+    padding-top: 3px;
+    cursor: pointer;
+}
+
+
 .progress
 {
     padding-left: 0px;
@@ -565,6 +630,7 @@ div.wizard-item-active-first > h2
 .progress-step1
 {
     text-align: left;
+    cursor: pointer;
 }
 
 .progress-step1 > p, .progress-step2 > p, .progress-step3 > p
@@ -578,12 +644,44 @@ div.wizard-item-active-first > h2
 .progress-step2
 {
     text-align: center;
+    cursor: pointer;
 }
 
 .progress-step3
 {
     text-align: right;
+    cursor: pointer;
 }
+
+.payment-block
+{
+    margin-top: 50px;
+    background-color:#FBFBFB;
+    height: 300px;
+    width: 40%;
+    float: left;
+}
+
+.payment-block:hover
+{
+    border: 2px #3FB8AF solid;
+    /*background-color: #EFF3F2;;*/
+}
+
+.payment-block > p
+{
+    font-family: Attentica4F;
+    font-size: 19pt;
+    font-weight: bold;
+}
+
+.payment-not-acitve
+{
+    color: #ABABAB !important;
+    background-color: #f3f3f3 !important;
+    opacity: 0.5;
+}
+
 
 /*The reason of redundant horizontal scroll :*/
 /*.row*/

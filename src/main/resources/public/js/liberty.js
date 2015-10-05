@@ -62,6 +62,10 @@ function show_step2()
 function show_step3(formData)
 {
     var post_url = 'payment_step';
+    $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+    $('html, body').animate({
+        scrollTop: $("#top-menu").offset().top
+    }, 'slow');
     $.ajax({
         type: 'POST',
         url: post_url,
@@ -71,6 +75,28 @@ function show_step3(formData)
                 $('#active-zone').html(msg).fadeIn().delay(2000);
 
             });
+        }
+    });
+}
+
+
+function getCategoryItems(id)
+{
+    $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+    var post_url = 'getCategoryItems';
+    var post_data = {
+        'categoryId' : id,
+        'itemWidth' : $(".container")[0].offsetWidth/3};
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        data: post_data,
+        success: function(msg) {
+            $('#marketing-active-zone').fadeOut(800, function(){
+                $('#marketing-active-zone').html(msg).fadeIn().delay(2000);
+
+            });
+            initGallery()
         }
     });
 }
@@ -314,5 +340,5 @@ $(window).load(function(){
 
 
     // download Items
-    getAllItems();
+    //getAllItems();
 });

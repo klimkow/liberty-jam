@@ -31,6 +31,12 @@
                         <div id="filter_option" class=" btn btn-default">${translator.getString("bouquet_in_the_box")}</div>
                     </div>
                 </form>
+                <form name="filter_opt1">
+                    <input id="filter_option_box" type="hidden" name="filterOption" value="3">
+                    <div style="margin-top:22px; padding-right: 10px" class="textleft">
+                        <div id="filter_option" class=" btn btn-default">Букет в вазе</div>
+                    </div>
+                </form>
             </div>
             <p id="bqt-found" style="position: absolute; padding-top: 55px; font-size: 12pt;"></p>
             <div id="slider" class="slider"></div>

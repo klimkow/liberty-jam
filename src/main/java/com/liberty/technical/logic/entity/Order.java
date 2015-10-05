@@ -42,13 +42,13 @@ public class Order
       inverseJoinColumns = {@JoinColumn(name = "item_id")})
   private Set items;
 
-  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name="delivery_information_id")
   private DeliveryInformation deliveryInformation;
 
 
   @ManyToOne(targetEntity=User.class,
-          cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+          cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
   @JoinColumn(name="user_id", referencedColumnName="id")
   private User user;
 

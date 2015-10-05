@@ -198,6 +198,21 @@ public class Liberty
 
         SparkBase.staticFileLocation("/public");
 
+        get("/administrator", (request, response) -> {
+
+            return new ModelAndView(null, "admin/index.ftl");
+
+        }, engine);
+
+        get("/tables", (request, response) -> {
+            List<Order> orderList = DaoFactory.getInstance().
+                    createCommonDAO().readAllObjects(Order.class);
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("orders", orderList);
+            return new ModelAndView(attributes, "admin/tables.ftl");
+
+        }, engine);
+
         get("/", (request, response) -> {
             Session session = request.session();
             Map<String, Object> attributes = new HashMap<>();
@@ -346,7 +361,7 @@ public class Liberty
 
             Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
             attributes.put("translator", LocalizationUtil.getInstance(locale));
-            return new ModelAndView(attributes, "common/cart/delivery.ftl");
+            return new ModelAndView(attributes, "common/cart/payment.ftl");
         }, engine);
 
 
@@ -373,6 +388,35 @@ public class Liberty
             Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
             attributes.put("translator", LocalizationUtil.getInstance(locale));
             return new ModelAndView(attributes, "common/marketing.ftl");
+        }, engine);
+
+
+        post("/getCategoryItems", (request, response) -> {
+            Integer categoryId = Integer.parseInt(request.queryParams("categoryId"));
+            List<Item> items = UserSessionUtils.filterByCat(categoryId);
+            if (items == null) {
+                // TODO: throw exception view
+            }
+
+            Double itemWidth = new Double(request.queryParams("itemWidth"));
+            Double totalWidth = itemWidth * items.size();
+            request.session().attribute("itemWidth", itemWidth);
+
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("items", items);
+            attributes.put("itemsSize", items.size());
+            attributes.put("itemWidth", itemWidth.toString());
+            attributes.put("galleryWidth", totalWidth.toString());
+            attributes.put("x", 0);
+            Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+            if (order != null) {
+                attributes.put("order", order);
+            }
+            Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+            attributes.put("translator", LocalizationUtil.getInstance(locale));
+            String viewName = items.size() > 0 ?
+                    "common/marketing.ftl" : "common/marketing-empty-view.ftl";
+            return new ModelAndView(attributes, viewName);
         }, engine);
 
 

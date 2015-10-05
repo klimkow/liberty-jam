@@ -26,12 +26,15 @@
 <!-- Marketing messaging and featurettes
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
+<#if itemsSize gt 3>
 <div href="#" class="gallery__controls-prev" onclick="goPrev()">
     <img src="img/ar-left.png" alt="" width="50" height="110" />
 </div>
 <div href="#" class="gallery__controls-next" onclick="goNext()">
     <img src="img/ar-right.png" alt="" width="50" height="110"/>
 </div>
+</#if>
+
 <div class="container marketing margintop10">
 
     <!-- Three columns of text below the carousel -->
