@@ -41,15 +41,16 @@
                 </form>
             </div>
             <p id="bqt-found" style="position: absolute; padding-top: 55px; font-size: 12pt;"></p>
-            <div id="slider" class="slider"></div>
+            <div class="slider-container">
+                <div id="slider" class="slider"></div>
 
-            <div style="font-size:18pt; float: right; padding-top: 50px;">
-                <p style="float: right; "> BYR   </p>
-                <p style="float: right; " id="sl_value_to"></p>
-                <p style="float: right; "> - </p>
-                <p style="float: right; " id="sl_value_from"></p>
+                <div class="slider-values">
+                    <p style="float: right; padding-left: 6px;">РУБ</p>
+                    <p style="float: right; " id="sl_value_to"></p>
+                    <p style="float: right; "> - </p>
+                    <p style="float: right; " id="sl_value_from"></p>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -23,6 +23,16 @@ function createSlider(){
     slider.noUiSlider.on('update', function( values, handle ) {
         snapValues[handle].innerHTML = values[handle];
     });
+
+    slider.noUiSlider.on('change', function(){
+        $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+        var from = $("#sl_value_from").html();
+        var to = $("#sl_value_to").html();
+        var options = {
+            "price_from" : from,
+            "price_to" : to};
+        filter(options);
+    });
 }
 function appear(elm, i, step, speed){
     var t_o;

@@ -159,9 +159,22 @@
 /*-------------- FILTER BAR -------------- */
 .slider
 {
-    margin-top: 30px;
+  width: 100%;
+
+}
+
+.slider-container
+{
+    margin-top: 20px;
     float: right;
     width: 33%;
+}
+
+.slider-values {
+    font-size:19pt;
+    float: right;
+    padding-top: 9px;
+    padding-right: 110px;
 }
 
 .content-section-a {

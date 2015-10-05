@@ -366,14 +366,25 @@ public class Liberty
 
 
         post("/filter", (request, response) -> {
-            Integer categoryId = Integer.parseInt(request.queryParams("filterOption"));
-            List<Item> items = UserSessionUtils.filterByCat(categoryId);
+//            Integer categoryId = Integer.parseInt(request.queryParams("filterOption"));
+            String priceFrom = request.queryParams("price_from") == null ?
+                    null : request.queryParams("price_from").replaceAll("\\.", "").replaceFirst("000", "");
+            String priceTo = request.queryParams("price_to") == null ?
+                    null : request.queryParams("price_to").replaceAll("\\.", "").replaceFirst("000", "");
+            Integer pFrom = Integer.parseInt(priceFrom);
+            Integer pTo = Integer.parseInt(priceTo);
+
+//            List<Item> items = UserSessionUtils.filterByCat(categoryId);
+            List<Item> items = UserSessionUtils.filterByCatAndPrice(1, pFrom, pTo);
+
             if (items == null) {
                 // TODO: throw exception view
             }
 
             Double itemWidth = request.session().attribute("itemWidth");
             Double totalWidth = itemWidth * items.size();
+
+
 
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("items", items);
