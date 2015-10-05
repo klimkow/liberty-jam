@@ -19,6 +19,7 @@
     <script src="js/validator.js"></script>
     <script src="locales/bootstrap-datepicker.ru.min.js"></script>
     <script src="js/nouislider.min.js"></script>
+    <script src="js/wNumb.min.js"></script>
     <script src="js/liberty.js"></script>
 
     <#include "/common/navbar.ftl">

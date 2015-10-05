@@ -682,6 +682,25 @@ div.wizard-item-active-first > h2
     opacity: 0.5;
 }
 
+.filter_option {
+    border: none;
+    font-weight: normal;
+    background-color: #f3f3f3;
+    font-size: 16pt;
+}
+
+#separator {
+    height: 20px;
+    width: 1px;
+    border-right: 1px #A2A2A2 solid;
+    float: left;
+    margin-top:28px;
+}
+
+#filter-opt-block {
+    margin-top:22px;
+    padding-right: 2px
+}
 
 /*The reason of redundant horizontal scroll :*/
 /*.row*/
@@ -692,7 +711,8 @@ div.wizard-item-active-first > h2
 
 .button-selected
 {
-    border-color: #3FB8AF;
+    border-bottom: 2px #3FB8AF solid;
+    font-weight: bold;
 }
 
 .form-control-feedback

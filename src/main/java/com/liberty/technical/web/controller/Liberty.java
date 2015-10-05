@@ -387,7 +387,9 @@ public class Liberty
             }
             Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
             attributes.put("translator", LocalizationUtil.getInstance(locale));
-            return new ModelAndView(attributes, "common/marketing.ftl");
+            String viewName = items.size() > 0 ?
+                "common/marketing.ftl" : "common/marketing-empty-view.ftl";
+            return new ModelAndView(attributes, viewName);
         }, engine);
 
 

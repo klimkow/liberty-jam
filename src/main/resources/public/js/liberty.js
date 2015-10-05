@@ -2,12 +2,26 @@ function createSlider(){
     var slider = document.getElementById('slider');
 
     noUiSlider.create(slider, {
-        start: [20, 80],
+        start: [300000, 1500000],
         connect: true,
+        step: 100000,
         range: {
             'min': 0,
-            'max': 100
-        }
+            'max': 2000000
+        },
+        format: wNumb({
+            decimals: 0,
+            thousand: '.'
+        })
+    });
+
+    var snapValues = [
+        document.getElementById('sl_value_from'),
+        document.getElementById('sl_value_to')
+    ];
+
+    slider.noUiSlider.on('update', function( values, handle ) {
+        snapValues[handle].innerHTML = values[handle];
     });
 }
 function appear(elm, i, step, speed){
@@ -82,6 +96,7 @@ function show_step3(formData)
 
 function getCategoryItems(id)
 {
+    $('#filter_option' + id).addClass("button-selected");
     $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
     var post_url = 'getCategoryItems';
     var post_data = {
@@ -99,6 +114,7 @@ function getCategoryItems(id)
             initGallery()
         }
     });
+
 }
 
 
