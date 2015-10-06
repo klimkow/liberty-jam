@@ -35,22 +35,22 @@
 
     <div id="pay_online" style="margin-left: 100px; margin-right: 30px"
          class="payment-block" onmouseover="makeNotActive('pay_cash')" onmouseout="makeActive('pay_cash')">
-        <p>Оплата онлайн</p>
+        <p>${translator.getString("payment_online")}</p>
         <p style="font-family: BadScript; font-size: 14pt; margin-top: 10px;">
-            Оплата банковской картой онлайн
+            ${translator.getString("payment_by_card_online")}
         </p>
         <div class="row">
             <img style="" src="img/webpay_logo.jpg" width="350" height="110"/>
         </div>
         <div style="margin-top: 30px;" class="btn btn-default">
-        Перейти к оплате
+        ${translator.getString("go_to_payment")}
         </div>
     </div>
     <div id="pay_cash" style="" class="payment-block"
          onmouseover="makeNotActive('pay_online')" onmouseout="makeActive('pay_online')">
-        <p>Оплата курьеру</p>
+        <p>${translator.getString("pay_to_delivery_boy")}</p>
         <p style="font-size: 14pt; font-family: BadScript; margin-top: 10px;">
-            Оплатить букет курьеру наличными или банковской картой
+            ${translator.getString("pay_to_d_boy_by_card_or_cash")}
         </p>
     </div>
 

@@ -5,7 +5,7 @@
             $(this).addClass("button-selected");
             $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
             var form = $(this).closest('form');
-            var formData = form.serializeArray();
+            var formData = form.serialize();
             filter(formData);
         });
 
@@ -36,7 +36,7 @@
                 <form name="filter_opt1">
                     <input id="filter_option_box" type="hidden" name="filterOption" value="3">
                     <div id="filter-opt-block" class="textleft">
-                        <div id="filter_option3" class=" btn btn-default filter_option">Букет в вазе</div>
+                        <div id="filter_option3" class=" btn btn-default filter_option">${translator.getString("bouquet_in_the_glass")}</div>
                     </div>
                 </form>
             </div>
@@ -45,7 +45,7 @@
                 <div id="slider" class="slider"></div>
 
                 <div class="slider-values">
-                    <p style="float: right; padding-left: 6px;">РУБ</p>
+                    <p style="float: right; padding-left: 6px;">${translator.getString("rub")}</p>
                     <p style="float: right; " id="sl_value_to"></p>
                     <p style="float: right; "> - </p>
                     <p style="float: right; " id="sl_value_from"></p>

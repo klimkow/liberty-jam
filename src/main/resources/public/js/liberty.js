@@ -134,14 +134,14 @@ function filter(option)
 {
     maxScrollPosition = 0;
     var post_url = 'filter';
-    var options = [];
 
-    options["price_from"] = $("#sl_value_from").html();
-    options["price_to"] = $("#sl_value_to").html();
-    options["itemWidth"] = $(".container")[0].offsetWidth/3;
-    //if (option != '') {
-    //    options.push(option);
-    //}
+    var options = '';
+    if (option != '') {
+        options = option + "&";
+    }
+    options = options + "price_from=" + $("#sl_value_from").html() +
+        "&price_to=" + $("#sl_value_to").html() + "&itemWidth=" + $(".container")[0].offsetWidth/3;
+
     $.ajax({
         type: 'POST',
         url: post_url,

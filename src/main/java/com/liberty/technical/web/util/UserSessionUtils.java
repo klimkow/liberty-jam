@@ -98,17 +98,17 @@ public class UserSessionUtils {
         return null;
     }
 
-    public static List<Item> filterByCatAndPrice(int categoryId, int pFrom, int pTo)
+    public static List<Item> filterByCatAndPrice(Integer categoryId, Integer pFrom, Integer pTo)
     {
         List resultList = null;
         SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();
         Session session = factory.openSession();
         Transaction tx = null;
+        String categoryCriteria = categoryId == null ? "" : " and chi.id = " + categoryId;
         try {
             tx = session.beginTransaction();
             resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
-                    "where chi.id = " + categoryId +
-                    " and itm.price between " + pFrom + " and " + pTo).
+                    "where itm.price between " + pFrom + " and " + pTo + categoryCriteria).
                     list();
             tx.commit();
 
