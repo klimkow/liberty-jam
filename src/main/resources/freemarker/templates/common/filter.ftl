@@ -5,7 +5,7 @@
             $(this).addClass("button-selected");
             $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
             var form = $(this).closest('form');
-            var formData = form.serialize();
+            var formData = form.serializeArray();
             filter(formData);
         });
 

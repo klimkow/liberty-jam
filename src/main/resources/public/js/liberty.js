@@ -2,7 +2,7 @@ function createSlider(){
     var slider = document.getElementById('slider');
 
     noUiSlider.create(slider, {
-        start: [300000, 1500000],
+        start: [300000, 2000000],
         connect: true,
         step: 100000,
         range: {
@@ -26,12 +26,14 @@ function createSlider(){
 
     slider.noUiSlider.on('change', function(){
         $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
-        var from = $("#sl_value_from").html();
-        var to = $("#sl_value_to").html();
-        var options = {
-            "price_from" : from,
-            "price_to" : to};
-        filter(options);
+        //var from = $("#sl_value_from").html();
+        //var to = $("#sl_value_to").html();
+        //var options = {
+        //    "price_from" : from,
+        //    "price_to" : to,
+        //    "itemWidth" : $(".container")[0].offsetWidth/3};
+
+        filter('');
     });
 }
 function appear(elm, i, step, speed){
@@ -132,10 +134,18 @@ function filter(option)
 {
     maxScrollPosition = 0;
     var post_url = 'filter';
+    var options = [];
+
+    options["price_from"] = $("#sl_value_from").html();
+    options["price_to"] = $("#sl_value_to").html();
+    options["itemWidth"] = $(".container")[0].offsetWidth/3;
+    //if (option != '') {
+    //    options.push(option);
+    //}
     $.ajax({
         type: 'POST',
         url: post_url,
-        data: option,
+        data: options,
         success: function(msg) {
             $('#marketing-active-zone').fadeOut(800, function(){
                 $('#marketing-active-zone').html(msg).fadeIn().delay(2000);

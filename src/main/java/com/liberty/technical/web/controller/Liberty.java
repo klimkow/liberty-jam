@@ -367,6 +367,7 @@ public class Liberty
 
         post("/filter", (request, response) -> {
 //            Integer categoryId = Integer.parseInt(request.queryParams("filterOption"));
+
             String priceFrom = request.queryParams("price_from") == null ?
                     null : request.queryParams("price_from").replaceAll("\\.", "").replaceFirst("000", "");
             String priceTo = request.queryParams("price_to") == null ?
@@ -381,8 +382,9 @@ public class Liberty
                 // TODO: throw exception view
             }
 
-            Double itemWidth = request.session().attribute("itemWidth");
+            Double itemWidth = new Double(request.queryParams("itemWidth"));
             Double totalWidth = itemWidth * items.size();
+            request.session().attribute("itemWidth", itemWidth);
 
 
 
