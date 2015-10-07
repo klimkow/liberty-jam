@@ -125,7 +125,7 @@
                 <div style="font-family: BadScript; font-size: 13pt;float: right;  width: 50%;">
                     <div style="margin-bottom:10px; width:99%;
                     border-bottom: 1px #B1AEAE solid;" class="row">
-                    <label for="comment">Время</label>
+                    <label for="comment">${translator.getString("dlv_deliver_time")}</label>
                         </div>
                     <div class="dlv-time-item">07.00 - 09.00</div>
                     <div class="dlv-time-item">09.00 - 11.00</div>
