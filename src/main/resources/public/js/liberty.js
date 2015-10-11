@@ -201,7 +201,7 @@ function addToCart(id, element)
                 $('#cart-notif').html(resp.st1 + ' ' + resp.amount
                     + ' ' + resp.st2 + ' ' + resp.st3 + ' '
                     + resp.price + resp.st4 +
-                    '<div id="go-to-cart" class="btn btn-default" onclick="goToCart()">Оплатить</div>').fadeIn().delay(800);
+                    '<a id="go-to-cart" class="btn btn-default" href="/cart">Оплатить</a>').fadeIn().delay(800);
             });
             element.css('border-color', '#3FB8AF');
             element.html('<img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>' + resp.st5
@@ -220,6 +220,28 @@ function goToCart()
     $.ajax({
         type: 'POST',
         url: post_url,
+        success: function(msg) {
+            $('#marketing-filter-zone').fadeOut(800, function(){
+                $('#marketing-filter-zone').html('').fadeIn().delay(2000);
+
+            });
+            $('#active-zone').fadeOut(800, function(){
+                $('#active-zone').html(msg).fadeIn().delay(2000);
+
+            });
+        }
+    });
+}
+
+
+function removeItemFromCart(id)
+{
+    var post_url = 'removeItem';
+    $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        data: {"id" : id},
         success: function(msg) {
             $('#marketing-filter-zone').fadeOut(800, function(){
                 $('#marketing-filter-zone').html('').fadeIn().delay(2000);

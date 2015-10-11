@@ -406,7 +406,6 @@ div.description-text > p
 .gallery__controls-next {
     cursor: pointer;
     float: right;
-    margin-top: 110px;
 
 }
 
@@ -731,4 +730,18 @@ div.wizard-item-active-first > h2
 .form-control-feedback
 {
     margin-right: 15px;
+}
+
+#cart-stub
+{
+    height: 500px;
+}
+
+#cart-stub > p
+{
+    font-family: BadScript;
+    font-size: 50pt;
+    text-align: center;
+    font-weight: bold;
+    color: #f3f3f3;
 }

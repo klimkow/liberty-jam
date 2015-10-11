@@ -197,4 +197,3 @@
     </form>
 </div>
 
-<#include "/common/carousel-small.ftl">

@@ -1,12 +1,3 @@
-<script>
-    $(document).ready(function(){
-
-        $("#go-to-cart").click(function(e) {
-           goToCart();
-        });
-
-    });
-</script>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div style="margin-top: 9px" class="textleft margintop3">
@@ -25,7 +16,7 @@
                     </#if>
             </#if>
                 ${translator.getString("total_amount")} ${order.getAmount()?string?replace(",",".")}${translator.getString("currency")}
-                <div id="go-to-cart" class="btn btn-default" onclick="goToCart()">${translator.getString("go_to_cart")}</div>
+                <a id="go-to-cart" class="btn btn-default" href="/cart">${translator.getString("go_to_cart")}</a>
             <#else>${translator.getString("cart_is_empty")}
             </#if>
             </div>
@@ -46,7 +37,7 @@
     <div class="container top-menu">
         <div class="text-center">
             <div class="row">
-                <a href=""><img src="img/main-logo.png" style="height:120px;"/></a>
+                <a href="/"><img src="img/main-logo.png" style="height:120px;"/></a>
             </div>
             <div class="row menu-item-container">
                 <div class="menu-col"><button class="btn-main-menu">${translator.getString("choose_bouquet_title")}</button></div>
