@@ -57,7 +57,7 @@
     </div>
 
     <div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="show_step2()">
-        <img style="float: left" src="img/ar-left.png" alt="" width="25" height="40" />
+        <img style="float: left" src="img/ar-left2.png" alt="" width="25" height="40" />
         <p style="text-decoration: underline; float: left; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_prev_step")}</p>
     </div>
 </div>

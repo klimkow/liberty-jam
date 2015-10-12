@@ -49,7 +49,9 @@
         <#list cartItems as item>
         <tr id="item-list-tr">
             <td class="textleft"><img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100"> <p class="item-name-cart">${item.getName()}</p></td>
-            <td style="padding-top: 30px" class="td-right">1</td>
+            <td style="padding-top: 30px" class="td-right">
+                <input type="number" value="1" min="1" max="100">
+            </td>
             <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>
             <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
         </tr>
@@ -59,7 +61,7 @@
     </div>
 
     <div class="gallery__controls-next" onclick="show_step2()">
-        <img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>
+        <img style="float: right" src="img/ar-right2.png" alt="" width="25" height="40"/>
         <p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>
     </div>
     <#--<div style="margin-top: 10px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15""/></div>-->

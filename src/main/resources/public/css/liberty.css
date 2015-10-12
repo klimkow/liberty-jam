@@ -399,14 +399,19 @@ div.description-text > p
 .gallery__controls-prev {
     cursor: pointer;
     float: left;
-    margin-top: 110px;
-
 }
 
 .gallery__controls-next {
     cursor: pointer;
     float: right;
+}
 
+.marketing-arrow {
+    opacity: 0.6;
+}
+
+.marketing-arrow:hover {
+    opacity: 1;
 }
 
 .marketing-category
