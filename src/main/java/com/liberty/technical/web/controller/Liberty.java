@@ -7,6 +7,7 @@ import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.localization.LocalizationUtil;
+import com.liberty.technical.logic.util.OrderUtils;
 import com.liberty.technical.web.SharedConstants;
 import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
@@ -383,7 +384,7 @@ public class Liberty
         Long id = new Long(request.queryParams("id"));
         Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
         if (order != null) {
-          order.getItems().removeIf(item -> item.getId() == id);
+          OrderUtils.removeItemFromOrder(order, id);
           attributes.put("order", order);
           attributes.put("itemCount", order.getItemCount());
           attributes.put("cartItems", order.getItems());
@@ -443,6 +444,30 @@ public class Liberty
         }
 
         attributes.put("order", order);
+        return new OrderVO(order.getAmount(),
+                count,
+                LocalizationUtil.getString("you_have"),
+                bouquets,
+                LocalizationUtil.getString("total_amount"),
+                LocalizationUtil.getString("currency"),
+                LocalizationUtil.getString("item_int_the_cart"));
+      }, gson::toJson);
+
+      post("/updateNavbar", (request, response) -> {
+        Order order = request.session()
+                .attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+        int count = order.getItems().size();
+        String bouquets;
+        if (count == 1) {
+          bouquets = LocalizationUtil.getString("bouquet1");
+        }
+        else if (count > 1 && count < 5) {
+          bouquets = LocalizationUtil.getString("bouquet24");
+        }
+        else {
+          bouquets = LocalizationUtil.getString("bouquet5");
+        }
+
         return new OrderVO(order.getAmount(),
                 count,
                 LocalizationUtil.getString("you_have"),

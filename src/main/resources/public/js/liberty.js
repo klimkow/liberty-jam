@@ -251,9 +251,37 @@ function removeItemFromCart(id)
                 $('#active-zone').html(msg).fadeIn().delay(2000);
 
             });
+            maybeUpdateNavBar();
         }
     });
 }
+
+function maybeUpdateNavBar()
+{
+    var post_url = 'updateNavbar';
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        success: function(msg) {
+            var resp = JSON.parse(msg);
+            if (resp.price != '') {
+                $('#cart-notif').fadeOut(300, function () {
+                    $('#cart-notif').html(resp.st1 + ' ' + resp.amount
+                        + ' ' + resp.st2 + ' ' + resp.st3 + ' '
+                        + resp.price + resp.st4 +
+                        '<a id="go-to-cart" class="btn btn-default" href="/cart">Оплатить</a>').fadeIn().delay(800);
+                });
+                element.css('border-color', '#3FB8AF');
+                element.html('<img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>' + resp.st5
+                ).fadeIn().delay(800);
+            } else {
+                $('#cart-notif').html("Корзина пуста");
+            }
+        }
+    });
+}
+
+
 
 
 function getAllItems()
