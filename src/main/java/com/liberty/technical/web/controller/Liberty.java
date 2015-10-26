@@ -331,6 +331,34 @@ public class Liberty
 //        , null);
 
 
+      post("/openPage", (request, response) -> {
+        Map<String, Object> attributes = new HashMap<>();
+        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+        attributes.put("translator", LocalizationUtil.getInstance(locale));
+        Integer pageNumber = new Integer(request.queryParams("page"));
+        return new ModelAndView(attributes, "common/pages/about.ftl");
+      }, engine);
+
+
+      post("/changeLang", (request, response) -> {
+        String lang = new String(request.queryParams("lang"));
+        request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE, new Locale(lang));
+        Session session = request.session();
+        Map<String, Object> attributes = new HashMap<>();
+        if (!session.isNew()) {
+          Order order = session.attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+          if (order != null) {
+            attributes.put("order", order);
+            attributes.put("itemCount", order.getItemCount());
+          }
+        }
+        Locale locale = session.attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
+        attributes.put("translator", LocalizationUtil.getInstance(locale));
+        response.redirect("/");
+        return new ModelAndView(attributes, "index.ftl");
+      }, engine);
+
+
       post("/getItem", (request, response) -> {
         List<Item> items = UserSessionUtils.getItemsBySession(request.session());
         if (items == null) {
@@ -345,6 +373,7 @@ public class Liberty
         if (order != null) {
           attributes.put("order", order);
         }
+        attributes.put("itemId", id);
         Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
         attributes.put("translator", LocalizationUtil.getInstance(locale));
 

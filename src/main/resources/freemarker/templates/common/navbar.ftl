@@ -3,7 +3,7 @@
         <div style="margin-top: 9px" class="textleft margintop3">
             <img style="margin-right: 15px" src="img/cart.png" class="textleft" height="25" width="25">
             <div id="cart-notif" class="textleft">
-            <#if order??>
+            <#if order?? && itemCount gt 0>
                 ${translator.getString("you_have")} ${itemCount}
                     <#if itemCount == 1>
                     ${translator.getString("bouquet1")}
@@ -16,16 +16,25 @@
                     </#if>
             </#if>
                 ${translator.getString("total_amount")} ${order.getAmount()?string?replace(",",".")}${translator.getString("currency")}
-                <a id="go-to-cart" class="btn btn-default" href="/cart">${translator.getString("go_to_cart")}</a>
+                <a id="go-to-cart" class="btn btn-default" href="/cart" onclick="turnOnLoadingGlass()">${translator.getString("go_to_cart")}</a>
             <#else>${translator.getString("cart_is_empty")}
             </#if>
             </div>
         </div>
         <div class="textright">
-            <img style="border-right: 1px solid #E2E2E2; border-left: 1px solid #E2E2E2" src="img/fb-tr.png" alt="Facebook" height="48" width="48">
-            <img style="border-right: 1px solid #E2E2E2;" src="img/twt-tr.gif" alt="Twitter" height="48" width="48">
-            <img style="border-right: 1px solid #E2E2E2;" src="img/vk-tr.png" alt="Vkontakte" height="48" width="48">
-            <img style="border-right: 1px solid #E2E2E2;" src="img/ru_trs.png" alt="Language" height="48" width="48">
+            <a href="http://facebook.com" target="_blank"><img style="border-right: 1px solid #E2E2E2; border-left: 1px solid #E2E2E2" src="img/fb-tr.png" alt="Facebook" height="48" width="48"></a>
+            <a href="http://twitter.com" target="_blank"><img style="border-right: 1px solid #E2E2E2;" src="img/twt-tr.gif" alt="Twitter" height="48" width="48"></a>
+            <a href="http://vk.com/kompliment_by" target="_blank"><img style="border-right: 1px solid #E2E2E2;" src="img/vk-tr.png" alt="Vkontakte" height="48" width="48"></a>
+            <div id="dLabel" class="language-dropdown dropdown">
+                <p  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:Attentica4F; font-weight: bold;">RU
+                <span class="caret"></span>
+                </p>
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li onclick="changeLang('en')"><a >EN</a> </li>
+                    <li onclick="changeLang('by')"><a>BY</a> </li>
+                </ul>
+            </div>
+            <#--<div class="dropdown"><img style="border-right: 1px solid #E2E2E2;" src="img/ru_trs.png" alt="Language" height="48" width="48"></div>-->
         </div>
     </div>
 </nav>
@@ -40,11 +49,11 @@
                 <a href="/"><img src="img/main-logo.png" style="height:120px;"/></a>
             </div>
             <div class="row menu-item-container">
-                <div class="menu-col"><button class="btn-main-menu">${translator.getString("choose_bouquet_title")}</button></div>
-                <div class="menu-col"><button class="btn-main-menu">${translator.getString("reason_title")}</button></div>
-                <div class="menu-col"><button class="btn-main-menu">${translator.getString("how_does_it_work_title")}</button></div>
-                <div class="menu-col"><button class="btn-main-menu">${translator.getString("about_title")}</button></div>
-                <div class="menu-col"><button class="btn-main-menu">${translator.getString("contacts_title")}</button></div>
+                <div class="menu-col" onclick="openPage('1')"><button class="btn-main-menu">${translator.getString("menu_item1")}</button></div>
+                <div class="menu-col" onclick="chooseBoquete()"><button class="btn-main-menu">${translator.getString("menu_item2")}</button></div>
+                <div class="menu-col"><button class="btn-main-menu">${translator.getString("menu_item3")}</button></div>
+                <div class="menu-col"><button class="btn-main-menu">${translator.getString("menu_item4")}</button></div>
+                <div class="menu-col"><button class="btn-main-menu">${translator.getString("menu_item5")}</button></div>
             </div>
         </div>
     </div>

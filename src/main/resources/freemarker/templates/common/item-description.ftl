@@ -1,3 +1,16 @@
+<script>
+    $(document).ready(function(){
+
+        $("#add-to-cart-desc").click(function(e) {
+            $(this).css("width", $(this).outerWidth());
+            $(this).html('<img src="../img/button-loading.gif"/>');
+            var form = $(this).closest('form');
+            var formData = form.serialize();
+            addToCart(formData, $(this));
+        });
+    });
+</script>
+
 <div class="container ">
     <div class="item-description-container">
     <div class="item-photo">
@@ -13,11 +26,14 @@
                 <p class="textleft">${selectedItem.getPrice()?string?replace(",",".")}.000</p>
             </div>
             <div style="margin-top:20px; padding-right: 10px" class="textleft">
-                <div id="add-to-cart" class="btn btn-default <#if order??><#if order.isSelected(selectedItem)>btn-item-in-cart</#if></#if>" >
+                <form name="myform">
+                <input id="item-id" type="hidden" name="itemId" value="${itemId}">
+                <div id="add-to-cart-desc" class="btn btn-default <#if order??><#if order.isSelected(selectedItem)>btn-item-in-cart</#if></#if>" >
                 <#if order??&&order.isSelected(selectedItem)>
                     <img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>${translator.getString("item_int_the_cart")}
                 <#else>${translator.getString("add_to_cart")}
                 </#if></div>
+                </form>
             </div>
         </div>
     </div>

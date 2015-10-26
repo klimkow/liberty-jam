@@ -138,6 +138,7 @@
 {
     float: left;
     width: 20%;
+    cursor: pointer;
 }
 
 
@@ -182,6 +183,29 @@
     background-color: #f3f3f3;
     height: 80px;
     width: 100%;
+}
+
+.language-dropdown
+{
+    float: right;
+    width: 48px;
+    height: 48px;
+    border-right: 1px solid #E2E2E2;
+    padding-top: 11px;
+    padding-left: 16px;
+    font-size: 17pt;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    min-width: 48px;
+    font-size: 16pt;
+}
+
+.pages-title
+{
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 .attentica-font16

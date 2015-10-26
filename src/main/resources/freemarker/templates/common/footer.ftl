@@ -4,7 +4,7 @@
 <div class="row">
     <div class="content-section-a">
         <div class="container attentica-font30">
-            <p class="text-center margintop10">${translator.getString("how_does_it_work_title")}</p>
+            <p class="text-center margintop10">${translator.getString("how_does_it_work")}</p>
         </div>
     </div>
 </div>
@@ -35,11 +35,11 @@
     <div class="content-section-a">
         <div class="container text-center">
             <div class="row menu-item-container">
-                <div class="menu-col">${translator.getString("choose_bouquet_title")}</div>
-                <div class="menu-col">${translator.getString("reason_title")}</div>
-                <div class="menu-col">${translator.getString("how_does_it_work_title")}</div>
-                <div class="menu-col">${translator.getString("about_title")}</div>
-                <div class="menu-col">${translator.getString("contacts_title")}</div>
+                <div class="menu-col" onclick="openPage('1')">${translator.getString("menu_item1")}</div>
+                <div class="menu-col" onclick="chooseBoquete()">${translator.getString("menu_item2")}</div>
+                <div class="menu-col">${translator.getString("menu_item3")}</div>
+                <div class="menu-col">${translator.getString("menu_item4")}</div>
+                <div class="menu-col">${translator.getString("menu_item5")}</div>
             </div>
         </div>
     </div>
