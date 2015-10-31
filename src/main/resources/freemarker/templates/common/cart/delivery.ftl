@@ -9,6 +9,18 @@
         var formData = form.serialize();
         show_step3(formData);
     });
+
+    $('.btn-show').on('click', function(e) {
+        $('.collapse').collapse('show');
+    });
+
+    $('.btn-hide').on('click', function(e) {
+        $('.collapse').collapse('hide');
+    });
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
 </script>
 
 <div style="height: 100px; background-color: #f3f3f3;" class="row">
@@ -16,14 +28,6 @@
 
     <div class="container">
 
-    <#--<div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="goToCart()">-->
-        <#--<img style="float: left" src="img/ar-left.png" alt="" width="25" height="40" />-->
-        <#--<p style="text-decoration: underline; float: left; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_prev_step")}</p>-->
-    <#--</div>-->
-    <#--<div style="margin-top: 30px;" href="#" class="gallery__controls-next" onclick="show_step2()">-->
-        <#--<img style="float: right" src="img/ar-right.png" alt="" width="25" height="40"/>-->
-        <#--<p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>-->
-    <#--</div>-->
         <div style="width: 60%; margin-left: 210px;">
             <img style="margin-top: 7px; margin-bottom: 5px" src="img/bi3.png" width="30" height="30"/>
             <div class="progress">
@@ -52,7 +56,7 @@
         <h2>${translator.getString("dlv_from")}</h2>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="from-name">${translator.getString("dlv_name")}</label>
-            <input type="text" name="name-from" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}" required>
+            <input type="text" name="name-from" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control has-success" id="from-name"  placeholder="${translator.getString("dlv_name_placeholder1")}" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             <#--<span class="help-block with-errors"></span>-->
         </div>
@@ -66,13 +70,34 @@
             <input type="text" name="phone-from" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="from-tel"  placeholder="${translator.getString("dlv_phone_placeholder1")}" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
+        <div class="dlv-block-cn form-group has-feedback">
+            <label>
+                Получатель букета:
+            </label>
+            <label class="radio-inline">
+                <input class="btn-show" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                Другой человек
+            </label>
+            <label class="radio-inline">
+                <input class="btn-hide" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked="checked">
+                Я
+            </label>
+        </div>
     </div>
     </div>
     </div>
-    <div class="row dlv-container-block">
-    <div id="dlv-bock-title" class="row text-center">
 
+        <#--=============================== COLLAPSABLE MENU ===============================-->
+<div class="row">
+<div class="collapse-group">
+
+
+
+    <div class="collapse row dlv-container-block">
+
+    <div id="dlv-bock-title" class="row text-center">
     </div>
+
     <div class="row">
     <div style="float:left">
         <img style="margin-left: 220px; margin-top:60px;" src="img/icon_recipient.png" width="120" height="120"/>
@@ -101,6 +126,10 @@
     </div>
     </div>
 
+</div>
+</div>
+    <#--=============================== COLLAPSABLE MENU END ===============================-->
+
     <div style="margin-bottom: 50px" class="row dlv-container-block">
     <div id="dlv-bock-title" class="row text-center">
 
@@ -115,7 +144,7 @@
     </div>
     </div>
 
-    <div style="margin-bottom: 20px" class="dlv-block textright">
+     <div style="margin-bottom: 20px" class="dlv-block textright">
         <h2>${translator.getString("dlv_delivery_title")}</h2>
         <div style="overflow: hidden;">
             <div class="dlv-block-cn form-group">

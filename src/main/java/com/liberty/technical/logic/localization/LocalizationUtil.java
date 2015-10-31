@@ -16,6 +16,7 @@ public class LocalizationUtil {
     private static Locale locale;
     private static Table<String, String, String> valueTable = HashBasedTable.create();
     private static ResourceBundle resourceBundle = null;
+    private static String[] allowedLanguages = {"EN", "RU"};
 
     private final static String TRANSLATION_LOC = "locution";
     private final static String ENCODING = "UTF-8";
@@ -83,5 +84,24 @@ public class LocalizationUtil {
             result = valueTable.get(locale.getLanguage(), key);
         }
         return result == null ? "@" + key : result;
+    }
+
+
+    public static List<String> getAllowedLanguages()
+    {
+        String currentLang = locale.getLanguage().toUpperCase();
+        List<String> result = new ArrayList<>();
+        for (String lang : allowedLanguages) {
+            if(!currentLang.equals(lang)) {
+                result.add(lang);
+            }
+        }
+        return result;
+    }
+
+
+    public static String getCurrentLocale()
+    {
+        return locale.getLanguage().toUpperCase();
     }
 }

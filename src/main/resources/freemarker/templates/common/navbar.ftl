@@ -26,12 +26,13 @@
             <a href="http://twitter.com" target="_blank"><img style="border-right: 1px solid #E2E2E2;" src="img/twt-tr.gif" alt="Twitter" height="48" width="48"></a>
             <a href="http://vk.com/kompliment_by" target="_blank"><img style="border-right: 1px solid #E2E2E2;" src="img/vk-tr.png" alt="Vkontakte" height="48" width="48"></a>
             <div id="dLabel" class="language-dropdown dropdown">
-                <p  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:Attentica4F; font-weight: bold;">RU
+                <p  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:Attentica4F; font-weight: bold;">${translator.getCurrentLocale()}
                 <span class="caret"></span>
                 </p>
                 <ul class="dropdown-menu" aria-labelledby="dLabel">
-                    <li onclick="changeLang('en')"><a >EN</a> </li>
-                    <li onclick="changeLang('by')"><a>BY</a> </li>
+                    <#list translator.getAllowedLanguages() as lang>
+                    <li onclick="changeLang('${lang}')"><a >${lang}</a> </li>
+                    </#list>
                 </ul>
             </div>
             <#--<div class="dropdown"><img style="border-right: 1px solid #E2E2E2;" src="img/ru_trs.png" alt="Language" height="48" width="48"></div>-->

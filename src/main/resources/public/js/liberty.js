@@ -165,6 +165,7 @@ function changeLang(lang)
         url: post_url,
         data: {'lang' : lang},
         success: function(msg) {
+            location.reload();
         }
     });
 }
