@@ -3,7 +3,6 @@ package com.liberty.technical.web.controller;
 import static spark.Spark.*;
 
 import com.google.gson.Gson;
-import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.localization.LocalizationUtil;
@@ -12,10 +11,10 @@ import com.liberty.technical.web.SharedConstants;
 import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
 import spark.*;
-import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import javax.validation.constraints.Null;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -509,6 +508,16 @@ public class Liberty
       post("/delivery_info", (request, response) -> {
         Map<String, Object> attributes = new HashMap<>();
 
+        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
+        if (order.getUser() != null) {
+          attributes.put("user", order.getUser());
+        }
+        if (order.getDeliveryInformation() != null) {
+          attributes.put("delivery", order.getDeliveryInformation());
+          SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+          attributes.put("date", "2015-11-02");
+        }
+
         Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
         attributes.put("translator", LocalizationUtil.getInstance(locale));
         return new ModelAndView(attributes, "common/cart/delivery.ftl");
@@ -522,13 +531,22 @@ public class Liberty
         info.setName(request.queryParams(SharedConstants.DELIVERY_NAME_TO));
         info.setPhone(request.queryParams(SharedConstants.DELIVERY_PHONE_TO));
         info.setMessage(request.queryParams(SharedConstants.DELIVERY_MESSAGE));
-        request.session().attribute(UserSessionUtils.ATTRIBUTE_DELIVERY_INFO, info);
+        StringBuilder address = new StringBuilder();
+        address.append(request.queryParams(SharedConstants.DELIVERY_ADDRESS)).
+            append("-").
+            append(request.queryParams(SharedConstants.DELIVERY_ADDRESS_HOUSE)).
+            append("-").
+            append(request.queryParams(SharedConstants.DELIVERY_ADDRESS_FLOR));
+        info.setAddress(address.toString());
+        Date date = new Date(request.queryParams(SharedConstants.DELIVERY_DATE));
+        info.setDeliveryDate(date);
+//        request.session().attribute(UserSessionUtils.ATTRIBUTE_DELIVERY_INFO, info);
 
         User user = new User();
         user.setName(request.queryParams(SharedConstants.DELIVERY_NAME_FROM));
         user.setPhone(request.queryParams(SharedConstants.DELIVERY_PHONE_FROM));
         user.setEmail(request.queryParams(SharedConstants.DELIVERY_EMAIL_FROM));
-        request.session().attribute(UserSessionUtils.ATTRIBUTE_USER, user);
+//        request.session().attribute(UserSessionUtils.ATTRIBUTE_USER, user);
 
         Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
         order.setDeliveryInformation(info);

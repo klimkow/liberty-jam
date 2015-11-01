@@ -146,4 +146,43 @@ public class DeliveryInformation
   {
     this.deliveryPrice = deliveryPrice;
   }
+
+
+//  TODO: replace to VO
+
+  public String getAddressStreet()
+  {
+    StringBuilder result = new StringBuilder();
+    if (address != null && !address.isEmpty()) {
+      String[] addressLine = address.split("-");
+      if (addressLine.length > 0) {
+        result.append(addressLine[0]);
+      }
+    }
+    return result.toString();
+  }
+
+  public String getAddressHouse()
+  {
+    StringBuilder result = new StringBuilder();
+    if (address != null && !address.isEmpty()) {
+      String[] addressLine = address.split("-");
+      if (addressLine.length > 1) {
+        result.append(addressLine[1]);
+      }
+    }
+    return result.toString();
+  }
+
+  public String getAddressFlor()
+  {
+    StringBuilder result = new StringBuilder();
+    if (address != null && !address.isEmpty()) {
+      String[] addressLine = address.split("-");
+      if (addressLine.length > 2) {
+        result.append(addressLine[2]);
+      }
+    }
+    return result.toString();
+  }
 }

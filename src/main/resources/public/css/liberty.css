@@ -197,6 +197,11 @@
     cursor: pointer;
 }
 
+.glyphicon-asterisk {
+    font-size: 8pt;
+    top: -1px;
+}
+
 .dropdown-menu {
     min-width: 48px;
     font-size: 16pt;
