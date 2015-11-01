@@ -163,7 +163,7 @@
         <h2>${translator.getString("dlv_delivery_title")}</h2>
         <div style="overflow: hidden;">
             <div class="dlv-block-cn form-group has-feedback">
-                <label for="address">Улица</label>
+                <label for="address">${translator.getString("address_street")}</label>
                 <span class="glyphicon glyphicon-asterisk"></span>
                 <input type="text" name="address" pattern="${translator.getString('name_reg_exp')}{1,}$"
                        maxlength="55" class="form-control" id="to-name"
@@ -171,7 +171,7 @@
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             </div>
             <div style="float:left; width: 50%;" class="dlv-block-cn form-group has-feedback">
-                <label for="address-house">Дом/корпус</label>
+                <label for="address-house">${translator.getString("address_house")}</label>
                 <span class="glyphicon glyphicon-asterisk"></span>
                 <div style="width: 70%">
                     <input type="text" name="address-house" maxlength="10" class="form-control" id="to-phone"
