@@ -62,7 +62,7 @@
 
     <div class="gallery__controls-next" onclick="show_step2()">
         <img style="float: right" src="img/ar-right2.png" alt="" width="25" height="40"/>
-        <p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>
+        <p>${translator.getString("go_next_step")}</p>
     </div>
     <#--<div style="margin-top: 10px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15""/></div>-->
 </div>

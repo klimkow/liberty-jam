@@ -12,6 +12,34 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SanFranc';
+    src: url('../fonts/SNF.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Osans';
+    src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OsansLight';
+    src: url('../fonts/OpenSans-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SanFrancThin';
+    src: url('../fonts/SNF_T.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @media (max-width: 2000px) {
     body {min-width:1100px;}
 
@@ -380,7 +408,7 @@ div.gallery__item > p, div.marketing-item-container > p
 .item-description
 {
     float: right;
-    width: 60%;
+    width: 40%;
     margin-top:40px;
 }
 
@@ -397,10 +425,10 @@ div.description-text > h2
 }
 div.description-text > p
 {
-  font-family: Attentica4F;
-    font-weight: bold;
-    font-size: 15pt;
-
+    text-align: left;
+    font-family: OsansLight, Arial, Helvetica, sans-serif;
+    font-size: 13pt;
+    padding: 5px 15px;
 }
 
 .row-bottom-border
@@ -433,6 +461,14 @@ div.description-text > p
 .gallery__controls-next {
     cursor: pointer;
     float: right;
+}
+
+.gallery__controls-next > p, .gallery__controls-prev > p {
+    text-decoration: underline;
+    float: right;
+    font-family: Attentica4F, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20pt;
 }
 
 .marketing-arrow {
@@ -617,9 +653,9 @@ div.wizard-item-active-first > h2
 .form-control
 {
     border-radius: 0px;
-    font-family: Attentica4f;
+    font-family: OsansLight, Arial, Helvetica, sans-serif;
     font-weight: bolder;
-    font-size: 18pt;
+    font-size: 13pt;
     padding: 2px 10px;
     line-height: 1;
     height: 29px;
@@ -646,14 +682,13 @@ div.wizard-item-active-first > h2
     padding-top: 3px;
 }
 
-.dlv-time-item:hover, .dlv-time-item:active
+.dlv-time-item-selected, .dlv-time-item:hover, .dlv-time-item:active
 {
     border: 2px #3FB8AF solid;
     background-color: #65D5D8;
     padding-top: 3px;
     cursor: pointer;
 }
-
 
 .progress
 {
@@ -727,6 +762,19 @@ div.wizard-item-active-first > h2
     background-color: #f3f3f3 !important;
     opacity: 0.5;
 }
+
+.select-payment
+{
+    color: #333;
+    border: 2px #3FB8AF solid;
+    opacity: 1;
+}
+
+.hidden-control
+{
+    display: none;
+}
+
 
 .filter_option {
     border: none;

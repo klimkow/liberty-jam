@@ -1,10 +1,44 @@
 <script>
+
+
+    var isSelected = false;
+
     function makeNotActive(id){
-        $('#'+id).addClass("payment-not-acitve");
+        if (!isSelected) {
+            $('#' + id).addClass("payment-not-acitve");
+        }
     }
 
     function makeActive(id){
-        $('#'+id).removeClass("payment-not-acitve");
+        if (!isSelected) {
+            $('#' + id).removeClass("payment-not-acitve");
+        }
+    }
+
+    function selectPayment(id) {
+        isSelected = true;
+        $('#lastStepButton').removeClass("hidden-control");
+        if (id == 'pay_cash') {
+            $('#pay_cash').removeClass("payment-not-acitve").
+                    addClass("select-payment");
+            $('#pay_online').removeClass("select-payment")
+                    .addClass("payment-not-acitve");
+            $('#lastStepButton').fadeOut(200, function(){
+                $('#lastStepButton').
+                        html("<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>Готово</p>").fadeIn().delay(100);
+
+            });
+        } else {
+            $('#pay_online').removeClass("payment-not-acitve").
+                    addClass("select-payment");
+            $('#pay_cash').removeClass("select-payment")
+                    .addClass("payment-not-acitve");
+            $('#lastStepButton').fadeOut(200, function(){
+                $('#lastStepButton').html(
+                        "<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>Перейти к оплате</p>").fadeIn().delay(100);
+
+            });
+        }
     }
 
 </script>
@@ -34,7 +68,8 @@
     <div class="row">
 
     <div id="pay_online" style="margin-left: 100px; margin-right: 30px"
-         class="payment-block" onmouseover="makeNotActive('pay_cash')" onmouseout="makeActive('pay_cash')">
+         class="payment-block" onmouseover="makeNotActive('pay_cash')"
+         onmouseout="makeActive('pay_cash')" onclick="selectPayment('pay_online')">
         <p>${translator.getString("payment_online")}</p>
         <p style="font-family: BadScript; font-size: 14pt; margin-top: 10px;">
             ${translator.getString("payment_by_card_online")}
@@ -47,7 +82,8 @@
         </div>
     </div>
     <div id="pay_cash" style="" class="payment-block"
-         onmouseover="makeNotActive('pay_online')" onmouseout="makeActive('pay_online')">
+         onmouseover="makeNotActive('pay_online')"
+         onmouseout="makeActive('pay_online')" onclick="selectPayment('pay_cash')">
         <p>${translator.getString("pay_to_delivery_boy")}</p>
         <p style="font-size: 14pt; font-family: BadScript; margin-top: 10px;">
             ${translator.getString("pay_to_d_boy_by_card_or_cash")}
@@ -58,6 +94,8 @@
 
     <div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="show_step2()">
         <img style="float: left" src="img/ar-left2.png" alt="" width="25" height="40" />
-        <p style="text-decoration: underline; float: left; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_prev_step")}</p>
+        <p>${translator.getString("go_prev_step")}</p>
+    </div>
+    <div id="lastStepButton" style="margin-top: 30px; cursor: pointer" class="hidden-control gallery__controls-next ">
     </div>
 </div>

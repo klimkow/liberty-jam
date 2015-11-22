@@ -514,8 +514,8 @@ public class Liberty
         }
         if (order.getDeliveryInformation() != null) {
           attributes.put("delivery", order.getDeliveryInformation());
-          SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
-          attributes.put("date", "2015-11-02");
+//          SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+//          attributes.put("date", "2015-11-02");
         }
 
         Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
@@ -538,8 +538,11 @@ public class Liberty
             append("-").
             append(request.queryParams(SharedConstants.DELIVERY_ADDRESS_FLOR));
         info.setAddress(address.toString());
-        Date date = new Date(request.queryParams(SharedConstants.DELIVERY_DATE));
-        info.setDeliveryDate(date);
+        String dateParam = request.queryParams(SharedConstants.DELIVERY_DATE);
+        if (dateParam != null && !dateParam.isEmpty()) {
+          Date date = new Date(dateParam);
+          info.setDeliveryDate(date);
+        }
 //        request.session().attribute(UserSessionUtils.ATTRIBUTE_DELIVERY_INFO, info);
 
         User user = new User();

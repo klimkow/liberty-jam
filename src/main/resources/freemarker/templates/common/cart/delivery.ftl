@@ -2,16 +2,36 @@
 
     $(document).ready(function() {
         $('#dlv-form').validator();
-        <#--<#if delivery??>$('#datetimepicker10 div').datepicker('setDate', ${delivery.getDateView()});    </#if>-->
 
+        $("#timeOptionsContainer").delegate('div[id^=timeOption]','click', function(e) {
+            $("div[id^= 'timeOption']").removeClass("dlv-time-item-selected");
+            $(this).addClass("dlv-time-item-selected");
+            var id = $(this).attr('id');
+            document.getElementById('time').value = id.replace('timeOption', '');
+        });
+    });
+
+    $('#dlv-form').validator().on('submit', function (e) {
+
+        if (!e.isDefaultPrevented()) {
+            if (document.getElementById('date').value == null)
+                return;
+            // if form was validated succesfully prevent page reloading
+            e.preventDefault();
+            var form = $(this).closest('form');
+            var formData = form.serialize();
+            show_step3(formData);
+        }
     });
 
     $('#go_step3').click(function(e) {
-        document.getElementById('date').value = $('#datetimepicker10 div').datepicker('getDate');
-//        $('#date').val($('#datetimepicker10 div').datepicker('getDate'));
+        document.getElementById('date').value = $('#datetimepicker10 div').datepicker('getFormattedDate');
+        $('#date').val($('#datetimepicker10 div').datepicker('getDate'));
         var form = $(this).closest('form');
+
         var formData = form.serialize();
         show_step3(formData);
+//        form.submit();
     });
 
     $('.btn-show').on('click', function(e) {
@@ -50,7 +70,7 @@
     <div class="row dlv-container-block">
     <div class="row">
     <div style="float:left">
-        <img style="margin-left: 220px; margin-top:30px;" src="img/icon_sender.png" width="120" height="120"/>
+        <img style="margin-left: 220px; margin-top:90px;" src="img/icon_sender.png" width="120" height="120"/>
         <div style="margin-left: 220px; width: 200px;font-family: BadScript;
             font-size: 15pt; font-weight: bold; color: #929090">
         ${translator.getString("dlv_assist_pic1")}
@@ -74,7 +94,7 @@
         <div class="dlv-block-cn form-group has-feedback">
             <label for="from-tel">${translator.getString("dlv_phone_number")}</label>
             <input type="text" name="phone-from" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control"
-                   id="from-tel"  placeholder="${translator.getString("dlv_phone_placeholder1")}"
+                   id="from-tel"
                    <#if user??>value="${user.getPhone()}"</#if>
                    data-toggle="popover" data-content="Мы воспользуемся этим номером телефона, если у нас возникнут трудности с доставкой">
         </div>
@@ -84,6 +104,10 @@
             <input type="email" name="email-from" class="form-control" id="from-email"
                    <#if user??>value="${user.getEmail()}"</#if> required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="dlv-block-cn form-group">
+            <label for="comment">${translator.getString("dlv_wish_comment")}</label>
+            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment"  placeholder="${translator.getString("dlv_wish_comment_placeholder")}"></textarea>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label>
@@ -115,7 +139,7 @@
 
     <div class="row">
     <div style="float:left">
-        <img style="margin-left: 220px; margin-top:60px;" src="img/icon_recipient.png" width="120" height="120"/>
+        <img style="margin-left: 220px; margin-top:20px;" src="img/icon_recipient.png" width="120" height="120"/>
         <div style="margin-left: 220px; width: 200px;font-family: BadScript;
              font-size: 15pt; font-weight: bold; color: #929090">
         ${translator.getString("dlv_assist_pic2")}
@@ -131,12 +155,9 @@
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="to-phone">${translator.getString("dlv_phone_reciever")}</label>
-            <input type="text" name="name-to" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone"  placeholder="${translator.getString("dlv_phone_placeholder1")}">
+            <input type="text" name="name-to" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone">
         </div>
-        <div class="dlv-block-cn form-group">
-            <label for="comment">${translator.getString("dlv_wish_comment")}</label>
-            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment"  placeholder="${translator.getString("dlv_wish_comment_placeholder")}"></textarea>
-        </div>
+
     </div>
     </div>
     </div>
@@ -145,14 +166,14 @@
 </div>
     <#--=============================== COLLAPSABLE MENU END ===============================-->
 
-    <div style="margin-bottom: 50px" class="row dlv-container-block">
+    <div class="row dlv-container-block">
     <div id="dlv-bock-title" class="row text-center">
 
     </div>
 
     <div class="row">
     <div style="float:left">
-    <img style="margin-left: 220px; margin-top:10px;" src="img/icon_delivery.png" width="120" height="120"/>
+    <img style="margin-left: 220px; margin-top:130px;" src="img/icon_delivery.png" width="120" height="120"/>
     <div style="margin-left: 220px; width: 200px;font-family: BadScript;
     font-size: 15pt; font-weight: bold; color: #929090">
     ${translator.getString("dlv_assist_pic3")}
@@ -187,58 +208,44 @@
                 </div>
             </div>
             <div class="dlv-block-cn form-group">
-                <div style="float: left; border-bottom: 1px #B1AEAE solid;width: 40%;font-family: BadScript;font-size: 13pt;">
-                    <label for="comment">${translator.getString("dlv_deliver_date")}</label>
-                    <span class="glyphicon glyphicon-asterisk"></span>
+                <div style="float: left; width: 40%;font-family: BadScript;font-size: 13pt;">
+                    <div style="border-bottom: 1px #B1AEAE solid;">
+                        <label for="comment">${translator.getString("dlv_deliver_date")}</label>
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </div>
+                    <div style="float: left;" class='input-group date'
+                         id='datetimepicker10' >
+                        <input id="date" type="hidden" name="date">
+                        <div class="attentica-font16" <#if delivery??>data-date="${delivery.getDateView()}"</#if>></div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker10 div').datepicker({
+                                    datesDisabled: ['09/06/2015', '09/21/2015'],
+                                    language: "ru"
+                                });
+                            });
+                        </script>
+                    </div>
+
                 </div>
                 <div style="font-family: BadScript; font-size: 13pt;float: right;  width: 50%;">
                     <div style="margin-bottom:10px; width:99%;
                     border-bottom: 1px #B1AEAE solid;" class="row">
-                    <label for="comment">${translator.getString("dlv_deliver_time")}</label>
+                        <label for="comment">${translator.getString("dlv_deliver_time")}</label>
                         <span class="glyphicon glyphicon-asterisk"></span>
-                        </div>
-                    <div class="dlv-time-item">07.00 - 09.00</div>
-                    <div class="dlv-time-item">09.00 - 11.00</div>
-                    <div class="dlv-time-item">11.00 - 13.00</div>
-                    <div class="dlv-time-item">13.00 - 15.00</div>
-                    <div class="dlv-time-item">15.00 - 17.00</div>
-                    <div class="dlv-time-item">17.00 - 19.00</div>
-                    <input type="hidden" name="time">
+                    </div>
+                    <div id="timeOptionsContainer">
+                        <div id="timeOption1" class="dlv-time-item">07.00 - 09.00</div>
+                        <div id="timeOption2" class="dlv-time-item">09.00 - 11.00</div>
+                        <div id="timeOption3" class="dlv-time-item">11.00 - 13.00</div>
+                        <div id="timeOption4" class="dlv-time-item">13.00 - 15.00</div>
+                        <div id="timeOption5" class="dlv-time-item">15.00 - 17.00</div>
+                        <div id="timeOption6" class="dlv-time-item">17.00 - 19.00</div>
+                        <input id="time" type="hidden" name="time">
+                    </div>
                 </div>
-                <div style="float: left;" class='input-group date' id='datetimepicker10'>
-                    <input id="date" type="hidden" name="date">
-                    <div class="attentica-font16"></div>
-                <#--<input type='text' name="date" class="form-control" required/>-->
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#datetimepicker10 div').datepicker({
-                                datesDisabled: ['09/06/2015', '09/21/2015'],
-                                language: "ru"
-                            });
-                        });
-                    </script>
-                </div>
+
             </div>
-            <#--<div class="dlv-block-cn form-group">-->
-                <#--<label>-->
-                    <#--<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>-->
-                <#--${translator.getString("dlv_delivery_free")}-->
-                <#--</label>-->
-                <#--<label>-->
-                    <#--<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">-->
-                <#--${translator.getString("dlv_delivery_accurate")}-->
-                <#--</label>-->
-                <#--<select name="time" style="padding: 0px 10px;" class="form-control">-->
-                    <#--<option>9.00 - 10.00</option>-->
-                    <#--<option>10.00 - 11.00</option>-->
-                    <#--<option>11.00 - 12.00</option>-->
-                    <#--<option>12.00 - 13.00</option>-->
-                    <#--<option>13.00 - 14.00</option>-->
-                    <#--<option>14.00 - 15.00</option>-->
-                    <#--<option>15.00 - 16.00</option>-->
-                    <#--<option>16.00 - 17.00</option>-->
-                <#--</select>-->
-            <#--</div>-->
     </div>
     </div>
 
@@ -246,21 +253,13 @@
     </div>
 
 
-        <#--<div style="float: right; margin-top: 250px; margin-bottom: 10px;" id="go-step2" class="btn btn-default textright">${translator.getString("next")}<img style="margin-left: 10px" src="img/next_arrow.png" width="15" height="15"/></div>-->
-        <#--<div style="float:right; margin-top: 250px; margin-bottom: 10px; margin-right: 5px;" id="go-step2" class="btn btn-default textleft">-->
-            <#--<img style="margin-right: 10px" src="img/prev_arrow.png" width="15" height="15"/>-->
-        <#--${translator.getString("prev")}-->
-        <#--</div>-->
-
-
-
-    <div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="goToCart()">
+    <div class="gallery__controls-prev" onclick="goToCart()">
         <img style="float: left" src="img/ar-left2.png" alt="" width="25" height="40" />
-        <p style="text-decoration: underline; float: left; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_prev_step")}</p>
+        <p>${translator.getString("go_prev_step")}</p>
     </div>
-    <div id="go_step3" style="margin-top: 30px;" href="#" class="gallery__controls-next">
+    <div id="go_step3" class="gallery__controls-next">
         <img style="float: right" src="img/ar-right2.png" alt="" width="25" height="40"/>
-        <p style="text-decoration: underline; float: right; font-family: Attentica4F; font-weight: bold;font-size: 20pt;">${translator.getString("go_next_step")}</p>
+        <p>${translator.getString("go_next_step")}</p>
     </div>
     </form>
 </div>

@@ -1,6 +1,7 @@
 package com.liberty.technical.logic.entity;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -184,5 +185,14 @@ public class DeliveryInformation
       }
     }
     return result.toString();
+  }
+
+  public String getDateView()
+  {
+    if (getDeliveryDate() != null) {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+      return sdf.format(getDeliveryDate());
+    }
+    return "";
   }
 }
