@@ -1,45 +1,82 @@
 package com.liberty.technical.logic.dao;
 
 import com.liberty.technical.logic.entity.Item;
-import com.liberty.technical.logic.factory.SessionFactoryInitializer;
-import org.hibernate.*;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author AKI
  */
-public class ItemDAO {
-    SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();
+public class ItemDAO extends CommonDAOImpl<Item>
+{
+  public List<Item> filterByCatAndPrice(Integer categoryId, Integer pFrom, Integer pTo)
+  {
+    List<Item> resultList = new ArrayList<>();
+    Session session = factory.openSession();
+    Transaction tx = null;
+    String categoryCriteria = categoryId == null ? "" : " and chi.id = " + categoryId;
+    try {
+      tx = session.beginTransaction();
+      resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
+          "where itm.price between " + pFrom + " and " + pTo + categoryCriteria).
+          list();
+      tx.commit();
 
-    public Item readItem(Long uid)
-    {
-        Session session = factory.openSession();
-        Item item = null;
-        try {
-            item = session.get(Item.class, uid);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return item;
+    } catch (HibernateException e) {
+      if (tx!=null) tx.rollback();
+      e.printStackTrace();
+    } finally {
+      session.close();
     }
+    return resultList;
+  }
 
 
-    public List<Item> readAllItems()
-    {
-        List<Item> resultList = null;
-        Session session = factory.openSession();
-        try {
-            resultList = session.createCriteria(Item.class).list();
+  public List<Item> filterByPrice(Integer pFrom, Integer pTo)
+  {
+    List<Item> resultList = new ArrayList<>();
+    Session session = factory.openSession();
+    Transaction tx = null;
+    try {
+      tx = session.beginTransaction();
+      resultList = session.createQuery(" select itm from Item itm " +
+          "where itm.price between " + pFrom + " and " + pTo).
+          list();
+      tx.commit();
 
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return resultList;
+    } catch (HibernateException e) {
+      if (tx != null) tx.rollback();
+      e.printStackTrace();
+    } finally {
+      session.close();
     }
+    return resultList;
+  }
+
+
+  public List<Item> filterByCat(int categoryId)
+  {
+    List<Item> resultList = new ArrayList<>();
+    Session session = factory.openSession();
+    Transaction tx = null;
+    try {
+      tx = session.beginTransaction();
+      resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
+          "where chi.id = " + categoryId).
+          list();
+      tx.commit();
+
+    } catch (HibernateException e) {
+      if (tx != null) tx.rollback();
+      e.printStackTrace();
+    } finally {
+      session.close();
+    }
+    return resultList;
+  }
 
 }

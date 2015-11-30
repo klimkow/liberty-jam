@@ -26,12 +26,6 @@ function createSlider(){
 
     slider.noUiSlider.on('change', function(){
         $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
-        //var from = $("#sl_value_from").html();
-        //var to = $("#sl_value_to").html();
-        //var options = {
-        //    "price_from" : from,
-        //    "price_to" : to,
-        //    "itemWidth" : $(".container")[0].offsetWidth/3};
 
         filter('');
     });

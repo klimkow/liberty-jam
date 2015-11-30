@@ -10,26 +10,15 @@ import org.hibernate.cfg.Configuration;
 /**
  * @author M-AKI.
  */
-final public class SessionFactoryInitializer
-{
-  private SessionFactory sessionFactory;
+public class SessionFactoryInitializer {
+
+  private static SessionFactoryInitializer instanse;
+  private SessionFactory factory;
 
 
-  private SessionFactoryInitializer()
-  {
-
-  }
-
-
-  public static SessionFactoryInitializer getInstance()
-  {
-    return new SessionFactoryInitializer();
-  }
-
-
-  public SessionFactory getSessionFacroty()
-  {
-    return new Configuration().configure()
+  private SessionFactoryInitializer() {
+    Configuration config = new Configuration();
+    config.configure()
         .addAnnotatedClass(Category.class)
         .addAnnotatedClass(DeliveryInformation.class)
         .addAnnotatedClass(Item.class)
@@ -38,5 +27,19 @@ final public class SessionFactoryInitializer
         .addAnnotatedClass(ItemImages.class)
         .addAnnotatedClass(CategoryImages.class)
         .buildSessionFactory();
+    factory = config.buildSessionFactory();
+  }
+
+
+  public static SessionFactoryInitializer getInstance() {
+    if (instanse == null) {
+      instanse = new SessionFactoryInitializer();
+    }
+    return instanse;
+  }
+
+
+  public SessionFactory getSessionFacroty() {
+    return factory;
   }
 }
