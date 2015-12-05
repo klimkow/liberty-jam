@@ -4,6 +4,8 @@ package com.liberty.technical.logic.factory;
 import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.dao.CommonDAOImpl;
 import com.liberty.technical.logic.dao.ItemDAO;
+import com.liberty.technical.logic.dao.SystemUserDAO;
+
 
 /**
  * @author AKI
@@ -34,7 +36,10 @@ public class DaoFactory {
     return new CommonDAOImpl<>();
   }
 
-
+  public SystemUserDAO createSystemUserDAO()
+  {
+    return new SystemUserDAO();
+  }
 
 
 }

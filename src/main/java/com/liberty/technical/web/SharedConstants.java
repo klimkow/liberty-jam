@@ -22,4 +22,7 @@ public interface SharedConstants {
   public static final String DELIVERY_DATE = "date";
   public static final String DELIVERY_TIME = "time";
   public static final String DELIVERY_OPTION = "option";
+
+  public static final String USERNAME = "usr-name";
+  public static final String PASSWORD = "pass";
 }

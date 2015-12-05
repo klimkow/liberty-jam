@@ -9,6 +9,7 @@ import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.factory.ServiceFactory;
 import com.liberty.technical.logic.localization.LocalizationUtil;
+import com.liberty.technical.logic.service.AuthenticationService;
 import com.liberty.technical.logic.service.GenericeCartService;
 import com.liberty.technical.logic.util.OrderUtils;
 import com.liberty.technical.web.SharedConstants;
@@ -644,6 +645,21 @@ public class Liberty {
           "common/marketing.ftl" : "common/marketing-empty-view.ftl";
       return new ModelAndView(attributes, viewName);
     }, engine);
+
+
+    // administration
+    before("/administration/*", (request, response) -> {
+      AuthenticationService service = ServiceFactory.getInstanse().createAuthenticationService();
+//      String name = request.queryParams(SharedConstants.USERNAME);
+//      String password = request.queryParams(SharedConstants.PASSWORD);
+      String name = "user1";
+      String password = "password";
+      if (name == null || password == null ||
+          !service.isValidUser(name,password)) {
+        halt(401, "Go Away!");
+      }
+    });
+
   }
 //
 //
