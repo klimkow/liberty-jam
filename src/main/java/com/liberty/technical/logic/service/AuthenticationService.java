@@ -19,13 +19,10 @@ public class AuthenticationService
     userDAO = DaoFactory.getInstance().createSystemUserDAO();
   }
 
-  public boolean isValidUser(String name, String password)
+  public SystemUser isValidUser(String name, String password)
   {
     SystemUser user  = userDAO.getUser(name, password);
-    if (user != null) {
-      return true;
-    }
-    return false;
+    return user;
   }
 
 }

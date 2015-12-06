@@ -9,16 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Комплимент</title>
+    <title>Kompliment Admin</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="../css/sb-admin.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +33,7 @@
 
        <#include "/admin/navbar.ftl">
 
-        <div id="page-wrapper">
+        <div style="height: 100vh;" id="page-wrapper">
 
             <div class="container-fluid">
 
@@ -47,10 +45,10 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Управление</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Tables
+                                <i class="fa fa-table"></i> Заказы
                             </li>
                         </ol>
                     </div>
@@ -58,7 +56,7 @@
                 <!-- /.row -->
 
                 <div class="row">
-                    <div style="width: 100%; height: 1500px">
+                    <div style="width: 100%; height: 100%">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -71,15 +69,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <#list orders as order>
-                                    <tr>
-                                        <td><input name="isSelectedChBox" type="checkbox"></td>
-                                        <td>${order.getUser().getName()}</td>
-                                        <td>${order.getAmount()}.000 BYR</td>
-                                        <td>Новый</td>
-                                        <td>01.10.2015</td>
-                                    </tr>
-                                    </#list>
+                                    <#if orders??>
+                                        <#list orders as order>
+                                        <tr onclick="redirect('orders/order?id=${order.getId()}')">
+                                            <td><input name="isSelectedChBox" type="checkbox"></td>
+                                            <td>${order.getUser().getName()}</td>
+                                            <td>${order.getAmount()}.000 BYR</td>
+                                            <td>Новый</td>
+                                            <td>01.10.2015</td>
+                                        </tr>
+                                        </#list>
+                                    </#if>
                                 </tbody>
                             </table>
                         </div>
@@ -98,10 +98,11 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/liberty-admin.js"></script>
 
 </body>
 

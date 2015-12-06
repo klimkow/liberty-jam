@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.dao.ItemDAO;
 import com.liberty.technical.logic.entity.*;
+import com.liberty.technical.logic.entity.system.SystemUser;
 import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.factory.ServiceFactory;
 import com.liberty.technical.logic.localization.LocalizationUtil;
@@ -51,7 +52,7 @@ public class Liberty {
 //            createCommonDAO().readAllObjects(Order.class);
 //        Map<String, Object> attributes = new HashMap<>();
 //        attributes.put("orders", orderList);
-//        return new ModelAndView(attributes, "admin/tables.ftl");
+//        return new ModelAndView(attributes, "admin/orders.ftl");
 //
 //      }, engine);
 //
@@ -293,20 +294,6 @@ public class Liberty {
 
     SparkBase.staticFileLocation("/public");
 
-    get("/administrator", (request, response) -> {
-
-      return new ModelAndView(null, "admin/index.ftl");
-
-    }, engine);
-
-    get("/tables", (request, response) -> {
-//        List<Order> orderList = DaoFactory.getInstance().
-//                createCommonDAO().readAllObjects(Order.class);
-      Map<String, Object> attributes = new HashMap<>();
-      attributes.put("orders", null);
-      return new ModelAndView(attributes, "admin/tables.ftl");
-
-    }, engine);
 
 
     get("/", (request, response) -> {
@@ -648,17 +635,84 @@ public class Liberty {
 
 
     // administration
-    before("/administration/*", (request, response) -> {
-      AuthenticationService service = ServiceFactory.getInstanse().createAuthenticationService();
-//      String name = request.queryParams(SharedConstants.USERNAME);
-//      String password = request.queryParams(SharedConstants.PASSWORD);
-      String name = "user1";
-      String password = "password";
-      if (name == null || password == null ||
-          !service.isValidUser(name,password)) {
-        halt(401, "Go Away!");
+    before("/administrator", (request, response) -> {
+      if (request.session().attribute(SharedConstants.SYSTEM_USER) == null) {
+        response.redirect("/signin");
+        halt();
       }
     });
+
+    before("/administrator/*", (request, response) -> {
+      if (request.session().attribute(SharedConstants.SYSTEM_USER) == null) {
+        response.redirect("/signin");
+        halt();
+      }
+    });
+
+    get("/administrator", (request, response) -> {
+      return new ModelAndView(null, "admin/index.ftl");
+    }, engine);
+
+    get("/signin", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<>();
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      return new ModelAndView(null, "admin/signin.ftl");
+    }, engine);
+
+
+    post("/signin", (request, response) -> {
+      AuthenticationService service = ServiceFactory.getInstanse().createAuthenticationService();
+      String name = request.queryParams(SharedConstants.USERNAME);
+      String password = request.queryParams(SharedConstants.PASSWORD);
+      SystemUser user = null;
+      if (name != null && password != null) {
+        user = service.isValidUser(name, password);
+      }
+      if (user != null) {
+        request.session().attribute(SharedConstants.SYSTEM_USER, user);
+        response.redirect("/administrator");
+      }
+      Map<String, Object> attributes = new HashMap<>();
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      attributes.put("show_error_message", true);
+      return new ModelAndView(attributes, "admin/signin.ftl");
+    }, engine);
+
+    get("/administrator/orders", (request, response) -> {
+      List<Order> orderList = DaoFactory.getInstance().
+          createCommonDAO(Order.class).readAllObjects(Order.class);
+      Map<String, Object> attributes = new HashMap<>();
+      attributes.put("orders", orderList);
+      return new ModelAndView(attributes, "admin/orders.ftl");
+
+    }, engine);
+
+
+    get("/administrator/logoff", (request, response) -> {
+      request.session().removeAttribute(SharedConstants.SYSTEM_USER);
+      response.redirect("/administrator");
+      return null;
+    });
+
+
+    get("/administrator/orders/order", (request, response) -> {
+      String stringIdParam = request.queryParams("id");
+      if(stringIdParam == null) {
+        // TODO: throw exception
+      }
+      CommonDAO<Order> orderDAO = DaoFactory.getInstance().createCommonDAO(Order.class);
+      Long id = new Long(stringIdParam);
+      Order order = orderDAO.readObject(Order.class, id);
+      Map<String, Object> attributes = new HashMap<>();
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      attributes.put("order", order);
+      attributes.put("user", order.getUser());
+      return new ModelAndView(attributes, "admin/order-detail.ftl");
+    }, engine);
+
 
   }
 //

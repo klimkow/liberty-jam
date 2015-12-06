@@ -6,6 +6,7 @@ package com.liberty.technical.web;
 public interface SharedConstants {
   public final static String ATTRIBUTE_ORDER = "getOrder";
   public final static String ATTRIBUTE_LOCALE = "locale";
+  public final static String SYSTEM_USER = "system-user";
 
   public static final String DELIVERY_NAME_FROM = "name-from";
   public static final String DELIVERY_EMAIL_FROM = "email-from";
@@ -23,6 +24,6 @@ public interface SharedConstants {
   public static final String DELIVERY_TIME = "time";
   public static final String DELIVERY_OPTION = "option";
 
-  public static final String USERNAME = "usr-name";
-  public static final String PASSWORD = "pass";
+  public static final String USERNAME = "j_username";
+  public static final String PASSWORD = "j_password";
 }
