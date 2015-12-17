@@ -3,6 +3,7 @@ package com.liberty.technical.web.controller;
 import static spark.Spark.*;
 
 import com.google.gson.Gson;
+import com.liberty.technical.logic.dao.CategoryDAO;
 import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.dao.ItemDAO;
 import com.liberty.technical.logic.entity.*;
@@ -644,8 +645,9 @@ public class Liberty {
 
     before("/administrator/*", (request, response) -> {
       if (request.session().attribute(SharedConstants.SYSTEM_USER) == null) {
-        response.redirect("/signin");
-        halt();
+        // TODO: remove!!!!!!!!!!!!!
+//        response.redirect("/signin");
+//        halt();
       }
     });
 
@@ -689,6 +691,14 @@ public class Liberty {
 
     }, engine);
 
+    get("/administrator/items", (request, response) -> {
+      List<Item> itemList = DaoFactory.getInstance().
+          createCommonDAO(Item.class).readAllObjects(Item.class);
+      Map<String, Object> attributes = new HashMap<>();
+      attributes.put("items", itemList);
+      return new ModelAndView(attributes, "admin/items.ftl");
+
+    }, engine);
 
     get("/administrator/logoff", (request, response) -> {
       request.session().removeAttribute(SharedConstants.SYSTEM_USER);
@@ -710,8 +720,57 @@ public class Liberty {
       attributes.put("translator", LocalizationUtil.getInstance(locale));
       attributes.put("order", order);
       attributes.put("user", order.getUser());
+//      attributes.put("items", order.getUser().get);
       return new ModelAndView(attributes, "admin/order-detail.ftl");
     }, engine);
+
+    get("/administrator/items/item", (request, response) -> {
+      String stringIdParam = request.queryParams("id");
+      if(stringIdParam == null) {
+        // TODO: throw exception
+      }
+      CommonDAO<Item> itemDAO = DaoFactory.getInstance().createCommonDAO(Item.class);
+      Long id = new Long(stringIdParam);
+      Item item = itemDAO.readObject(Item.class, id);
+      Map<String, Object> attributes = new HashMap<>();
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      attributes.put("item", item);
+//      attributes.put("items", order.getUser().get);
+      return new ModelAndView(attributes, "admin/item-detail.ftl");
+    }, engine);
+
+    post("/administrator/items/save_item", (request, response) -> {
+      String stringIdParam = request.queryParams("id");
+      if(stringIdParam == null) {
+        // TODO: throw exception
+      }
+      Long id = new Long(request.queryParams("id"));
+      String name = request.queryParams("b_name");
+      String description = request.queryParams("b_desc");
+      Integer price = new Integer(request.queryParams("b_price"));
+      String categoryName = request.queryParams("b_cat");
+      CommonDAO<Item> itemDAO = DaoFactory.getInstance().createCommonDAO(Item.class);
+      CategoryDAO categoryDAO = DaoFactory.getInstance().createCategoryDAO();
+      Item item = itemDAO.readObject(Item.class, id);
+      Category category = categoryDAO.getCategoryByName(categoryName);
+      Set<Category> categories = new HashSet<Category>();
+      categories.add(category);
+
+      item.setName(name);
+      item.setDescription(description);
+      item.setPrice(price);
+      item.setCategories(categories);
+      itemDAO.updateObject(item);
+      Map<String, Object> attributes = new HashMap<>();
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      attributes.put("item", item);
+//      attributes.put("items", order.getUser().get);
+      response.redirect("/administrator/items");
+      return new ModelAndView(attributes, "admin/items.ftl");
+    }, engine);
+
 
 
   }

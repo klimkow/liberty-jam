@@ -41,14 +41,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Заказы
+                            Цветы
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="/administrator">Управление</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Заказы
+                                <i class="fa fa-table"></i> Цветы
                             </li>
                         </ol>
                     </div>
@@ -62,21 +62,19 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Имя</th>
-                                        <th>Сумма</th>
-                                        <th>Статус заказа</th>
-                                        <th>Дата создания</th>
+                                        <th>Название</th>
+                                        <th>Категория</th>
+                                        <th>Цена</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <#if orders??>
-                                        <#list orders as order>
-                                        <tr onclick="redirect('orders/order?id=${order.getId()}')">
-                                            <td><input name="isSelectedChBox" type="checkbox"></td>
-                                            <td>${order.getUser().getName()}</td>
-                                            <td>${order.getAmount()}.000 BYR</td>
-                                            <td>Новый</td>
-                                            <td>01.10.2015</td>
+                                    <#if items??>
+                                        <#list items as item>
+                                        <tr onclick="redirect('items/item?id=${item.getId()}')">
+                                            <td class="textleft"><img class="img-circle textleft" src="../${item.getLogo()}" height="100" width="100"></td>
+                                            <td>${item.getName()}</td>
+                                            <td>${item.getCategoryName()}</td>
+                                            <td>${item.getPrice()}.000 BYR</td>
                                         </tr>
                                         </#list>
                                     </#if>

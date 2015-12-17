@@ -7,10 +7,12 @@ import java.util.List;
  */
 public interface CommonDAO<T> {
 
-  public void persistObject(T object);
+  void persistObject(T object);
 
-  public T readObject(Class<T> className, Long uid);
+  T readObject(Class<T> className, Long uid);
 
-  public List<T> readAllObjects(Class<T> className);
+  List<T> readAllObjects(Class<T> className);
+
+  void updateObject(T object);
 
 }

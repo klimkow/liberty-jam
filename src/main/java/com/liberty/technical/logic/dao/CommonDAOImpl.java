@@ -68,6 +68,18 @@ public class CommonDAOImpl<T> implements CommonDAO<T> {
 
 
   public void updateObject(T object) {
+    Session session = factory.openSession();
+    Transaction tx = null;
+    try {
+      tx = session.beginTransaction();
+      session.update(object);
+      tx.commit();
 
+    } catch (HibernateException e) {
+      if (tx != null) tx.rollback();
+      e.printStackTrace();
+    } finally {
+      session.close();
+    }
   }
 }

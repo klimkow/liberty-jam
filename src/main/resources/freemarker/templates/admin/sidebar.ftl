@@ -7,7 +7,7 @@
             <a href="/administrator/orders"><i class="fa fa-fw fa-bar-chart-o"></i> Заказы</a>
         </li>
         <li>
-            <a href=""><i class="fa fa-fw fa-table"></i> Цветы</a>
+            <a href="/administrator/items"><i class="fa fa-fw fa-table"></i> Цветы</a>
         </li>
         <li>
             <a href="../todelete/forms.html"><i class="fa fa-fw fa-edit"></i> Категории</a>

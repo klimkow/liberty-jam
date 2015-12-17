@@ -63,12 +63,34 @@
                         <p>Name: ${user.getName()}</p>
                         <p>Email: ${user.getEmail()}</p>
                         <p>Phone: ${user.getPhone()}</p>
-                        <#--<p>Address: ${user.getAddress()}</p>-->
+                        <#--<p>Address: <#if user.getAddress != null>${user.getAddress()}</#if></p>-->
 
+                        <div class="row" style="height: 250px; width: 100%; margin-top: 20px; overflow: auto">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>${translator.getString("amount")}</th>
+                                    <th>${translator.getString("price")}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <#list order.getItems() as item>
+                                <tr id="item-list-tr">
+                                    <td class="textleft"><img class="img-circle textleft" src="../../../${item.getLogo()}" height="100" width="100"> </td>
+                                    <td style="padding-top: 30px" ><p >${item.getName()}</p></td>
+                                    <td style="padding-top: 30px" class="td-right">
+                                        1
+                                    </td>
+                                    <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>
+                                </tr>
+                                </#list>
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <p>Name: ${user.getName()}</p>
-                        <p>Name: ${user.getName()}</p>
-                        <p>Name: ${user.getName()}</p>
 
                     </div>
 

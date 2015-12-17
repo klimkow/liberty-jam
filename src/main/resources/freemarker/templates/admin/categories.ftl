@@ -33,7 +33,7 @@
 
        <#include "/admin/navbar.ftl">
 
-        <div style="min-height: 100vh;" id="page-wrapper">
+        <div style="height: 100vh;" id="page-wrapper">
 
             <div class="container-fluid">
 

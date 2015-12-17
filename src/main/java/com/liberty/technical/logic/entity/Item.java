@@ -38,7 +38,7 @@ public class Item
   @JoinTable(name = "category_has_item",
       joinColumns = {@JoinColumn(name = "item_id")},
       inverseJoinColumns = {@JoinColumn(name = "category_id")})
-  private Set categories;
+  private Set<Category> categories;
 
   @OneToMany(targetEntity = com.liberty.technical.logic.entity.images.ItemImages.class,
           cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -57,7 +57,7 @@ public class Item
   }
 
 
-  public Set getCategories()
+  public Set<Category> getCategories()
   {
     return categories;
   }
@@ -132,6 +132,8 @@ public class Item
   {
     return ((ItemImages)getImages().toArray()[0]).getImageUrl();
   }
+
+  public String getCategoryName() {return ((Category)getCategories().toArray()[0]).getName();}
 
     @Override
     public int hashCode() {
