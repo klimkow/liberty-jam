@@ -60,12 +60,16 @@
 
                 <div class="row">
                     <div style="width: 100%; height: 100%">
-                        <div style="float: left; width: 40%">
+                        <div id="img-container" style="float: left; width: 40%">
                             <div style="border:2px solid #f3f3f3; background-color:#F3F3F3; <#if item??>background:
                                     url(../../${item.getLogo()}) no-repeat;background-size: 300px 300px;</#if> width: 300px; height: 300px">
-
+                            </div>
+                            <ul id="img-list"></ul>
+                            <div>
+                                <input type="file" name="file" id="file-field" multiple="false" />
                             </div>
                         </div>
+
                         <div style="float: left; width: 60%">
                             <form name="item_form" action="/administrator/items/save_item" method="post">
                             <input type="hidden" name="id" value="${item.getId()}">
