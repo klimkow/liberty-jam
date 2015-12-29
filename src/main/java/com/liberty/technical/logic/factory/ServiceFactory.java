@@ -2,6 +2,7 @@ package com.liberty.technical.logic.factory;
 
 import com.liberty.technical.logic.service.GenericeCartService;
 import com.liberty.technical.logic.service.AuthenticationService;
+import com.liberty.technical.logic.service.ImageService;
 
 
 /**
@@ -28,6 +29,11 @@ public class ServiceFactory {
   public GenericeCartService createCartService()
   {
     return new GenericeCartService();
+  }
+
+  public ImageService createImageService()
+  {
+    return new ImageService();
   }
 
 

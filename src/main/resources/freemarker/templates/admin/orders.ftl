@@ -41,14 +41,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Заказы
+                            Orders
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Управление</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Control panel</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Заказы
+                                <i class="fa fa-table"></i> Orders
                             </li>
                         </ol>
                     </div>
@@ -62,10 +62,10 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Имя</th>
-                                        <th>Сумма</th>
-                                        <th>Статус заказа</th>
-                                        <th>Дата создания</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Order status</th>
+                                        <th>Date created</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +75,7 @@
                                             <td><input name="isSelectedChBox" type="checkbox"></td>
                                             <td>${order.getUser().getName()}</td>
                                             <td>${order.getAmount()}.000 BYR</td>
-                                            <td>Новый</td>
+                                            <td>New</td>
                                             <td>01.10.2015</td>
                                         </tr>
                                         </#list>

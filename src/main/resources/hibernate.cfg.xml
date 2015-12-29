@@ -2,51 +2,47 @@
 <!DOCTYPE hibernate-configuration SYSTEM
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
-<hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.dialect">
-            org.hibernate.dialect.MySQLDialect
-        </property>
-        <property name="hibernate.connection.driver_class">
-            com.mysql.jdbc.Driver
-        </property>
+<!--<hibernate-configuration>-->
+    <!--<session-factory>-->
+        <!--<property name="hibernate.dialect">-->
+            <!--org.hibernate.dialect.MySQLDialect-->
+        <!--</property>-->
+        <!--<property name="hibernate.connection.driver_class">-->
+            <!--com.mysql.jdbc.Driver-->
+        <!--</property>-->
 
-        <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/liberty-jam?useUnicode=true&amp;characterEncoding=utf8
-        </property>
-        <property name="hibernate.connection.username">
-            root
-        </property>
-        <property name="hibernate.connection.password">
-        </property>
+        <!--<property name="hibernate.connection.url">-->
+            <!--jdbc:mysql://localhost/liberty-jam?useUnicode=true&amp;characterEncoding=utf8-->
+        <!--</property>-->
+        <!--<property name="hibernate.connection.username">-->
+            <!--root-->
+        <!--</property>-->
+        <!--<property name="hibernate.connection.password">-->
+        <!--</property>-->
 
-    </session-factory>
-</hibernate-configuration>
+    <!--</session-factory>-->
+<!--</hibernate-configuration>-->
 
         <!--FOR PRODUCTION-->
 
-        <!--<?xml version="1.0" encoding="utf-8"?>-->
-        <!--<!DOCTYPE hibernate-configuration SYSTEM-->
-                <!--"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">-->
+<hibernate-configuration>
+<session-factory>
+    <property name="hibernate.dialect">
+        org.hibernate.dialect.MySQLDialect
+    </property>
+    <property name="hibernate.connection.driver_class">
+        com.mysql.jdbc.Driver
+    </property>
 
-<!--<hibernate-configuration>-->
-<!--<session-factory>-->
-    <!--<property name="hibernate.dialect">-->
-        <!--org.hibernate.dialect.MySQLDialect-->
-    <!--</property>-->
-    <!--<property name="hibernate.connection.driver_class">-->
-        <!--com.mysql.jdbc.Driver-->
-    <!--</property>-->
+    <property name="hibernate.connection.url">
+        jdbc:mysql://localhost:3306/komplimentby?useUnicode=true&amp;characterEncoding=utf8
+    </property>
+    <property name="hibernate.connection.username">
+        komplimentby
+    </property>
+    <property name="hibernate.connection.password">
+        IhuEq70rrbiO
+    </property>
 
-    <!--<property name="hibernate.connection.url">-->
-        <!--jdbc:mysql://localhost:3306/komplimentby?useUnicode=true&amp;characterEncoding=utf8-->
-    <!--</property>-->
-    <!--<property name="hibernate.connection.username">-->
-        <!--komplimentby-->
-    <!--</property>-->
-    <!--<property name="hibernate.connection.password">-->
-        <!--IhuEq70rrbiO-->
-    <!--</property>-->
-
-<!--</session-factory>-->
-<!--</hibernate-configuration>-->
+</session-factory>
+</hibernate-configuration>

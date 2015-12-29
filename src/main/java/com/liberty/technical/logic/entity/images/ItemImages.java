@@ -3,6 +3,7 @@ package com.liberty.technical.logic.entity.images;
 import com.liberty.technical.logic.entity.Item;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 /**

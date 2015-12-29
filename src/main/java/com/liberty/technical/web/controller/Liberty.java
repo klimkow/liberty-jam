@@ -7,286 +7,49 @@ import com.liberty.technical.logic.dao.CategoryDAO;
 import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.dao.ItemDAO;
 import com.liberty.technical.logic.entity.*;
+import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.entity.system.SystemUser;
 import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.factory.ServiceFactory;
 import com.liberty.technical.logic.localization.LocalizationUtil;
 import com.liberty.technical.logic.service.AuthenticationService;
 import com.liberty.technical.logic.service.GenericeCartService;
-import com.liberty.technical.logic.util.OrderUtils;
+import com.liberty.technical.logic.service.ImageService;
 import com.liberty.technical.web.SharedConstants;
-import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
+import org.eclipse.jetty.util.MultiPartInputStreamParser;
 import spark.*;
+import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import javax.imageio.ImageIO;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
+import javax.servlet.http.Part;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 
 /**
  * @author M-AKI.
  */
-public class Liberty {
+public class Liberty implements SparkApplication {
 
-//    @Override
-//    public void init()
-//    {
-//      Configuration config = new Configuration();
-//      config.setClassForTemplateLoading(Liberty.class, "/freemarker/templates");
-//
-//      FreeMarkerEngine engine = new FreeMarkerEngine();
-//      engine.setConfiguration(config);
-//
-//
-//      SparkBase.staticFileLocation("/public");
-//
-//      get("/administrator", (request, response) -> {
-//
-//        return new ModelAndView(null, "admin/index.ftl");
-//
-//      }, engine);
-//
-//      get("/tables", (request, response) -> {
-//        List<Order> orderList = DaoFactory.getInstance().
-//            createCommonDAO().readAllObjects(Order.class);
-//        Map<String, Object> attributes = new HashMap<>();
-//        attributes.put("orders", orderList);
-//        return new ModelAndView(attributes, "admin/orders.ftl");
-//
-//      }, engine);
-//
-//      get("/", (request, response) -> {
-//        Session session = request.session();
-//        Map<String, Object> attributes = new HashMap<>();
-//        if (!session.isNew()) {
-//          Order order = session.attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-//          if (order != null) {
-//            attributes.put("order", order);
-//            attributes.put("itemCount", order.getItemCount());
-//          }
-//        }
-//        Locale locale = session.attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//
-//        return new ModelAndView(attributes, "index.ftl");
-//      }, engine);
-//
-////        get("/", new Route() {
-////            @Override
-////            public Object handle(Request request, Response response)  {
-////                halt();
-////                return null;
-////            }
-////        }
-////        , null);
-//
-//
-//      post("/getItem", (request, response) -> {
-//        List<Item> items = UserSessionUtils.getItemsBySession(request.session());
-//        if (items == null) {
-//          // TODO: throw exception view
-//        }
-//
-//        Map<String, Object> attributes = new HashMap<>();
-//        Long id = new Long(request.queryParams("itemId"));
-//        Item item = UserSessionUtils.getItemIndexById(items, id);
-//        attributes.put("selectedItem", item);
-//        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-//        if (order != null) {
-//          attributes.put("order", order);
-//        }
-//        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//
-//        return new ModelAndView(attributes, "common/item-description.ftl");
-//      }, engine);
-//
-//      post("/cart", (request, response) -> {
-//        Map<String, Object> attributes = new HashMap<>();
-//        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-//        if (order != null) {
-//          attributes.put("order", order);
-//          attributes.put("itemCount", order.getItemCount());
-//          attributes.put("cartItems", order.getItems());
-//        }
-//        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//        return new ModelAndView(attributes, "common/cart/item-list.ftl");
-//      }, engine);
-//
-//
-//      post("/getAllItems", (request, response) -> {
-//        List<Item> items = UserSessionUtils.getItemsBySession(request.session());
-//        if (items == null) {
-//          // TODO: throw exception view
-//        }
-//
-//        Double itemWidth = new Double(request.queryParams("itemWidth"));
-//        Double totalWidth = itemWidth * items.size();
-//        request.session().attribute("itemWidth", itemWidth);
-//
-//        Map<String, Object> attributes = new HashMap<>();
-//        attributes.put("items", items);
-//        attributes.put("itemsSize", items.size());
-//        attributes.put("itemWidth", itemWidth.toString());
-//        attributes.put("galleryWidth", totalWidth.toString());
-//        attributes.put("x", 0);
-//        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-//        if (order != null) {
-//          attributes.put("order", order);
-//        }
-//        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//
-//        return new ModelAndView(attributes, "common/marketing.ftl");
-//      }, engine);
-//
-//      Gson gson = new Gson();
-//      post("/addToCart", (request, response) -> {
-//        Map<String, Order> attributes = new HashMap<>();
-//        List<Item> items = UserSessionUtils.getItemsBySession(request.session());
-//        if (items == null) {
-//          // TODO: throw exception view
-//        }
-//        Long id = new Long(request.queryParams("itemId"));
-//        Order order = UserSessionUtils.addToCart(request.session(), id);
-//        String bouquets;
-//        int count = order.getItems().size();
-//        if (count == 1) {
-//          bouquets = LocalizationUtil.getString("bouquet1");
-//        }
-//        else if (count > 1 && count < 5) {
-//          bouquets = LocalizationUtil.getString("bouquet24");
-//        }
-//        else {
-//          bouquets = LocalizationUtil.getString("bouquet5");
-//        }
-//
-//        attributes.put("order", order);
-//        return new OrderVO(order.getAmount(),
-//            count,
-//            LocalizationUtil.getString("you_have"),
-//            bouquets,
-//            LocalizationUtil.getString("total_amount"),
-//            LocalizationUtil.getString("currency"),
-//            LocalizationUtil.getString("item_int_the_cart"));
-//      }, gson::toJson);
-//
-//      post("/delivery_info", (request, response) -> {
-//        Map<String, Object> attributes = new HashMap<>();
-//
-//        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//        return new ModelAndView(attributes, "common/cart/delivery.ftl");
-//      }, engine);
-//
-//
-//      post("/payment_step", (request, response) -> {
-//        Map<String, Object> attributes = new HashMap<>();
-//
-//        DeliveryInformation info = new DeliveryInformation();
-//        info.setName(request.queryParams(SharedConstants.DELIVERY_NAME_TO));
-//        info.setPhone(request.queryParams(SharedConstants.DELIVERY_PHONE_TO));
-//        info.setMessage(request.queryParams(SharedConstants.DELIVERY_MESSAGE));
-//        request.session().attribute(UserSessionUtils.ATTRIBUTE_DELIVERY_INFO, info);
-//
-//        User user = new User();
-//        user.setName(request.queryParams(SharedConstants.DELIVERY_NAME_FROM));
-//        user.setPhone(request.queryParams(SharedConstants.DELIVERY_PHONE_FROM));
-//        user.setEmail(request.queryParams(SharedConstants.DELIVERY_EMAIL_FROM));
-//        request.session().attribute(UserSessionUtils.ATTRIBUTE_USER, user);
-//
-//        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-//        order.setDeliveryInformation(info);
-//        order.setUser(user);
-//
-//        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//        return new ModelAndView(attributes, "common/cart/payment.ftl");
-//      }, engine);
-//
-//
-//      post("/filter", (request, response) -> {
-//        String catId = request.queryParams("filterOption");
-//        Integer categoryId = catId == null ? null : Integer.parseInt(catId);
-//
-//        if (categoryId != null) {
-//          request.session().attribute("categoryId", categoryId);
-//        }
-//
-//        String priceFrom = request.queryParams("price_from") == null ?
-//            null : request.queryParams("price_from").replaceAll("\\.", "").replaceFirst("000", "");
-//        String priceTo = request.queryParams("price_to") == null ?
-//            null : request.queryParams("price_to").replaceAll("\\.", "").replaceFirst("000", "");
-//        Integer pFrom = Integer.parseInt(priceFrom);
-//        Integer pTo = Integer.parseInt(priceTo);
-//
-//        List<Item> items = UserSessionUtils.filterByCatAndPrice(request.session().attribute("categoryId"), pFrom, pTo);
-//        ;
-//
-////            List<Item> items = UserSessionUtils.filterByCat(categoryId);
-//
-//
-//        if (items == null) {
-//          // TODO: throw exception view
-//        }
-//
-//        Double itemWidth = new Double(request.queryParams("itemWidth"));
-//        Double totalWidth = itemWidth * items.size();
-//        request.session().attribute("itemWidth", itemWidth);
-//
-//
-//        Map<String, Object> attributes = new HashMap<>();
-//        attributes.put("items", items);
-//        attributes.put("itemsSize", items.size());
-//        attributes.put("itemWidth", itemWidth.toString());
-//        attributes.put("galleryWidth", totalWidth.toString());
-//        attributes.put("x", 0);
-//        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-//        if (order != null) {
-//          attributes.put("order", order);
-//        }
-//        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//        String viewName = items.size() > 0 ?
-//            "common/marketing.ftl" : "common/marketing-empty-view.ftl";
-//        return new ModelAndView(attributes, viewName);
-//      }, engine);
-//
-//
-//      post("/getCategoryItems", (request, response) -> {
-//        Integer categoryId = Integer.parseInt(request.queryParams("categoryId"));
-//        List<Item> items = UserSessionUtils.filterByCat(categoryId);
-//        if (items == null) {
-//          // TODO: throw exception view
-//        }
-//
-//        Double itemWidth = new Double(request.queryParams("itemWidth"));
-//        Double totalWidth = itemWidth * items.size();
-//        request.session().attribute("itemWidth", itemWidth);
-//
-//        Map<String, Object> attributes = new HashMap<>();
-//        attributes.put("items", items);
-//        attributes.put("itemsSize", items.size());
-//        attributes.put("itemWidth", itemWidth.toString());
-//        attributes.put("galleryWidth", totalWidth.toString());
-//        attributes.put("x", 0);
-//        Order order = request.session().attribute(UserSessionUtils.ATTRIBUTE_ORDER);
-//        if (order != null) {
-//          attributes.put("order", order);
-//        }
-//        Locale locale = request.session().attribute(UserSessionUtils.ATTRIBUTE_LOCALE);
-//        attributes.put("translator", LocalizationUtil.getInstance(locale));
-//        String viewName = items.size() > 0 ?
-//            "common/marketing.ftl" : "common/marketing-empty-view.ftl";
-//        return new ModelAndView(attributes, viewName);
-//      }, engine);
-//    }
+    @Override
+    public void init()
+    {
+      execute();
+    }
 
-  public static void main(String[] args) {
-    Configuration config = new Configuration();
+//  public static void main(String[] args) {
+//    execute();
+//  }
+
+  private static void execute()
+  {
+        Configuration config = new Configuration();
     config.setClassForTemplateLoading(Liberty.class, "/freemarker/templates");
 
     FreeMarkerEngine engine = new FreeMarkerEngine();
@@ -645,9 +408,8 @@ public class Liberty {
 
     before("/administrator/*", (request, response) -> {
       if (request.session().attribute(SharedConstants.SYSTEM_USER) == null) {
-        // TODO: remove!!!!!!!!!!!!!
-//        response.redirect("/signin");
-//        halt();
+        response.redirect("/signin");
+        halt();
       }
     });
 
@@ -742,7 +504,7 @@ public class Liberty {
 
     post("/administrator/items/save_item", (request, response) -> {
       String stringIdParam = request.queryParams("id");
-      if(stringIdParam == null) {
+      if (stringIdParam == null) {
         // TODO: throw exception
       }
       Long id = new Long(request.queryParams("id"));
@@ -756,6 +518,26 @@ public class Liberty {
       Category category = categoryDAO.getCategoryByName(categoryName);
       Set<Category> categories = new HashSet<Category>();
       categories.add(category);
+
+      String image_main = request.queryParams("image_main");
+//      String image_add1 = request.queryParams("image_add1");
+//      String image_add2 = request.queryParams("image_add2");
+      if (image_main != null && !image_main.isEmpty()) {
+        Set<ItemImages> images = new HashSet<>();
+        ImageService imageService = ServiceFactory.getInstanse().createImageService();
+        imageService.deleteItemImages(item);
+        ItemImages image = imageService.setItemImage(item, image_main, true);
+        images.add(image);
+
+//        if (Objects.nonNull(image_add1)) {
+//          images.add(imageService.setItemImage(item, image_add1, false));
+//        }
+//        if (Objects.nonNull(image_add2)) {
+//          images.add(imageService.setItemImage(item, image_add2, false));
+//        }
+
+        item.setImages(images);
+      }
 
       item.setName(name);
       item.setDescription(description);
@@ -771,102 +553,25 @@ public class Liberty {
       return new ModelAndView(attributes, "admin/items.ftl");
     }, engine);
 
+    post("/administrator/items/b_image_upload", (request, response) -> {
+      MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/tmp");
+      request.raw().setAttribute("org.eclipse.multipartConfig", multipartConfigElement);
 
+      try {
+        Part file = request.raw().getPart("file");
+        if (file != null) {
+          BufferedImage img = ImageIO.read(file.getInputStream());
+//          "/var/www/folder"
+          File outputfile = new File("/h/komplimentby/htdocs/liberty-jam/WEB-INF/classes/public/img/bouquets",
+              ((MultiPartInputStreamParser.MultiPart) file)
+              .getContentDispositionFilename());
+          ImageIO.write(img, "jpg", outputfile);
+        }
+      } catch (IOException | ServletException e) {
+
+      }
+      return new ModelAndView(null, "admin/items.ftl");
+    }, engine);
 
   }
-//
-//
-//
-////    SessionFactory factory = SessionFactoryInitializer.getInstance().getSessionFacroty();
-////      org.hibernate.Session session = factory.openSession();
-////    Transaction tx = null;
-////    long id = 2;
-////    Category cat2 = null;
-////    try {
-////      tx = session.beginTransaction();
-////
-////      Item item = new Item();
-////      item.setName("Летняя сказка");
-////      item.setDescription("It’s the timeless beauty and elegant simplicity of this arrangement that makes it special. Exquisite large-headed roses, graceful lilies and a beautiful selection of germinis, lisianthus and spray chrysanthemums make up this chic display, and the looped steel grass adds a contemporary twist.");
-////      item.setAvailableAmount(10);
-////        item.setPrice(700);
-////
-////        Set<ItemImages> images = new HashSet<>();
-////        ItemImages image = new ItemImages();
-////        image.setImageUrl("img/b3.jpg");
-////        image.setItem(item);
-////        images.add(image);
-////
-////        item.setImages(images);
-////        session.save(item);
-////        session.save(image);
-////
-////      Item item2 = new Item();
-////      item2.setName("Лунный сонет");
-////      item2.setDescription("It’s the timeless beauty and elegant simplicity of this arrangement that makes it special. Exquisite large-headed roses, graceful lilies and a beautiful selection of germinis, lisianthus and spray chrysanthemums make up this chic display, and the looped steel grass adds a contemporary twist.");
-////        item2.setAvailableAmount(9);
-////        item2.setPrice(1100);
-////
-////        ItemImages image2 = new ItemImages();
-////        image2.setImageUrl("img/b2.jpg");
-////        image2.setItem(item2);
-////        images.clear();
-////        images.add(image2);
-////
-////         item2.setImages(images);
-////
-////        session.save(item2);
-////        session.save(image2);
-//
-//
-//
-////      session.save(item2);
-//
-////      Set<Item> items = new HashSet<>();
-////      items.add(item);
-////      items.add(item2);
-//
-////      User us = new User();
-////      us.setName("Nigga");
-////      session.save(us);
-//
-////      DeliveryInformation dv = new DeliveryInformation();
-////      dv.setName("dv");
-////
-////      Order order = new Order();
-////      order.setUser(us);
-////      order.setAmount(100500);
-////      order.setItems(items);
-////      order.setDeliveryInformation(dv);
-////      session.save(order);
-//
-//
-//// This works
-////      User us = new User();
-////      us.setName("Nigga");
-////      session.save(us);
-////      DeliveryInformation dv = new DeliveryInformation();
-////      dv.setName("dv");
-////      Order order = new Order();
-////      order.setAmount(150);
-////      order.setUser(us);
-////      order.setDeliveryInformation(dv);
-////
-////      id = (long) session.save(order);
-////      tx.commit();
-//
-////      tx = session.beginTransaction();
-////
-////      cat2 = (Category) session.get(Category.class, id);
-////      tx.commit();
-////
-////    }catch (HibernateException e) {
-////      if (tx!=null) tx.rollback();
-////      e.printStackTrace();
-////    }finally {
-////      session.close();
-////    }
-////
-////    System.out.println(cat2 == null ? "null" : cat2.getDescription());
-//  }
 }

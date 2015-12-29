@@ -15,4 +15,6 @@ public interface CommonDAO<T> {
 
   void updateObject(T object);
 
+  void deleteObject(T object);
+
 }

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -63,7 +64,19 @@ public class CommonDAOImpl<T> implements CommonDAO<T> {
 
 
   public void deleteObject(T object) {
+    Session session = factory.openSession();
+    Transaction tx = null;
+    try {
+      tx = session.beginTransaction();
+      session.delete(object);
+      tx.commit();
 
+    } catch (HibernateException e) {
+      if (tx != null) tx.rollback();
+      e.printStackTrace();
+    } finally {
+      session.close();
+    }
   }
 
 

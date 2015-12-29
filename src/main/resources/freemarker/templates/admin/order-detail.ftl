@@ -41,17 +41,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 style="font-size: 25px;" class="page-header">
-                            Заказ ${order.getId()} - Подробности
+                            Order ${order.getId()} - Description
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Управление</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Control panel</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> <a href="/administrator/orders">Заказы</a>
+                                <i class="fa fa-table"></i> <a href="/administrator/orders">Orders</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Подробности
+                                <i class="fa fa-table"></i> Description
                             </li>
                         </ol>
                     </div>

@@ -25,7 +25,7 @@
                     .addClass("payment-not-acitve");
             $('#lastStepButton').fadeOut(200, function(){
                 $('#lastStepButton').
-                        html("<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>Готово</p>").fadeIn().delay(100);
+                        html("<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>${translator.getString("done")}</p>").fadeIn().delay(100);
 
             });
         } else {
@@ -35,7 +35,7 @@
                     .addClass("payment-not-acitve");
             $('#lastStepButton').fadeOut(200, function(){
                 $('#lastStepButton').html(
-                        "<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>Перейти к оплате</p>").fadeIn().delay(100);
+                        "<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>${translator.getString("go_to_payment")}</p>").fadeIn().delay(100);
 
             });
         }
@@ -77,9 +77,9 @@
         <div class="row">
             <img style="" src="img/webpay_logo.jpg" width="350" height="110"/>
         </div>
-        <div style="margin-top: 30px;" class="btn btn-default">
-        ${translator.getString("go_to_payment")}
-        </div>
+        <#--<div style="margin-top: 30px;" class="btn btn-default">-->
+        <#--${translator.getString("go_to_payment")}-->
+        <#--</div>-->
     </div>
     <div id="pay_cash" style="" class="payment-block"
          onmouseover="makeNotActive('pay_online')"

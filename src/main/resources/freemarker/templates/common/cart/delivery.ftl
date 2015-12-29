@@ -30,8 +30,8 @@
         var form = $(this).closest('form');
 
         var formData = form.serialize();
-        show_step3(formData);
-//        form.submit();
+//        show_step3(formData);
+        form.submit();
     });
 
     $('.btn-show').on('click', function(e) {
@@ -201,7 +201,7 @@
                 </div>
             </div>
             <div style="float:right; width: 50%;" class="dlv-block-cn form-group has-feedback">
-                <label for="address-flor">Офис/этаж</label>
+                <label for="address-flor">${translator.getString("dlv_floor")}</label>
                 <div style="width: 70%">
                     <input type="text" name="address-flor" maxlength="10" class="form-control"
                            <#if delivery??>value="${delivery.getAddressFlor()}"</#if> id="to-phone">

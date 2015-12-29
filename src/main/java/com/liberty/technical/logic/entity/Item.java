@@ -43,7 +43,7 @@ public class Item
   @OneToMany(targetEntity = com.liberty.technical.logic.entity.images.ItemImages.class,
           cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
   @JoinColumn(name="item_id", referencedColumnName="id")
-  private Set images;
+  private Set<ItemImages> images;
 
   public long getId()
   {
@@ -105,13 +105,13 @@ public class Item
   }
 
 
-    public Set getImages()
+  public Set<ItemImages> getImages()
   {
     return images;
   }
 
 
-  public void setImages(Set images)
+  public void setImages(Set<ItemImages> images)
   {
     this.images = images;
   }
@@ -130,10 +130,14 @@ public class Item
 
   public String getLogo()
   {
-    return ((ItemImages)getImages().toArray()[0]).getImageUrl();
+    return getImages() == null || getImages().isEmpty() ?
+        "" : getImages().iterator().next().getImageUrl();
   }
 
-  public String getCategoryName() {return ((Category)getCategories().toArray()[0]).getName();}
+  public String getCategoryName() {
+    return getCategories() == null || getCategories().isEmpty() ?
+        "" : getCategories().iterator().next().getName();
+  }
 
     @Override
     public int hashCode() {

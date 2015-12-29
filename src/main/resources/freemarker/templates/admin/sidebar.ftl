@@ -1,16 +1,16 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li>
-            <a href="/administrator"><i class="fa fa-fw fa-dashboard"></i> Управление</a>
+            <a href="/administrator"><i class="fa fa-fw fa-dashboard"></i> Control panel</a>
         </li>
         <li>
-            <a href="/administrator/orders"><i class="fa fa-fw fa-bar-chart-o"></i> Заказы</a>
+            <a href="/administrator/orders"><i class="fa fa-fw fa-bar-chart-o"></i> Orders</a>
         </li>
         <li>
-            <a href="/administrator/items"><i class="fa fa-fw fa-table"></i> Цветы</a>
+            <a href="/administrator/items"><i class="fa fa-fw fa-table"></i> Bouquets</a>
         </li>
         <li>
-            <a href="../todelete/forms.html"><i class="fa fa-fw fa-edit"></i> Категории</a>
+            <a href=""><i class="fa fa-fw fa-edit"></i> Category</a>
         </li>
 
     </ul>

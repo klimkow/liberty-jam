@@ -1,3 +1,17 @@
+<script src="http://code.jquery.com/jquery.js"></script>
+<script>
+    $(document).ready(function(){
+
+        $("#item_form").bind('submit', function(e) {
+//            e.preventDefault();
+            uploadImages();
+            return true;
+        });
+
+    });
+
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,14 +31,6 @@
     <!-- Custom CSS -->
     <link href="../../css/sb-admin.css" rel="stylesheet">
 
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
@@ -41,17 +47,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 style="font-size: 25px;" class="page-header">
-                            Букет ${item.getId()} - Подробности
+                            Bouquet ${item.getId()} - Description
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Управление</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Control panel</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> <a href="/administrator/items">Цветы</a>
+                                <i class="fa fa-table"></i> <a href="/administrator/items">Bouquets</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Подробности
+                                <i class="fa fa-table"></i> Description
                             </li>
                         </ol>
                     </div>
@@ -60,54 +66,58 @@
 
                 <div class="row">
                     <div style="width: 100%; height: 100%">
-                        <div id="img-container" style="float: left; width: 40%">
+                        <div id="img-container" style="float: left; width: 50%">
                             <div style="border:2px solid #f3f3f3; background-color:#F3F3F3; <#if item??>background:
                                     url(../../${item.getLogo()}) no-repeat;background-size: 300px 300px;</#if> width: 300px; height: 300px">
                             </div>
-                            <ul id="img-list"></ul>
+                            <div style="margin-top: 20px;min-height:150px; min-width:370px;border:2px solid #f3f3f3;" id="img-list"></div>
                             <div>
                                 <input type="file" name="file" id="file-field" multiple="false" />
                             </div>
                         </div>
 
-                        <div style="float: left; width: 60%">
-                            <form name="item_form" action="/administrator/items/save_item" method="post">
+                        <div style="float: right; width: 50%">
+                            <form name="item_form" id="item_form" action="/administrator/items/save_item" method="post">
                             <input type="hidden" name="id" value="${item.getId()}">
                             <div class="dlv-block-cn form-group">
                                 <label style="float: left; padding-right: 20px; padding-top: 7px;"
-                                       for="b_name">Название</label>
+                                       for="b_name">Name</label>
                                 <input style="width: 50%" type="text" name="b_name" class="form-control" id="b_name"
                                        <#if item??>value="${item.getName()}"</#if>>
                             </div>
                             <div class="dlv-block-cn form-group">
                                 <label style="float: left; padding-right: 20px;"
-                                       for="b_cat">Категория</label>
+                                       for="b_cat">Category</label>
                                 <select name="b_cat">
                                     <option value="classic" <#if item??>
                                         <#if item.getCategoryName() == 'classic'>selected</#if></#if>>
-                                            Классический</option>
+                                            Classic</option>
                                     <option value="box" <#if item??>
-                                            <#if item.getCategoryName() == 'box'>selected</#if></#if>>В коробке</option>
+                                            <#if item.getCategoryName() == 'box'>selected</#if></#if>>In box</option>
                                     <option value="vase" <#if item??>
-                                            <#if item.getCategoryName() == 'vase'>selected</#if></#if>>В вазе</option>
+                                            <#if item.getCategoryName() == 'vase'>selected</#if></#if>>In vase</option>
                                 </select>
                             </div>
                             <div class="dlv-block-cn form-group">
                                 <label style="float: left; padding-right: 52px; padding-top: 7px;"
-                                       for="b_price">Цена</label>
+                                       for="b_price">Price</label>
                                 <input style="float: left; width: 25%;" type="number" name="b_price" class="form-control" id="b_price"
                                        <#if item??>value="${item.getPrice()?string?replace(",","")}"</#if>>
                                 <p style="padding-top: 7px;">.000 BYR</p>
                             </div>
                             <div style="padding-top: 7px;" class="dlv-block-cn form-group">
                                 <label style="float: left; padding-right: 20px; padding-top: 7px;"
-                                       for="b_desc">Описание</label>
+                                       for="b_desc">Description</label>
                                 <textarea style="width: 50%; height: 300px" type="text"
                                           name="b_desc" class="form-control" id="b_desc"><#if item??>${item.getDescription()}</#if>
                                 </textarea>
                             </div>
-                                <a class="btn btn-default" style="float: right; margin-top: 10px;margin-left: 10px;" href="/administrator/items">Отмена</a>
-                                <button class="btn btn-default" style="float: right; margin-top: 10px;" type="submit">Сохранить</button>
+                                <#--NEW IMAGES INPUTS-->
+                                <input type="hidden" name="image_main" id="image_main"/>
+                                <input type="hidden" name="image_add1" id="image_add1"/>
+                                <input type="hidden" name="image_add2" id="image_add2"/>
+                                <a class="btn btn-default" style="float: right; margin-top: 10px;margin-left: 10px;" href="/administrator/items">Cancel</a>
+                                <button id="svbtn" class="btn btn-default" style="float: right; margin-top: 10px;" type="submit">Save</button>
                             </form>
                         </div>
 

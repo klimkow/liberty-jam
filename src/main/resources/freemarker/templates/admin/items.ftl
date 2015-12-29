@@ -41,14 +41,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Цветы
+                            Bouquets
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Управление</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/administrator">Control panel</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Цветы
+                                <i class="fa fa-table"></i> Bouquets
                             </li>
                         </ol>
                     </div>
@@ -62,9 +62,9 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Название</th>
-                                        <th>Категория</th>
-                                        <th>Цена</th>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
