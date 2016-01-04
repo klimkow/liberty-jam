@@ -400,6 +400,9 @@ public class Liberty implements SparkApplication {
 
     // administration
     before("/administrator", (request, response) -> {
+      request.raw().setCharacterEncoding("UTF-8");
+      response.raw().setContentType("text/html;charset=UTF-8");
+      response.raw().setCharacterEncoding("UTF-8");
       if (request.session().attribute(SharedConstants.SYSTEM_USER) == null) {
         response.redirect("/signin");
         halt();
@@ -407,6 +410,9 @@ public class Liberty implements SparkApplication {
     });
 
     before("/administrator/*", (request, response) -> {
+      request.raw().setCharacterEncoding("UTF-8");
+      response.raw().setContentType("text/html;charset=UTF-8");
+      response.raw().setCharacterEncoding("UTF-8");
       if (request.session().attribute(SharedConstants.SYSTEM_USER) == null) {
         response.redirect("/signin");
         halt();
@@ -561,8 +567,8 @@ public class Liberty implements SparkApplication {
         Part file = request.raw().getPart("file");
         if (file != null) {
           BufferedImage img = ImageIO.read(file.getInputStream());
-//          "/var/www/folder"
-          File outputfile = new File("/h/komplimentby/htdocs/liberty-jam/WEB-INF/classes/public/img/bouquets",
+          File outputfile = new File(request.raw().getSession().getServletContext().getRealPath("/") +
+              "/WEB-INF/classes/public/img/bouquets",
               ((MultiPartInputStreamParser.MultiPart) file)
               .getContentDispositionFilename());
           ImageIO.write(img, "jpg", outputfile);
