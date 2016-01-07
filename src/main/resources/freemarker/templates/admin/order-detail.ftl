@@ -63,7 +63,8 @@
                         <p>Name: ${user.getName()}</p>
                         <p>Email: ${user.getEmail()}</p>
                         <p>Phone: ${user.getPhone()}</p>
-                        <#--<p>Address: <#if user.getAddress != null>${user.getAddress()}</#if></p>-->
+                        <p>Address: ${info.getAddress()}</p>
+                        <p>Date: ${info.getDateView()}</p>
 
                         <div class="row" style="height: 250px; width: 100%; margin-top: 20px; overflow: auto">
                             <table class="table table-striped">

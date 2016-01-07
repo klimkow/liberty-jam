@@ -1,6 +1,15 @@
 <script>
 
     $(document).ready(function() {
+
+        <#if delivery??>
+            <#if delivery.getTimeRange()??>
+                var time = ${delivery.getTimeRange()};
+                $("#timeOption" + time).addClass("dlv-time-item-selected");
+                document.getElementById('time').value = time;
+            </#if>
+        </#if>
+
         $('#dlv-form').validator();
 
         $("#timeOptionsContainer").delegate('div[id^=timeOption]','click', function(e) {
@@ -14,10 +23,14 @@
     $('#dlv-form').validator().on('submit', function (e) {
 
         if (!e.isDefaultPrevented()) {
-            if (document.getElementById('date').value == null)
+            e.preventDefault();
+            if (document.getElementById('date').value == null ||
+                    document.getElementById('date').value == '')
+                return;
+            if (document.getElementById('time').value == null ||
+                    document.getElementById('time').value == '')
                 return;
             // if form was validated succesfully prevent page reloading
-            e.preventDefault();
             var form = $(this).closest('form');
             var formData = form.serialize();
             show_step3(formData);
@@ -107,7 +120,7 @@
         </div>
         <div class="dlv-block-cn form-group">
             <label for="comment">${translator.getString("dlv_wish_comment")}</label>
-            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment"  placeholder="${translator.getString("dlv_wish_comment_placeholder")}"></textarea>
+            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment"></textarea>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label>

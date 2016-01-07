@@ -35,17 +35,17 @@ import java.util.*;
 /**
  * @author M-AKI.
  */
-public class Liberty implements SparkApplication {
+public class Liberty {
 
-    @Override
-    public void init()
-    {
-      execute();
-    }
+//    @Override
+//    public void init()
+//    {
+//      execute();
+//    }
 
-//  public static void main(String[] args) {
-//    execute();
-//  }
+  public static void main(String[] args) {
+    execute();
+  }
 
   private static void execute()
   {
@@ -234,11 +234,9 @@ public class Liberty implements SparkApplication {
     post("/updateNavbar", (request, response) -> {
       Order order = request.session()
           .attribute(SharedConstants.ATTRIBUTE_ORDER);
-      if (order == null) {
-        // throw exception view
-      }
+      int count = order == null ? 0 : order.getItems().size();
+      int amount = order == null ? 0 : order.getAmount();
 
-      int count = order.getItems().size();
       String bouquets;
       if (count == 1) {
         bouquets = LocalizationUtil.getString("bouquet1");
@@ -248,7 +246,7 @@ public class Liberty implements SparkApplication {
         bouquets = LocalizationUtil.getString("bouquet5");
       }
 
-      return new OrderVO(order.getAmount(),
+      return new OrderVO(amount,
           count,
           LocalizationUtil.getString("you_have"),
           bouquets,
@@ -262,15 +260,15 @@ public class Liberty implements SparkApplication {
       Map<String, Object> attributes = new HashMap<>();
 
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
-      if (order == null) {
-        // return exception view
-      }
+      if (order != null) {
 
-      if (order.getUser() != null) {
-        attributes.put("user", order.getUser());
-      }
-      if (order.getDeliveryInformation() != null) {
-        attributes.put("delivery", order.getDeliveryInformation());
+//        Integer amount = new Integer(request.queryParams(SharedConstants.BOUQUET_AMOUNT));
+        if (order.getUser() != null) {
+          attributes.put("user", order.getUser());
+        }
+        if (order.getDeliveryInformation() != null) {
+          attributes.put("delivery", order.getDeliveryInformation());
+        }
       }
 
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
@@ -294,11 +292,12 @@ public class Liberty implements SparkApplication {
           append(request.queryParams(SharedConstants.DELIVERY_ADDRESS_FLOR));
       info.setAddress(address.toString());
       String dateParam = request.queryParams(SharedConstants.DELIVERY_DATE);
+      Integer timeParam = new Integer(request.queryParams(SharedConstants.DELIVERY_TIME));
       if (dateParam != null && !dateParam.isEmpty()) {
         Date date = new Date(dateParam);
         info.setDeliveryDate(date);
+        info.setTimeRange(timeParam);
       }
-//        request.session().attribute(UserSessionUtils.ATTRIBUTE_DELIVERY_INFO, info);
 
       User user = new User();
       user.setName(request.queryParams(SharedConstants.DELIVERY_NAME_FROM));
@@ -313,6 +312,18 @@ public class Liberty implements SparkApplication {
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
       attributes.put("translator", LocalizationUtil.getInstance(locale));
       return new ModelAndView(attributes, "common/cart/payment.ftl");
+    }, engine);
+
+
+    post("/saveOrder", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<>();
+      Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
+      if (order == null) {
+        // TODO: throw exception
+      }
+      ServiceFactory.getInstanse().createOrderService().saveOrder(order);
+      request.session().invalidate();
+      return new ModelAndView(attributes, "common/cart/well-done.ftl");
     }, engine);
 
 
@@ -488,6 +499,7 @@ public class Liberty implements SparkApplication {
       attributes.put("translator", LocalizationUtil.getInstance(locale));
       attributes.put("order", order);
       attributes.put("user", order.getUser());
+      attributes.put("info", order.getDeliveryInformation());
 //      attributes.put("items", order.getUser().get);
       return new ModelAndView(attributes, "admin/order-detail.ftl");
     }, engine);

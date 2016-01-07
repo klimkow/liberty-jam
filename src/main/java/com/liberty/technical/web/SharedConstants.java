@@ -8,6 +8,7 @@ public interface SharedConstants {
   public final static String ATTRIBUTE_LOCALE = "locale";
   public final static String SYSTEM_USER = "system-user";
 
+  public static final String BOUQUET_AMOUNT = "amount";
   public static final String DELIVERY_NAME_FROM = "name-from";
   public static final String DELIVERY_EMAIL_FROM = "email-from";
   public static final String DELIVERY_PHONE_FROM = "phone-from";

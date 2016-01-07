@@ -332,6 +332,24 @@ function turnOnLoadingGlass()
 }
 
 
+function finishOrder()
+{
+    var post_url = 'saveOrder';
+    turnOnLoadingGlass();
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        success: function(msg) {
+            $('#active-zone').fadeOut(800, function(){
+                $('#active-zone').html(msg).fadeIn().delay(2000);
+                maybeUpdateNavBar();
+            });
+        }
+    });
+
+}
+
+
 function getAllItems()
 {
     var form = $(this);

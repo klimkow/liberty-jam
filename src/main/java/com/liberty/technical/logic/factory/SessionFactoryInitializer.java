@@ -3,6 +3,7 @@ package com.liberty.technical.logic.factory;
 import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.entity.images.CategoryImages;
 import com.liberty.technical.logic.entity.images.ItemImages;
+import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.entity.system.SystemUser;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -28,6 +29,7 @@ public class SessionFactoryInitializer {
         .addAnnotatedClass(ItemImages.class)
         .addAnnotatedClass(CategoryImages.class)
         .addAnnotatedClass(SystemUser.class)
+        .addAnnotatedClass(ItemQuantity.class)
         .buildSessionFactory();
     factory = config.buildSessionFactory();
   }

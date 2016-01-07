@@ -28,6 +28,7 @@
                         html("<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>${translator.getString("done")}</p>").fadeIn().delay(100);
 
             });
+            $('#lastStepButton').click(finishOrder());
         } else {
             $('#pay_online').removeClass("payment-not-acitve").
                     addClass("select-payment");

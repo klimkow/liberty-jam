@@ -1,5 +1,7 @@
 package com.liberty.technical.logic.entity;
 
+import com.liberty.technical.logic.entity.service.ItemQuantity;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -46,6 +48,10 @@ public class Order
   @JoinColumn(name="delivery_information_id")
   private DeliveryInformation deliveryInformation;
 
+  @OneToMany(targetEntity = ItemQuantity.class,
+      cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
+  @JoinColumn(name="item_quantity_id", referencedColumnName="id")
+  private Set<ItemQuantity> itemQuantity;
 
   @ManyToOne(targetEntity=User.class,
           cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
@@ -85,6 +91,16 @@ public class Order
   public void setAmount(Integer amount)
   {
     this.amount = amount;
+  }
+
+
+  public Set<ItemQuantity> getItemQuantity() {
+    return itemQuantity;
+  }
+
+
+  public void setItemQuantity(Set<ItemQuantity> itemQuantity) {
+    this.itemQuantity = itemQuantity;
   }
 
 

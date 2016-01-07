@@ -4,8 +4,10 @@ import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.dao.ItemDAO;
 import com.liberty.technical.logic.entity.Item;
 import com.liberty.technical.logic.entity.Order;
+import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.factory.DaoFactory;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -28,13 +30,26 @@ public class GenericeCartService {
       return;
     }
     Set<Item> items = order.getItems();
+    Set<ItemQuantity> quantities = new HashSet<>();
     if (items == null) {
       items = new HashSet<>();
     }
     Item item = itemDAO.readObject(Item.class, itemId);
     items.add(item);
+    ItemQuantity itemQuantity = new ItemQuantity(item, 1);
+    quantities.add(itemQuantity);
+    order.setItemQuantity(quantities);
     order.setItems(items);
     order.setAmount(calculateOrderAmount(order));
+  }
+
+
+  public void setItemQuantity(Order order,
+                              Long itemId, Integer quantity)
+  {
+    Item item = itemDAO.readObject(Item.class, itemId);
+    ItemQuantity itemQuantity = new ItemQuantity(item, quantity);
+//    order.setItemQuantity(itemQuantity);
   }
 
 

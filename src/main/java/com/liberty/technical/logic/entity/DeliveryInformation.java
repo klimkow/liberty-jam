@@ -39,6 +39,9 @@ public class DeliveryInformation
   @Column(name = "delivery_price")
   private Integer deliveryPrice;
 
+  @Column(name = "time_range")
+  private Integer timeRange;
+
 
   public long getId()
   {
@@ -123,6 +126,13 @@ public class DeliveryInformation
     this.message = message;
   }
 
+  public Integer getTimeRange() {
+    return timeRange;
+  }
+
+  public void setTimeRange(Integer timeRange) {
+    this.timeRange = timeRange;
+  }
 
   @Temporal(TemporalType.DATE)
   public Date getDeliveryDate()

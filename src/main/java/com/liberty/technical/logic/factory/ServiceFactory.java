@@ -3,6 +3,7 @@ package com.liberty.technical.logic.factory;
 import com.liberty.technical.logic.service.GenericeCartService;
 import com.liberty.technical.logic.service.AuthenticationService;
 import com.liberty.technical.logic.service.ImageService;
+import com.liberty.technical.logic.service.OrderService;
 
 
 /**
@@ -34,6 +35,12 @@ public class ServiceFactory {
   public ImageService createImageService()
   {
     return new ImageService();
+  }
+
+
+  public OrderService createOrderService()
+  {
+    return new OrderService();
   }
 
 
