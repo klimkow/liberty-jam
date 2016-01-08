@@ -8,6 +8,7 @@ import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.dao.ItemDAO;
 import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.entity.images.ItemImages;
+import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.entity.system.SystemUser;
 import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.factory.ServiceFactory;
@@ -66,7 +67,7 @@ public class Liberty {
       Order order = session.attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
-        attributes.put("itemCount", order.getItemCount());
+        attributes.put("itemCount", order.getSumItemCount());
       }
       Locale locale = session.attribute(SharedConstants.ATTRIBUTE_LOCALE);
       attributes.put("translator", LocalizationUtil.getInstance(locale));
@@ -92,7 +93,7 @@ public class Liberty {
       Order order = session.attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
-        attributes.put("itemCount", order.getItemCount());
+        attributes.put("itemCount", order.getSumItemCount());
       }
       Locale locale = session.attribute(SharedConstants.ATTRIBUTE_LOCALE);
       attributes.put("translator", LocalizationUtil.getInstance(locale));
@@ -125,7 +126,7 @@ public class Liberty {
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
-        attributes.put("itemCount", order.getItemCount());
+        attributes.put("itemCount", order.getSumItemCount());
         attributes.put("cartItems", order.getItems());
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
@@ -139,7 +140,7 @@ public class Liberty {
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
-        attributes.put("itemCount", order.getItemCount());
+        attributes.put("itemCount", order.getSumItemCount());
         attributes.put("cartItems", order.getItems());
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
@@ -156,7 +157,7 @@ public class Liberty {
       if (order != null) {
         cartService.removeItemFromOrder(order, id);
         attributes.put("order", order);
-        attributes.put("itemCount", order.getItemCount());
+        attributes.put("itemCount", order.getSumItemCount());
         attributes.put("cartItems", order.getItems());
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
@@ -234,8 +235,9 @@ public class Liberty {
     post("/updateNavbar", (request, response) -> {
       Order order = request.session()
           .attribute(SharedConstants.ATTRIBUTE_ORDER);
-      int count = order == null ? 0 : order.getItems().size();
-      int amount = order == null ? 0 : order.getAmount();
+      int count = order.getSumItemCount();
+      int amount = order.getSumItemPrice();
+
 
       String bouquets;
       if (count == 1) {
@@ -258,11 +260,19 @@ public class Liberty {
 
     post("/delivery_info", (request, response) -> {
       Map<String, Object> attributes = new HashMap<>();
-
+      GenericeCartService cartService = ServiceFactory.getInstanse().createCartService();
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
-      if (order != null) {
 
-//        Integer amount = new Integer(request.queryParams(SharedConstants.BOUQUET_AMOUNT));
+      if (order != null) {
+        for(Item item : order.getItems()) {
+          String itemId = String.valueOf(item.getId());
+          String amountString = request.queryParams(itemId);
+          if (amountString != null) {
+            Integer amount = new Integer(amountString);
+            cartService.setItemQuantity(order, item.getId(), amount);
+          }
+        }
+
         if (order.getUser() != null) {
           attributes.put("user", order.getUser());
         }
@@ -430,9 +440,7 @@ public class Liberty {
       }
     });
 
-    get("/administrator", (request, response) -> {
-      return new ModelAndView(null, "admin/index.ftl");
-    }, engine);
+    get("/administrator", (request, response) -> new ModelAndView(null, "admin/index.ftl"), engine);
 
     get("/signin", (request, response) -> {
       Map<String, Object> attributes = new HashMap<>();
@@ -463,7 +471,7 @@ public class Liberty {
 
     get("/administrator/orders", (request, response) -> {
       List<Order> orderList = DaoFactory.getInstance().
-          createCommonDAO(Order.class).readAllObjects(Order.class);
+          createOrderDAO().readAllOrders();
       Map<String, Object> attributes = new HashMap<>();
       attributes.put("orders", orderList);
       return new ModelAndView(attributes, "admin/orders.ftl");

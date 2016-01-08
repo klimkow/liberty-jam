@@ -3,8 +3,11 @@ package com.liberty.technical.logic.entity;
 import com.liberty.technical.logic.entity.service.ItemQuantity;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
@@ -49,9 +52,9 @@ public class Order
   private DeliveryInformation deliveryInformation;
 
   @OneToMany(targetEntity = ItemQuantity.class,
-      cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
-  @JoinColumn(name="item_quantity_id", referencedColumnName="id")
-  private Set<ItemQuantity> itemQuantity;
+      cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name="order_id", referencedColumnName="id")
+  private Set<ItemQuantity> itemQuantity = new HashSet<>();
 
   @ManyToOne(targetEntity=User.class,
           cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
@@ -72,7 +75,51 @@ public class Order
 
   public Set<Item> getItems()
   {
+    Set<Item> items = itemQuantity.stream().map(ItemQuantity::getItem).collect(Collectors.toSet());
     return items;
+  }
+
+
+  public Integer getAmountOfItem(Item item)
+  {
+    for (ItemQuantity q : itemQuantity) {
+      if (q.getItem().equals(item)) {
+        return q.getItemQuantity();
+      }
+    }
+    return 1;
+  }
+
+
+  public Integer getSumItemCount()
+  {
+    int count = 0;
+    for (ItemQuantity q : itemQuantity) {
+      count += q.getItemQuantity();
+    }
+    return count;
+  }
+
+
+  public Integer getSumItemPrice()
+  {
+    int price = 0;
+    for (ItemQuantity q : itemQuantity) {
+      price += q.getItem().getPrice() * q.getItemQuantity();
+    }
+    return price;
+  }
+
+
+
+  public ItemQuantity getIQWithItem(Item item)
+  {
+    for (ItemQuantity q : itemQuantity) {
+      if (q.getItem().equals(item)) {
+        return q;
+      }
+    }
+    return null;
   }
 
 
@@ -101,6 +148,13 @@ public class Order
 
   public void setItemQuantity(Set<ItemQuantity> itemQuantity) {
     this.itemQuantity = itemQuantity;
+  }
+
+
+  public void addItemQuantity(ItemQuantity item)
+  {
+    item.setOrder(this);
+    itemQuantity.add(item);
   }
 
 

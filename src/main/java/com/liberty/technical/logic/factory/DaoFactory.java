@@ -45,4 +45,10 @@ public class DaoFactory {
   }
 
 
+  public OrderDAO createOrderDAO()
+  {
+    return new OrderDAO();
+  }
+
+
 }

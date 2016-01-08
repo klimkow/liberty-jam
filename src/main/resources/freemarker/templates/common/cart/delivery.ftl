@@ -30,7 +30,6 @@
             if (document.getElementById('time').value == null ||
                     document.getElementById('time').value == '')
                 return;
-            // if form was validated succesfully prevent page reloading
             var form = $(this).closest('form');
             var formData = form.serialize();
             show_step3(formData);

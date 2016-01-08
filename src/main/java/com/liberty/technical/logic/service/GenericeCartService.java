@@ -7,10 +7,8 @@ import com.liberty.technical.logic.entity.Order;
 import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.factory.DaoFactory;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
+
 
 /**
  * @author AKI
@@ -29,17 +27,9 @@ public class GenericeCartService {
       // log exception
       return;
     }
-    Set<Item> items = order.getItems();
-    Set<ItemQuantity> quantities = new HashSet<>();
-    if (items == null) {
-      items = new HashSet<>();
-    }
     Item item = itemDAO.readObject(Item.class, itemId);
-    items.add(item);
     ItemQuantity itemQuantity = new ItemQuantity(item, 1);
-    quantities.add(itemQuantity);
-    order.setItemQuantity(quantities);
-    order.setItems(items);
+    order.addItemQuantity(itemQuantity);
     order.setAmount(calculateOrderAmount(order));
   }
 
@@ -48,8 +38,14 @@ public class GenericeCartService {
                               Long itemId, Integer quantity)
   {
     Item item = itemDAO.readObject(Item.class, itemId);
-    ItemQuantity itemQuantity = new ItemQuantity(item, quantity);
-//    order.setItemQuantity(itemQuantity);
+
+    ItemQuantity itemQuantity = order.getIQWithItem(item);
+    if (itemQuantity != null) {
+      itemQuantity.setItemQuantity(quantity);
+    } else {
+      itemQuantity = new ItemQuantity(item, quantity);
+      order.addItemQuantity(itemQuantity);
+    }
   }
 
 
@@ -73,8 +69,8 @@ public class GenericeCartService {
       // log exception
       return;
     }
-    Set<Item> items = order.getItems();
-    items.removeIf(item1 -> item1.getId() == itemId);
+    Set<ItemQuantity> items = order.getItemQuantity();
+    items.removeIf(item1 -> item1.getItem().getId() == itemId);
   }
 
 }

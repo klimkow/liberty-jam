@@ -1,5 +1,5 @@
 <#--TODO: REPLACE BY JSON ANSWER-->
-${translator.getString("you_have")} ${order.getItems().size()}
+${translator.getString("you_have")} ${order.getSumItemCount()}
 <#if order.getItems().size() == 1>
 ${translator.getString("bouquet1")}
 <#if order.getItems().size() > 1>
@@ -11,4 +11,4 @@ ${translator.getString("bouquet1")}
 
 </#if>
 </#if>
-${translator.getString("total_amount")} ${order.getAmount()}
+${translator.getString("total_amount")} ${order.getSumItemPrice()}

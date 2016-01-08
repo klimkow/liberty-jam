@@ -2,7 +2,19 @@
     $(document).ready(function(){
 
         $("#go-step2").click(function(e) {
-            show_step2();
+            $('form[name="items_form"]').submit();
+        });
+
+        $("#step2_wizard").click(function(e) {
+            $('form[name="items_form"]').submit();
+        });
+
+        $('#items_form').bind('submit', function (e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+//            alert(form);
+            var formData = form.serialize();
+            show_step2(formData);
         });
 
     });
@@ -23,7 +35,7 @@
                 </div>
             </div>
             <div class="width33 progress-step1"><p style="font-size: 21pt;">1.${translator.getString("step1")}</p></div>
-            <div style="color: #ABABAB;" class="width33 progress-step2" onclick="show_step2()"><p>2.${translator.getString("step2")}</p></div>
+            <div id="step2_wizard" style="color: #ABABAB;" class="width33 progress-step2"><p>2.${translator.getString("step2")}</p></div>
             <div style="color: #ABABAB;" class="width33 progress-step3"><p>3.${translator.getString("step3")}</p></div>
         </div>
     </div>
@@ -45,22 +57,26 @@
             <th></th>
         </tr>
         </thead>
+        <form name="items_form" id="items_form" method="post">
         <tbody>
-        <#list cartItems as item>
-        <tr id="item-list-tr">
-            <td class="textleft"><img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100"> <p class="item-name-cart">${item.getName()}</p></td>
-            <td style="padding-top: 30px" class="td-right">
-                <input type="number" value="1" min="1" max="100">
-            </td>
-            <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>
-            <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
-        </tr>
-        </#list>
+
+            <#list cartItems as item>
+            <tr id="item-list-tr">
+                <td class="textleft"><img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100"> <p class="item-name-cart">${item.getName()}</p></td>
+                <td style="padding-top: 30px" class="td-right">
+                    <input name="${item.getId()}" id="${item.getId()}" type="number" value="${order.getAmountOfItem(item)}" min="1" max="100">
+                </td>
+                <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>
+                <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
+            </tr>
+            </#list>
+
         </tbody>
+        </form>
     </table>
     </div>
 
-    <div class="gallery__controls-next" onclick="show_step2()">
+    <div id="go-step2" class="gallery__controls-next" >
         <img style="float: right" src="img/ar-right2.png" alt="" width="25" height="40"/>
         <p>${translator.getString("go_next_step")}</p>
     </div>

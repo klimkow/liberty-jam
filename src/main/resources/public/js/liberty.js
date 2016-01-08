@@ -59,7 +59,7 @@ function appear(elm, i, step, speed){
 
 }
 
-function show_step2()
+function show_step2(formData)
 {
     var post_url = 'delivery_info';
     turnOnLoadingGlass();
@@ -69,10 +69,13 @@ function show_step2()
     $.ajax({
         type: 'POST',
         url: post_url,
+        data: formData,
         success: function(msg) {
             $('#active-zone').fadeOut(800, function(){
                 $('#active-zone').html(msg).fadeIn().delay(2000);
-
+                if (formData != null && formData != '') {
+                    maybeUpdateNavBar();
+                }
             });
         }
     });
@@ -316,9 +319,7 @@ function maybeUpdateNavBar()
                         + resp.price + resp.st4 +
                         '<a id="go-to-cart" class="btn btn-default" href="/cart">Оплатить</a>').fadeIn().delay(800);
                 });
-                element.css('border-color', '#3FB8AF');
-                element.html('<img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>' + resp.st5
-                ).fadeIn().delay(800);
+
             } else {
                 $('#cart-notif').html("Корзина пуста");
             }

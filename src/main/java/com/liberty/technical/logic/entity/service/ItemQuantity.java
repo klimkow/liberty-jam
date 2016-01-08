@@ -1,6 +1,7 @@
 package com.liberty.technical.logic.entity.service;
 
 import com.liberty.technical.logic.entity.Item;
+import com.liberty.technical.logic.entity.Order;
 
 import javax.persistence.*;
 
@@ -21,6 +22,15 @@ public class ItemQuantity {
 
   @Column(name = "item_quantity")
   private Integer itemQuantity;
+
+  @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+  @JoinColumn(name="order_id", referencedColumnName="id")
+  private Order order;
+
+  public ItemQuantity()
+  {
+
+  }
 
   public ItemQuantity(Item item, Integer itemQuantity)
   {
@@ -50,5 +60,15 @@ public class ItemQuantity {
 
   public void setItemQuantity(Integer itemQuantity) {
     this.itemQuantity = itemQuantity;
+  }
+
+  public Order getOrder()
+  {
+    return order;
+  }
+
+  public void setOrder(Order order)
+  {
+    this.order = order;
   }
 }
