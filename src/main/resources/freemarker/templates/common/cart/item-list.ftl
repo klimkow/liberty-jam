@@ -11,11 +11,25 @@
 
         $('#items_form').bind('submit', function (e) {
             e.preventDefault();
-            var form = $(this).closest('form');
+            var form = $('form[name="items_form"]');
 //            alert(form);
             var formData = form.serialize();
             show_step2(formData);
         });
+
+        $("#full-minus").click(function(e) {
+            var value = document.getElementById('quant_input').value;
+            if(value > 1) {
+                document.getElementById('quant_input').value = --value;
+            }
+        });
+
+        $("#quant_box").delegate('#full-plus','click', function(e) {
+            var value = $(this).prev('input').val();
+            $(this).prev('input').val(++value);
+        });
+
+
 
     });
 </script>
@@ -48,6 +62,7 @@
         <#--<div class="wizard-item">3.${translator.getString("step3")}</div>-->
     <#--</div>-->
     <div class="row" style="height: 250px; width: 100%; margin-top: 20px; overflow: auto">
+    <form name="items_form" id="items_form" method="post">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -57,23 +72,25 @@
             <th></th>
         </tr>
         </thead>
-        <form name="items_form" id="items_form" method="post">
         <tbody>
-
             <#list cartItems as item>
             <tr id="item-list-tr">
                 <td class="textleft"><img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100"> <p class="item-name-cart">${item.getName()}</p></td>
                 <td style="padding-top: 30px" class="td-right">
-                    <input name="${item.getId()}" id="${item.getId()}" type="number" value="${order.getAmountOfItem(item)}" min="1" max="100">
+                    <div id="quant_box" style="margin-top: 0px;" class="quant_box">
+                        <span id="full-minus" style="margin-top: 2px;" class="quant_btn_left">-</span>
+                        <input type="text" name="${item.getId()}" id="quant_input" value="${order.getAmountOfItem(item)}" >
+                        <span id="full-plus" style="margin-top: 2px;" class="quant_btn_right">+</span>
+                    </div>
+                    <#--<input name="${item.getId()}" id="${item.getId()}" type="number" value="${order.getAmountOfItem(item)}" min="1" max="100">-->
                 </td>
                 <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>
                 <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
             </tr>
             </#list>
-
         </tbody>
-        </form>
     </table>
+    </form>
     </div>
 
     <div id="go-step2" class="gallery__controls-next" >

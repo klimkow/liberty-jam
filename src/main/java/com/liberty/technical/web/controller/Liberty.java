@@ -109,6 +109,7 @@ public class Liberty {
       Long id = new Long(request.queryParams("itemId"));
       Item item = itemCommonDAO.readObject(Item.class, id);
       attributes.put("selectedItem", item);
+      attributes.put("photos", item.getImages());
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
