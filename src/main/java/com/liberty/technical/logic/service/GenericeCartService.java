@@ -21,14 +21,14 @@ public class GenericeCartService {
     itemDAO = DaoFactory.getInstance().createItemDAO();
   }
 
-  public void addToCart(Order order, Long itemId)
+  public void addToCart(Order order, Long itemId, Boolean withPaper, Boolean withVase, Integer amount)
   {
     if (order == null || itemId == null) {
       // log exception
       return;
     }
     Item item = itemDAO.readObject(Item.class, itemId);
-    ItemQuantity itemQuantity = new ItemQuantity(item, 1);
+    ItemQuantity itemQuantity = new ItemQuantity(item, amount, withPaper, withVase);
     order.addItemQuantity(itemQuantity);
     order.setAmount(calculateOrderAmount(order));
   }

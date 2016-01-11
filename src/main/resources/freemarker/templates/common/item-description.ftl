@@ -52,13 +52,13 @@
         <div class="item-price">
             <form name="myform">
                 <div class="item-add-options">
-                    <input type="checkbox" id="c1" name="option1" />
+                    <input type="checkbox" id="c1" name="option_paper" />
                     <label style="display: block; margin-left: 10px" for="c1"><span></span>Крафт-бумага (+25.000 РУБ.)</label>
-                    <input type="checkbox" id="c2" name="option2" />
+                    <input type="checkbox" id="c2" name="option_vase" />
                     <label style="display: block; margin-left: 10px" for="c2"><span></span>Добавить вазу (+70.000 РУБ.)</label>
                     <div style="margin-left: 10px;" class="quant_box">
                         <span id="full-minus" class="quant_btn_left">-</span>
-                        <input id="quant_input" type="text" name="itm_quant" value="1">
+                        <input id="quant_input" type="text" name="item_quantity" value="1">
                         <span id="full-plus" class="quant_btn_right">+</span>
                     </div>
                 </div>

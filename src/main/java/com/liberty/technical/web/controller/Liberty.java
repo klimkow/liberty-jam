@@ -210,7 +210,12 @@ public class Liberty {
         order = new Order();
       }
       Long id = new Long(request.queryParams("itemId"));
-      cartService.addToCart(order, id);
+      Boolean withPaper = request.queryParams(SharedConstants.OPTION_PAPER) != null;
+      Boolean withVase = request.queryParams(SharedConstants.OPTION_VASE) != null;
+      String quantity_string = request.queryParams(SharedConstants.ITEM_QUANTITY);
+      Integer item_quantity = quantity_string == null || quantity_string.isEmpty() ? 1 : new Integer(quantity_string);
+
+      cartService.addToCart(order, id, withPaper, withVase, item_quantity);
       request.session().attribute(SharedConstants.ATTRIBUTE_ORDER, order);
 
       String bouquets;

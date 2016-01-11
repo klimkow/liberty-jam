@@ -17,14 +17,14 @@
             show_step2(formData);
         });
 
-        $("#full-minus").click(function(e) {
-            var value = document.getElementById('quant_input').value;
+        $("#items_form").delegate('#full-minus','click', function(e) {
+            var value = $(this).next('input').val();
             if(value > 1) {
-                document.getElementById('quant_input').value = --value;
+                $(this).next('input').val(--value);
             }
         });
 
-        $("#quant_box").delegate('#full-plus','click', function(e) {
+        $("#items_form").delegate('#full-plus','click', function(e) {
             var value = $(this).prev('input').val();
             $(this).prev('input').val(++value);
         });

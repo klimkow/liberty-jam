@@ -27,6 +27,13 @@ public class ItemQuantity {
   @JoinColumn(name="order_id", referencedColumnName="id")
   private Order order;
 
+  @Column(name = "OPTION_PAPER")
+  private boolean withPaper;
+
+  @Column(name = "OPTION_VASE")
+  private boolean withVase;
+
+
   public ItemQuantity()
   {
 
@@ -36,6 +43,14 @@ public class ItemQuantity {
   {
     this.item = item;
     this.itemQuantity = itemQuantity;
+  }
+
+  public ItemQuantity(Item item, Integer itemQuantity, Boolean withPaper, Boolean withVase)
+  {
+    this.item = item;
+    this.itemQuantity = itemQuantity;
+    this.withPaper = withPaper;
+    this.withVase = withVase;
   }
 
   public long getId() {
@@ -71,4 +86,25 @@ public class ItemQuantity {
   {
     this.order = order;
   }
+
+  public boolean isWithPaper()
+  {
+    return withPaper;
+  }
+
+  public void setWithPaper(boolean withPaper)
+  {
+    this.withPaper = withPaper;
+  }
+
+  public boolean isWithVase()
+  {
+    return withVase;
+  }
+
+  public void setWithVase(boolean withVase)
+  {
+    this.withVase = withVase;
+  }
 }
+

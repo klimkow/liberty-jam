@@ -27,4 +27,8 @@ public interface SharedConstants {
 
   public static final String USERNAME = "j_username";
   public static final String PASSWORD = "j_password";
+
+  public static final String OPTION_PAPER = "option_paper";
+  public static final String OPTION_VASE = "option_vase";
+  public static final String ITEM_QUANTITY = "item_quantity";
 }
