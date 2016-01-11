@@ -107,14 +107,18 @@ public class Liberty {
 
       Map<String, Object> attributes = new HashMap<>();
       Long id = new Long(request.queryParams("itemId"));
+      int count = 1;
       Item item = itemCommonDAO.readObject(Item.class, id);
       attributes.put("selectedItem", item);
       attributes.put("photos", item.getImages());
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
+        attributes.put("itemQuantity", order.getIQWithItem(item));
+        count = order.getAmountOfItem(item);
       }
       attributes.put("itemId", id);
+      attributes.put("count", count);
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
       attributes.put("translator", LocalizationUtil.getInstance(locale));
 
@@ -219,7 +223,8 @@ public class Liberty {
       request.session().attribute(SharedConstants.ATTRIBUTE_ORDER, order);
 
       String bouquets;
-      int count = order.getItems().size();
+      int count = order.getSumItemCount();
+      int amount = order.getSumItemPrice();
       if (count == 1) {
         bouquets = LocalizationUtil.getString("bouquet1");
       } else if (count > 1 && count < 5) {
@@ -228,7 +233,7 @@ public class Liberty {
         bouquets = LocalizationUtil.getString("bouquet5");
       }
       attributes.put("order", order);
-      return new OrderVO(order.getAmount(),
+      return new OrderVO(amount,
           count,
           LocalizationUtil.getString("you_have"),
           bouquets,
@@ -241,8 +246,8 @@ public class Liberty {
     post("/updateNavbar", (request, response) -> {
       Order order = request.session()
           .attribute(SharedConstants.ATTRIBUTE_ORDER);
-      int count = order.getSumItemCount();
-      int amount = order.getSumItemPrice();
+      int count = order == null ? 1 : order.getSumItemCount();
+      int amount = order == null ? 0 : order.getSumItemPrice();
 
 
       String bouquets;
