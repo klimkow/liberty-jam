@@ -915,3 +915,10 @@ input[type="checkbox"]:checked + label span {
     cursor: pointer;
     font-weight: 300;
 }
+
+.sum_amount {
+    border-top: 2px solid #CECECE;
+    font-family: Attentica4F;
+    font-weight: bold;
+    font-size: 22pt;
+}

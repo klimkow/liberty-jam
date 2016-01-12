@@ -132,6 +132,7 @@ public class Liberty {
       if (order != null) {
         attributes.put("order", order);
         attributes.put("itemCount", order.getSumItemCount());
+        attributes.put("sumAmount", order.getSumItemPrice());
         attributes.put("cartItems", order.getItems());
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
@@ -163,6 +164,7 @@ public class Liberty {
         cartService.removeItemFromOrder(order, id);
         attributes.put("order", order);
         attributes.put("itemCount", order.getSumItemCount());
+        attributes.put("sumAmount", order.getSumItemPrice());
         attributes.put("cartItems", order.getItems());
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);

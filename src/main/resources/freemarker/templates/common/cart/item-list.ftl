@@ -19,6 +19,8 @@
 
         $("#items_form").delegate('#full-minus','click', function(e) {
             var value = $(this).next('input').val();
+            var item_price = $(this).closest('#item-price-id').html();
+            alert(item_price);
             if(value > 1) {
                 $(this).next('input').val(--value);
             }
@@ -61,7 +63,7 @@
         <#--<div class="wizard-item">2.${translator.getString("step2")}</div>-->
         <#--<div class="wizard-item">3.${translator.getString("step3")}</div>-->
     <#--</div>-->
-    <div class="row" style="height: 250px; width: 100%; margin-top: 20px; overflow: auto">
+    <div class="row" style="height: 275px; width: 100%; margin-top: 20px; overflow: auto">
     <form name="items_form" id="items_form" method="post">
     <table class="table table-striped">
         <thead>
@@ -82,15 +84,17 @@
                         <input type="text" name="${item.getId()}" id="quant_input" value="${order.getAmountOfItem(item)}" >
                         <span id="full-plus" style="margin-top: 2px;" class="quant_btn_right">+</span>
                     </div>
-                    <#--<input name="${item.getId()}" id="${item.getId()}" type="number" value="${order.getAmountOfItem(item)}" min="1" max="100">-->
                 </td>
-                <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>
+                <td style="padding-top: 30px" class="td-right"><span id="item-price-id">${item.getPrice()?string?replace(",",".")}</span>.000</td>
                 <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
             </tr>
             </#list>
         </tbody>
     </table>
     </form>
+    </div>
+    <div class="row sum_amount">
+        Итого к оплате: <span style="color: #3FB8AF;" id="amount-to-pay">${sumAmount}</span><span style="color: #3FB8AF;">.000</span> РУБ.
     </div>
 
     <div id="go-step2" class="gallery__controls-next" >
