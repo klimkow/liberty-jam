@@ -281,6 +281,11 @@ function goToCart()
     });
 }
 
+function showValidationWarning(text)
+{
+    $('#alert-zone').html('<div style="text-align: center; color:black; font-family: OsansLight, Arial, Helvetica, sans-serif;font-size: 12pt;" class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + text + '</div>');
+}
+
 
 function removeItemFromCart(id)
 {

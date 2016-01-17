@@ -37,7 +37,9 @@
             </div>
             <#--<div class="dropdown"><img style="border-right: 1px solid #E2E2E2;" src="img/ru_trs.png" alt="Language" height="48" width="48"></div>-->
         </div>
+
     </div>
+    <div id="alert-zone"></div>
 </nav>
 
 <!-- NAVBAR END-->

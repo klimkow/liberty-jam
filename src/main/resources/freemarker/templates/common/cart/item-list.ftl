@@ -12,15 +12,12 @@
         $('#items_form').bind('submit', function (e) {
             e.preventDefault();
             var form = $('form[name="items_form"]');
-//            alert(form);
             var formData = form.serialize();
             show_step2(formData);
         });
 
         $("#items_form").delegate('#full-minus','click', function(e) {
             var value = $(this).next('input').val();
-            var item_price = $(this).closest('#item-price-id').html();
-            alert(item_price);
             if(value > 1) {
                 $(this).next('input').val(--value);
             }
@@ -94,7 +91,7 @@
     </form>
     </div>
     <div class="row sum_amount">
-        Итого к оплате: <span style="color: #3FB8AF;" id="amount-to-pay">${sumAmount}</span><span style="color: #3FB8AF;">.000</span> РУБ.
+        ${translator.getString("sum_amount_to_pay")}: <span style="color: #3FB8AF;" id="amount-to-pay">${sumAmount}</span><span style="color: #3FB8AF;">.000</span> ${translator.getString("rub")}.
     </div>
 
     <div id="go-step2" class="gallery__controls-next" >

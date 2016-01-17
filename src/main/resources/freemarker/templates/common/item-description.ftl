@@ -34,12 +34,12 @@
 <div class="container ">
     <div class="item-description-container">
     <div style="position: relative;" id="item-photo" class="item-photo">
-        <img id="img-logo" src="${selectedItem.getLogo()}" height="400" width="400">
+        <img id="img-logo" src="${selectedItem.getLogo()}" height="450" width="450">
     </div>
     <div id="item-additional-photo" class="item-additional-photo">
         <#if photos??>
         <#list photos as photo>
-            <div id="add-img-div" style="text-align:left; display: block">
+            <div id="add-img-div">
                 <img id="img-add" style="margin-left: 15px; cursor:pointer;" class="img-circle" src="${photo.getImageUrl()}" height="110" width="110">
             </div>
         </#list>
@@ -53,10 +53,12 @@
         <div class="item-price">
             <form name="myform">
                 <div class="item-add-options">
-                    <input type="checkbox" id="c1" name="option_paper" <#if itemQuantity??><#if itemQuantity.isWithPaper()>checked</#if></#if>/>
-                    <label style="display: block; margin-left: 10px" for="c1"><span></span>Крафт-бумага (+25.000 РУБ.)</label>
-                    <input type="checkbox" id="c2" name="option_vase" <#if itemQuantity??><#if itemQuantity.isWithVase()>checked</#if></#if>/>
-                    <label style="display: block; margin-left: 10px" for="c2"><span></span>Добавить вазу (+70.000 РУБ.)</label>
+                    <#if isClassic>
+                        <input type="checkbox" id="c1" name="option_paper" <#if itemQuantity??><#if itemQuantity.isWithPaper()>checked</#if></#if>/>
+                        <label style="display: block; margin-left: 10px" for="c1"><span></span>${translator.getString("item_paper_option")}</label>
+                        <input type="checkbox" id="c2" name="option_vase" <#if itemQuantity??><#if itemQuantity.isWithVase()>checked</#if></#if>/>
+                        <label style="display: block; margin-left: 10px" for="c2"><span></span>${translator.getString("item_vase_option")}</label>
+                    </#if>
                     <div style="margin-left: 10px;" class="quant_box">
                         <span id="full-minus" class="quant_btn_left">-</span>
                         <input id="quant_input" type="text" name="item_quantity" value="${count}">

@@ -25,14 +25,21 @@
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
             if (document.getElementById('date').value == null ||
-                    document.getElementById('date').value == '')
+                    document.getElementById('date').value == '') {
+                showValidationWarning('${translator.getString("alert_fill_date_and_time")}');
                 return;
+            }
             if (document.getElementById('time').value == null ||
-                    document.getElementById('time').value == '')
+                    document.getElementById('time').value == '') {
+                showValidationWarning('${translator.getString("alert_fill_date_and_time")}');
                 return;
+            }
+            $('#alert-zone').html('');
             var form = $(this).closest('form');
             var formData = form.serialize();
             show_step3(formData);
+        } else {
+            showValidationWarning('${translator.getString("alert_fill_all_fields")}');
         }
     });
 

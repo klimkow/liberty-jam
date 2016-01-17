@@ -6,7 +6,9 @@ import com.google.gson.Gson;
 import com.liberty.technical.logic.dao.CategoryDAO;
 import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.dao.ItemDAO;
+import com.liberty.technical.logic.dao.PageDAO;
 import com.liberty.technical.logic.entity.*;
+import com.liberty.technical.logic.entity.content.ContentPage;
 import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.entity.system.SystemUser;
@@ -17,6 +19,7 @@ import com.liberty.technical.logic.service.AuthenticationService;
 import com.liberty.technical.logic.service.GenericeCartService;
 import com.liberty.technical.logic.service.ImageService;
 import com.liberty.technical.web.SharedConstants;
+import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
 import org.eclipse.jetty.util.MultiPartInputStreamParser;
 import spark.*;
@@ -78,10 +81,14 @@ public class Liberty {
 
     post("/openPage", (request, response) -> {
       Map<String, Object> attributes = new HashMap<>();
+      PageDAO contentPageDAO = DaoFactory.getInstance().createPageDAO();
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
-      attributes.put("translator", LocalizationUtil.getInstance(locale));
       Integer pageNumber = new Integer(request.queryParams("page"));
-      return new ModelAndView(attributes, "common/pages/about.ftl");
+      ContentPage page = contentPageDAO.getContentPage(pageNumber);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      attributes.put("title", page.getTitle());
+      attributes.put("content", page.getContent());
+      return new ModelAndView(attributes, "common/pages/content_page_template.ftl");
     }, engine);
 
 
@@ -111,6 +118,7 @@ public class Liberty {
       Item item = itemCommonDAO.readObject(Item.class, id);
       attributes.put("selectedItem", item);
       attributes.put("photos", item.getImages());
+      attributes.put("isClassic", item.getCategoryName().equals("classic"));
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
@@ -147,6 +155,7 @@ public class Liberty {
       if (order != null) {
         attributes.put("order", order);
         attributes.put("itemCount", order.getSumItemCount());
+        attributes.put("sumAmount", order.getSumItemPrice());
         attributes.put("cartItems", order.getItems());
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);

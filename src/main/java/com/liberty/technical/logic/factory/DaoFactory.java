@@ -51,4 +51,10 @@ public class DaoFactory {
   }
 
 
+  public PageDAO createPageDAO()
+  {
+    return new PageDAO();
+  }
+
+
 }
