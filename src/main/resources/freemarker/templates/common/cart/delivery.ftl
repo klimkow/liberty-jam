@@ -2,6 +2,8 @@
 
     $(document).ready(function() {
 
+        // SELECT TIME IF CHOSE
+
         <#if delivery??>
             <#if delivery.getTimeRange()??>
                 var time = ${delivery.getTimeRange()};
@@ -10,8 +12,10 @@
             </#if>
         </#if>
 
+        // INITIALIZE VALIDATOR
         $('#dlv-form').validator();
 
+        // DELEGATE CLICK EVENT OF TIME CONTAINER
         $("#timeOptionsContainer").delegate('div[id^=timeOption]','click', function(e) {
             $("div[id^= 'timeOption']").removeClass("dlv-time-item-selected");
             $(this).addClass("dlv-time-item-selected");
@@ -20,6 +24,7 @@
         });
     });
 
+    // ON FORM SUBMIT
     $('#dlv-form').validator().on('submit', function (e) {
 
         if (!e.isDefaultPrevented()) {
@@ -43,6 +48,7 @@
         }
     });
 
+    // ON GO TO NEXT STEP
     $('#go_step3').click(function(e) {
         document.getElementById('date').value = $('#datetimepicker10 div').datepicker('getFormattedDate');
         $('#date').val($('#datetimepicker10 div').datepicker('getDate'));
@@ -209,6 +215,9 @@
                        maxlength="55" class="form-control" id="to-name"
                        <#if delivery??>value="${delivery.getAddressStreet()}"</#if> required>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+            <div class="delivery-zone">
+                <p class="map-link" data-toggle="modal" data-target=".bs-modal-lg">${translator.getString("delivery_zone")}</p>
             </div>
             <div style="float:left; width: 50%;" class="dlv-block-cn form-group has-feedback">
                 <label for="address-house">${translator.getString("address_house")}</label>

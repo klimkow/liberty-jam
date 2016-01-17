@@ -27,16 +27,16 @@
                     <div id="separator"></div>
                 </form>
                 <form name="filter_opt1">
-                    <input id="filter_option_box" type="hidden" name="filterOption" value="2">
+                    <input id="filter_option_box" type="hidden" name="filterOption" value="3">
                     <div id="filter-opt-block" class="textleft">
-                        <div id="filter_option2" class=" btn btn-default filter_option">${translator.getString("bouquet_in_the_box")}</div>
+                        <div id="filter_option3" class=" btn btn-default filter_option">${translator.getString("bouquet_in_the_glass")}</div>
                     </div>
                     <div id="separator"></div>
                 </form>
                 <form name="filter_opt1">
-                    <input id="filter_option_box" type="hidden" name="filterOption" value="3">
+                    <input id="filter_option_box" type="hidden" name="filterOption" value="2">
                     <div id="filter-opt-block" class="textleft">
-                        <div id="filter_option3" class=" btn btn-default filter_option">${translator.getString("bouquet_in_the_glass")}</div>
+                        <div id="filter_option2" class=" btn btn-default filter_option">${translator.getString("bouquet_in_the_box")}</div>
                     </div>
                 </form>
             </div>

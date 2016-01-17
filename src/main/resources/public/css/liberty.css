@@ -219,7 +219,7 @@
     width: 48px;
     height: 48px;
     border-right: 1px solid #E2E2E2;
-    padding-top: 11px;
+    padding-top: 8px;
     padding-left: 16px;
     font-size: 17pt;
     cursor: pointer;
@@ -953,5 +953,23 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 {
     padding: 0px 200px;
     font-size: 13pt;
+}
+
+.dv-zone
+{
+    height: 200px;
+    width: 200px;
+}
+
+.map-link {
+    text-align: right;
+    padding-right: 15px;
+    cursor: pointer;
+    font-family: OsansLight, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+    color: #3FB8AF;
+    text-decoration: underline;
 }
 
