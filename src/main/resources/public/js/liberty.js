@@ -186,6 +186,12 @@ function openPage(page)
     });
 }
 
+
+function calculateClassicBouquetPrice(paper, vase, count, priceforone)
+{
+    return (count * priceforone) + paper + vase;
+}
+
 function chooseBoquete()
 {
     if($("#marketing-filter-zone").get(0))
@@ -203,7 +209,9 @@ function chooseBoquete()
     }
 }
 
-
+function numberWithDots(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 function getItem(id)
 {
@@ -245,10 +253,11 @@ function addToCart(id, element)
         data: post_data,
         success: function(msg) {
             var resp = JSON.parse(msg);
+            var price = numberWithDots(resp.price);
             $('#cart-notif').fadeOut(300, function(){
                 $('#cart-notif').html(resp.st1 + ' ' + resp.amount
                     + ' ' + resp.st2 + ' ' + resp.st3 + ' '
-                    + resp.price + resp.st4 +
+                    + price + resp.st4 +
                     '<a id="go-to-cart" class="btn btn-default" href="/cart">Оплатить</a>').fadeIn().delay(800);
             });
             element.css('border-color', '#3FB8AF');
@@ -318,10 +327,11 @@ function maybeUpdateNavBar()
         success: function(msg) {
             var resp = JSON.parse(msg);
             if (resp.price != '') {
+                var price = numberWithDots(resp.price);
                 $('#cart-notif').fadeOut(300, function () {
                     $('#cart-notif').html(resp.st1 + ' ' + resp.amount
                         + ' ' + resp.st2 + ' ' + resp.st3 + ' '
-                        + resp.price + resp.st4 +
+                        + price + resp.st4 +
                         '<a id="go-to-cart" class="btn btn-default" href="/cart">Оплатить</a>').fadeIn().delay(800);
                 });
 

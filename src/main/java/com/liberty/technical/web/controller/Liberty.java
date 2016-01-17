@@ -114,11 +114,13 @@ public class Liberty {
 
       Map<String, Object> attributes = new HashMap<>();
       Long id = new Long(request.queryParams("itemId"));
-      int count = 1;
       Item item = itemCommonDAO.readObject(Item.class, id);
+      boolean isClassic = item.getCategoryName().equals("classic");
+      int count = isClassic ?
+          SharedConstants.ITEM_CLASSIC_MIN_AMOUNT : SharedConstants.ITEM_MIN_AMOUNT;
       attributes.put("selectedItem", item);
       attributes.put("photos", item.getImages());
-      attributes.put("isClassic", item.getCategoryName().equals("classic"));
+      attributes.put("isClassic", isClassic);
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);

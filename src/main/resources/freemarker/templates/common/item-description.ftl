@@ -1,6 +1,16 @@
 <script>
     $(document).ready(function(){
 
+        var itemMinAmount = 1;
+        var isClassic = false;
+        <#if isClassic>
+                itemMinAmount = 15;
+                isClassic = true;
+                // TODO: remove by frmrkr vars
+                var paper_price = 25000;
+                var vase_price = 70000;
+        </#if>
+
         $("#add-to-cart-desc").click(function(e) {
             $(this).css("width", $(this).outerWidth());
             $(this).html('<img src="../img/button-loading.gif"/>');
@@ -8,6 +18,7 @@
             var formData = form.serialize();
             addToCart(formData, $(this));
         });
+
 
         $("#item-additional-photo").delegate('#img-add','click', function(e) {
 //            $('#item-photo').append('<img style="position: absolute; top: 50%;left: 50%;" src="img/loading.gif"  height="43" width="43"  />');
@@ -18,17 +29,77 @@
             $(this).parent().addClass("item-additional-photo-selected");
         });
 
+
+        $( "#quant_input" ).change(function() {
+            var value = document.getElementById('quant_input').value;
+            if (value < itemMinAmount) {
+                document.getElementById('quant_input').value = itemMinAmount;
+            }
+            if(isClassic) {
+                updateResultAmount(value);
+            }
+        });
+
+
+        $( "#c1" ).change(function() {
+            var value = document.getElementById('quant_input').value;
+            updateResultAmount(value);
+        });
+
+
+        $( "#c2" ).change(function() {
+            var value = document.getElementById('quant_input').value;
+            updateResultAmount(value);
+        });
+
+
         $("#full-minus").click(function(e) {
             var value = document.getElementById('quant_input').value;
-            if(value > 1) {
+            if(value > itemMinAmount) {
                 document.getElementById('quant_input').value = --value;
+            }
+            if(isClassic) {
+                updateResultAmount(value)
             }
         });
 
         $("#full-plus").click(function(e) {
-            document.getElementById('quant_input').value = ++document.getElementById('quant_input').value;
+            var value = document.getElementById('quant_input').value;
+            document.getElementById('quant_input').value = ++value;
+            if(isClassic) {
+                updateResultAmount(value)
+            }
         });
     });
+
+    function updateResultAmount(value)
+    {
+        var pforone = getIntPriceForOneFlower(value);
+        paper_price = $('#c1').is(':checked') ? 25000 : 0;
+        vase_price = $('#c2').is(':checked') ? 70000 : 0;
+        var result = calculateClassicBouquetPrice(paper_price, vase_price, value, pforone);
+        $('#flex-price').html(getStringPriceForOneFlower(pforone));
+        $('#result-amount').html(numberWithDots(result));
+    }
+
+    function getStringPriceForOneFlower(value)
+    {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
+    function getIntPriceForOneFlower(value)
+    {
+        if (value < 21) {
+            return 35000;
+        }
+        if (value > 20 && value < 31) {
+            return 34000;
+        } else {
+            return 30000;
+        }
+    }
+
+
 </script>
 
 <div class="container ">
@@ -64,9 +135,19 @@
                         <input id="quant_input" type="text" name="item_quantity" value="${count}">
                         <span id="full-plus" class="quant_btn_right">+</span>
                     </div>
+                    <#if isClassic>
+                        <span style="padding-left: 9px;vertical-align: super;">
+                            ${translator.getString("item_for")}
+                            <span id="flex-price" style="padding-left: 5px;font-size: 14pt;font-weight: bold;">
+                                10 000
+                            </span>
+                            <span style="font-size: 14pt;font-weight: bold;">
+                                ${translator.getString("rub")}.
+                            </span>
+                        </span></#if>
                 </div>
                 <div style="font-family: Attentica4F; font-size: 25pt; font-weight:bold; margin-left: 10px; margin-top:15px; padding-right: 15px" class="textleft">
-                    <p class="textleft">${selectedItem.getPrice()?string?replace(",",".")}.000</p>
+                    <p id="result-amount" class="textleft">${selectedItem.getPrice()?string?replace(",",".")}.000</p>
                 </div>
                 <div style="margin-top:20px; padding-right: 10px" class="textleft">
                         <input id="item-id" type="hidden" name="itemId" value="${itemId}">

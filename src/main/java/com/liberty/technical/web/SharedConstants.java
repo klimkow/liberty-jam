@@ -4,6 +4,8 @@ package com.liberty.technical.web;
  * @author AKI
  */
 public interface SharedConstants {
+  public final static int ITEM_MIN_AMOUNT = 1;
+  public final static int ITEM_CLASSIC_MIN_AMOUNT = 15;
   public final static String ATTRIBUTE_ORDER = "getOrder";
   public final static String ATTRIBUTE_LOCALE = "locale";
   public final static String SYSTEM_USER = "system-user";
