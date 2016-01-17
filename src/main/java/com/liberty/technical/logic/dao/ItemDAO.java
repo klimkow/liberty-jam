@@ -18,7 +18,7 @@ public class ItemDAO extends CommonDAOImpl<Item>
     List<Item> resultList = new ArrayList<>();
     Session session = factory.openSession();
     Transaction tx = null;
-    String categoryCriteria = categoryId == null ? "" : " and chi.id = " + categoryId;
+    String categoryCriteria = categoryId == null ? "" : " and chi.name like '" + getCategoryName(categoryId) + "'";
     try {
       tx = session.beginTransaction();
       resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
@@ -66,7 +66,7 @@ public class ItemDAO extends CommonDAOImpl<Item>
     try {
       tx = session.beginTransaction();
       resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
-          "where chi.id = " + categoryId).
+          "where chi.name like '" + getCategoryName(categoryId) + "'").
           list();
       tx.commit();
 
@@ -77,6 +77,24 @@ public class ItemDAO extends CommonDAOImpl<Item>
       session.close();
     }
     return resultList;
+  }
+
+
+  private String getCategoryName(int i)
+  {
+    String name = "";
+    switch (i) {
+      case 1:
+        name = "classic";
+        break;
+      case 2:
+        name = "box";
+        break;
+      case 3:
+        name = "vase";
+        break;
+    }
+    return name;
   }
 
 }
