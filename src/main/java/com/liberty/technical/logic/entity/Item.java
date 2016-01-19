@@ -5,6 +5,7 @@ import com.liberty.technical.logic.entity.images.ItemImages;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -130,8 +131,41 @@ public class Item
 
   public String getLogo()
   {
-    return getImages() == null || getImages().isEmpty() ?
-        "" : getImages().iterator().next().getImageUrl();
+    StringBuilder result = new StringBuilder();
+    if (!(getImages() == null || getImages().isEmpty())) {
+      Optional<ItemImages> image = getImages().stream().
+          filter(im -> im.getSeqenceOrder() == ItemImages.IMAGE_LOGO).findFirst();
+      if (image.isPresent()) {
+        result.append(image.get().getImageUrl());
+      }
+    }
+    return result.toString();
+  }
+
+  public String getSecondImageUrl()
+  {
+    StringBuilder result = new StringBuilder();
+    if (!(getImages() == null || getImages().isEmpty())) {
+      Optional<ItemImages> image = getImages().stream().
+          filter(im -> im.getSeqenceOrder() == ItemImages.SECOND_IMAGE).findFirst();
+      if (image.isPresent()) {
+        result.append(image.get().getImageUrl());
+      }
+    }
+    return result.toString();
+  }
+
+  public String getThirdImageUrl()
+  {
+    StringBuilder result = new StringBuilder();
+    if (!(getImages() == null || getImages().isEmpty())) {
+      Optional<ItemImages> image = getImages().stream().
+          filter(im -> im.getSeqenceOrder() == ItemImages.THIRD_IMAGE).findFirst();
+      if (image.isPresent()) {
+        result.append(image.get().getImageUrl());
+      }
+    }
+    return result.toString();
   }
 
   public String getCategoryName() {

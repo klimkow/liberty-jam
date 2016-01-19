@@ -1,4 +1,19 @@
 <script>
+
+    <#if flexPrice??>
+    function getItemPriceFromDiapasons(count) {
+        <#if diapasons??>
+            <#list diapasons as diapason>
+                if (count >= ${diapason.getCountFrom()} && count <= ${diapason.getCountTo()}) {
+                    return ${diapason.getPrice()} * 1000;
+                }
+            </#list>
+
+        </#if>
+        return ${defaultPrice} * 1000;
+    }
+    </#if>
+
     $(document).ready(function(){
 
         var itemMinAmount = 1;
@@ -10,6 +25,8 @@
                 var paper_price = 25000;
                 var vase_price = 70000;
         </#if>
+        var value = document.getElementById('quant_input').value;
+        updateResultAmount(value);
 
         $("#add-to-cart-desc").click(function(e) {
             $(this).css("width", $(this).outerWidth());
@@ -74,7 +91,7 @@
 
     function updateResultAmount(value)
     {
-        var pforone = getIntPriceForOneFlower(value);
+        var pforone = getItemPriceFromDiapasons(value);
         paper_price = $('#c1').is(':checked') ? 25000 : 0;
         vase_price = $('#c2').is(':checked') ? 70000 : 0;
         var result = calculateClassicBouquetPrice(paper_price, vase_price, value, pforone);
@@ -108,13 +125,19 @@
         <img id="img-logo" src="${selectedItem.getLogo()}" height="450" width="450">
     </div>
     <div id="item-additional-photo" class="item-additional-photo">
-        <#if photos??>
-        <#list photos as photo>
+        <#--<#if photos??>-->
+        <#--<#list photos as photo>-->
             <div id="add-img-div">
-                <img id="img-add" style="margin-left: 15px; cursor:pointer;" class="img-circle" src="${photo.getImageUrl()}" height="110" width="110">
+                <img id="img-add" style="margin-left: 15px; cursor:pointer;" class="img-circle" src="${selectedItem.getLogo()}" height="110" width="110">
             </div>
-        </#list>
-        </#if>
+            <div id="add-img-div">
+                <img id="img-add" style="margin-left: 15px; cursor:pointer;" class="img-circle" src="${selectedItem.getSecondImageUrl()}" height="110" width="110">
+            </div>
+            <div id="add-img-div">
+                <img id="img-add" style="margin-left: 15px; cursor:pointer;" class="img-circle" src="${selectedItem.getThirdImageUrl()}" height="110" width="110">
+            </div>
+        <#--</#list>-->
+        <#--</#if>-->
     </div>
     <div class="item-description">
         <div class="description-text">
@@ -139,7 +162,7 @@
                         <span style="padding-left: 9px;vertical-align: super;">
                             ${translator.getString("item_for")}
                             <span id="flex-price" style="padding-left: 5px;font-size: 14pt;font-weight: bold;">
-                                10 000
+                                ${defaultPrice}
                             </span>
                             <span style="font-size: 14pt;font-weight: bold;">
                                 ${translator.getString("rub")}.

@@ -13,6 +13,10 @@ import java.io.Serializable;
 @Table(name = "item_images")
 public class ItemImages
 {
+  public static final int IMAGE_LOGO = 0;
+  public static final int SECOND_IMAGE = 1;
+  public static final int THIRD_IMAGE = 2;
+
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private long id;
@@ -23,6 +27,9 @@ public class ItemImages
   @ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
   @JoinColumn(name="item_id", referencedColumnName="id")
   private Item item;
+
+  @Column(name = "seqence_order")
+  private Integer seqenceOrder;
 
 
   public long getId()
@@ -58,5 +65,15 @@ public class ItemImages
   public void setItem(Item item)
   {
     this.item = item;
+  }
+
+
+  public Integer getSeqenceOrder() {
+    return seqenceOrder;
+  }
+
+
+  public void setSeqenceOrder(Integer seqenceOrder) {
+    this.seqenceOrder = seqenceOrder;
   }
 }

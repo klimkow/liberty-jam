@@ -2,6 +2,7 @@ package com.liberty.technical.logic.factory;
 
 
 import com.liberty.technical.logic.dao.*;
+import com.liberty.technical.logic.entity.service.PriceDiapason;
 
 
 /**
@@ -54,6 +55,12 @@ public class DaoFactory {
   public PageDAO createPageDAO()
   {
     return new PageDAO();
+  }
+
+
+  public PriceDiapasonDAO createPriceDiapasonDAO()
+  {
+    return new PriceDiapasonDAO();
   }
 
 

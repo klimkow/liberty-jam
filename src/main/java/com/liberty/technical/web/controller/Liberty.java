@@ -3,14 +3,12 @@ package com.liberty.technical.web.controller;
 import static spark.Spark.*;
 
 import com.google.gson.Gson;
-import com.liberty.technical.logic.dao.CategoryDAO;
-import com.liberty.technical.logic.dao.CommonDAO;
-import com.liberty.technical.logic.dao.ItemDAO;
-import com.liberty.technical.logic.dao.PageDAO;
+import com.liberty.technical.logic.dao.*;
 import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.entity.content.ContentPage;
 import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.entity.service.ItemQuantity;
+import com.liberty.technical.logic.entity.service.PriceDiapason;
 import com.liberty.technical.logic.entity.system.SystemUser;
 import com.liberty.technical.logic.factory.DaoFactory;
 import com.liberty.technical.logic.factory.ServiceFactory;
@@ -39,17 +37,17 @@ import java.util.*;
 /**
  * @author M-AKI.
  */
-public class Liberty implements SparkApplication {
+public class Liberty {
 
-    @Override
-    public void init()
-    {
-      execute();
-    }
+//    @Override
+//    public void init()
+//    {
+//      execute();
+//    }
 
-//  public static void main(String[] args) {
-//    execute();
-//  }
+  public static void main(String[] args) {
+    execute();
+  }
 
   private static void execute()
   {
@@ -111,6 +109,7 @@ public class Liberty implements SparkApplication {
 
     post("/getItem", (request, response) -> {
       CommonDAO<Item> itemCommonDAO = DaoFactory.getInstance().createCommonDAO(Item.class);
+      PriceDiapasonDAO priceDAO = DaoFactory.getInstance().createPriceDiapasonDAO();
 
       Map<String, Object> attributes = new HashMap<>();
       Long id = new Long(request.queryParams("itemId"));
@@ -119,13 +118,23 @@ public class Liberty implements SparkApplication {
       int count = isClassic ?
           SharedConstants.ITEM_CLASSIC_MIN_AMOUNT : SharedConstants.ITEM_MIN_AMOUNT;
       attributes.put("selectedItem", item);
-      attributes.put("photos", item.getImages());
       attributes.put("isClassic", isClassic);
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
         attributes.put("order", order);
         attributes.put("itemQuantity", order.getIQWithItem(item));
         count = order.getAmountOfItem(item);
+      }
+      List<PriceDiapason> prices = priceDAO.getItemFlexPrices(id);
+      if (!prices.isEmpty()) {
+        attributes.put("flexPrice", true);
+        Optional<PriceDiapason> defPrice = prices.stream().
+            filter(p -> p.getCountFrom() == 0 && p.getCountTo() == 0).findFirst();
+        if (defPrice.isPresent()) {
+          attributes.put("defaultPrice", defPrice.get().getPrice());
+          prices.remove(defPrice.get());
+          attributes.put("diapasons", prices);
+        }
       }
       attributes.put("itemId", id);
       attributes.put("count", count);

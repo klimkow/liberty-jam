@@ -5,6 +5,7 @@ import com.liberty.technical.logic.entity.content.ContentPage;
 import com.liberty.technical.logic.entity.images.CategoryImages;
 import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.entity.service.ItemQuantity;
+import com.liberty.technical.logic.entity.service.PriceDiapason;
 import com.liberty.technical.logic.entity.system.SystemUser;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -32,6 +33,7 @@ public class SessionFactoryInitializer {
         .addAnnotatedClass(SystemUser.class)
         .addAnnotatedClass(ItemQuantity.class)
         .addAnnotatedClass(ContentPage.class)
+        .addAnnotatedClass(PriceDiapason.class)
         .buildSessionFactory();
     factory = config.buildSessionFactory();
   }
