@@ -23,6 +23,7 @@ import org.eclipse.jetty.util.MultiPartInputStreamParser;
 import spark.*;
 import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
+import sun.security.provider.SHA;
 
 import javax.imageio.ImageIO;
 import javax.servlet.MultipartConfigElement;
@@ -115,11 +116,11 @@ public class Liberty {
       Long id = new Long(request.queryParams("itemId"));
       Item item = itemCommonDAO.readObject(Item.class, id);
       boolean isClassic = item.getCategoryName().equals("classic");
-      int count = isClassic ?
-          SharedConstants.ITEM_CLASSIC_MIN_AMOUNT : SharedConstants.ITEM_MIN_AMOUNT;
       attributes.put("selectedItem", item);
       attributes.put("isClassic", isClassic);
+      attributes.put("minAmount", item.getMinAmount());
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
+      int count = item.getMinAmount();
       if (order != null) {
         attributes.put("order", order);
         attributes.put("itemQuantity", order.getIQWithItem(item));
@@ -127,14 +128,7 @@ public class Liberty {
       }
       List<PriceDiapason> prices = priceDAO.getItemFlexPrices(id);
       if (!prices.isEmpty()) {
-        attributes.put("flexPrice", true);
-        Optional<PriceDiapason> defPrice = prices.stream().
-            filter(p -> p.getCountFrom() == 0 && p.getCountTo() == 0).findFirst();
-        if (defPrice.isPresent()) {
-          attributes.put("defaultPrice", defPrice.get().getPrice());
-          prices.remove(defPrice.get());
-          attributes.put("diapasons", prices);
-        }
+        attributes.put("diapasons", prices);
       }
       attributes.put("itemId", id);
       attributes.put("count", count);
@@ -239,7 +233,7 @@ public class Liberty {
       Boolean withPaper = request.queryParams(SharedConstants.OPTION_PAPER) != null;
       Boolean withVase = request.queryParams(SharedConstants.OPTION_VASE) != null;
       String quantity_string = request.queryParams(SharedConstants.ITEM_QUANTITY);
-      Integer item_quantity = quantity_string == null || quantity_string.isEmpty() ? 1 : new Integer(quantity_string);
+      Integer item_quantity = quantity_string == null || quantity_string.isEmpty() ? null : new Integer(quantity_string);
 
       cartService.addToCart(order, id, withPaper, withVase, item_quantity);
       request.session().attribute(SharedConstants.ATTRIBUTE_ORDER, order);

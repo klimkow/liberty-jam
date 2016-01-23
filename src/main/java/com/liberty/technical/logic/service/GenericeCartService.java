@@ -28,6 +28,9 @@ public class GenericeCartService {
       return;
     }
     Item item = itemDAO.readObject(Item.class, itemId);
+    if (amount == null) {
+      amount = item.getMinAmount();
+    }
     ItemQuantity itemQuantity = new ItemQuantity(item, amount, withPaper, withVase);
     ItemQuantity oldIQ = order.getIQWithItem(item);
     order.getItemQuantity().remove(oldIQ);

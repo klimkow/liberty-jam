@@ -1,6 +1,7 @@
 package com.liberty.technical.logic.entity;
 
 import com.liberty.technical.logic.entity.service.ItemQuantity;
+import com.liberty.technical.web.SharedConstants;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -87,7 +88,7 @@ public class Order
         return q.getItemQuantity();
       }
     }
-    return 1;
+    return item.getMinAmount();
   }
 
 
@@ -95,7 +96,11 @@ public class Order
   {
     int count = 0;
     for (ItemQuantity q : itemQuantity) {
-      count += q.getItemQuantity();
+      if (q.getItem().getCategoryName().equals(SharedConstants.CATEGORY_CLASSIC)) {
+        count++;
+      } else {
+        count += q.getItemQuantity();
+      }
     }
     return count;
   }

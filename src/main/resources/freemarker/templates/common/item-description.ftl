@@ -1,32 +1,27 @@
 <script>
 
-    <#if flexPrice??>
+    <#if diapasons??>
     function getItemPriceFromDiapasons(count) {
-        <#if diapasons??>
-            <#list diapasons as diapason>
-                if (count >= ${diapason.getCountFrom()} && count <= ${diapason.getCountTo()}) {
-                    return ${diapason.getPrice()} * 1000;
-                }
-            </#list>
-
-        </#if>
-        return ${defaultPrice} * 1000;
+        <#list diapasons as diapason>
+            if (count >= ${diapason.getCountFrom()} && count <= ${diapason.getCountTo()}) {
+                return ${diapason.getPrice()} * 1000;
+            }
+        </#list>
+        return ${selectedItem.getPrice()} * 1000;
     }
     </#if>
 
     $(document).ready(function(){
 
-        var itemMinAmount = 1;
+        var itemMinAmount = ${minAmount};
         var isClassic = false;
         <#if isClassic>
-                itemMinAmount = 15;
                 isClassic = true;
                 // TODO: remove by frmrkr vars
                 var paper_price = 25000;
                 var vase_price = 70000;
         </#if>
         var value = document.getElementById('quant_input').value;
-        updateResultAmount(value);
 
         $("#add-to-cart-desc").click(function(e) {
             $(this).css("width", $(this).outerWidth());
@@ -162,7 +157,7 @@
                         <span style="padding-left: 9px;vertical-align: super;">
                             ${translator.getString("item_for")}
                             <span id="flex-price" style="padding-left: 5px;font-size: 14pt;font-weight: bold;">
-                                ${defaultPrice}
+                                ${selectedItem.getPrice()}.000
                             </span>
                             <span style="font-size: 14pt;font-weight: bold;">
                                 ${translator.getString("rub")}.
@@ -170,7 +165,7 @@
                         </span></#if>
                 </div>
                 <div style="font-family: Attentica4F; font-size: 25pt; font-weight:bold; margin-left: 10px; margin-top:15px; padding-right: 15px" class="textleft">
-                    <p id="result-amount" class="textleft">${selectedItem.getPrice()?string?replace(",",".")}.000</p>
+                    <p id="result-amount" class="textleft">${selectedItem.getPrice() * selectedItem.getMinAmount()}.000</p>
                 </div>
                 <div style="margin-top:20px; padding-right: 10px" class="textleft">
                         <input id="item-id" type="hidden" name="itemId" value="${itemId}">

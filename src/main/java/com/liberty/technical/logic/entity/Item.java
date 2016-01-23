@@ -46,6 +46,9 @@ public class Item
   @JoinColumn(name="item_id", referencedColumnName="id")
   private Set<ItemImages> images;
 
+  @Column(name = "min_amount")
+  private Integer minAmount;
+
   public long getId()
   {
     return id;
@@ -121,6 +124,18 @@ public class Item
   public Integer getPrice()
   {
     return price;
+  }
+
+
+  public Integer getMinAmount()
+  {
+    return minAmount;
+  }
+
+
+  public void setMinAmount(Integer minAmount)
+  {
+    this.minAmount = minAmount;
   }
 
 
