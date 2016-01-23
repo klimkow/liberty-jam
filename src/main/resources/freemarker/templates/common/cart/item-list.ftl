@@ -16,6 +16,18 @@
         </#list>
     }
 
+    function getAdditionalPrice(id) {
+        var result = 0;
+        <#list cartItems as item>
+            if(id == ${item.getId()}) {
+                <#if order.getIQWithItem(item).isWithPaper()>result += 25;</#if>
+                <#if order.getIQWithItem(item).isWithVase()>result += 70;</#if>
+
+                return result;
+            }
+        </#list>
+    }
+
     function getItemMinAmount(id) {
         <#list cartItems as item>
             if(id == ${item.getId()}) {
@@ -50,6 +62,7 @@
             if(value > minAmount) {
                 $(this).next('input').val(--value);
                 updateItemPrice(id, value);
+                recalculateSumAmount();
             }
         });
 
@@ -59,21 +72,8 @@
 
             $(this).prev('input').val(++value);
             updateItemPrice(id, value);
+            recalculateSumAmount();
         });
-
-//        $( "#quant_input" ).change(function(e) {
-//            var id = $(this).prev('input').val();
-//            var value = $(this).closest('#quant_input').val();
-//            alert(id);
-//            var itemMinAmount = getItemMinAmount(id);
-//            if (value < itemMinAmount) {
-//                $(this).closest('#quant_input').val(itemMinAmount);
-//            }
-////            if(isClassic) {
-////                updateResultAmount(value);
-////            }
-//        });
-
     });
 
     function onCountChanged(id) {
@@ -84,11 +84,24 @@
             count = minAmount;
         }
         updateItemPrice(id, count);
+        recalculateSumAmount();
     }
 
     function updateItemPrice(id, count) {
         var price = getItemPriceFromDiapasons(id, count);
         $('#item-price-' + id).html(numberWithDots(price));
+    }
+
+    function recalculateSumAmount()
+    {
+        var price = 0;
+        $(".item-list-tr").each(function() {
+            var id = $(this).find('input').attr('name');
+            var count = $(this).find('input').val();
+            price += getItemPriceFromDiapasons(id, count) * count;
+            price += getAdditionalPrice(id);
+        });
+        $('#amount-to-pay').html(numberWithDots(price));
     }
 
 </script>
@@ -135,17 +148,23 @@
         </thead>
         <tbody>
             <#list cartItems as item>
-            <tr id="item-list-tr">
-                <td class="textleft"><img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100"> <p class="item-name-cart">${item.getName()}</p></td>
+            <tr id="item-list-tr" class="item-list-tr">
+                <td class="textleft">
+                    <img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100">
+                    <div class="item-name-cart-block">
+                        <p class="item-name-cart">${item.getName()}</p>
+                        <#if order.getIQWithItem(item).isWithPaper()><span>${translator.getString("item_paper_option")}</span></#if>
+                        <#if order.getIQWithItem(item).isWithVase()><span>${translator.getString("item_vase_option_added")}</span></#if>
+                    </div>
+                </td>
                 <td style="padding-top: 30px" class="td-right">
                     <div id="quant_box" style="margin-top: 0px;" class="quant_box">
-                        <input type="hidden" name="itemId" value="${item.getId()}">
                         <span id="full-minus" style="margin-top: 2px;" class="quant_btn_left">-</span>
                         <input type="text" onchange="onCountChanged(${item.getId()})" name="${item.getId()}" id="quant_input" value="${order.getAmountOfItem(item)}" >
                         <span id="full-plus" style="margin-top: 2px;" class="quant_btn_right">+</span>
                     </div>
                 </td>
-                <td style="padding-top: 30px" class="td-right"><span id="item-price-${item.getId()}">${item.getPrice()?string?replace(",",".")}</span>.000</td>
+                <td style="padding-top: 30px" class="td-right"><span id="item-price-${item.getId()}" class="itm-price">${item.getPrice()?string?replace(",",".")}</span>.000</td>
                 <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
             </tr>
             </#list>

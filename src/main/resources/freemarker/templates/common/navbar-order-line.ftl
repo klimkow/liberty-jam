@@ -11,4 +11,4 @@ ${translator.getString("bouquet1")}
 
 </#if>
 </#if>
-${translator.getString("total_amount")} ${order.getSumItemPrice()}
+${translator.getString("total_amount")} ${order.getAmount()}

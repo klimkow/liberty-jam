@@ -314,6 +314,7 @@ function removeItemFromCart(id)
 
             });
             maybeUpdateNavBar();
+            recalculateSumAmount();
         }
     });
 }

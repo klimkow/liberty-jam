@@ -15,7 +15,7 @@
                         ${translator.getString("bouquet5")}
                     </#if>
             </#if>
-                ${translator.getString("total_amount")} ${order.getSumItemPrice()?string?replace(",",".")}${translator.getString("currency")}
+                ${translator.getString("total_amount")} ${order.getAmount()?string?replace(",",".")}${translator.getString("currency")}
                 <a id="go-to-cart" class="btn btn-default" href="/cart" onclick="turnOnLoadingGlass()">${translator.getString("go_to_cart")}</a>
             <#else>${translator.getString("cart_is_empty")}
             </#if>

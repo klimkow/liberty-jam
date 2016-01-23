@@ -532,13 +532,25 @@ div.description-text > p
     margin-left: 15px;
 }
 
-.item-name-cart
+.item-name-cart-block
 {
     float: left;
+    padding-left: 90px;
+    text-align: left;
+}
+
+.item-name-cart
+{
     font-family: BadScript;
     font-size: 15pt;
-    padding-left: 90px;
-    padding-top: 30px;
+    padding-top: 25px;
+}
+
+.item-name-cart-block > span
+{
+    display: block;
+    font-family: OsansLight, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
 }
 
 .td-right

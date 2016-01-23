@@ -51,17 +51,22 @@ public class GenericeCartService {
       itemQuantity = new ItemQuantity(item, quantity);
       order.addItemQuantity(itemQuantity);
     }
+    order.setAmount(calculateOrderAmount(order));
   }
 
 
   private Integer calculateOrderAmount(Order order)
   {
     int sum = 0;
-    if (order != null && order.getItems() != null) {
-      Iterator<Item> it = order.getItems().iterator();
-      while (it.hasNext()) {
-        Item item = it.next();
-        sum += item.getPrice();
+    for (ItemQuantity q : order.getItemQuantity()) {
+      sum += q.getItem().getPrice() * q.getItemQuantity();
+      if (q.isWithPaper()) {
+        // TODO: get amount from db
+        sum += 25;
+      }
+      if (q.isWithVase()) {
+        // TODO: get amount from db
+        sum += 70;
       }
     }
     return sum;
@@ -76,6 +81,7 @@ public class GenericeCartService {
     }
     Set<ItemQuantity> items = order.getItemQuantity();
     items.removeIf(item1 -> item1.getItem().getId() == itemId);
+    order.setAmount(calculateOrderAmount(order));
   }
 
 }

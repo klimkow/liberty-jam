@@ -106,14 +106,14 @@ public class Order
   }
 
 
-  public Integer getSumItemPrice()
-  {
-    int price = 0;
-    for (ItemQuantity q : itemQuantity) {
-      price += q.getItem().getPrice() * q.getItemQuantity();
-    }
-    return price;
-  }
+//  public Integer getSumItemPrice()
+//  {
+//    int price = 0;
+//    for (ItemQuantity q : itemQuantity) {
+//      price += q.getItem().getPrice() * q.getItemQuantity();
+//    }
+//    return price;
+//  }
 
 
 

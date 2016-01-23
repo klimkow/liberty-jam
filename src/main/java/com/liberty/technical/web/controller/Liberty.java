@@ -145,7 +145,7 @@ public class Liberty {
       if (order != null) {
         attributes.put("order", order);
         attributes.put("itemCount", order.getSumItemCount());
-        attributes.put("sumAmount", order.getSumItemPrice());
+        attributes.put("sumAmount", order.getAmount());
         attributes.put("cartItems", order.getItems());
 
         for (Item item : order.getItems()) {
@@ -164,13 +164,20 @@ public class Liberty {
       if (order != null) {
         attributes.put("order", order);
         attributes.put("itemCount", order.getSumItemCount());
-        attributes.put("sumAmount", order.getSumItemPrice());
+        attributes.put("sumAmount", order.getAmount());
         attributes.put("cartItems", order.getItems());
+
+        for (Item item : order.getItems()) {
+          attributes.put("minAmount" + item.getId(), item.getMinAmount());
+        }
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
       attributes.put("translator", LocalizationUtil.getInstance(locale));
       return new ModelAndView(attributes, "common/cart/item-list.ftl");
     }, engine);
+
+
+
 
 
     post("/removeItem", (request, response) -> {
@@ -182,7 +189,7 @@ public class Liberty {
         cartService.removeItemFromOrder(order, id);
         attributes.put("order", order);
         attributes.put("itemCount", order.getSumItemCount());
-        attributes.put("sumAmount", order.getSumItemPrice());
+        attributes.put("sumAmount", order.getAmount());
         attributes.put("cartItems", order.getItems());
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
@@ -244,7 +251,7 @@ public class Liberty {
 
       String bouquets;
       int count = order.getSumItemCount();
-      int amount = order.getSumItemPrice();
+      int amount = order.getAmount();
       if (count == 1) {
         bouquets = LocalizationUtil.getString("bouquet1");
       } else if (count > 1 && count < 5) {
@@ -267,7 +274,7 @@ public class Liberty {
       Order order = request.session()
           .attribute(SharedConstants.ATTRIBUTE_ORDER);
       int count = order == null ? 1 : order.getSumItemCount();
-      int amount = order == null ? 0 : order.getSumItemPrice();
+      int amount = order == null ? 0 : order.getAmount();
 
 
       String bouquets;
