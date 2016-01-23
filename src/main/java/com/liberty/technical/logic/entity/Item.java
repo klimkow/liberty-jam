@@ -2,6 +2,7 @@ package com.liberty.technical.logic.entity;
 
 
 import com.liberty.technical.logic.entity.images.ItemImages;
+import com.liberty.technical.logic.entity.service.PriceDiapason;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -48,6 +49,11 @@ public class Item
 
   @Column(name = "min_amount")
   private Integer minAmount;
+
+  @OneToMany(targetEntity = com.liberty.technical.logic.entity.service.PriceDiapason.class,
+      cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
+  @JoinColumn(name="item_id", referencedColumnName="id")
+  private Set<PriceDiapason> priceDiapasonList;
 
   public long getId()
   {
@@ -106,6 +112,18 @@ public class Item
   public void setAvailableAmount(Integer availableAmount)
   {
     this.availableAmount = availableAmount;
+  }
+
+
+  public Set<PriceDiapason> getPriceDiapasonList()
+  {
+    return priceDiapasonList;
+  }
+
+
+  public void setPriceDiapasonList(Set<PriceDiapason> priceDiapasonList)
+  {
+    this.priceDiapasonList = priceDiapasonList;
   }
 
 

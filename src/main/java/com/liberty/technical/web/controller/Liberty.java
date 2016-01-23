@@ -147,6 +147,10 @@ public class Liberty {
         attributes.put("itemCount", order.getSumItemCount());
         attributes.put("sumAmount", order.getSumItemPrice());
         attributes.put("cartItems", order.getItems());
+
+        for (Item item : order.getItems()) {
+          attributes.put("minAmount" + item.getId(), item.getMinAmount());
+        }
       }
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
       attributes.put("translator", LocalizationUtil.getInstance(locale));

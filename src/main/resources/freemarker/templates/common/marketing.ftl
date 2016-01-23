@@ -49,7 +49,7 @@
                             <input id="item-id" type="hidden" name="itemId" value="${item.getId()}">
                             <img class="img-circle" src="${item.getLogo()}" height="200" width="200">
                             <h2>${item.getName()}</h2>
-                            <div class="item-price-small">${item.getPrice() * item.getMinAmount()}${translator.getString("currency")}</div>
+                            <div class="item-price-small">${(item.getPrice() * item.getMinAmount())?string?replace(",",".")}${translator.getString("currency")}</div>
                             </div>
                             <div id="add-to-cart" class="btn btn-default <#if order??><#if order.isSelected(item)>btn-item-in-cart</#if></#if>" >
                                 <#if order??&&order.isSelected(item)><img style="margin-right: 2px" src="img/ok_symb2.png" width="13" height="13"/>${translator.getString("item_int_the_cart")}

@@ -1,5 +1,32 @@
 <script>
+
+    function getItemPriceFromDiapasons(id, count) {
+        <#list cartItems as item>
+            if(id == ${item.getId()}) {
+                <#if item.getPriceDiapasonList()??>
+                    <#list item.getPriceDiapasonList() as diapason>
+                        if (count >= ${diapason.getCountFrom()} && count <= ${diapason.getCountTo()}) {
+                            return ${diapason.getPrice()};
+                        }
+                    </#list>
+                </#if>
+
+                return ${item.getPrice()?c};
+            }
+        </#list>
+    }
+
+    function getItemMinAmount(id) {
+        <#list cartItems as item>
+            if(id == ${item.getId()}) {
+                return ${item.getMinAmount()};
+            }
+        </#list>
+        return 1;
+    }
+
     $(document).ready(function(){
+
 
         $("#go-step2").click(function(e) {
             $('form[name="items_form"]').submit();
@@ -18,20 +45,55 @@
 
         $("#items_form").delegate('#full-minus','click', function(e) {
             var value = $(this).next('input').val();
-            if(value > 1) {
+            var id = $(this).next('input').attr('name');
+            var minAmount = getItemMinAmount(id);
+            if(value > minAmount) {
                 $(this).next('input').val(--value);
+                updateItemPrice(id, value);
             }
         });
 
         $("#items_form").delegate('#full-plus','click', function(e) {
             var value = $(this).prev('input').val();
+            var id = $(this).prev('input').attr('name');
+
             $(this).prev('input').val(++value);
+            updateItemPrice(id, value);
         });
 
-
+//        $( "#quant_input" ).change(function(e) {
+//            var id = $(this).prev('input').val();
+//            var value = $(this).closest('#quant_input').val();
+//            alert(id);
+//            var itemMinAmount = getItemMinAmount(id);
+//            if (value < itemMinAmount) {
+//                $(this).closest('#quant_input').val(itemMinAmount);
+//            }
+////            if(isClassic) {
+////                updateResultAmount(value);
+////            }
+//        });
 
     });
+
+    function onCountChanged(id) {
+        var count = $(("input[name='" + id + "']")).val();
+        var minAmount = getItemMinAmount(id);
+        if (count < minAmount) {
+            $(("input[name='" + id + "']")).val(minAmount);
+            count = minAmount;
+        }
+        updateItemPrice(id, count);
+    }
+
+    function updateItemPrice(id, count) {
+        var price = getItemPriceFromDiapasons(id, count);
+        $('#item-price-' + id).html(numberWithDots(price));
+    }
+
 </script>
+
+
 <div style="height: 100px; background-color: #f3f3f3;" class="row">
     <div class="container">
         <#--<div style="margin-top: 30px;" href="#" class="gallery__controls-next" onclick="show_step2()">-->
@@ -77,12 +139,13 @@
                 <td class="textleft"><img class="img-circle textleft" src="${item.getLogo()}" height="100" width="100"> <p class="item-name-cart">${item.getName()}</p></td>
                 <td style="padding-top: 30px" class="td-right">
                     <div id="quant_box" style="margin-top: 0px;" class="quant_box">
+                        <input type="hidden" name="itemId" value="${item.getId()}">
                         <span id="full-minus" style="margin-top: 2px;" class="quant_btn_left">-</span>
-                        <input type="text" name="${item.getId()}" id="quant_input" value="${order.getAmountOfItem(item)}" >
+                        <input type="text" onchange="onCountChanged(${item.getId()})" name="${item.getId()}" id="quant_input" value="${order.getAmountOfItem(item)}" >
                         <span id="full-plus" style="margin-top: 2px;" class="quant_btn_right">+</span>
                     </div>
                 </td>
-                <td style="padding-top: 30px" class="td-right"><span id="item-price-id">${item.getPrice()?string?replace(",",".")}</span>.000</td>
+                <td style="padding-top: 30px" class="td-right"><span id="item-price-${item.getId()}">${item.getPrice()?string?replace(",",".")}</span>.000</td>
                 <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
             </tr>
             </#list>
@@ -91,7 +154,7 @@
     </form>
     </div>
     <div class="row sum_amount">
-        ${translator.getString("sum_amount_to_pay")}: <span style="color: #3FB8AF;" id="amount-to-pay">${sumAmount}</span><span style="color: #3FB8AF;">.000</span> ${translator.getString("rub")}.
+        ${translator.getString("sum_amount_to_pay")}: <span style="color: #3FB8AF;" id="amount-to-pay">${sumAmount?string?replace(",",".")}</span><span style="color: #3FB8AF;">.000</span> ${translator.getString("rub")}.
     </div>
 
     <div id="go-step2" class="gallery__controls-next" >
