@@ -1,3 +1,5 @@
+var imageFlag = 0;
+
 function redirect(href)
 {
     window.location = href;
@@ -46,7 +48,13 @@ function displayFiles(files) {
         if (!file.type.match(/image.*/) || files.size > 3) {
             return true;
         }
-        document.getElementById('image_main').value = file.name;
+        document.getElementById('image' + imageFlag).value = file.name;
+        if (imageFlag < 3) {
+            imageFlag++;
+        } else {
+            imageFlag = 0;
+        }
+
         var li = $('<div id="img" class="img-to-download" style="float: left; padding: 2px 7px;"/>').appendTo(imgList);
         $('<div/>').text(file.name).appendTo(li);
         var img = $('<img/>').appendTo(li);

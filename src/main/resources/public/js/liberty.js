@@ -1,3 +1,5 @@
+var needUpdateNavBar = false;
+
 function createSlider(){
     var slider = document.getElementById('slider');
 
@@ -298,6 +300,7 @@ function showValidationWarning(text)
 
 function removeItemFromCart(id)
 {
+    needUpdateNavBar = true;
     var post_url = 'removeItem';
     turnOnLoadingGlass();
     $.ajax({
@@ -321,6 +324,10 @@ function removeItemFromCart(id)
 
 function maybeUpdateNavBar()
 {
+    if (!needUpdateNavBar)
+        return;
+
+    needUpdateNavBar = false;
     var post_url = 'updateNavbar';
     $.ajax({
         type: 'POST',
@@ -351,6 +358,7 @@ function turnOnLoadingGlass()
 
 function finishOrder()
 {
+    needUpdateNavBar = true;
     var post_url = 'saveOrder';
     turnOnLoadingGlass();
     $.ajax({

@@ -359,6 +359,7 @@ public class Liberty {
 
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
       attributes.put("translator", LocalizationUtil.getInstance(locale));
+      attributes.put("sumAmount", order.getAmount());
       return new ModelAndView(attributes, "common/cart/payment.ftl");
     }, engine);
 
@@ -414,6 +415,7 @@ public class Liberty {
       attributes.put("itemsSize", items.size());
       attributes.put("itemWidth", itemWidth.toString());
       attributes.put("galleryWidth", totalWidth.toString());
+      attributes.put("isClassic", categoryId.equals(SharedConstants.CATEGORY_CLASSIC_ID));
       attributes.put("x", 0);
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
@@ -444,6 +446,7 @@ public class Liberty {
       attributes.put("itemsSize", items.size());
       attributes.put("itemWidth", itemWidth.toString());
       attributes.put("galleryWidth", totalWidth.toString());
+      attributes.put("isClassic", categoryId.equals(SharedConstants.CATEGORY_CLASSIC_ID));
       attributes.put("x", 0);
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
@@ -518,7 +521,7 @@ public class Liberty {
 
     get("/administrator/items", (request, response) -> {
       List<Item> itemList = DaoFactory.getInstance().
-          createCommonDAO(Item.class).readAllObjects(Item.class);
+          createItemDAO().getAllItems();
       Map<String, Object> attributes = new HashMap<>();
       attributes.put("items", itemList);
       return new ModelAndView(attributes, "admin/items.ftl");
@@ -583,22 +586,22 @@ public class Liberty {
       Set<Category> categories = new HashSet<Category>();
       categories.add(category);
 
-      String image_main = request.queryParams("image_main");
-//      String image_add1 = request.queryParams("image_add1");
-//      String image_add2 = request.queryParams("image_add2");
+      String image_main = request.queryParams("image0");
+      String image_add1 = request.queryParams("image1");
+      String image_add2 = request.queryParams("image2");
       if (image_main != null && !image_main.isEmpty()) {
         Set<ItemImages> images = new HashSet<>();
         ImageService imageService = ServiceFactory.getInstanse().createImageService();
         imageService.deleteItemImages(item);
-        ItemImages image = imageService.setItemImage(item, image_main, true);
+        ItemImages image = imageService.setItemImage(item, image_main, 0);
         images.add(image);
 
-//        if (Objects.nonNull(image_add1)) {
-//          images.add(imageService.setItemImage(item, image_add1, false));
-//        }
-//        if (Objects.nonNull(image_add2)) {
-//          images.add(imageService.setItemImage(item, image_add2, false));
-//        }
+        if (Objects.nonNull(image_add1)) {
+          images.add(imageService.setItemImage(item, image_add1, 1));
+        }
+        if (Objects.nonNull(image_add2)) {
+          images.add(imageService.setItemImage(item, image_add2, 2));
+        }
 
         item.setImages(images);
       }

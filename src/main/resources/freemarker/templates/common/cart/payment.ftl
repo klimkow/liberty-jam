@@ -65,8 +65,8 @@
     </div>
 </div>
 
-<div style="height: 400px;" class="container ">
-    <div class="row">
+<div style="min-height: 400px;" class="container ">
+    <div id="payment-type-row" class="row">
 
     <div id="pay_online" style="margin-left: 100px; margin-right: 30px"
          class="payment-block" onmouseover="makeNotActive('pay_cash')"
@@ -91,6 +91,9 @@
         </p>
     </div>
 
+    </div>
+    <div style="font-size: 28pt;" class="row sum_amount">
+    ${translator.getString("sum_amount_to_pay")}: <span style="color: #3FB8AF;" id="amount-to-pay">${sumAmount?string?replace(",",".")}</span><span style="color: #3FB8AF;">.000</span> ${translator.getString("rub")}.
     </div>
 
     <div style="margin-top: 30px;" href="#" class="gallery__controls-prev" onclick="show_step2()">

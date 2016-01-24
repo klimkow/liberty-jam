@@ -44,9 +44,10 @@
             var value = document.getElementById('quant_input').value;
             if (value < itemMinAmount) {
                 document.getElementById('quant_input').value = itemMinAmount;
-            }
-            if(isClassic) {
-                updateResultAmount(value);
+            } else {
+                if(isClassic) {
+                    updateResultAmount(value);
+                }
             }
         });
 
@@ -67,9 +68,9 @@
             var value = document.getElementById('quant_input').value;
             if(value > itemMinAmount) {
                 document.getElementById('quant_input').value = --value;
-            }
-            if(isClassic) {
-                updateResultAmount(value)
+                if(isClassic) {
+                    updateResultAmount(value)
+                }
             }
         });
 
@@ -147,9 +148,9 @@
                         <label style="display: block; margin-left: 10px" for="c2"><span></span>${translator.getString("item_vase_option")}</label>
                     </#if>
                     <div style="margin-left: 10px;" class="quant_box">
-                        <span id="full-minus" class="quant_btn_left">-</span>
+                        <span id="full-minus" class="quant_btn_left noselect">-</span>
                         <input id="quant_input" type="text" name="item_quantity" value="${count}">
-                        <span id="full-plus" class="quant_btn_right">+</span>
+                        <span id="full-plus" class="quant_btn_right noselect">+</span>
                     </div>
                     <#if isClassic>
                         <span style="padding-left: 9px;vertical-align: super;">

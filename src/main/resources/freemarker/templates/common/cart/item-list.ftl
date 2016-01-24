@@ -1,5 +1,4 @@
 <script>
-
     function getItemPriceFromDiapasons(id, count) {
         <#list cartItems as item>
             if(id == ${item.getId()}) {
@@ -88,6 +87,7 @@
     }
 
     function updateItemPrice(id, count) {
+        needUpdateNavBar = true;
         var price = getItemPriceFromDiapasons(id, count);
         $('#item-price-' + id).html(numberWithDots(price));
     }
@@ -159,12 +159,13 @@
                 </td>
                 <td style="padding-top: 30px" class="td-right">
                     <div id="quant_box" style="margin-top: 0px;" class="quant_box">
-                        <span id="full-minus" style="margin-top: 2px;" class="quant_btn_left">-</span>
-                        <input type="text" onchange="onCountChanged(${item.getId()})" name="${item.getId()}" id="quant_input" value="${order.getAmountOfItem(item)}" >
-                        <span id="full-plus" style="margin-top: 2px;" class="quant_btn_right">+</span>
+                        <span id="full-minus" style="margin-top: 2px;" class="quant_btn_left noselect">-</span>
+                        <#assign initCount = order.getAmountOfItem(item)>
+                        <input type="text" onchange="onCountChanged(${item.getId()})" name="${item.getId()}" id="quant_input" value="${initCount}" >
+                        <span id="full-plus" style="margin-top: 2px;" class="quant_btn_right noselect">+</span>
                     </div>
                 </td>
-                <td style="padding-top: 30px" class="td-right"><span id="item-price-${item.getId()}" class="itm-price">${item.getPrice()?string?replace(",",".")}</span>.000</td>
+                <td style="padding-top: 30px" class="td-right"><span id="item-price-${item.getId()}" class="itm-price">${item.getPriceIncludingDiapasons(initCount)?string?replace(",",".")}</span>.000</td>
                 <td class="td-right"><img style="margin-top: 30px; cursor: pointer" onclick="removeItemFromCart(${item.getId()})" src="img/delete.png" height="15" width="15"></td>
             </tr>
             </#list>

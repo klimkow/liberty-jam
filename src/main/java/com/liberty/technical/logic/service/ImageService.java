@@ -14,11 +14,12 @@ public class ImageService
   private static final String IMAGES_PATH = "img/bouquets/";
   private static final String LOGO_IMAGE = "KLOGO_";
 
-  public ItemImages setItemImage(Item item, String url, boolean logo)
+  public ItemImages setItemImage(Item item, String url, int order)
   {
     ItemImages images = new ItemImages();
     images.setImageUrl(IMAGES_PATH + url);
     images.setItem(item);
+    images.setSeqenceOrder(order);
     imageDAO.persistObject(images);
     return images;
   }

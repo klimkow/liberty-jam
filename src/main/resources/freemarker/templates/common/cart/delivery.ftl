@@ -48,7 +48,7 @@
         }
     });
 
-    // ON GO TO NEXT STEP
+    // ON GO TO THE NEXT STEP
     $('#go_step3').click(function(e) {
         document.getElementById('date').value = $('#datetimepicker10 div').datepicker('getFormattedDate');
         $('#date').val($('#datetimepicker10 div').datepicker('getDate'));
@@ -118,10 +118,13 @@
         <#--</div>-->
         <div class="dlv-block-cn form-group has-feedback">
             <label for="from-tel">${translator.getString("dlv_phone_number")}</label>
+            <span class="glyphicon glyphicon-asterisk"></span>
             <input type="text" name="phone-from" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control"
                    id="from-tel"
                    <#if user??>value="${user.getPhone()}"</#if>
-                   data-toggle="popover" data-content="Мы воспользуемся этим номером телефона, если у нас возникнут трудности с доставкой">
+                   <#--data-toggle="popover" data-content="Мы воспользуемся этим номером телефона, если у нас возникнут трудности с доставкой"-->
+                   required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="from-email">Email</label>
@@ -132,13 +135,14 @@
         </div>
         <div class="dlv-block-cn form-group">
             <label for="comment">${translator.getString("dlv_wish_comment")}</label>
-            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment"></textarea>
+            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment" placeholder="${translator.getString("dlv_wish_comment_placeholder")}"></textarea>
+            <span class="dlv-description-small">${translator.getString("punctuation_warning")}</span>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label>
                 ${translator.getString("dlv_who_is_reciever")}
             </label>
-            <label class="radio-inline">
+            <label style="padding-left: 30px;" class="radio-inline">
                 <input class="btn-hide" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked="checked">
                 ${translator.getString("i_am")}
             </label>
@@ -180,7 +184,9 @@
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="to-phone">${translator.getString("dlv_phone_reciever")}</label>
-            <input type="text" name="name-to" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone">
+            <span class="glyphicon glyphicon-asterisk"></span>
+            <input type="text" name="name-to" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone" required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
 
     </div>
@@ -217,7 +223,11 @@
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             </div>
             <div class="delivery-zone">
-                <p class="map-link" data-toggle="modal" data-target=".bs-modal-lg">${translator.getString("delivery_zone")}</p>
+                <span class="map-link" data-toggle="modal" data-target=".bs-modal-lg">${translator.getString("delivery_zone")}</span>
+            </div>
+            <div class="dlv-block-cn form-group">
+                <input type="checkbox" id="dlv-out-of-city" name="out-of-city" <#if itemQuantity??><#if itemQuantity.isWithPaper()>checked</#if></#if>/>
+                <label style="font-family: OsansLight, Arial, Helvetica, sans-serif;font-weight: bolder;font-size: 12pt;" for="dlv-out-of-city"><span></span>${translator.getString("dlv_delivery_out_of_city")}</label>
             </div>
             <div style="float:left; width: 50%;" class="dlv-block-cn form-group has-feedback">
                 <label for="address-house">${translator.getString("address_house")}</label>

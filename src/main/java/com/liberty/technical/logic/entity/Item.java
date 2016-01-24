@@ -3,6 +3,7 @@ package com.liberty.technical.logic.entity;
 
 import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.entity.service.PriceDiapason;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -54,6 +55,10 @@ public class Item
       cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
   @JoinColumn(name="item_id", referencedColumnName="id")
   private Set<PriceDiapason> priceDiapasonList;
+
+  // is used in ItemDAO
+  @Formula("price*min_amount")
+  private Integer minPrice;
 
   public long getId()
   {
@@ -173,6 +178,16 @@ public class Item
       }
     }
     return result.toString();
+  }
+
+  public int getPriceIncludingDiapasons(int count)
+  {
+    for (PriceDiapason diapason : getPriceDiapasonList()) {
+      if (count >= diapason.getCountFrom() && count <= diapason.getCountTo()) {
+        return diapason.getPrice();
+      }
+    }
+    return getPrice();
   }
 
   public String getSecondImageUrl()

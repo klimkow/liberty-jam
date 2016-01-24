@@ -22,7 +22,7 @@ public class ItemDAO extends CommonDAOImpl<Item>
     try {
       tx = session.beginTransaction();
       resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
-          "where itm.price between " + pFrom + " and " + pTo + categoryCriteria).
+          "where itm.minPrice between " + pFrom + " and " + pTo + categoryCriteria).
           list();
       tx.commit();
 
@@ -44,7 +44,7 @@ public class ItemDAO extends CommonDAOImpl<Item>
     try {
       tx = session.beginTransaction();
       resultList = session.createQuery(" select itm from Item itm " +
-          "where itm.price between " + pFrom + " and " + pTo).
+          "where itm.minPrice between " + pFrom + " and " + pTo).
           list();
       tx.commit();
 
@@ -70,6 +70,25 @@ public class ItemDAO extends CommonDAOImpl<Item>
           list();
       tx.commit();
 
+    } catch (HibernateException e) {
+      if (tx != null) tx.rollback();
+      e.printStackTrace();
+    } finally {
+      session.close();
+    }
+    return resultList;
+  }
+
+
+  public List<Item> getAllItems()
+  {
+    List<Item> resultList = new ArrayList<>();
+    Session session = factory.openSession();
+    Transaction tx = null;
+    try {
+      tx = session.beginTransaction();
+      resultList = session.createQuery(" select itm from Item itm ").list();
+      tx.commit();
     } catch (HibernateException e) {
       if (tx != null) tx.rollback();
       e.printStackTrace();

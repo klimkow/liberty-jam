@@ -316,6 +316,12 @@ div.marketing-item-container > div.item-price-small
     font-size: 20pt;
 }
 
+.item-price-small > span {
+    font-family: BadScript;
+    font-size: 15pt;
+    font-weight: 200;
+}
+
 div.gallery__item > p, div.marketing-item-container > p
 {
     font-family: BadScript;
@@ -675,7 +681,7 @@ div.wizard-item-active-first > h2
 .dlv-block-cn > label
 {
     font-family: BadScript;
-    font-size: 13pt;
+    font-size: 12pt;
 }
 
 .form-control
@@ -683,10 +689,11 @@ div.wizard-item-active-first > h2
     border-radius: 0px;
     font-family: OsansLight, Arial, Helvetica, sans-serif;
     font-weight: bolder;
-    font-size: 13pt;
+    font-size: 12pt;
     padding: 2px 10px;
     line-height: 1;
     height: 29px;
+    color: black;
 }
 
 .form-control:focus
@@ -889,7 +896,7 @@ input[type="checkbox"]:checked + label span {
     position: relative;
     display: inline-block;
     margin-top: 15px;
-    width: 80px;
+    width: 90px;
     height: 28px;
     border: black solid 1px;
     background: #fff;
@@ -901,7 +908,7 @@ input[type="checkbox"]:checked + label span {
 
 .quant_box input[type="text"] {
     border: 0;
-    width: 30px;
+    width: 40px;
     text-align: center;
 }
 
@@ -921,6 +928,14 @@ input[type="checkbox"]:checked + label span {
     border-right: #b1b0b0 solid 1px;
     cursor: pointer;
     font-weight: 300;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .quant_btn_right {
@@ -943,6 +958,11 @@ input[type="checkbox"]:checked + label span {
     font-weight: bold;
     font-size: 22pt;
 }
+
+#payment-type-row {
+    padding-bottom: 50px;
+}
+
 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: #3FB8AF !important;
@@ -974,7 +994,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .map-link {
-    text-align: right;
+    float: right;
     padding-right: 15px;
     cursor: pointer;
     font-family: OsansLight, Arial, Helvetica, sans-serif;
@@ -985,3 +1005,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     text-decoration: underline;
 }
 
+.dlv-description-small {
+    display: block;
+    font-family: OsansLight, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    padding-bottom: 5px;
+    font-weight: bold;
+}

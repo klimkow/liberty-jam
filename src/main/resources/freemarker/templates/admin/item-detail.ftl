@@ -2,6 +2,7 @@
 <script>
     $(document).ready(function(){
 
+
         $("#item_form").bind('submit', function(e) {
 //            e.preventDefault();
             uploadImages();
@@ -113,9 +114,9 @@
                                 </textarea>
                             </div>
                                 <#--NEW IMAGES INPUTS-->
-                                <input type="hidden" name="image_main" id="image_main"/>
-                                <input type="hidden" name="image_add1" id="image_add1"/>
-                                <input type="hidden" name="image_add2" id="image_add2"/>
+                                <input type="hidden" name="image0" id="image0"/>
+                                <input type="hidden" name="image1" id="image1"/>
+                                <input type="hidden" name="image2" id="image2"/>
                                 <a class="btn btn-default" style="float: right; margin-top: 10px;margin-left: 10px;" href="/administrator/items">Cancel</a>
                                 <button id="svbtn" class="btn btn-default" style="float: right; margin-top: 10px;" type="submit">Save</button>
                             </form>

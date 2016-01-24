@@ -59,7 +59,8 @@ public class GenericeCartService {
   {
     int sum = 0;
     for (ItemQuantity q : order.getItemQuantity()) {
-      sum += q.getItem().getPrice() * q.getItemQuantity();
+      int count = q.getItemQuantity();
+      sum += q.getItem().getPriceIncludingDiapasons(count) * count;
       if (q.isWithPaper()) {
         // TODO: get amount from db
         sum += 25;
