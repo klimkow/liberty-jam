@@ -37,9 +37,9 @@
             <div class="row menu-item-container">
                 <div class="menu-col" onclick="openPage('1')">${translator.getString("menu_item1")}</div>
                 <div class="menu-col" onclick="chooseBoquete()">${translator.getString("menu_item2")}</div>
-                <div class="menu-col">${translator.getString("menu_item3")}</div>
-                <div class="menu-col">${translator.getString("menu_item4")}</div>
-                <div class="menu-col">${translator.getString("menu_item5")}</div>
+                <div class="menu-col" onclick="openPage('3')">${translator.getString("menu_item3")}</div>
+                <div class="menu-col" onclick="openPage('4')">${translator.getString("menu_item4")}</div>
+                <div class="menu-col" onclick="openPage('5')">${translator.getString("menu_item5")}</div>
             </div>
         </div>
     </div>
