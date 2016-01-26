@@ -87,7 +87,7 @@
     {
         var pforone = getItemPriceFromDiapasons(value);
         paper_price = $('#c1').is(':checked') ? 25000 : 0;
-        vase_price = $('#c2').is(':checked') ? 70000 : 0;
+        vase_price = $('#c2').is(':checked') ? 150000 : 0;
         var result = calculateClassicBouquetPrice(paper_price, vase_price, value, pforone);
         $('#flex-price').html(getStringPriceForOneFlower(pforone));
         $('#result-amount').html(numberWithDots(result));

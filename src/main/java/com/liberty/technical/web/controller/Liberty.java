@@ -38,17 +38,17 @@ import java.util.*;
 /**
  * @author M-AKI.
  */
-public class Liberty {
+public class Liberty implements SparkApplication {
 
-//    @Override
-//    public void init()
-//    {
-//      execute();
-//    }
+    @Override
+    public void init()
+    {
+      execute();
+    }
 
-  public static void main(String[] args) {
-    execute();
-  }
+//  public static void main(String[] args) {
+//    execute();
+//  }
 
   private static void execute()
   {
