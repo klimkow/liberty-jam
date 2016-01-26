@@ -84,7 +84,7 @@
                                 <label style="float: left; padding-right: 20px; padding-top: 7px;"
                                        for="b_name">Name</label>
                                 <input style="width: 50%" type="text" name="b_name" class="form-control" id="b_name"
-                                       <#if item??>value="${item.getName()}"</#if>>
+                                       <#if item??>value='${item.getName()}'</#if>>
                             </div>
                             <div class="dlv-block-cn form-group">
                                 <label style="float: left; padding-right: 20px;"
