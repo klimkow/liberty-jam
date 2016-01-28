@@ -42,5 +42,28 @@
                 <div class="menu-col" onclick="openPage('5')">${translator.getString("menu_item5")}</div>
             </div>
         </div>
+        </div>
     </div>
+
+<div class="row">
+    <div class="menu-item-container">
+        <div class="footer-info-col">
+            ${translator.getString("foot_info_line1")}<br>
+            ${translator.getString("foot_info_line2")}<br>
+            ${translator.getString("foot_info_line3")}<br>
+            ${translator.getString("foot_info_line4")}
+        </div>
+        <div style="text-align: center;opacity: 0.5;padding-top: 15px;" class="footer-info-col">
+            <img src="img/main-logo.png" height="35px">
+        </div>
+        <div style="text-align: center;opacity: 0.8;" class="footer-info-col">
+            <img src="img/card1.gif" height="25px">
+            <br>
+            <img src="img/card2.jpg" height="25px">
+            <img src="img/card3.png" height="25px">
+            <img src="img/card4.jpg" height="25px">
+            <img src="img/card5.png" height="25px">
+        </div>
+    </div>
+</div>
 </div>

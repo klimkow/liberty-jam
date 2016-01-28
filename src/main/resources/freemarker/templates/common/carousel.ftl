@@ -14,7 +14,6 @@
                 <div class="carousel-caption">
                     <h1>${translator.getString("car_item1_header")}</h1>
                     <p>${translator.getString("car_item1_text")}</p>
-                    <p><a class="btn btn-lg btn-primary" href="">${translator.getString("car_button_more")}</a>
                     </p>
                 </div>
             </div>
@@ -25,7 +24,6 @@
                 <div class="carousel-caption">
                     <h1>${translator.getString("car_item2_header")}</h1>
                     <p>${translator.getString("car_item2_text")}</p>
-                    <p><a class="btn btn-lg btn-primary" href="">${translator.getString("car_button_more")}</a>
                 </div>
             </div>
         </div>
@@ -35,7 +33,6 @@
                 <div class="carousel-caption">
                     <h1>${translator.getString("car_item3_header")}</h1>
                     <p>${translator.getString("car_item3_text")}</p>
-                    <p><a class="btn btn-lg btn-primary" href="">${translator.getString("car_button_more")}</a>
                 </div>
             </div>
         </div>

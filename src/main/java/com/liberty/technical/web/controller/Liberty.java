@@ -38,17 +38,17 @@ import java.util.*;
 /**
  * @author M-AKI.
  */
-public class Liberty implements SparkApplication {
+public class Liberty {
 
-    @Override
-    public void init()
-    {
-      execute();
-    }
+//    @Override
+//    public void init()
+//    {
+//      execute();
+//    }
 
-//  public static void main(String[] args) {
-//    execute();
-//  }
+  public static void main(String[] args) {
+    execute();
+  }
 
   private static void execute()
   {
@@ -349,6 +349,7 @@ public class Liberty implements SparkApplication {
 
       User user = new User();
       user.setName(request.queryParams(SharedConstants.DELIVERY_NAME_FROM));
+      user.setSurname(request.queryParams(SharedConstants.DELIVERY_SURNAME_FROM));
       user.setPhone(request.queryParams(SharedConstants.DELIVERY_PHONE_FROM));
       user.setEmail(request.queryParams(SharedConstants.DELIVERY_EMAIL_FROM));
 //        request.session().attribute(UserSessionUtils.ATTRIBUTE_USER, user);

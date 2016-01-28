@@ -75,8 +75,9 @@
         <p style="font-family: BadScript; font-size: 14pt; margin-top: 10px;">
             ${translator.getString("payment_by_card_online")}
         </p>
-        <div class="row">
-            <img style="" src="img/webpay_logo.jpg" width="350" height="110"/>
+        <div style="margin-top: 40px" class="row">
+            <img src="img/card1.gif" height="30px">
+            <img src="img/card4.jpg" height="30px">
         </div>
         <#--<div style="margin-top: 30px;" class="btn btn-default">-->
         <#--${translator.getString("go_to_payment")}-->

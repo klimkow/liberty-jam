@@ -111,6 +111,14 @@
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             <#--<span class="help-block with-errors"></span>-->
         </div>
+        <div class="dlv-block-cn form-group has-feedback">
+            <label for="from-surname">${translator.getString("dlv_surname")}</label>
+            <span class="glyphicon glyphicon-asterisk"></span>
+            <input type="text" name="surname-from" pattern="${translator.getString('name_reg_exp')}{1,}$"
+                   maxlength="55" class="form-control has-success" id="from-surname" <#if user??>value="${user.getSurname()}" </#if> required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        <#--<span class="help-block with-errors"></span>-->
+        </div>
         <#--<div class="dlv-block-cn form-group has-feedback">-->
             <#--<label for="from-surname">${translator.getString("dlv_surname")}</label>-->
             <#--<input type="text" name="surname-from" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control has-success" id="from-name">-->
@@ -217,7 +225,7 @@
             <div class="dlv-block-cn form-group has-feedback">
                 <label for="address">${translator.getString("address_street")}</label>
                 <span class="glyphicon glyphicon-asterisk"></span>
-                <input type="text" name="address" pattern="${translator.getString('name_reg_exp')}{1,}$"
+                <input type="text" name="address"
                        maxlength="55" class="form-control" id="to-name"
                        <#if delivery??>value="${delivery.getAddressStreet()}"</#if> required>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>

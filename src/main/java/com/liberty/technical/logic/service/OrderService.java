@@ -50,6 +50,12 @@ public class OrderService
 
   public void saveOrder(Order order)
   {
+    User user = order.getUser();
+    StringBuilder username = new StringBuilder();
+    username.append(user.getName()).
+        append(" ").
+        append(user.getSurname());
+    user.setName(username.toString());
     userDAO.persistObject(order.getUser());
     orderDAO.persistObject(order);
   }

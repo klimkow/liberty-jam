@@ -169,6 +169,17 @@
     cursor: pointer;
 }
 
+.footer-info-col
+{
+    float: left;
+    width: 33%;
+    text-align: justify;
+    white-space: normal;
+    font-family: OsansLight, Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    padding: 2px 15px;
+    color: grey;
+}
 
 /*-------------- CAROUSEL -------------- */
 .carousel .item {
