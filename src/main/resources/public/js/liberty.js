@@ -356,21 +356,44 @@ function turnOnLoadingGlass()
 }
 
 
-function finishOrder()
+function finishOrder(id)
 {
     needUpdateNavBar = true;
-    var post_url = 'saveOrder';
-    turnOnLoadingGlass();
-    $.ajax({
-        type: 'POST',
-        url: post_url,
-        success: function(msg) {
-            $('#active-zone').fadeOut(800, function(){
-                $('#active-zone').html(msg).fadeIn().delay(2000);
-                maybeUpdateNavBar();
-            });
-        }
-    });
+    if (id == 'pay_cash') {
+        var post_url = 'payCash';
+        turnOnLoadingGlass();
+        $.ajax({
+            type: 'POST',
+            url: post_url,
+            success: function (msg)
+            {
+                $('#active-zone').fadeOut(800, function ()
+                {
+                    $('#active-zone').html(msg).fadeIn().delay(2000);
+                    maybeUpdateNavBar();
+                });
+            }
+        });
+    } else {
+        var post_url = 'payOnline';
+        turnOnLoadingGlass();
+        $.ajax({
+            type: 'POST',
+            url: post_url,
+            success: function (msg)
+            {
+                var resp = JSON.parse(msg);
+                $('input[name="FirstName"]').val(resp.name);
+                $('input[name="LastName"]').val(resp.surname);
+                $('input[name="Email"]').val(resp.email);
+                $('input[name="MobilePhone"]').val(resp.phone);
+                $('input[name="OrderNumber"]').val(resp.id);
+                $('input[name="OrderAmount"]').val(resp.price);
+                $('form[name="pay_online"]').serialize();
+                $('form[name="pay_online"]').submit();
+            }
+        });
+    }
 
 }
 

@@ -38,17 +38,17 @@ import java.util.*;
 /**
  * @author M-AKI.
  */
-public class Liberty {
+public class Liberty implements SparkApplication {
 
-//    @Override
-//    public void init()
-//    {
-//      execute();
-//    }
+    @Override
+    public void init()
+    {
+      execute();
+    }
 
-  public static void main(String[] args) {
-    execute();
-  }
+//  public static void main(String[] args) {
+//    execute();
+//  }
 
   private static void execute()
   {
@@ -325,6 +325,44 @@ public class Liberty {
     }, engine);
 
 
+    get("/payment_result", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<>();
+      OrderDAO orderDAO = DaoFactory.getInstance().createOrderDAO();
+      Long id = new Long(request.queryParams("ordernumber"));
+      String confirmNumber = request.queryParams("billnumber");
+      Order order = orderDAO.readObject(Order.class, id);
+
+      if (order != null) {
+        order.setConfirmationNumber(confirmNumber);
+        attributes.put("id", order.getId());
+        attributes.put("confirmNumber", confirmNumber);
+        orderDAO.updateObject(order);
+      }
+
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      return new ModelAndView(attributes, "common/cart/order-finished.ftl");
+    }, engine);
+
+
+    post("/payment_denied", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<>();
+      OrderDAO orderDAO = DaoFactory.getInstance().createOrderDAO();
+      Long id = new Long(request.queryParams("ordernumber"));
+//      Integer confirmNumber = new Integer(request.queryParams("billnumber"));
+      Order order = orderDAO.readObject(Order.class, id);
+
+      if (order != null) {
+        orderDAO.deleteObject(order);
+      }
+
+      attributes.put("paymentFailed", true);
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      return new ModelAndView(attributes, "common/cart/order-finished.ftl");
+    }, engine);
+
+
     post("/payment_step", (request, response) -> {
       Map<String, Object> attributes = new HashMap<>();
 
@@ -365,16 +403,29 @@ public class Liberty {
     }, engine);
 
 
-    post("/saveOrder", (request, response) -> {
+    post("/payCash", (request, response) -> {
       Map<String, Object> attributes = new HashMap<>();
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order == null) {
         // TODO: throw exception
       }
-      ServiceFactory.getInstanse().createOrderService().saveOrder(order);
+      attributes.put("order", order);
+      ServiceFactory.getInstanse().createOrderService().saveOrder(order, SharedConstants.PAYMENT_CASH);
       request.session().invalidate();
       return new ModelAndView(attributes, "common/cart/well-done.ftl");
     }, engine);
+
+
+    Gson payOnlineJson = new Gson();
+    post("/payOnline", (request, response) -> {
+      Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
+      if (order == null) {
+        // TODO: throw exception
+      }
+      ServiceFactory.getInstanse().createOrderService().saveOrder(order, SharedConstants.PAYMENT_ONLINE);
+      return new OrderVO(order.getId(), order.getAmount() * 1000, order.getUser().getName(),
+          order.getUser().getSurname(), order.getUser().getEmail(), order.getUser().getPhone());
+    }, payOnlineJson::toJson);
 
 
     post("/filter", (request, response) -> {

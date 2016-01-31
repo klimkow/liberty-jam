@@ -2,6 +2,7 @@
 
 
     var isSelected = false;
+    var selectedId = '';
 
     function makeNotActive(id){
         if (!isSelected) {
@@ -17,6 +18,7 @@
 
     function selectPayment(id) {
         isSelected = true;
+        selectedId = id;
         $('#lastStepButton').removeClass("hidden-control");
         if (id == 'pay_cash') {
             $('#pay_cash').removeClass("payment-not-acitve").
@@ -28,7 +30,6 @@
                         html("<img style='float: right' src='img/ar-right2.png' width='25' height='40'/><p>${translator.getString("done")}</p>").fadeIn().delay(100);
 
             });
-            $('#lastStepButton').click(finishOrder());
         } else {
             $('#pay_online').removeClass("payment-not-acitve").
                     addClass("select-payment");
@@ -101,6 +102,15 @@
         <img style="float: left" src="img/ar-left2.png" alt="" width="25" height="40" />
         <p>${translator.getString("go_prev_step")}</p>
     </div>
-    <div id="lastStepButton" style="margin-top: 30px; cursor: pointer" class="hidden-control gallery__controls-next ">
+    <div id="lastStepButton" style="margin-top: 30px; cursor: pointer" class="hidden-control gallery__controls-next " onclick="finishOrder(selectedId)">
     </div>
+    <form name="pay_online" method="post" action="https://test.paysec.by/pay/order.cfm">
+        <input type="hidden" name="Merchant_ID" value="477696">
+        <input type="hidden" name="FirstName"">
+        <input type="hidden" name="LastName">
+        <input type="hidden" name="Email">
+        <input type="hidden" name="MobilePhone">
+        <input type="hidden" name="OrderNumber">
+        <input type="hidden" name="OrderAmount">
+    </form>
 </div>

@@ -5,13 +5,28 @@ package com.liberty.technical.logic.entity;
  */
 public class OrderVO
 {
+    public Long id;
     public int amount;
     public int price;
+    public String name;
+    public String surname;
+    public String email;
+    public String phone;
     public String st1;
     public String st2;
     public String st3;
     public String st4;
     public String st5;
+
+    public OrderVO(Long id, int price, String name, String surname, String email, String phone)
+    {
+        this.id = id;
+        this.price = price;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+    }
 
     public OrderVO(int price, int amount, String st1, String st2, String st3, String st4, String st5)
     {
@@ -23,6 +38,67 @@ public class OrderVO
         this.st4 = st4;
         this.st5 = st5;
     }
+
+
+    public Long getId()
+    {
+        return id;
+    }
+
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+
+
+    public String getName()
+    {
+        return name;
+    }
+
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+
+    public String getSurname()
+    {
+        return surname;
+    }
+
+
+    public void setSurname(String surname)
+    {
+        this.surname = surname;
+    }
+
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
 
     int getAmount() {
         return amount;

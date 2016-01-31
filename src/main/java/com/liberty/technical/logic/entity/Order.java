@@ -4,7 +4,6 @@ import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.web.SharedConstants;
 
 import javax.persistence.*;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +28,7 @@ public class Order
   private Date dateCreated;
 
   @Column(name = "confirmation_number")
-  private Integer confirmationNumber;
+  private String confirmationNumber;
 
   @Column(name = "status")
   private Integer status;
@@ -37,8 +36,8 @@ public class Order
   @Column(name = "last_updated")
   private Date lastUpdated;
 
-  @Column(name = "payment_status")
-  private Integer paymentStatus;
+  @Column(name = "payment_type")
+  private Integer paymentType;
 
   @ManyToMany(targetEntity=com.liberty.technical.logic.entity.Item.class,
           cascade = {CascadeType.PERSIST, CascadeType.MERGE}
@@ -200,13 +199,13 @@ public class Order
   }
 
 
-  public Integer getConfirmationNumber()
+  public String getConfirmationNumber()
   {
     return confirmationNumber;
   }
 
 
-  public void setConfirmationNumber(Integer confirmationNumber)
+  public void setConfirmationNumber(String confirmationNumber)
   {
     this.confirmationNumber = confirmationNumber;
   }
@@ -237,15 +236,15 @@ public class Order
   }
 
 
-  public Integer getPaymentStatus()
+  public Integer getPaymentType()
   {
-    return paymentStatus;
+    return paymentType;
   }
 
 
-  public void setPaymentStatus(Integer paymentStatus)
+  public void setPaymentType(Integer paymentType)
   {
-    this.paymentStatus = paymentStatus;
+    this.paymentType = paymentType;
   }
 
   // TODO: replace to ContentManager

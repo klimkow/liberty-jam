@@ -18,6 +18,9 @@ public class User
   @Column(name = "name")
   private String name;
 
+  @Column(name = "surname")
+  private String surname;
+
   @Column(name = "email")
   private String email;
 
@@ -34,8 +37,6 @@ public class User
           cascade=CascadeType.PERSIST)
   @JoinColumn(name="user_id", referencedColumnName="id")
   private Set orders;
-
-  private String surname;
 
 
   public long getId()

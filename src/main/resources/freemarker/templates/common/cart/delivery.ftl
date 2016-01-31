@@ -187,13 +187,13 @@
         <div class="dlv-block-cn form-group has-feedback">
             <label for="to-name">${translator.getString("dlv_name_to")}</label>
             <span class="glyphicon glyphicon-asterisk"></span>
-            <input type="text" name="name_to" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control" id="to-name" required>
+            <input type="text" name="name-to" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control" id="to-name" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="to-phone">${translator.getString("dlv_phone_reciever")}</label>
             <span class="glyphicon glyphicon-asterisk"></span>
-            <input type="text" name="name-to" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone" required>
+            <input type="text" name="phone-to" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
 
@@ -237,7 +237,7 @@
                 <input type="checkbox" id="dlv-out-of-city" name="out-of-city" <#if itemQuantity??><#if itemQuantity.isWithPaper()>checked</#if></#if>/>
                 <label style="font-family: OsansLight, Arial, Helvetica, sans-serif;font-weight: bolder;font-size: 12pt;" for="dlv-out-of-city"><span></span>${translator.getString("dlv_delivery_out_of_city")}</label>
             </div>
-            <div style="float:left; width: 50%;" class="dlv-block-cn form-group has-feedback">
+            <div style="float:left; width: 33%;" class="dlv-block-cn form-group has-feedback">
                 <label for="address-house">${translator.getString("address_house")}</label>
                 <span class="glyphicon glyphicon-asterisk"></span>
                 <div style="width: 70%">
@@ -246,7 +246,15 @@
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </div>
             </div>
-            <div style="float:right; width: 50%;" class="dlv-block-cn form-group has-feedback">
+            <div style="float:left; width: 33%;" class="dlv-block-cn form-group has-feedback">
+                <label for="address-door">${translator.getString("address_apartments")}</label>
+                <div style="width: 70%">
+                    <input type="text" name="address-door" maxlength="10" class="form-control"
+                           <#if delivery??>value="${delivery.getAddressFlor()}"</#if> id="address-door" required="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+            </div>
+            <div style="float:left; width: 33%;" class="dlv-block-cn form-group has-feedback">
                 <label for="address-flor">${translator.getString("dlv_floor")}</label>
                 <div style="width: 70%">
                     <input type="text" name="address-flor" maxlength="10" class="form-control"

@@ -35,4 +35,7 @@ public interface SharedConstants {
 
   public static final String CATEGORY_CLASSIC = "classic";
   public static final Integer CATEGORY_CLASSIC_ID = 1;
+
+  public static final int PAYMENT_CASH = 1;
+  public static final int PAYMENT_ONLINE = 2;
 }

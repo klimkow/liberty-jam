@@ -4,10 +4,8 @@ import com.liberty.technical.logic.dao.CommonDAO;
 import com.liberty.technical.logic.entity.Item;
 import com.liberty.technical.logic.entity.Order;
 import com.liberty.technical.logic.entity.User;
-import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.factory.DaoFactory;
 
-import java.util.Date;
 
 /**
  * @author AKI
@@ -48,14 +46,9 @@ public class OrderService
   }
 
 
-  public void saveOrder(Order order)
+  public void saveOrder(Order order, int paymentType)
   {
-    User user = order.getUser();
-    StringBuilder username = new StringBuilder();
-    username.append(user.getName()).
-        append(" ").
-        append(user.getSurname());
-    user.setName(username.toString());
+    order.setPaymentType(paymentType);
     userDAO.persistObject(order.getUser());
     orderDAO.persistObject(order);
   }
