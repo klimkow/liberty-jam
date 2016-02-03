@@ -4,6 +4,7 @@ import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.web.SharedConstants;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
  * @author M-AKI.
  */
 @Entity
-@Table(name = "order")
+@Table(name = "order_detail")
 public class Order
 {
   @Id
@@ -257,6 +258,23 @@ public class Order
   public boolean isSelected(Item item)
   {
       return getItems() != null && getItems().contains(item);
+  }
+
+  public String getDateCreatedView()
+  {
+    if (getDateCreated() != null) {
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm");
+      return sdf.format(getDateCreated());
+    }
+    return "";
+  }
+
+  public String getPayTypeView()
+  {
+    if (getPaymentType() == 1) {
+      return "Наличные";
+    }
+    return "Онлайн";
   }
 
 }

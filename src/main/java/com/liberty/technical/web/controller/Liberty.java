@@ -410,6 +410,8 @@ public class Liberty implements SparkApplication {
         // TODO: throw exception
       }
       attributes.put("order", order);
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
       ServiceFactory.getInstanse().createOrderService().saveOrder(order, SharedConstants.PAYMENT_CASH);
       request.session().invalidate();
       return new ModelAndView(attributes, "common/cart/well-done.ftl");
@@ -423,6 +425,7 @@ public class Liberty implements SparkApplication {
         // TODO: throw exception
       }
       ServiceFactory.getInstanse().createOrderService().saveOrder(order, SharedConstants.PAYMENT_ONLINE);
+      request.session().invalidate();
       return new OrderVO(order.getId(), order.getAmount() * 1000, order.getUser().getName(),
           order.getUser().getSurname(), order.getUser().getEmail(), order.getUser().getPhone());
     }, payOnlineJson::toJson);

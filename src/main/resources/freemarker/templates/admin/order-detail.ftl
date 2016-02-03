@@ -60,11 +60,19 @@
 
                 <div class="row">
                     <div style="width: 100%; height: 100%">
-                        <p>Name: ${user.getName()}</p>
-                        <p>Email: ${user.getEmail()}</p>
-                        <p>Phone: ${user.getPhone()}</p>
-                        <p>Address: ${info.getAddress()}</p>
-                        <p>Date: ${info.getDateView()}</p>
+                        <p>Name: <#if user.getName()??>${user.getName()}</#if></p>
+                        <p>Surname: <#if user.getSurname()??>${user.getSurname()}</#if></p>
+                        <p>Email: <#if user.getEmail()??>${user.getEmail()}</#if></p>
+                        <p>Phone: <#if user.getPhone()??>${user.getPhone()}</#if></p>
+                        <p>Address: <#if info.getAddress()??>${info.getAddress()}</#if></p>
+                        <br>
+                        <p>Delivery date: <#if info.getDateView()??>${info.getDateView()}</#if></p>
+                        <p>Delivery time: <#if info.getTimeView()??>${info.getTimeView()}</#if></p>
+
+                        <p>Date created: <#if order.getDateCreatedView()??>${order.getDateCreatedView()}</#if></p>
+                        <p>Payment type: <#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></p>
+                        <p>Payment confirmation number: <#if order.getConfirmationNumber()??>${order.getConfirmationNumber()}</#if></p>
+                        <p>Order total price: <#if order.getAmount()??>${order.getAmount()}.</#if>000 BYR</p>
 
                         <div class="row" style="height: 250px; width: 100%; margin-top: 20px; overflow: auto">
                             <table class="table table-striped">
@@ -81,11 +89,16 @@
                                 <#list order.getItems() as item>
                                 <tr id="item-list-tr">
                                     <td class="textleft"><img class="img-circle textleft" src="../../../${item.getLogo()}" height="100" width="100"> </td>
-                                    <td style="padding-top: 30px" ><p >${item.getName()}</p></td>
-                                    <td style="padding-top: 30px" class="td-right">
-                                        1
+                                    <td style="padding-top: 30px" >
+                                        <p >${item.getName()}<br>
+                                        <#if order.getIQWithItem(item).isWithPaper()>+ paper</#if><br>
+                                        <#if order.getIQWithItem(item).isWithVase()>+ vase</#if>
+                                    </p>
                                     </td>
-                                    <td style="padding-top: 30px" class="td-right">${item.getPrice()?string?replace(",",".")}.000</td>
+                                    <td style="padding-top: 30px" class="td-right">
+                                        ${order.getIQWithItem(item).getItemQuantity()}
+                                    </td>
+                                    <td style="padding-top: 30px" class="td-right">${item.getPriceIncludingDiapasons(order.getIQWithItem(item).getItemQuantity())?string?replace(",",".")}.000</td>
                                 </tr>
                                 </#list>
                                 </tbody>

@@ -205,4 +205,24 @@ public class DeliveryInformation
     }
     return "";
   }
+
+  public String getTimeView()
+  {
+    int range = getTimeRange();
+    switch (range) {
+      case 1:
+        return "7.00 - 9.00";
+      case 2:
+        return "9.00 - 11.00";
+      case 3:
+        return "11.00 - 13.00";
+      case 4:
+        return "13.00 - 15.00";
+      case 5:
+        return "15.00 - 17.00";
+      case 6:
+        return "17.00 - 19.00";
+    }
+    return "";
+  }
 }
