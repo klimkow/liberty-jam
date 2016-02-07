@@ -18,12 +18,12 @@
     <link href="../../css/sb-admin.css" rel="stylesheet">
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <#--<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+    <#--<!-- WARNING: Respond.js doesn't work if you view the page via file:// &ndash;&gt;-->
+    <#--<!--[if lt IE 9]>-->
+        <#--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+        <#--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+    <#--<![endif]&ndash;&gt;-->
 
 </head>
 
@@ -60,20 +60,53 @@
 
                 <div class="row">
                     <div style="width: 100%; height: 100%">
-                        <p>Name: <#if user.getName()??>${user.getName()}</#if></p>
-                        <p>Surname: <#if user.getSurname()??>${user.getSurname()}</#if></p>
-                        <p>Email: <#if user.getEmail()??>${user.getEmail()}</#if></p>
-                        <p>Phone: <#if user.getPhone()??>${user.getPhone()}</#if></p>
-                        <p>Address: <#if info.getAddress()??>${info.getAddress()}</#if></p>
-                        <br>
-                        <p>Delivery date: <#if info.getDateView()??>${info.getDateView()}</#if></p>
-                        <p>Delivery time: <#if info.getTimeView()??>${info.getTimeView()}</#if></p>
+                        <div style="float: left; width: 50%;">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Delivery information</div>
+                                <div class="panel-body">
+                                    <p><b>Name:</b> <#if user.getName()??>${user.getName()}</#if></p>
+                                    <p><b>Surname:</b> <#if user.getSurname()??>${user.getSurname()}</#if></p>
+                                    <p><b>Email:</b> <#if user.getEmail()??>${user.getEmail()}</#if></p>
+                                    <p><b>Phone:</b> <#if user.getPhone()??>${user.getPhone()}</#if></p>
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <p><b>Date created:</b> <#if order.getDateCreatedView()??>${order.getDateCreatedView()}</#if></p>
+                                        <p><b>Payment type:</b> <#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></p>
+                                        <#if order.getPaymentType()?? && order.getPaymentType() == 1>
+                                            <p><b>Payment confirmation number:</b> <#if order.getConfirmationNumber()??>${order.getConfirmationNumber()}</#if></p>
+                                            <FORM name="check_payment_form" METHOD="POST">
+                                                <INPUT TYPE="HIDDEN" NAME="Ordernumber" VALUE="${order.getId()}">
+                                                <INPUT TYPE="HIDDEN" NAME="Merchant_ID" VALUE="477696">
+                                                <INPUT TYPE="HIDDEN" NAME="Login" VALUE="EugeneSal0v">
+                                                <INPUT TYPE="HIDDEN" NAME="Password" VALUE="htcwildfire132">
+                                                <DIV class="btn btn-default" onclick="checkPayment()">Check payment aprovement</div>
+                                            </FORM>
+                                        </#if>
+                                    </li>
+                                </ul>
+                                <div style="font-size: 14pt;" class="panel-footer text-center">
+                                    <p><b>Order total price: <#if order.getAmount()??>${order.getAmount()}.</#if>000 BYR</b></p>
+                                </div>
 
-                        <p>Date created: <#if order.getDateCreatedView()??>${order.getDateCreatedView()}</#if></p>
-                        <p>Payment type: <#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></p>
-                        <p>Payment confirmation number: <#if order.getConfirmationNumber()??>${order.getConfirmationNumber()}</#if></p>
-                        <p>Order total price: <#if order.getAmount()??>${order.getAmount()}.</#if>000 BYR</p>
-
+                            </div>
+                        </div>
+                        <div style="float:right; width:40%;">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Delivery time</div>
+                                <div class="panel-body">
+                                    <p><b>Delivery date:</b> <#if info.getDateView()??>${info.getDateView()}</#if></p>
+                                    <p><b>Delivery time:</b> <#if info.getTimeView()??>${info.getTimeView()}</#if></p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Delivery address</div>
+                                <div class="panel-body">
+                                    <p><b>Address:</b> <#if info.getAddress()??>${info.getAddress()}</#if></p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row" style="height: 250px; width: 100%; margin-top: 20px; overflow: auto">
                             <table class="table table-striped">
                                 <thead>
@@ -89,11 +122,12 @@
                                 <#list order.getItems() as item>
                                 <tr id="item-list-tr">
                                     <td class="textleft"><img class="img-circle textleft" src="../../../${item.getLogo()}" height="100" width="100"> </td>
-                                    <td style="padding-top: 30px" >
-                                        <p >${item.getName()}<br>
-                                        <#if order.getIQWithItem(item).isWithPaper()>+ paper</#if><br>
-                                        <#if order.getIQWithItem(item).isWithVase()>+ vase</#if>
-                                    </p>
+                                    <td>
+                                        <div class="item-name-cart-block">
+                                            <p class="item-name-cart">${item.getName()}</p>
+                                            <#if order.getIQWithItem(item).isWithPaper()><span>${translator.getString("item_paper_option")}</span><br></#if>
+                                            <#if order.getIQWithItem(item).isWithVase()><span>${translator.getString("item_vase_option_added")}</span></#if>
+                                        </div>
                                     </td>
                                     <td style="padding-top: 30px" class="td-right">
                                         ${order.getIQWithItem(item).getItemQuantity()}

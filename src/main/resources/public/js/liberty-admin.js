@@ -72,6 +72,25 @@ function displayFiles(files) {
     });
 }
 
+function checkPayment()
+{
+    var post_url = 'https://test.paysec.by/orderstate/orderstate.cfm';
+    var data = $('form[name="check_payment_form"]').serialize();
+    turnOnLoadingGlass();
+    $.ajax({
+        type: 'POST',
+        url: post_url,
+        data: data,
+        success: function(msg) {
+            $('#active-zone').fadeOut(800, function(){
+                $('#active-zone').html(msg).fadeIn().delay(2000);
+
+            });
+        }
+    });
+}
+
+
 function uploadFile(file) {
 
     var formData = new FormData();

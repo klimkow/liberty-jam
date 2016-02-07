@@ -302,7 +302,7 @@ public class Liberty implements SparkApplication {
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
 
       if (order != null) {
-        for(Item item : order.getItems()) {
+        for (Item item : order.getItems()) {
           String itemId = String.valueOf(item.getId());
           String amountString = request.queryParams(itemId);
           if (amountString != null) {
@@ -525,6 +525,7 @@ public class Liberty implements SparkApplication {
         halt();
       }
     });
+
 
     before("/administrator/*", (request, response) -> {
       request.raw().setCharacterEncoding("UTF-8");

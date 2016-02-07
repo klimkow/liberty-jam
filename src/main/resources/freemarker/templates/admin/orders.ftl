@@ -63,9 +63,9 @@
                                     <tr>
                                         <th></th>
                                         <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Order status</th>
                                         <th>Date created</th>
+                                        <th>Payment type</th>
+                                        <th>Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,10 +73,10 @@
                                         <#list orders as order>
                                         <tr onclick="redirect('orders/order?id=${order.getId()}')">
                                             <td><input name="isSelectedChBox" type="checkbox"></td>
-                                            <td>${order.getUser().getName()}</td>
+                                            <td>${order.getUser().getName()} <#if order.getUser().getSurname()??>${order.getUser().getSurname()}</#if></td>
+                                            <td><#if order.getDateCreatedView()??>${order.getDateCreatedView()}</#if></td>
+                                            <td><#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></td>
                                             <td>${order.getAmount()}.000 BYR</td>
-                                            <td>New</td>
-                                            <td>01.10.2015</td>
                                         </tr>
                                         </#list>
                                     </#if>

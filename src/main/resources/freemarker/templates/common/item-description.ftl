@@ -121,7 +121,7 @@
     <div id="item-additional-photo" class="item-additional-photo">
         <#--<#if photos??>-->
         <#--<#list photos as photo>-->
-            <div id="add-img-div">
+            <div id="add-img-div" class="item-additional-photo-selected">
                 <img id="img-add" style="margin-left: 15px; cursor:pointer;" class="img-circle" src="${selectedItem.getLogo()}" height="110" width="110">
             </div>
             <div id="add-img-div">

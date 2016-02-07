@@ -263,7 +263,7 @@ public class Order
   public String getDateCreatedView()
   {
     if (getDateCreated() != null) {
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm");
+      SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy' 'HH:mm");
       return sdf.format(getDateCreated());
     }
     return "";
@@ -271,10 +271,10 @@ public class Order
 
   public String getPayTypeView()
   {
-    if (getPaymentType() == 1) {
-      return "Наличные";
+    if (getPaymentType() != null && getPaymentType() == 1) {
+      return "Онлайн";
     }
-    return "Онлайн";
+    return "Наличные";
   }
 
 }
