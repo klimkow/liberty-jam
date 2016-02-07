@@ -271,7 +271,7 @@ public class Order
 
   public String getPayTypeView()
   {
-    if (getPaymentType() != null && getPaymentType() == 1) {
+    if (getPaymentType() != null && getPaymentType() == 2) {
       return "Онлайн";
     }
     return "Наличные";

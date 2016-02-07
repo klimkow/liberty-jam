@@ -73,7 +73,7 @@
                                     <li class="list-group-item">
                                         <p><b>Date created:</b> <#if order.getDateCreatedView()??>${order.getDateCreatedView()}</#if></p>
                                         <p><b>Payment type:</b> <#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></p>
-                                        <#if order.getPaymentType()?? && order.getPaymentType() == 1>
+                                        <#if order.getPaymentType()?? && order.getPaymentType() == 2>
                                             <p><b>Payment confirmation number:</b> <#if order.getConfirmationNumber()??>${order.getConfirmationNumber()}</#if></p>
                                             <FORM name="check_payment_form" METHOD="POST">
                                                 <INPUT TYPE="HIDDEN" NAME="Ordernumber" VALUE="${order.getId()}">
