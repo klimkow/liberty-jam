@@ -36,6 +36,8 @@
     <script src="js/nouislider.min.js"></script>
     <script src="js/wNumb.min.js"></script>
     <script src="js/liberty.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=MLV6Yv2Rxa7Tiv2JgPZiGNl4PNcjN9An&width=917&height=559&lang=ru_RU&sourceType=constructor&id=map-hidden"></script>
 
     <#include "/common/navbar.ftl">
     <div id="active-zone" class="row text-center">
@@ -50,5 +52,13 @@
     </div>
     <#include "/common/footer.ftl">
 
+
+    <#--RENDER MAP IN MODAL DIALOG-->
+    <div id="mapModal" class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div id="map-hidden" class="dv-zone modal-content">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
