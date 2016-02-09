@@ -676,6 +676,16 @@ div.wizard-item-active-first > h2
     margin-bottom: 0px;
 }
 
+.dlv-block-cn > .radio > label {
+    font-family: OsansLight, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+input[type=radio]:checked + label {
+    color:red;
+}
+
 #dlv-bock-title
 {
     border-bottom: 2px #f3f3f3 solid;

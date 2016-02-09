@@ -21,6 +21,7 @@ public interface SharedConstants {
   public static final String DELIVERY_ADDRESS = "address";
   public static final String DELIVERY_ADDRESS_HOUSE = "address-house";
   public static final String DELIVERY_ADDRESS_FLOR = "address-flor";
+  public static final String DELIVERY_ZONE = "dlv_zone_radio";
 
   public static final String DELIVERY_DATE = "date";
   public static final String DELIVERY_TIME = "time";

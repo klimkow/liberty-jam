@@ -39,6 +39,10 @@
                 showValidationWarning('${translator.getString("alert_fill_date_and_time")}');
                 return;
             }
+            var zone = $(("input[name='dlv_zone_radio']:checked")).val();
+            if (zone == '2' || zone == '3') {
+                needUpdateNavBar = true;
+            }
             $('#alert-zone').html('');
             var form = $(this).closest('form');
             var formData = form.serialize();
@@ -233,9 +237,16 @@
             <div class="delivery-zone">
                 <span class="map-link" data-toggle="modal" data-target=".bs-modal-lg">${translator.getString("delivery_zone")}</span>
             </div>
-            <div class="dlv-block-cn form-group">
-                <input type="checkbox" id="dlv-out-of-city" name="out-of-city" <#if itemQuantity??><#if itemQuantity.isWithPaper()>checked</#if></#if>/>
-                <label style="font-family: OsansLight, Arial, Helvetica, sans-serif;font-weight: bolder;font-size: 12pt;" for="dlv-out-of-city"><span></span>${translator.getString("dlv_delivery_out_of_city")}</label>
+            <div style="padding-bottom: 5px;" class="dlv-block-cn form-group">
+                <div class="radio">
+                    <label><input type="radio" name="dlv_zone_radio" value="1" checked>Бесплатная доставка</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="dlv_zone_radio" value="2">Доставка 5 км от МКАД ( +100.000 РУБ.)</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="dlv_zone_radio" value="3">Доставка 20 км от МКАД ( +150.000 РУБ.)</label>
+                </div>
             </div>
             <div style="float:left; width: 33%;" class="dlv-block-cn form-group has-feedback">
                 <label for="address-house">${translator.getString("address_house")}</label>

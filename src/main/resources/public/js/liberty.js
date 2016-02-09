@@ -98,7 +98,7 @@ function show_step3(formData)
         success: function(msg) {
             $('#active-zone').fadeOut(800, function(){
                 $('#active-zone').html(msg).fadeIn().delay(2000);
-
+                    maybeUpdateNavBar();
             });
         }
     });
