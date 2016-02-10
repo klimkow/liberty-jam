@@ -4,12 +4,12 @@ function createSlider(){
     var slider = document.getElementById('slider');
 
     noUiSlider.create(slider, {
-        start: [300000, 2000000],
+        start: [300000, 4000000],
         connect: true,
         step: 100000,
         range: {
             'min': 0,
-            'max': 2000000
+            'max': 4000000
         },
         format: wNumb({
             decimals: 0,

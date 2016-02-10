@@ -10,6 +10,15 @@
                 $("#timeOption" + time).addClass("dlv-time-item-selected");
                 document.getElementById('time').value = time;
             </#if>
+
+            $("#zone${delivery.getDeliveryPrice()}").attr('checked', 'checked');
+
+            <#if delivery.getName()??>
+                $("#inlineRadio1").attr('checked', 'checked');
+                $('.collapse').collapse('show');
+            </#if>
+
+            <#--$(("input[name='dlv_zone_radio']")).val(${delivery.getDeliveryPrice()});-->
         </#if>
 
         // INITIALIZE VALIDATOR
@@ -39,10 +48,9 @@
                 showValidationWarning('${translator.getString("alert_fill_date_and_time")}');
                 return;
             }
-            var zone = $(("input[name='dlv_zone_radio']:checked")).val();
-            if (zone == '2' || zone == '3') {
-                needUpdateNavBar = true;
-            }
+
+            needUpdateNavBar = true;
+
             $('#alert-zone').html('');
             var form = $(this).closest('form');
             var formData = form.serialize();
@@ -191,13 +199,15 @@
         <div class="dlv-block-cn form-group has-feedback">
             <label for="to-name">${translator.getString("dlv_name_to")}</label>
             <span class="glyphicon glyphicon-asterisk"></span>
-            <input type="text" name="name-to" pattern="${translator.getString('name_reg_exp')}{1,}$" maxlength="55" class="form-control" id="to-name" required>
+            <input type="text" name="name-to" pattern="${translator.getString('name_reg_exp')}{1,}$"
+                   <#if delivery??>value="${delivery.getName()}"</#if> maxlength="55" class="form-control" id="to-name" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
             <label for="to-phone">${translator.getString("dlv_phone_reciever")}</label>
             <span class="glyphicon glyphicon-asterisk"></span>
-            <input type="text" name="phone-to" pattern="[+\d\s]{1,}$" maxlength="25" class="form-control" id="to-phone" required>
+            <input type="text" name="phone-to" pattern="[+\d\s]{1,}$" maxlength="25"
+                   <#if delivery??>value="${delivery.getPhone()}"</#if> class="form-control" id="to-phone" required>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
 
@@ -239,13 +249,15 @@
             </div>
             <div style="padding-bottom: 5px;" class="dlv-block-cn form-group">
                 <div class="radio">
-                    <label><input type="radio" name="dlv_zone_radio" value="1" checked>Бесплатная доставка</label>
+                    <label>
+                        <input type="radio" id="zone1" name="dlv_zone_radio" value="1" checked>
+                        ${translator.getString("delivery_zone1")}</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="dlv_zone_radio" value="2">Доставка 5 км от МКАД ( +100.000 РУБ.)</label>
+                    <label><input type="radio" id="zone2" name="dlv_zone_radio" value="2">${translator.getString("delivery_zone2")}</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="dlv_zone_radio" value="3">Доставка 20 км от МКАД ( +150.000 РУБ.)</label>
+                    <label><input type="radio" id="zone3" name="dlv_zone_radio" value="3">${translator.getString("delivery_zone3")}</label>
                 </div>
             </div>
             <div style="float:left; width: 33%;" class="dlv-block-cn form-group has-feedback">

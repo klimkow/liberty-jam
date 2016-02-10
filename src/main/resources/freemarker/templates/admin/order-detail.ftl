@@ -33,7 +33,7 @@
 
        <#include "/admin/navbar.ftl">
 
-        <div style="height: 100vh;" id="page-wrapper">
+        <div style="height: 100%;" id="page-wrapper">
 
             <div class="container-fluid">
 
@@ -62,7 +62,7 @@
                     <div style="width: 100%; height: 100%">
                         <div style="float: left; width: 50%;">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Delivery information</div>
+                                <div class="panel-heading">Buyer information</div>
                                 <div class="panel-body">
                                     <p><b>Name:</b> <#if user.getName()??>${user.getName()}</#if></p>
                                     <p><b>Surname:</b> <#if user.getSurname()??>${user.getSurname()}</#if></p>
@@ -93,6 +93,14 @@
                         </div>
                         <div style="float:right; width:40%;">
                             <div class="panel panel-default">
+                                <div class="panel-heading">Deliver to</div>
+                                <div class="panel-body">
+                                    <p><b>Name:</b> <#if info.getName()??>${info.getName()}</#if></p>
+                                    <p><b>Phone:</b> <#if info.getPhone()??>${info.getPhone()}</#if></p>
+                                    <p><b>Wish:</b> <#if info.getMessage()??>${info.getMessage()}</#if></p>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
                                 <div class="panel-heading">Delivery time</div>
                                 <div class="panel-body">
                                     <p><b>Delivery date:</b> <#if info.getDateView()??>${info.getDateView()}</#if></p>
@@ -104,6 +112,7 @@
                                 <div class="panel-heading">Delivery address</div>
                                 <div class="panel-body">
                                     <p><b>Address:</b> <#if info.getAddress()??>${info.getAddress()}</#if></p>
+                                    <p><b>Delivery zone:</b> <#if info.getDeliveryPrice()??>${info.getDeliveryPrice()}</#if></p>
                                 </div>
                             </div>
                         </div>

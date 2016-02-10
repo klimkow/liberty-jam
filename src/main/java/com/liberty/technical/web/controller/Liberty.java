@@ -16,6 +16,7 @@ import com.liberty.technical.logic.localization.LocalizationUtil;
 import com.liberty.technical.logic.service.AuthenticationService;
 import com.liberty.technical.logic.service.GenericeCartService;
 import com.liberty.technical.logic.service.ImageService;
+import com.liberty.technical.logic.util.OrderUtils;
 import com.liberty.technical.web.SharedConstants;
 import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
@@ -38,17 +39,17 @@ import java.util.*;
 /**
  * @author M-AKI.
  */
-public class Liberty {
+public class Liberty implements SparkApplication {
 
-//    @Override
-//    public void init()
-//    {
-//      execute();
-//    }
+    @Override
+    public void init()
+    {
+      execute();
+    }
 
-  public static void main(String[] args) {
-    execute();
-  }
+//  public static void main(String[] args) {
+//    execute();
+//  }
 
   private static void execute()
   {
@@ -345,6 +346,26 @@ public class Liberty {
     }, engine);
 
 
+    post("/payment_result", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<>();
+      OrderDAO orderDAO = DaoFactory.getInstance().createOrderDAO();
+      Long id = new Long(request.queryParams("ordernumber"));
+      String confirmNumber = request.queryParams("billnumber");
+      Order order = orderDAO.readObject(Order.class, id);
+
+      if (order != null) {
+        order.setConfirmationNumber(confirmNumber);
+        attributes.put("id", order.getId());
+        attributes.put("confirmNumber", confirmNumber);
+        orderDAO.updateObject(order);
+      }
+
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      return new ModelAndView(attributes, "common/cart/order-finished.ftl");
+    }, engine);
+
+
     post("/payment_denied", (request, response) -> {
       Map<String, Object> attributes = new HashMap<>();
       OrderDAO orderDAO = DaoFactory.getInstance().createOrderDAO();
@@ -370,6 +391,8 @@ public class Liberty {
       info.setName(request.queryParams(SharedConstants.DELIVERY_NAME_TO));
       info.setPhone(request.queryParams(SharedConstants.DELIVERY_PHONE_TO));
       info.setMessage(request.queryParams(SharedConstants.DELIVERY_MESSAGE));
+      Integer deliveryZone = new Integer(request.queryParams(SharedConstants.DELIVERY_ZONE));
+      info.setDeliveryPrice(deliveryZone);
       StringBuilder address = new StringBuilder();
       address.append(request.queryParams(SharedConstants.DELIVERY_ADDRESS)).
           append("-").
@@ -393,6 +416,7 @@ public class Liberty {
 //        request.session().attribute(UserSessionUtils.ATTRIBUTE_USER, user);
 
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
+      OrderUtils.updateOrderDeliveryPrice(order, info);
       order.setDeliveryInformation(info);
       order.setUser(user);
 
@@ -470,7 +494,7 @@ public class Liberty {
       attributes.put("itemsSize", items.size());
       attributes.put("itemWidth", itemWidth.toString());
       attributes.put("galleryWidth", totalWidth.toString());
-      attributes.put("isClassic", categoryId.equals(SharedConstants.CATEGORY_CLASSIC_ID));
+      attributes.put("isClassic", SharedConstants.CATEGORY_CLASSIC_ID.equals(categoryId));
       attributes.put("x", 0);
       Order order = request.session().attribute(SharedConstants.ATTRIBUTE_ORDER);
       if (order != null) {
