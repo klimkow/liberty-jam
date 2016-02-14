@@ -241,3 +241,21 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.dlv-time-item
+{
+    cursor: pointer;
+    float:left;
+    width: 50%;
+    font-family: Attentica4F;
+    font-size: 17pt;
+    font-weight: bold;
+    text-align: center;
+    border: 2px #f3f3f3 solid;
+    padding-top: 3px;
+}
+
+.dlv-time-item-disabled
+{
+    opacity: 0.2;
+}

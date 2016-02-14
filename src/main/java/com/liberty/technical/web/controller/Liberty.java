@@ -7,6 +7,7 @@ import com.liberty.technical.logic.dao.*;
 import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.entity.content.ContentPage;
 import com.liberty.technical.logic.entity.images.ItemImages;
+import com.liberty.technical.logic.entity.service.DeliveryTimePeriod;
 import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.entity.service.PriceDiapason;
 import com.liberty.technical.logic.entity.system.SystemUser;
@@ -33,6 +34,7 @@ import javax.servlet.http.Part;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -317,6 +319,8 @@ public class Liberty implements SparkApplication {
         }
         if (order.getDeliveryInformation() != null) {
           attributes.put("delivery", order.getDeliveryInformation());
+          String receiverName = order.getDeliveryInformation().getName();
+          attributes.put("isAnotherPerson", receiverName != null && !receiverName.isEmpty());
         }
       }
 
@@ -720,5 +724,75 @@ public class Liberty implements SparkApplication {
       return new ModelAndView(null, "admin/items.ftl");
     }, engine);
 
+    get("/administrator/time", (request, response) -> {
+      Map<String, Object> attributes = new HashMap<>();
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
+
+      return new ModelAndView(attributes, "admin/time.ftl");
+    }, engine);
+
+    post("/administrator/disableTime", (request, response) -> {
+      DatePeriodDAO datePeriodDAO = DaoFactory.getInstance().createDatePeriodDAO();
+      String dateParam = request.queryParams(SharedConstants.DELIVERY_DATE);
+      Date date = new Date(dateParam);
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+      List<DeliveryTimePeriod> oldPeriodList = datePeriodDAO.readAllPeriodsForDate(sdf.format(date));
+      Map<Integer, Boolean> newDisabledList = new HashMap<>();
+      for (int i = 0; i < 7; ++i) {
+        StringBuilder timeOption = new StringBuilder();
+        timeOption.append("time")
+            .append(i);
+        String option = request.queryParams(timeOption.toString());
+        if (option != null && !option.isEmpty()) {
+          newDisabledList.put(i, option.equals("true"));
+        }
+      }
+      for (Integer i : newDisabledList.keySet()) {
+        Optional<DeliveryTimePeriod> deliveryTimeOptional =
+            oldPeriodList.stream().filter(dt -> dt.getTimePeriod().equals(i)).findFirst();
+        if (deliveryTimeOptional.isPresent() && !newDisabledList.get(i)) {
+          // remove from db if item became available
+          datePeriodDAO.deleteObject(deliveryTimeOptional.get());
+        } else if (!deliveryTimeOptional.isPresent() && newDisabledList.get(i)) {
+          DeliveryTimePeriod dt = new DeliveryTimePeriod();
+          dt.setDate(date);
+          dt.setTimePeriod(i);
+          datePeriodDAO.persistObject(dt);
+        }
+      }
+      return "OK";
+    });
+
+    post("/administrator/getTimesForDate", (request, response) -> {
+      String dateParam = request.queryParams(SharedConstants.DELIVERY_DATE);
+      return getDisabledTimePeriods(dateParam);
+    });
+
+    post("/getTimesForDate", (request, response) -> {
+      String dateParam = request.queryParams(SharedConstants.DELIVERY_DATE);
+      return getDisabledTimePeriods(dateParam);
+    });
+  }
+
+  private static String getDisabledTimePeriods(String dateParam)
+  {
+    DatePeriodDAO datePeriodDAO = DaoFactory.getInstance().createDatePeriodDAO();
+
+    Date date = new Date(dateParam);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    List<DeliveryTimePeriod> periodList = datePeriodDAO.readAllPeriodsForDate(sdf.format(date));
+    StringBuilder result = new StringBuilder();
+    final String SEPARATOR = "&";
+    Iterator<DeliveryTimePeriod> it = periodList.iterator();
+    while (it.hasNext()) {
+      result.append(it.next().getTimePeriod());
+      if (it.hasNext()) {
+        result.append(SEPARATOR);
+      }
+    }
+    return result.toString();
   }
 }

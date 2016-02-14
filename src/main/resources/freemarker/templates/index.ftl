@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>${translator.getString("index_title")}</title>
+    <description>${translator.getString("index_description")}</description>
     <#--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -27,6 +28,16 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 <body onload="createSlider()">
+<!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PH29GX"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PH29GX');</script>
+    <!-- End Google Tag Manager -->
+
     <#--TODO: download jquery to libs folder (current downloaded is too slow)-->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -355,6 +355,15 @@ function turnOnLoadingGlass()
     $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
 }
 
+function turnOnLoadingGlass(enable)
+{
+    if (enable) {
+        $('#navbar-header').append('<div id="top-layer"></div>');
+    } else {
+        $('#top-layer').remove();
+    }
+}
+
 
 function finishOrder(id)
 {

@@ -76,19 +76,31 @@ function checkPayment()
 {
     var post_url = 'https://test.paysec.by/orderstate/orderstate.cfm';
     var data = $('form[name="check_payment_form"]').serialize();
-    turnOnLoadingGlass();
+    turnOnLoadingGlass(true);
     $.ajax({
         type: 'POST',
         url: post_url,
         data: data,
         success: function(msg) {
-            $('#active-zone').fadeOut(800, function(){
-                $('#active-zone').html(msg).fadeIn().delay(2000);
-
-            });
+            turnOnLoadingGlass(false);
         }
     });
 }
+
+function postRequest(data, url, result)
+{
+    turnOnLoadingGlass(true);
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function(msg) {
+            turnOnLoadingGlass(false);
+            return msg;
+        }
+    });
+}
+
 
 
 function uploadFile(file) {
@@ -103,7 +115,11 @@ function uploadFile(file) {
     xhr.send(formData);
 }
 
-function turnOnLoadingGlass()
+function turnOnLoadingGlass(enable)
 {
-    $('#navbar-header').append('<div id="top-layer"></div>');
+    if (enable) {
+        $('#navbar-header').append('<div id="top-layer"></div>');
+    } else {
+        $('#top-layer').remove();
+    }
 }

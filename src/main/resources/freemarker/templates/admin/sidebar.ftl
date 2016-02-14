@@ -12,6 +12,9 @@
         <li>
             <a href=""><i class="fa fa-fw fa-edit"></i> Category</a>
         </li>
+        <li>
+            <a href="/administrator/time"><i class="fa fa-fw fa-edit"></i> Time management</a>
+        </li>
 
     </ul>
 </div>

@@ -1,5 +1,35 @@
 <script>
 
+    function updateDisabledTime(dateParam)
+    {
+        turnOnLoadingGlass(true);
+        $.ajax({
+            type: 'POST',
+            url: "getTimesForDate",
+            data: {date : dateParam},
+            success: function(msg) {
+                var ar = msg.split("&");
+                $('.dlv-time-item').each(function(i, obj) {
+                    var id = $(this).attr('id').replace('timeOption', '');
+                    var isDisabled = ar.indexOf(id) != '-1';
+                    if (isDisabled) {
+                        $(this).addClass("dlv-time-item-disabled");
+                        $(this).removeClass("dlv-time-available");
+                    } else {
+                        $(this).removeClass("dlv-time-item-disabled");
+                        if (!$(this).hasClass("dlv-time-available")) {
+                            $(this).addClass("dlv-time-available");
+                        }
+                    }
+                });
+                for (i = 0; i < ar.length; i++) {
+                    $('#timeOption' + ar[i]).addClass("dlv-time-item-disabled");
+                }
+                turnOnLoadingGlass(false);
+            }
+        });
+    }
+
     $(document).ready(function() {
 
         // SELECT TIME IF CHOSE
@@ -11,25 +41,34 @@
                 document.getElementById('time').value = time;
             </#if>
 
+            // SELECT FREE PRICE OPTION BY DEFAULT
             $("#zone${delivery.getDeliveryPrice()}").attr('checked', 'checked');
 
-            <#if delivery.getName()??>
+            // SHOW COLLAPSED INPUTS IF THEY WAS SELECTED
+            <#if isAnotherPerson == true>
                 $("#inlineRadio1").attr('checked', 'checked');
                 $('.collapse').collapse('show');
             </#if>
-
-            <#--$(("input[name='dlv_zone_radio']")).val(${delivery.getDeliveryPrice()});-->
         </#if>
+
+        $(("input[name='dlv_zone_radio']")).change(function() {
+            needUpdateNavBar = true;
+        });
+
+        updateDisabledTime(new Date());
 
         // INITIALIZE VALIDATOR
         $('#dlv-form').validator();
 
         // DELEGATE CLICK EVENT OF TIME CONTAINER
         $("#timeOptionsContainer").delegate('div[id^=timeOption]','click', function(e) {
-            $("div[id^= 'timeOption']").removeClass("dlv-time-item-selected");
-            $(this).addClass("dlv-time-item-selected");
-            var id = $(this).attr('id');
-            document.getElementById('time').value = id.replace('timeOption', '');
+            var isDisabled = $(this).hasClass("dlv-time-item-disabled");
+            if (!isDisabled) {
+                $("div[id^= 'timeOption']").removeClass("dlv-time-item-selected");
+                $(this).addClass("dlv-time-item-selected");
+                var id = $(this).attr('id');
+                document.getElementById('time').value = id.replace('timeOption', '');
+            }
         });
     });
 
@@ -48,8 +87,6 @@
                 showValidationWarning('${translator.getString("alert_fill_date_and_time")}');
                 return;
             }
-
-            needUpdateNavBar = true;
 
             $('#alert-zone').html('');
             var form = $(this).closest('form');
@@ -296,10 +333,16 @@
                         <div class="attentica-font16" <#if delivery??>data-date="${delivery.getDateView()}"</#if>></div>
                         <script type="text/javascript">
                             $(function () {
+                                var startDate = new Date();
                                 $('#datetimepicker10 div').datepicker({
+                                    startDate: startDate,
                                     datesDisabled: ['09/06/2015', '09/21/2015'],
                                     language: "ru"
-                                });
+                                }).on('changeDate', function (ev) {
+                                    $("div[id^= 'timeOption']").addClass("dlv-time-available");
+                                    $("div[id^= 'timeOption']").removeClass("dlv-time-item-selected");
+                                    updateDisabledTime($('#datetimepicker10 div').datepicker('getDate'));
+                                }).datepicker("setDate", "0");
                             });
                         </script>
                     </div>

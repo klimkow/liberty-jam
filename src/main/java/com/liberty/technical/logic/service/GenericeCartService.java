@@ -67,7 +67,7 @@ public class GenericeCartService {
       }
       if (q.isWithVase()) {
         // TODO: get amount from db
-        sum += 150;
+        sum += 220;
       }
     }
     return sum;

@@ -64,4 +64,10 @@ public class DaoFactory {
   }
 
 
+  public DatePeriodDAO createDatePeriodDAO()
+  {
+    return new DatePeriodDAO();
+  }
+
+
 }

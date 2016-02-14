@@ -20,7 +20,7 @@
         <#list cartItems as item>
             if(id == ${item.getId()}) {
                 <#if order.getIQWithItem(item).isWithPaper()>result += 25;</#if>
-                <#if order.getIQWithItem(item).isWithVase()>result += 150;</#if>
+                <#if order.getIQWithItem(item).isWithVase()>result += 220;</#if>
 
                 return result;
             }

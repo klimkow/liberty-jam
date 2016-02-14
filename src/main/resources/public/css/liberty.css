@@ -738,12 +738,17 @@ input[type=radio]:checked + label {
     padding-top: 3px;
 }
 
-.dlv-time-item-selected, .dlv-time-item:hover, .dlv-time-item:active
+
+.dlv-time-item-selected, .dlv-time-available:hover, .dlv-time-available:active
 {
     border: 2px #3FB8AF solid;
     background-color: #65D5D8;
     padding-top: 3px;
     cursor: pointer;
+}
+
+.dlv-time-item-disabled, .dlv-time-item-disabled:hover {
+    opacity: 0.4;
 }
 
 .progress
