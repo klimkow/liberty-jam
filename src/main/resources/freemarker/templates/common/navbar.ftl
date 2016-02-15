@@ -22,8 +22,8 @@
             </div>
         </div>
         <div class="textright">
-            <a href="http://facebook.com" target="_blank"><img style="border-right: 1px solid #E2E2E2; border-left: 1px solid #E2E2E2" src="img/fb-tr.png" alt="Facebook" height="48" width="48"></a>
-            <a href="http://twitter.com" target="_blank"><img style="border-right: 1px solid #E2E2E2;" src="img/twt-tr.gif" alt="Twitter" height="48" width="48"></a>
+            <a href="https://www.facebook.com/komplimentby/" target="_blank"><img style="border-right: 1px solid #E2E2E2; border-left: 1px solid #E2E2E2" src="img/fb-tr.png" alt="Facebook" height="48" width="48"></a>
+            <a href="https://www.instagram.com/kompliment.by/" target="_blank"><img style="border-right: 1px solid #E2E2E2;" src="img/insta.png" alt="Instagram" height="48" width="48"></a>
             <a href="http://vk.com/kompliment_by" target="_blank"><img style="border-right: 1px solid #E2E2E2;" src="img/vk-tr.png" alt="Vkontakte" height="48" width="48"></a>
             <div id="dLabel" class="language-dropdown dropdown">
                 <p  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:Attentica4F; font-weight: bold;">${translator.getCurrentLocale()}

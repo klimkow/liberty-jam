@@ -30,6 +30,15 @@ public class DeliveryInformation
   @Column(name = "address")
   private String address;
 
+  @Column(name = "address_house")
+  private String addressHouse;
+
+  @Column(name = "address_door")
+  private String addressDoor;
+
+  @Column(name = "address_floor")
+  private String addressFloor;
+
   @Column(name = "message")
   private String message;
 
@@ -115,6 +124,37 @@ public class DeliveryInformation
   }
 
 
+  public String getAddressHouse()
+  {
+    return addressHouse;
+  }
+
+
+  public void setAddressHouse(String addressHouse) {
+    this.addressHouse = addressHouse;
+  }
+
+
+  public String getAddressDoor() {
+    return addressDoor;
+  }
+
+
+  public void setAddressDoor(String addressDoor) {
+    this.addressDoor = addressDoor;
+  }
+
+
+  public String getAddressFloor() {
+    return addressFloor;
+  }
+
+
+  public void setAddressFloor(String addressFloor) {
+    this.addressFloor = addressFloor;
+  }
+
+
   public String getMessage()
   {
     return message;
@@ -160,42 +200,6 @@ public class DeliveryInformation
 
 
 //  TODO: replace to VO
-
-  public String getAddressStreet()
-  {
-    StringBuilder result = new StringBuilder();
-    if (address != null && !address.isEmpty()) {
-      String[] addressLine = address.split("-");
-      if (addressLine.length > 0) {
-        result.append(addressLine[0]);
-      }
-    }
-    return result.toString();
-  }
-
-  public String getAddressHouse()
-  {
-    StringBuilder result = new StringBuilder();
-    if (address != null && !address.isEmpty()) {
-      String[] addressLine = address.split("-");
-      if (addressLine.length > 1) {
-        result.append(addressLine[1]);
-      }
-    }
-    return result.toString();
-  }
-
-  public String getAddressFlor()
-  {
-    StringBuilder result = new StringBuilder();
-    if (address != null && !address.isEmpty()) {
-      String[] addressLine = address.split("-");
-      if (addressLine.length > 2) {
-        result.append(addressLine[2]);
-      }
-    }
-    return result.toString();
-  }
 
   public String getDateView()
   {

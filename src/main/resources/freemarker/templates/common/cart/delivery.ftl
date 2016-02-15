@@ -2,7 +2,7 @@
 
     function updateDisabledTime(dateParam)
     {
-        turnOnLoadingGlass(true);
+        turnOnLoadingGlassWithParam(true);
         $.ajax({
             type: 'POST',
             url: "getTimesForDate",
@@ -25,7 +25,7 @@
                 for (i = 0; i < ar.length; i++) {
                     $('#timeOption' + ar[i]).addClass("dlv-time-item-disabled");
                 }
-                turnOnLoadingGlass(false);
+                turnOnLoadingGlassWithParam(false);
             }
         });
     }
@@ -61,7 +61,7 @@
         $('#dlv-form').validator();
 
         // DELEGATE CLICK EVENT OF TIME CONTAINER
-        $("#timeOptionsContainer").delegate('div[id^=timeOption]','click', function(e) {
+        $("#timeOptnsContainer").delegate('div[id^=timeOption]','click', function(e) {
             var isDisabled = $(this).hasClass("dlv-time-item-disabled");
             if (!isDisabled) {
                 $("div[id^= 'timeOption']").removeClass("dlv-time-item-selected");
@@ -278,7 +278,7 @@
                 <span class="glyphicon glyphicon-asterisk"></span>
                 <input type="text" name="address"
                        maxlength="55" class="form-control" id="to-name"
-                       <#if delivery??>value="${delivery.getAddressStreet()}"</#if> required>
+                       <#if delivery??>value="${delivery.getAddress()}"</#if> required>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             </div>
             <div class="delivery-zone">
@@ -310,7 +310,7 @@
                 <label for="address-door">${translator.getString("address_apartments")}</label>
                 <div style="width: 70%">
                     <input type="text" name="address-door" maxlength="10" class="form-control"
-                           <#if delivery??>value="${delivery.getAddressFlor()}"</#if> id="address-door" required="">
+                           <#if delivery??>value="${delivery.getAddressDoor()}"</#if> id="address-door" required="">
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </div>
             </div>
@@ -318,7 +318,7 @@
                 <label for="address-flor">${translator.getString("dlv_floor")}</label>
                 <div style="width: 70%">
                     <input type="text" name="address-flor" maxlength="10" class="form-control"
-                           <#if delivery??>value="${delivery.getAddressFlor()}"</#if> id="to-phone">
+                           <#if delivery??>value="${delivery.getAddressFloor()}"</#if> id="to-phone">
                 </div>
             </div>
             <div class="dlv-block-cn form-group">
@@ -354,7 +354,7 @@
                         <label for="comment">${translator.getString("dlv_deliver_time")}</label>
                         <span class="glyphicon glyphicon-asterisk"></span>
                     </div>
-                    <div id="timeOptionsContainer">
+                    <div id="timeOptnsContainer">
                         <div id="timeOption1" class="dlv-time-item">07.00 - 09.00</div>
                         <div id="timeOption2" class="dlv-time-item">09.00 - 11.00</div>
                         <div id="timeOption3" class="dlv-time-item">11.00 - 13.00</div>

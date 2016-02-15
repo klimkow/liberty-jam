@@ -8,7 +8,6 @@ import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.entity.content.ContentPage;
 import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.entity.service.DeliveryTimePeriod;
-import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.entity.service.PriceDiapason;
 import com.liberty.technical.logic.entity.system.SystemUser;
 import com.liberty.technical.logic.factory.DaoFactory;
@@ -19,13 +18,11 @@ import com.liberty.technical.logic.service.GenericeCartService;
 import com.liberty.technical.logic.service.ImageService;
 import com.liberty.technical.logic.util.OrderUtils;
 import com.liberty.technical.web.SharedConstants;
-import com.liberty.technical.web.util.UserSessionUtils;
 import freemarker.template.Configuration;
 import org.eclipse.jetty.util.MultiPartInputStreamParser;
 import spark.*;
 import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
-import sun.security.provider.SHA;
 
 import javax.imageio.ImageIO;
 import javax.servlet.MultipartConfigElement;
@@ -41,17 +38,17 @@ import java.util.*;
 /**
  * @author M-AKI.
  */
-public class Liberty implements SparkApplication {
+public class Liberty {
 
-    @Override
-    public void init()
-    {
-      execute();
-    }
+//    @Override
+//    public void init()
+//    {
+//      execute();
+//    }
 
-//  public static void main(String[] args) {
-//    execute();
-//  }
+  public static void main(String[] args) {
+    execute();
+  }
 
   private static void execute()
   {
@@ -397,13 +394,12 @@ public class Liberty implements SparkApplication {
       info.setMessage(request.queryParams(SharedConstants.DELIVERY_MESSAGE));
       Integer deliveryZone = new Integer(request.queryParams(SharedConstants.DELIVERY_ZONE));
       info.setDeliveryPrice(deliveryZone);
-      StringBuilder address = new StringBuilder();
-      address.append(request.queryParams(SharedConstants.DELIVERY_ADDRESS)).
-          append("-").
-          append(request.queryParams(SharedConstants.DELIVERY_ADDRESS_HOUSE)).
-          append("-").
-          append(request.queryParams(SharedConstants.DELIVERY_ADDRESS_FLOR));
-      info.setAddress(address.toString());
+
+      info.setAddress(request.queryParams(SharedConstants.DELIVERY_ADDRESS));
+      info.setAddressHouse(request.queryParams(SharedConstants.DELIVERY_ADDRESS_HOUSE));
+      info.setAddressDoor(request.queryParams(SharedConstants.DELIVERY_ADDRESS_DOOR));
+      info.setAddressFloor(request.queryParams(SharedConstants.DELIVERY_ADDRESS_FLOOR));
+
       String dateParam = request.queryParams(SharedConstants.DELIVERY_DATE);
       Integer timeParam = new Integer(request.queryParams(SharedConstants.DELIVERY_TIME));
       if (dateParam != null && !dateParam.isEmpty()) {
@@ -597,6 +593,19 @@ public class Liberty implements SparkApplication {
     get("/administrator/orders", (request, response) -> {
       List<Order> orderList = DaoFactory.getInstance().
           createOrderDAO().readAllOrders();
+      orderList.sort(new Comparator<Order>() {
+        @Override
+        public int compare(Order o1, Order o2) {
+          Date d1 = o1.getDateCreated();
+          Date d2 = o2.getDateCreated();
+          if (d2 == null) {
+            return 1;
+          } else if (d1 == null) {
+            return -1;
+          }
+          return d1.compareTo(d2);
+        }
+      });
       Map<String, Object> attributes = new HashMap<>();
       attributes.put("orders", orderList);
       return new ModelAndView(attributes, "admin/orders.ftl");

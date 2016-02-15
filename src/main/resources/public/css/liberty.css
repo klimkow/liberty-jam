@@ -751,6 +751,10 @@ input[type=radio]:checked + label {
     opacity: 0.4;
 }
 
+.delivery-zone {
+    padding-bottom: 6px;
+}
+
 .progress
 {
     padding-left: 0px;

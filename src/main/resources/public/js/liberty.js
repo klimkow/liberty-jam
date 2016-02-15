@@ -355,10 +355,10 @@ function turnOnLoadingGlass()
     $('#active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
 }
 
-function turnOnLoadingGlass(enable)
+function turnOnLoadingGlassWithParam(enable)
 {
     if (enable) {
-        $('#navbar-header').append('<div id="top-layer"></div>');
+        turnOnLoadingGlass();
     } else {
         $('#top-layer').remove();
     }

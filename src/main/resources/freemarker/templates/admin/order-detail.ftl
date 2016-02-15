@@ -111,7 +111,10 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Delivery address</div>
                                 <div class="panel-body">
-                                    <p><b>Address:</b> <#if info.getAddress()??>${info.getAddress()}</#if></p>
+                                    <p><b>Street:</b> <#if info.getAddress()??>${info.getAddress()}</#if></p>
+                                    <p><span style="float: left; width: 33%"><b>House:</b> <#if info.getAddressHouse()??>${info.getAddressHouse()}</#if></span>
+                                    <span style="float: left; width: 33%"><b>Door:</b> <#if info.getAddressDoor()??>${info.getAddressDoor()}</#if></span>
+                                    <span style="float: left; width: 33%"><b>Floor:</b> <#if info.getAddressFloor()??>${info.getAddressFloor()}</#if></span></p>
                                     <p><b>Delivery zone:</b> <#if info.getDeliveryPrice()??>${info.getDeliveryPrice()}</#if></p>
                                 </div>
                             </div>
