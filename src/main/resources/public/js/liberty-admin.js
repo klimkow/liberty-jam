@@ -80,6 +80,7 @@ function checkPayment()
     $.ajax({
         type: 'POST',
         url: post_url,
+        crossDomain: true,
         data: data,
         success: function(msg) {
             turnOnLoadingGlass(false);

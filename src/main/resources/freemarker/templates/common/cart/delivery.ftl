@@ -355,12 +355,12 @@
                         <span class="glyphicon glyphicon-asterisk"></span>
                     </div>
                     <div id="timeOptnsContainer">
-                        <div id="timeOption1" class="dlv-time-item">07.00 - 09.00</div>
-                        <div id="timeOption2" class="dlv-time-item">09.00 - 11.00</div>
-                        <div id="timeOption3" class="dlv-time-item">11.00 - 13.00</div>
-                        <div id="timeOption4" class="dlv-time-item">13.00 - 15.00</div>
-                        <div id="timeOption5" class="dlv-time-item">15.00 - 17.00</div>
-                        <div id="timeOption6" class="dlv-time-item">17.00 - 19.00</div>
+                        <div id="timeOption1" class="dlv-time-item">09.00 - 11.00</div>
+                        <div id="timeOption2" class="dlv-time-item">11.00 - 13.00</div>
+                        <div id="timeOption3" class="dlv-time-item">13.00 - 15.00</div>
+                        <div id="timeOption4" class="dlv-time-item">15.00 - 17.00</div>
+                        <div id="timeOption5" class="dlv-time-item">17.00 - 19.00</div>
+                        <div id="timeOption6" class="dlv-time-item">19.00 - 21.00</div>
                         <input id="time" type="hidden" name="time">
                     </div>
                 </div>

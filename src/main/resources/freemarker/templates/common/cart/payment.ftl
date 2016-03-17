@@ -77,8 +77,7 @@
             ${translator.getString("payment_by_card_online")}
         </p>
         <div style="margin-top: 40px" class="row">
-            <img src="img/card1.gif" height="30px">
-            <img src="img/card4.jpg" height="30px">
+            <img src="img/assistlogo.png" height="50px">
         </div>
         <#--<div style="margin-top: 30px;" class="btn btn-default">-->
         <#--${translator.getString("go_to_payment")}-->

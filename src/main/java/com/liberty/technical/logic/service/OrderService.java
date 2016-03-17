@@ -6,6 +6,10 @@ import com.liberty.technical.logic.entity.Order;
 import com.liberty.technical.logic.entity.User;
 import com.liberty.technical.logic.factory.DaoFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 /**
  * @author AKI
@@ -51,6 +55,13 @@ public class OrderService
     order.setPaymentType(paymentType);
     userDAO.persistObject(order.getUser());
     orderDAO.persistObject(order);
+
+    MailService mailService = MailService.getInstanse();
+    User user = order.getUser();
+    List<String> items = order.getItems().stream().map(Item::getName).collect(Collectors.toList());
+    String message = mailService.createNewOrderMail(order.getId(), user.getName(), user.getSurname(),
+        user.getPhone(), order.getPayTypeView(), items, order.getAmount());
+    mailService.sendEmail("delivery@kompliment.by", "a.klimkou@gmail.com", "Новый заказ", message);
   }
 
 }
