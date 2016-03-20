@@ -21,19 +21,9 @@ public class MailService
   private MailService()
   {
     properties = System.getProperties();
-//    properties.put("mail.transport.protocol", "smtp");
-//    properties.put("mail.smtp.port", "587");
-//    properties.put("mail.host", SMTP_SERVER);
-//    properties.put("mail.smtp.auth", "true");
-//    properties.put("mail.smtp.socketFactory.port", "587");
-//    properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-//    properties.put("mail.smtp.starttls.enable", "true");
-//    properties.put("mail.smtp.socketFactory.fallback", "true");
-
     properties.put("mail.smtp.auth", "true");
-    properties.put("mail.smtp.starttls.enable", "true");
     properties.put("mail.smtp.host", SMTP_SERVER);
-    properties.put("mail.smtp.port", "587");
+    properties.put("mail.smtp.port", "25");
   }
 
 
@@ -55,7 +45,7 @@ public class MailService
   {
     Session session = Session.getDefaultInstance(properties, new Authenticator() {
       protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication(DEFAULT_SENDER,"8bkNsvnElH2T@1"); // username and the password
+        return new PasswordAuthentication(DEFAULT_SENDER,"8bkNsvnElH2T"); // username and the password
       }
     });
 
