@@ -192,7 +192,7 @@
         </div>
         <div class="dlv-block-cn form-group">
             <label for="comment">${translator.getString("dlv_wish_comment")}</label>
-            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment" placeholder="${translator.getString("dlv_wish_comment_placeholder")}"></textarea>
+            <textarea style="height: 70px" name="message" class="form-control" rows="5" id="comment" placeholder="${translator.getString("dlv_wish_comment_placeholder")}"><#if delivery??>${delivery.getMessage()}</#if></textarea>
             <span class="dlv-description-small">${translator.getString("punctuation_warning")}</span>
         </div>
         <div class="dlv-block-cn form-group has-feedback">
@@ -308,6 +308,7 @@
             </div>
             <div style="float:left; width: 33%;" class="dlv-block-cn form-group has-feedback">
                 <label for="address-door">${translator.getString("address_apartments")}</label>
+                <span class="glyphicon glyphicon-asterisk"></span>
                 <div style="width: 70%">
                     <input type="text" name="address-door" maxlength="10" class="form-control"
                            <#if delivery??>value="${delivery.getAddressDoor()}"</#if> id="address-door" required="">
@@ -322,7 +323,11 @@
                 </div>
             </div>
             <div class="dlv-block-cn form-group">
-                <div style="float: left; width: 40%;font-family: BadScript;font-size: 13pt;">
+                <label for="comment">${translator.getString("dlv_delivery_comment")}</label>
+                <textarea style="height: 70px" name="dlv_comment" class="form-control" rows="5" id="dlv_comment"><#if delivery??>${delivery.getOrderComment()}</#if></textarea>
+            </div>
+            <div class="dlv-block-cn form-group">
+                <div style="float: left; width: 40%; margin-top:15px; font-family: BadScript;font-size: 13pt;">
                     <div style="border-bottom: 1px #B1AEAE solid;">
                         <label for="comment">${translator.getString("dlv_deliver_date")}</label>
                         <span class="glyphicon glyphicon-asterisk"></span>
@@ -348,7 +353,7 @@
                     </div>
 
                 </div>
-                <div style="font-family: BadScript; font-size: 13pt;float: right;  width: 50%;">
+                <div style="font-family: BadScript; font-size: 13pt; margin-top:15px; float: right;  width: 50%;">
                     <div style="margin-bottom:10px; width:99%;
                     border-bottom: 1px #B1AEAE solid;" class="row">
                         <label for="comment">${translator.getString("dlv_deliver_time")}</label>
@@ -366,6 +371,7 @@
                 </div>
 
             </div>
+
     </div>
     </div>
 

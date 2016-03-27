@@ -19,14 +19,14 @@
             <p class="hdw-font">${translator.getString("hw_step1")}</p>
         </div>
         <div class="width33">
-            <img src="img/icon_payment2.png" width="120">
-            </br>
-            <p class="hdw-font">${translator.getString("hw_step2")}</p>
-        </div>
-        <div class="width33">
             <img src="img/icon_fillin2.png" width="120">
             </br>
             <p class="hdw-font">${translator.getString("hw_step3")}</p>
+        </div>
+        <div class="width33">
+            <img src="img/icon_payment2.png" width="120">
+            </br>
+            <p class="hdw-font">${translator.getString("hw_step2")}</p>
         </div>
     </div><!-- /.row -->
 </div>

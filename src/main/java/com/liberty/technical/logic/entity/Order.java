@@ -2,6 +2,7 @@ package com.liberty.technical.logic.entity;
 
 import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.web.SharedConstants;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -40,25 +41,17 @@ public class Order
   @Column(name = "payment_type")
   private Integer paymentType;
 
-  @ManyToMany(targetEntity=com.liberty.technical.logic.entity.Item.class,
-          cascade = {CascadeType.PERSIST, CascadeType.MERGE}
-      , fetch = FetchType.EAGER)
-  @JoinTable(name = "order_has_item",
-      joinColumns = {@JoinColumn(name = "order_id")},
-      inverseJoinColumns = {@JoinColumn(name = "item_id")})
-  private Set items;
-
   @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name="delivery_information_id")
   private DeliveryInformation deliveryInformation;
 
   @OneToMany(targetEntity = ItemQuantity.class,
-      cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+      cascade=CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
   @JoinColumn(name="order_id", referencedColumnName="id")
   private Set<ItemQuantity> itemQuantity = new HashSet<>();
 
   @ManyToOne(targetEntity=User.class,
-          cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+          cascade=CascadeType.ALL)
   @JoinColumn(name="user_id", referencedColumnName="id")
   private User user;
 
@@ -128,13 +121,7 @@ public class Order
   }
 
 
-  public void setItems(Set<Item> items)
-  {
-    this.items = items;
-  }
-
-
-  public Integer getAmount()
+   public Integer getAmount()
   {
     return amount;
   }

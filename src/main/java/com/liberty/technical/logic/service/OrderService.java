@@ -61,7 +61,7 @@ public class OrderService
     List<String> items = order.getItems().stream().map(Item::getName).collect(Collectors.toList());
     String message = mailService.createNewOrderMail(order.getId(), user.getName(), user.getSurname(),
         user.getPhone(), order.getPayTypeView(), items, order.getAmount());
-    mailService.sendEmail("delivery@kompliment.by", "eugenesalov@gmail.com", "Новый заказ", message);
+    mailService.sendEmail("delivery@kompliment.by", "kompliment.by@gmail.com", "Новый заказ", message);
   }
 
 }

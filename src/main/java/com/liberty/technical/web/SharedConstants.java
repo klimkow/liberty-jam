@@ -23,6 +23,7 @@ public interface SharedConstants {
   public static final String DELIVERY_ADDRESS_DOOR = "address-door";
   public static final String DELIVERY_ADDRESS_FLOOR = "address-flor";
   public static final String DELIVERY_ZONE = "dlv_zone_radio";
+  public static final String DELIVERY_ORDER_COMMENT = "dlv_comment";
 
   public static final String DELIVERY_DATE = "date";
   public static final String DELIVERY_TIME = "time";
@@ -34,6 +35,8 @@ public interface SharedConstants {
   public static final String OPTION_PAPER = "option_paper";
   public static final String OPTION_VASE = "option_vase";
   public static final String ITEM_QUANTITY = "item_quantity";
+
+  public static final String ADMN_DELETE_ORDERS_IDS = "orders_ids";
 
   public static final String CATEGORY_CLASSIC = "classic";
   public static final Integer CATEGORY_CLASSIC_ID = 1;

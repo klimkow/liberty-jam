@@ -399,6 +399,7 @@ public class Liberty implements SparkApplication {
       info.setAddressHouse(request.queryParams(SharedConstants.DELIVERY_ADDRESS_HOUSE));
       info.setAddressDoor(request.queryParams(SharedConstants.DELIVERY_ADDRESS_DOOR));
       info.setAddressFloor(request.queryParams(SharedConstants.DELIVERY_ADDRESS_FLOOR));
+      info.setOrderComment(request.queryParams(SharedConstants.DELIVERY_ORDER_COMMENT));
 
       String dateParam = request.queryParams(SharedConstants.DELIVERY_DATE);
       Integer timeParam = new Integer(request.queryParams(SharedConstants.DELIVERY_TIME));
@@ -743,6 +744,23 @@ public class Liberty implements SparkApplication {
       attributes.put("translator", LocalizationUtil.getInstance(locale));
 
       return new ModelAndView(attributes, "admin/time.ftl");
+    }, engine);
+
+    get("/administrator/delete_orders", (request, response) -> {
+      CommonDAO<Order> ordersDAO = DaoFactory.getInstance().createOrderDAO();
+      Map<String, Object> attributes = new HashMap<>();
+      Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
+//      attributes.put("translator", LocalizationUtil.getInstance(locale));
+//      String[] idArray = request.queryParams(SharedConstants.ADMN_DELETE_ORDERS_IDS).split("[-]");
+//      for (String i : idArray) {
+//        Long uid = Long.valueOf(i);
+//        Order order = ordersDAO.readObject(Order.class, uid);
+//        order.getItems();
+//        ordersDAO.deleteObject(order);
+//      }
+//      response.redirect("admin/orders.ftl");
+
+      return new ModelAndView(attributes, "admin/orders.ftl");
     }, engine);
 
     post("/administrator/disableTime", (request, response) -> {

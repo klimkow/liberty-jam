@@ -51,6 +51,9 @@ public class DeliveryInformation
   @Column(name = "time_range")
   private Integer timeRange;
 
+  @Column(name = "comment")
+  private String orderComment;
+
 
   public long getId()
   {
@@ -147,6 +150,16 @@ public class DeliveryInformation
 
   public String getAddressFloor() {
     return addressFloor;
+  }
+
+
+  public String getOrderComment() {
+    return orderComment;
+  }
+
+
+  public void setOrderComment(String orderComment) {
+    this.orderComment = orderComment;
   }
 
 

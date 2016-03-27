@@ -1,3 +1,23 @@
+<script>
+
+    function deleteOrders()
+    {
+        var idArray = 'orders_ids=';
+        $(".select-checkox").each(function() {
+            if ($(this).is(":checked")) {
+                var id = $(this).next('input').val();
+                idArray += id + '-';
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: "/administrator/delete_orders",
+            data: idArray
+        });
+    }
+
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,7 +75,8 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" style="float: right"><span style="cursor: pointer; color:darkred" onclick="deleteOrders()">Delete</span></div>
+                <div style="padding-top: 30px;" class="row">
                     <div style="width: 100%; height: 100%">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -71,12 +92,14 @@
                                 <tbody>
                                     <#if orders??>
                                         <#list orders as order>
-                                        <tr onclick="redirect('orders/order?id=${order.getId()}')">
-                                            <td><input name="isSelectedChBox" type="checkbox"></td>
-                                            <td>${order.getUser().getName()} <#if order.getUser().getSurname()??>${order.getUser().getSurname()}</#if></td>
-                                            <td><#if order.getDateCreatedView()??>${order.getDateCreatedView()}</#if></td>
-                                            <td><#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></td>
-                                            <td>${order.getAmount()}.000 BYR</td>
+                                        <tr>
+                                            <td><input id="isSelectedChBox" class="select-checkox" name="isSelectedChBox" type="checkbox">
+                                                <input type="hidden" id="orderId" value="${order.getId()}">
+                                            </td>
+                                            <td onclick="redirect('orders/order?id=${order.getId()}')">${order.getUser().getName()} <#if order.getUser().getSurname()??>${order.getUser().getSurname()}</#if></td>
+                                            <td onclick="redirect('orders/order?id=${order.getId()}')"><#if order.getDateCreatedView()??>${order.getDateCreatedView()}</#if></td>
+                                            <td onclick="redirect('orders/order?id=${order.getId()}')"><#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></td>
+                                            <td onclick="redirect('orders/order?id=${order.getId()}')">${order.getAmount()}.000 BYR</td>
                                         </tr>
                                         </#list>
                                     </#if>

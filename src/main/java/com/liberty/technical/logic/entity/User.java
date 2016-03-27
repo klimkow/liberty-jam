@@ -1,6 +1,7 @@
 package com.liberty.technical.logic.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -34,9 +35,9 @@ public class User
   private String city;
 
   @OneToMany(targetEntity=Order.class,
-          cascade=CascadeType.PERSIST)
+          cascade=CascadeType.ALL)
   @JoinColumn(name="user_id", referencedColumnName="id")
-  private Set orders;
+  private Set<Order> orders = new HashSet<>();
 
 
   public long getId()

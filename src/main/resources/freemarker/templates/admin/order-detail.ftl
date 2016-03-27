@@ -75,7 +75,7 @@
                                         <p><b>Payment type:</b> <#if order.getPayTypeView()??>${order.getPayTypeView()}</#if></p>
                                         <#if order.getPaymentType()?? && order.getPaymentType() == 2>
                                             <p><b>Payment confirmation number:</b> <#if order.getConfirmationNumber()??>${order.getConfirmationNumber()}</#if></p>
-                                            <FORM name="check_payment_form" METHOD="POST" action="https://test.paysec.by/orderresult/orderresult.cfm">
+                                            <FORM name="check_payment_form" METHOD="POST" action="https://pay139.paysec.by/orderresult/orderresult.cfm">
                                                 <INPUT TYPE="HIDDEN" NAME="Ordernumber" VALUE="${order.getId()}">
                                                 <INPUT TYPE="HIDDEN" NAME="Merchant_ID" VALUE="477696">
                                                 <INPUT TYPE="HIDDEN" NAME="Login" VALUE="EugeneSal0v">

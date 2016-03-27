@@ -5,6 +5,7 @@ function redirect(href)
     window.location = href;
 }
 
+
 function uploadImages()
 {
     var elements = document.getElementsByClassName("img-to-download");
@@ -74,7 +75,7 @@ function displayFiles(files) {
 
 function checkPayment()
 {
-    var post_url = 'https://test.paysec.by/orderstate/orderstate.cfm';
+    var post_url = 'https://pay139.paysec.by/orderstate/orderstate.cfm';
     var data = $('form[name="check_payment_form"]').serialize();
     turnOnLoadingGlass(true);
     $.ajax({

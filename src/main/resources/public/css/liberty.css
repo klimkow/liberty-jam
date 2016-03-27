@@ -194,6 +194,77 @@
     min-height: 500px;
 }
 
+.car-menu-line {
+    position: relative;
+    height: 56px;
+    background: rgba(0,0,0,0.06);
+}
+
+#car-menu-item > span {
+    position: relative;
+    width: 20%;
+    display: inline-block;
+    vertical-align: middle;
+    height: 36px;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+    padding-left: 55px;
+    margin-left: 20px;
+    padding-top: 3px;
+    top: 10px;
+    color: white;
+    text-align: justify;
+    cursor: default;
+}
+
+#car-menu-item > a:hover {
+    color: #3FB8AF;
+}
+
+#car-menu-item span:before {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 36px;
+    height: 36px;
+    left: 0px;
+    top: 0px;
+}
+
+#car-menu-item > span > small {
+    display: block;
+}
+
+#car-menu-item > span.item1:hover {
+    cursor: pointer;
+    color: #3FB8AF;
+}
+
+#car-menu-item > span.item3:hover {
+    cursor: pointer;
+    color: #3FB8AF;
+}
+
+span.item1:before {
+    background: url(../img/accord_menu/transport.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+span.item2::before {
+    background: url(../img/accord_menu/technology.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+span.item3::before {
+    background: url(../img/accord_menu/money.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+span.item4::before {
+    background: url(../img/accord_menu/social.png) no-repeat;
+    background-size: 100% 100%;
+}
 
 
 /*-------------- FILTER BAR -------------- */
@@ -318,6 +389,9 @@ div.marketing-item-container > h2
     font-family: BadScript;
     font-size: 15pt;
     font-weight: bold;
+    max-width: 80%;
+    padding-left: 20%;
+    word-wrap: break-word;
 }
 
 div.marketing-item-container > div.item-price-small

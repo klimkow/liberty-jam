@@ -103,7 +103,7 @@
     </div>
     <div id="lastStepButton" style="margin-top: 30px; cursor: pointer" class="hidden-control gallery__controls-next " onclick="finishOrder(selectedId)">
     </div>
-    <form name="pay_online" method="post" action="https://test.paysec.by/pay/order.cfm">
+    <form name="pay_online" method="post" action="https://pay139.paysec.by/pay/order.cfm">
         <input type="hidden" name="Merchant_ID" value="477696">
         <input type="hidden" name="FirstName"">
         <input type="hidden" name="LastName">
