@@ -92,6 +92,13 @@
                                 </div>
 
                             </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Order Comment</div>
+                                <div class="panel-body">
+                                    <p><b>Comment:</b> <#if info.getOrderComment()??>${info.getOrderComment()}</#if></p>
+                                </div>
+                            </div>
+
                         </div>
                         <div style="float:right; width:40%;">
                             <div class="panel panel-default">

@@ -8,6 +8,7 @@ import com.liberty.technical.logic.entity.*;
 import com.liberty.technical.logic.entity.content.ContentPage;
 import com.liberty.technical.logic.entity.images.ItemImages;
 import com.liberty.technical.logic.entity.service.DeliveryTimePeriod;
+import com.liberty.technical.logic.entity.service.ItemQuantity;
 import com.liberty.technical.logic.entity.service.PriceDiapason;
 import com.liberty.technical.logic.entity.system.SystemUser;
 import com.liberty.technical.logic.factory.DaoFactory;
@@ -466,6 +467,7 @@ public class Liberty implements SparkApplication {
       } else if (request.session().attribute("categoryId") != null) {
         categoryId = request.session().attribute("categoryId");
       }
+      String boxSize = request.queryParams("boxSize");
 
       String priceFrom = request.queryParams("price_from") == null ?
           null : request.queryParams("price_from").replaceAll("\\.", "").replaceFirst("000", "");
@@ -482,7 +484,11 @@ public class Liberty implements SparkApplication {
       } else if (categoryId != null && priceFrom != null && priceTo != null) {
         Integer pFrom = Integer.parseInt(priceFrom);
         Integer pTo = Integer.parseInt(priceTo);
-        items = itemDAO.filterByCatAndPrice(categoryId, pFrom, pTo);
+        if (boxSize == null || boxSize.isEmpty()) {
+          items = itemDAO.filterByCatAndPrice(categoryId, pFrom, pTo);
+        } else {
+          items = itemDAO.filterByCatPriceAndSize(categoryId, pFrom, pTo, boxSize);
+        }
       }
 
       Double itemWidth = new Double(request.queryParams("itemWidth"));
@@ -677,6 +683,7 @@ public class Liberty implements SparkApplication {
       String description = request.queryParams("b_desc");
       Integer price = new Integer(request.queryParams("b_price"));
       String categoryName = request.queryParams("b_cat");
+      String size = request.queryParams("b_size");
       CommonDAO<Item> itemDAO = DaoFactory.getInstance().createCommonDAO(Item.class);
       CategoryDAO categoryDAO = DaoFactory.getInstance().createCategoryDAO();
       Item item = itemDAO.readObject(Item.class, id);
@@ -707,6 +714,7 @@ public class Liberty implements SparkApplication {
       item.setName(name);
       item.setDescription(description);
       item.setPrice(price);
+      item.setSize(size);
       item.setCategories(categories);
       itemDAO.updateObject(item);
       Map<String, Object> attributes = new HashMap<>();
@@ -748,17 +756,20 @@ public class Liberty implements SparkApplication {
 
     get("/administrator/delete_orders", (request, response) -> {
       CommonDAO<Order> ordersDAO = DaoFactory.getInstance().createOrderDAO();
+      CommonDAO<ItemQuantity> items = DaoFactory.getInstance().createCommonDAO(ItemQuantity.class);
       Map<String, Object> attributes = new HashMap<>();
       Locale locale = request.session().attribute(SharedConstants.ATTRIBUTE_LOCALE);
-//      attributes.put("translator", LocalizationUtil.getInstance(locale));
+      attributes.put("translator", LocalizationUtil.getInstance(locale));
 //      String[] idArray = request.queryParams(SharedConstants.ADMN_DELETE_ORDERS_IDS).split("[-]");
 //      for (String i : idArray) {
 //        Long uid = Long.valueOf(i);
 //        Order order = ordersDAO.readObject(Order.class, uid);
-//        order.getItems();
+//        for (ItemQuantity iq : order.getItemQuantity()) {
+//          items.deleteObject(iq);
+//        }
 //        ordersDAO.deleteObject(order);
 //      }
-//      response.redirect("admin/orders.ftl");
+      response.redirect("admin/orders.ftl");
 
       return new ModelAndView(attributes, "admin/orders.ftl");
     }, engine);

@@ -100,6 +100,19 @@
                                 </select>
                             </div>
                             <div class="dlv-block-cn form-group">
+                                <label style="float: left; padding-right: 20px; padding-top: 7px;"
+                                       for="b_size">Size</label>
+                                <select name="b_size">
+                                    <option value="" <#if item??>
+                                            <#if !item.getSize()??>selected</#if></#if>>
+                                        </option>
+                                    <option value="M" <#if item?? && item.getSize()??>
+                                            <#if item.getSize() == 'M'>selected</#if></#if>>M</option>
+                                    <option value="L" <#if item?? && item.getSize()??>
+                                            <#if item.getSize() == 'L'>selected</#if></#if>>L</option>
+                                </select>
+                            </div>
+                            <div class="dlv-block-cn form-group">
                                 <label style="float: left; padding-right: 52px; padding-top: 7px;"
                                        for="b_price">Price</label>
                                 <input style="float: left; width: 25%;" type="number" name="b_price" class="form-control" id="b_price"

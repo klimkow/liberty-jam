@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <script>
 
     function deleteOrders()
@@ -17,10 +19,6 @@
     }
 
 </script>
-
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
 
     <meta charset="utf-8">

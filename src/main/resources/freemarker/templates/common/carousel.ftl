@@ -34,8 +34,8 @@
                 <div id="car-menu-item" class="container">
                     <span class="item1" onclick="openPage('4')">${translator.getString("car_menuitem1")} <small>${translator.getString("car_menuitem1_small1")}</small></span>
                     <span class="item2">${translator.getString("car_menuitem2")} <small>${translator.getString("car_menuitem1_small2")}</small></span>
-                    <span class="item3" onclick="openPage('3')">${translator.getString("car_menuitem3")}<small></small>${translator.getString("car_menuitem1_small3")}</span>
-                    <span class="item4">${translator.getString("car_menuitem4")}<small></small>${translator.getString("car_menuitem1_small4")}</span>
+                    <span class="item3" onclick="openPage('3')">${translator.getString("car_menuitem3")}<small>${translator.getString("car_menuitem1_small3")}</small></span>
+                    <span class="item4">${translator.getString("car_menuitem4")}<small>${translator.getString("car_menuitem1_small4")}</small></span>
                 </div>
             </div>
             <div class="container">
@@ -43,9 +43,9 @@
                 padding-top: 50px;    padding-bottom: 20px;color: #fff;text-align:
                  left;text-shadow: 0 1px 2px rgba(0,0,0,.6);cursor: default;
                  font-family: OsansLight, Arial, Helvetica, sans-serif; font-weight: bold;">
-                    <h1 style="font-size: 34pt;padding-bottom: 50px; font-weight: bold;">${translator.getString("car_main1")}</h1>
-                    <p style="font-size: 21pt; max-width: 600px;">${translator.getString("car_main2")}</p>
-                    <p style="font-size: 21pt; max-width: 600px;">${translator.getString("car_main3")}</p>
+                    <h1 style="font-size: 34pt;padding-bottom: 70px; font-weight: bold;">${translator.getString("car_main1")}</h1>
+                    <p style="font-size: 18pt; max-width: 500px;">${translator.getString("car_main2")}</p>
+                    <p style="font-size: 18pt; max-width: 600px;">${translator.getString("car_main3")}</p>
                 </div>
                 <#--<div class="carousel-caption">-->
                     <#--<h1>${translator.getString("car_item3_header")}</h1>-->

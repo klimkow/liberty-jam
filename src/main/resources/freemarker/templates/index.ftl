@@ -70,5 +70,21 @@
             </div>
         </div>
     </div>
+    <#--DISPLAY CHAT-->
+    <script type="text/javascript">
+        (function(){
+            if (typeof carrotquest === 'undefined') {
+                var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+                s.src = '//cdn.carrotquest.io/api.min.js';
+                var x = document.getElementsByTagName('head')[0]; x.appendChild(s);
+
+                carrotquest = {}; window.carrotquestasync = []; carrotquest.settings = {};
+                m = ['connect', 'identify', 'track', 'auth'];
+                function Build(name, args){return function(){window.carrotquestasync.push(name, arguments);} }
+                for (var i = 0; i < m.length; i++) carrotquest[m[i]] = Build(m[i]);
+            }
+        })();
+        carrotquest.connect('3859-d1717147c6645d5172f89e84879');
+    </script>
 </body>
 </html>

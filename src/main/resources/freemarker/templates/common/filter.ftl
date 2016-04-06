@@ -3,12 +3,31 @@
         $("#filter-container").delegate('div[id^=filter_option]','click', function(e) {
             $("div[id^= 'filter_option']").removeClass("button-selected");
             $(this).addClass("button-selected");
+            var boxSizeDiv = $("#box-size");
+            if ($(this).attr('id') == "filter_option2") {
+                // if filtering by box display size option
+                boxSizeDiv.removeClass("box-size-invisible");
+                boxSizeDiv.addClass("box-size-visible");
+            } else {
+                boxSizeDiv.addClass("box-size-invisible");
+                boxSizeDiv.removeClass("box-size-visible");
+            }
             $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
             var form = $(this).closest('form');
             var formData = form.serialize();
             filter(formData);
         });
 
+        $("#box-size").delegate('span[id^=size]','click', function(e) {
+            $("span[id^=size]").removeClass("size-selected");
+            $(this).addClass("size-selected");
+            var size = $(this).html();
+            $('#filter_option_box_size').val(size);
+            $('#marketing-active-zone').append('<div id="top-layer"><img src="img/loading.gif"  height="43" width="43"  /> </div>');
+            var form = $(this).closest('form');
+            var formData = form.serialize();
+            filter(formData);
+        });
 
     });
 </script>
@@ -35,8 +54,13 @@
                 </form>
                 <form name="filter_opt1">
                     <input id="filter_option_box" type="hidden" name="filterOption" value="2">
+                    <input id="filter_option_box_size" type="hidden" name="boxSize">
                     <div id="filter-opt-block" class="textleft">
                         <div id="filter_option2" class=" btn btn-default filter_option">${translator.getString("bouquet_in_the_box")}</div>
+                    </div>
+                    <div id="box-size" class="box-size-invisible">
+                        <span id="size-m">M</span>
+                        <span id="size-l">L</span>
                     </div>
                 </form>
             </div>

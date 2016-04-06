@@ -141,12 +141,12 @@
                                 <label for="comment">${translator.getString("dlv_deliver_time")}</label>
                             </div>
                             <div id="timeOptionsContainer">
-                                <div id="timeOption1" class="dlv-time-item">07.00 - 09.00</div>
-                                <div id="timeOption2" class="dlv-time-item">09.00 - 11.00</div>
-                                <div id="timeOption3" class="dlv-time-item">11.00 - 13.00</div>
-                                <div id="timeOption4" class="dlv-time-item">13.00 - 15.00</div>
-                                <div id="timeOption5" class="dlv-time-item">15.00 - 17.00</div>
-                                <div id="timeOption6" class="dlv-time-item">17.00 - 19.00</div>
+                                <div id="timeOption1" class="dlv-time-item">09.00 - 11.00</div>
+                                <div id="timeOption2" class="dlv-time-item">11.00 - 13.00</div>
+                                <div id="timeOption3" class="dlv-time-item">13.00 - 15.00</div>
+                                <div id="timeOption4" class="dlv-time-item">15.00 - 17.00</div>
+                                <div id="timeOption5" class="dlv-time-item">17.00 - 19.00</div>
+                                <div id="timeOption6" class="dlv-time-item">19.00 - 21.00</div>
                                 <input id="time1" type="hidden" name="time1">
                                 <input id="time2" type="hidden" name="time2">
                                 <input id="time3" type="hidden" name="time3">

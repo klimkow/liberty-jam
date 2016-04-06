@@ -51,6 +51,9 @@ public class Item
   @Column(name = "min_amount")
   private Integer minAmount;
 
+  @Column(name = "size")
+  private String size;
+
   @OneToMany(targetEntity = com.liberty.technical.logic.entity.service.PriceDiapason.class,
       cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
   @JoinColumn(name="item_id", referencedColumnName="id")
@@ -161,6 +164,13 @@ public class Item
     this.minAmount = minAmount;
   }
 
+  public String getSize() {
+    return size;
+  }
+
+  public void setSize(String size) {
+    this.size = size;
+  }
 
   public void setPrice(Integer price)
   {

@@ -36,6 +36,30 @@ public class ItemDAO extends CommonDAOImpl<Item>
   }
 
 
+  public List<Item> filterByCatPriceAndSize(Integer categoryId, Integer pFrom, Integer pTo, String size)
+  {
+    List<Item> resultList = new ArrayList<>();
+    Session session = factory.openSession();
+    Transaction tx = null;
+    String categoryCriteria = categoryId == null ? "" : " and chi.name like '" + getCategoryName(categoryId) + "'";
+    String sizeCriteria = size == null ? "" : " and itm.size like '" + size + "'";
+    try {
+      tx = session.beginTransaction();
+      resultList = session.createQuery(" select itm from Item itm join itm.categories chi " +
+          "where itm.minPrice between " + pFrom + " and " + pTo + categoryCriteria + sizeCriteria).
+          list();
+      tx.commit();
+
+    } catch (HibernateException e) {
+      if (tx!=null) tx.rollback();
+      e.printStackTrace();
+    } finally {
+      session.close();
+    }
+    return resultList;
+  }
+
+
   public List<Item> filterByPrice(Integer pFrom, Integer pTo)
   {
     List<Item> resultList = new ArrayList<>();

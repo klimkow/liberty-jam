@@ -17,14 +17,14 @@ public class ItemQuantity {
   private long id;
 
   @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinColumn(name="item_id")
+  @JoinColumn(name="item_id", nullable = false)
   private Item item;
 
   @Column(name = "item_quantity")
   private Integer itemQuantity;
 
   @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-  @JoinColumn(name="order_id", referencedColumnName="id")
+  @JoinColumn(name="order_id", referencedColumnName="id", nullable = false)
   private Order order;
 
   @Column(name = "OPTION_PAPER")

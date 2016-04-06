@@ -144,8 +144,8 @@
                     <#if isClassic>
                         <input type="checkbox" id="c1" name="option_paper" <#if itemQuantity??><#if itemQuantity.isWithPaper()>checked</#if></#if>/>
                         <label style="display: block; margin-left: 10px" for="c1"><span></span>${translator.getString("item_paper_option")}</label>
-                        <input type="checkbox" id="c2" name="option_vase" <#if itemQuantity??><#if itemQuantity.isWithVase()>checked</#if></#if>/>
-                        <label style="display: block; margin-left: 10px" for="c2"><span></span>${translator.getString("item_vase_option")}</label>
+                        <#--<input type="checkbox" id="c2" name="option_vase" <#if itemQuantity??><#if itemQuantity.isWithVase()>checked</#if></#if>/>-->
+                        <#--<label style="display: block; margin-left: 10px" for="c2"><span></span>${translator.getString("item_vase_option")}</label>-->
                     </#if>
                     <div style="margin-left: 10px;" class="quant_box">
                         <span id="full-minus" class="quant_btn_left noselect">-</span>
